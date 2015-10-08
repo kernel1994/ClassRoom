@@ -19,3 +19,5 @@
 !WebContent/
 
 WebContent/WEB-INF/lib
+
+WebContent/WEB-INF/classes
