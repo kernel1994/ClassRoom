@@ -11,4 +11,4 @@
 !src/
 
 # do not ignore all .jsp files in the WebContent/ directory
-!WebContent/**/*.jsp
+!*.jsp

@@ -1,25 +1,22 @@
 package team.dx.classroom.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class User {
 
 	private String id;
 	private String nick;
 	private String email;
 	private String password;
-	private Set<Role> roles = new HashSet();
+	private Role role; /* 角色，一个账号在系统中的角色类型 */
 
 	public User() {
 	}
 
-	public User(String id, String nick, String email, String password, Set<Role> roles) {
+	public User(String id, String nick, String email, String password, Role role) {
 		this.id = id;
 		this.nick = nick;
 		this.email = email;
 		this.password = password;
-		this.roles = roles;
+		this.role = role;
 	}
 
 	public String getId() {
@@ -54,17 +51,17 @@ public class User {
 		this.password = password;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", nick=" + nick + ", password=" + password + ", roles=" + roles + "]";
+		return "User [id=" + id + ", nick=" + nick + ", password=" + password + ", role=" + role + "]";
 	}
 
 }

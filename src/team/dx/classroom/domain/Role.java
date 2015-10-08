@@ -8,17 +8,15 @@ public class Role {
 	private String id;
 	private String name;
 	private String description;
-	private Person person;
 	private Set<Privilege> privilleges = new HashSet();
 
 	public Role() {
 	}
 
-	public Role(String id, String name, String description, Person person, Set<Privilege> privilleges) {
+	public Role(String id, String name, String description, Set<Privilege> privilleges) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.person = person;
 		this.privilleges = privilleges;
 	}
 
@@ -46,14 +44,6 @@ public class Role {
 		this.description = description;
 	}
 
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
 	public Set<Privilege> getPrivilleges() {
 		return privilleges;
 	}
@@ -64,7 +54,7 @@ public class Role {
 
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", name=" + name + ", description=" + description + ", person=" + person + ", privilleges=" + privilleges + "]";
+		return "Role [id=" + id + ", name=" + name + ", description=" + description + ", privilleges=" + privilleges + "]";
 	}
 
 }
