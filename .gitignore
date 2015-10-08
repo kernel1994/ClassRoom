@@ -11,7 +11,11 @@
 !src/
 
 # do not ignore all .jsp files in the WebContent/ directory
-!*.jsp
+# !*.jsp
 
 # do not ignore all .txt files in the WebContent/ directory
-!*.txt
+# !*.txt
+
+!WebContent/
+
+WebContent/WEB-INF/lib
