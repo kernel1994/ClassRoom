@@ -12,3 +12,6 @@
 
 # do not ignore all .jsp files in the WebContent/ directory
 !*.jsp
+
+# do not ignore all .txt files in the WebContent/ directory
+!*.txt
