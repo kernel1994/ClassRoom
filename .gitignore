@@ -1,5 +1,14 @@
+# ignore all
 /*
+
+# do not ignore .gitignore
 !.gitignore
+
+# do not ignore README.md
 !README.md
-!/src
-!/WebContent/*.jsp
+
+# do not ignore all files in the src/ directory
+!src/
+
+# do not ignore all .jsp files in the WebContent/ directory
+!WebContent/**/*.jsp
