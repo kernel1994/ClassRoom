@@ -46,10 +46,19 @@ create table privilege
 (
 	id varchar(40) primary key,
 	name varchar(100) not null unique,
-	description varchar(255),
-	role_id varchar(40),
-	constraint role_id_FK2 foreign key(role_id) references role(id)
+	description varchar(255)
+
 );
+--权限privilege和角色role关系，定义为多对多
+create table role_privilege
+(
+	privilege_id varchar(40),
+	role_id varchar(40),
+	primary key(privilege_id,role_id),
+	constraint role_id_FK2 foreign key(role_id) references role(id),
+	constraint privilege_id_id_FK foreign key(privilege_id) references privilege(id)
+);
+
 
 对应代码
 class User{
