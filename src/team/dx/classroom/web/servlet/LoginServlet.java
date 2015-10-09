@@ -34,10 +34,10 @@ public class LoginServlet extends HttpServlet {
     	PrintWriter out = response.getWriter();
     	
     	// 返回空则表示登录不成功，密码或邮箱错误，用Ajax + jQuery 给出提示信息
-    	if (user != null) {
+    	if (user != null && user.getRole() != null) {
     		request.getSession().setAttribute("user", user);
         	
-        	String role = "";
+        	String role = ""+"";
         	if (user.getRole().getName().equals("学生")) {
         		role = "student";
         	} else if (user.getRole().getName().equals("教师")) {
@@ -48,6 +48,8 @@ public class LoginServlet extends HttpServlet {
         	
         	// 重定向到不同身份用户的主页
         	out.write(request.getContextPath() + "/" + role + "/index.jsp");
+    	}else if(user != null && user.getRole() == null) {
+    		out.write(request.getContextPath() + "/index.jsp");
     	} else {
     		out.write("NO");
     	}

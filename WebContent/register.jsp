@@ -8,6 +8,59 @@
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/jquery.validate.min.js"></script>
 </head>
+
+<body>
+	参考链接:
+	<a
+		href="https://www.facebook.comu">facebook</a>
+	<hr />
+
+	<br />
+	<!-- 注册 -->
+	<fieldset style="width: 50%;margin:10px;padding: 5px;">
+		<legend>注册</legend>
+		<form id="form" action="${pageContext.request.contextPath}/servlet/RegisterServlet" method="post">
+			<p>
+				<label for="nick">昵称:</label>
+				<input name="nick" id="nick" />
+				<span id="nickspan"></span> 
+			</p>
+			<p>
+				<label for="password">密码:</label>
+				<input id="password" name="password" type="password" />
+			</p>
+			<p>
+				<label for="confirm_password">确认密码:</label>
+				<input id="confirm_password" name="confirm_password" type="password" />
+			</p>
+			<p>
+				<label for="email">邮箱: </label>
+				<input id="email" name="email" />
+			</p>
+			<p>
+				<label for="birthday">生日: </label><br/>
+				<select style="width: 80px" name="year" id="year"></select> 
+				<select style="width: 80px" name="month" id="month"></select> 
+				<select style="width: 80px" name="day" id="day"></select><br /> 
+			</p>
+			
+			<p>
+				<label for="gender">性别: </label><br/>
+				<label for="male">男</label>
+					<input type="radio" name="gender" value="male">
+				<label for="female">女</label>
+					<input type="radio" name="gender" value="female">
+			</p>
+			<p>
+				点击注册，即表示你同意我们的条款，且已阅读过我们的<a href="">《使用政策》</a>，包括《Cookie 使用政策》。
+			</p>
+			<p>
+				<input type="submit" value="注册">
+			</p>
+		</form>
+	</fieldset>
+	<br />
+</body>
 <script type="text/javascript">
 	$().ready(function(){
 		//文档加载完毕后
@@ -97,56 +150,4 @@
 	});
 </script>
 
-<body>
-	参考链接:
-	<a
-		href="https://www.facebook.comu">facebook</a>
-	<hr />
-
-	<br />
-	<!-- 注册 -->
-	<fieldset style="width: 50%;margin:10px;padding: 5px;">
-		<legend>注册</legend>
-		<form id="form" action="${pageContext.request.contextPath}/servlet/RegisterServlet" method="post">
-			<p>
-				<label for="nick">昵称:</label>
-				<input name="nick" id="nick" />
-				<span id="nickspan"></span> 
-			</p>
-			<p>
-				<label for="password">密码:</label>
-				<input id="password" name="password" type="password" />
-			</p>
-			<p>
-				<label for="confirm_password">确认密码:</label>
-				<input id="confirm_password" name="confirm_password" type="password" />
-			</p>
-			<p>
-				<label for="email">邮箱: </label>
-				<input id="email" name="email" />
-			</p>
-			<p>
-				<label for="birthday">生日: </label><br/>
-				<select style="width: 80px" name="year" id="year"></select> 
-				<select style="width: 80px" name="month" id="month"></select> 
-				<select style="width: 80px" name="day" id="day"></select><br /> 
-			</p>
-			
-			<p>
-				<label for="gender">性别: </label><br/>
-				<label for="male">男</label>
-					<input type="radio" name="gender" value="male">
-				<label for="female">女</label>
-					<input type="radio" name="gender" value="female">
-			</p>
-			<p>
-				点击注册，即表示你同意我们的条款，且已阅读过我们的<a href="">《使用政策》</a>，包括《Cookie 使用政策》。
-			</p>
-			<p>
-				<input type="submit" value="注册">
-			</p>
-		</form>
-	</fieldset>
-	<br />
-</body>
 </html>

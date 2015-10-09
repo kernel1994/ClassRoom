@@ -42,6 +42,10 @@ public class LoginService {
 		String roleCondition = "SELECT * FROM role WHERE id = (SELECT role_id FROM user_role WHERE user_id = ?)";
 		Role role = roleDAO.getRole(roleCondition, user.getId());
 		
+		if (role == null) {
+			return user;
+		}
+		
 		// 再根据role_id 获取privilege 对象
 		String privilegeCondition = "SELECT * FROM privilege WHERE id = (SELECT privilege_id FROM role_privilege WHERE role_id = ?)";
 		List<Privilege> privileges = privilegeDAO.getPrivileges(privilegeCondition, role.getId());
