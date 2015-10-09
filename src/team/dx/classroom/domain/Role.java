@@ -10,7 +10,7 @@ public class Role {
 	private String id;
 	private String name;
 	private String description;
-	private List<Privilege> privilleges = new ArrayList<>();
+	private List<Privilege> privilleges = new ArrayList<Privilege>();
 
 	public Role() {
 	}
