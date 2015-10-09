@@ -24,7 +24,6 @@
 			<input type="checkbox" name="loginstatus" />保持登陆状态<a href="">忘记密码</a> <br />
 			<input type="submit" value="登陆" id="loginBtn">
 		</form>
-
 	</fieldset>
 
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.2.min.js"></script>
