@@ -1,6 +1,7 @@
 package team.dx.classroom.web.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +33,12 @@ public class LoginServlet extends HttpServlet {
     	
     	// 返回空则表示登录不成功，密码或邮箱错误，暂时这样处理，以后用Ajax + jQuery 完善
     	if (user == null) {
-    		response.sendRedirect(request.getContextPath() + "/login.jsp");
+    		// response.sendRedirect(request.getContextPath() + "/login.jsp");
+    		PrintWriter out = response.getWriter();
+    		out.write("NO");
+    		
+    		out.flush();
+    		out.close();
     		return;
     	}
     	
