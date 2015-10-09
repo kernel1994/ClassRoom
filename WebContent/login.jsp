@@ -20,7 +20,7 @@
 		<legend>登陆</legend>
 		<form action="">
 			邮箱: <input type="text" name="eamil" /> <br /> 密码: <input
-				type="text" name=password /> <br /> <input type="checkbox"
+				type="password" name=password /> <br /> <input type="checkbox"
 				name="loginstatus" />保持登陆状态<a href="">忘记密码</a> <br /> <input
 				type="submit" value="登陆">
 		</form>
