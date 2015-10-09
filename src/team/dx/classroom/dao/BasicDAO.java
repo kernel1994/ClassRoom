@@ -11,8 +11,8 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
-import team.dx.classroom.db.JDBCUtils;
 import team.dx.classroom.exception.DaoException;
+import team.dx.classroom.utils.JDBCUtils;
 
 /**
  * 封装了基本的 CRUD 方法, 以供子类继承使用 当前 DAO 直接在方法中获取数据库连接 整个DAO采取DBUtils解决方案 泛型T: 当前 DAO

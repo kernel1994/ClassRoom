@@ -1,4 +1,4 @@
-package team.dx.classroom.servlet;
+package team.dx.classroom.web.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

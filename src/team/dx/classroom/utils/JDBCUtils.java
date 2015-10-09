@@ -1,4 +1,4 @@
-package team.dx.classroom.db;
+package team.dx.classroom.utils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
