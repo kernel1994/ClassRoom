@@ -19,7 +19,7 @@ create table user(
 	name varchar(100) not null,
 	email varchar(100) not null,
 	gender varchar(10),
-	bitthday date,
+	birthday date,
 	address varchar(255),
 	description varchar(255)
 );
@@ -68,7 +68,7 @@ class User{
 	private String password;
 	private String name;
 	private String gender;
-	private Date bitthday;
+	private Date birthday;
 	private String address;
 	private String description;
 	private Role role; /* 角色，一个账号在系统中的角色类型 */

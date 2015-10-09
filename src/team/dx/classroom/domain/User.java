@@ -10,7 +10,7 @@ public class User {
 	private String password;
 	private String name;
 	private String gender;
-	private Date bitthday;
+	private Date birthday;
 	private String address;
 	private String description;
 	private Role role; /* 角色，一个账号在系统中的角色类型 */
@@ -27,7 +27,7 @@ public class User {
 		this.password = password;
 		this.name = name;
 		this.gender = gender;
-		this.bitthday = bitthday;
+		this.birthday = bitthday;
 		this.address = address;
 		this.description = description;
 		this.role = role;
@@ -49,12 +49,12 @@ public class User {
 		this.gender = gender;
 	}
 
-	public Date getBitthday() {
-		return bitthday;
+	public Date getBirthday() {
+		return birthday;
 	}
-
-	public void setBitthday(Date bitthday) {
-		this.bitthday = bitthday;
+	
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 	public String getAddress() {
@@ -117,7 +117,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", nick=" + nick + ", email=" + email
 				+ ", password=" + password + ", name=" + name + ", gender="
-				+ gender + ", bitthday=" + bitthday + ", address=" + address
+				+ gender + ", bitthday=" + birthday + ", address=" + address
 				+ ", description=" + description + ", role=" + role + "]";
 	}
 

@@ -13,18 +13,21 @@
 		//文档加载完毕后
 		//1.填充生日需要的数据
 		//年
+		$("#year").append($("<option></option>"));
 		$("#year").append($("<option>年</option>"));
 		for(var i=new Date().getFullYear();i > new Date().getFullYear() - 150;i--){
 			var $optionElement = $("<option value='"+i+"'>"+i+"</option>");
 			$("#year").append($optionElement);
 		}
 		//月
+		$("#month").append($("<option></option>"));
 		$("#month").append($("<option>月</option>"));
 		for(var i=1;i <= 12;i++){
 			var $optionElement = $("<option value='"+i+"'>"+i+"</option>");
 			$("#month").append($optionElement);
 		}
 		//日
+		$("#day").append($("<option></option>"));
 		$("#day").append($("<option>日</option>"));
 		for(var i=1;i <= 31;i++){
 			var $optionElement = $("<option value='"+i+"'>"+i+"</option>");
@@ -32,9 +35,10 @@
 		}
 		
 		//2.异步注册用户名称
-		$("#name").blur( function () { 
-			$.post("${pageContext.request.contextPath}/servlet/CheckUserServlet&time="+new Date().getTime(),{name:$(this).val()},function(data,textStatus){
-				alert(data);
+		$("#nick").blur( function () { 
+			$.post("${pageContext.request.contextPath}/servlet/CheckUserServlet?time="+new Date().getTime(),{nick:$(this).val()},function(data,textStatus){
+				$("#nickspan").html(data);
+				$("#nickspan").css("color", "blue");
 			});
 		} );
 		
@@ -47,7 +51,6 @@
 			},
 			confirm_password: {
 				required: true,
-				minlength: 5,
 				equalTo: "#password"
 			},
 			email: {
@@ -59,6 +62,12 @@
 			},
 			year:{
 				required: true
+			},
+			month:{
+				required: true
+			},
+			day:{
+				required: true
 			}
 		},
 		messages: {
@@ -68,7 +77,6 @@
 			},
 			confirm_password: {
 				required: "Please provide a password",
-				minlength: "Your password must be at least 5 characters long",
 				equalTo: "Please enter the same password as above"
 			},
 			email: {
@@ -77,6 +85,12 @@
 			},
 			year:{
 				required: "Please provide a year"
+			},
+			month:{
+				required: "Please provide a month"
+			},
+			day:{
+				required: "Please provide a day"
 			}
 		}
 		});
@@ -94,21 +108,43 @@
 	<fieldset style="width: 50%;margin:10px;padding: 5px;">
 		<legend>注册</legend>
 		<form id="form" action="${pageContext.request.contextPath}/servlet/RegisterServlet" method="post">
-			昵称:<input type="text" name="name" id="name" /> <br /> 
-			密码:<input type="password" name="password" /> <br />
-			确认密码: <input type="password" name="confirm_password" /> <br /> 
-			邮箱: <input type="text" name="email" /> <br /> 
-			生日<br /> 
-			<select style="width: 80px" name="year" id="year"></select> 
-			<select style="width: 80px" name="month" id="month"></select> 
-			<select style="width: 80px" name="day" id="day"></select><br /> 
-			性别<br /> 
-			<input type="radio" name="gender" value="male">男
-			<input type="radio" name="gender" value="female">女 <br>
-			<div>
+			<p>
+				<label for="nick">昵称:</label>
+				<input name="nick" id="nick" />
+				<span id="nickspan"></span> 
+			</p>
+			<p>
+				<label for="password">密码:</label>
+				<input id="password" name="password" type="password" />
+			</p>
+			<p>
+				<label for="confirm_password">确认密码:</label>
+				<input id="confirm_password" name="confirm_password" type="password" />
+			</p>
+			<p>
+				<label for="email">邮箱: </label>
+				<input id="email" name="email" />
+			</p>
+			<p>
+				<label for="birthday">生日: </label><br/>
+				<select style="width: 80px" name="year" id="year"></select> 
+				<select style="width: 80px" name="month" id="month"></select> 
+				<select style="width: 80px" name="day" id="day"></select><br /> 
+			</p>
+			
+			<p>
+				<label for="gender">性别: </label><br/>
+				<label for="male">男</label>
+					<input type="radio" name="gender" value="male">
+				<label for="female">女</label>
+					<input type="radio" name="gender" value="female">
+			</p>
+			<p>
 				点击注册，即表示你同意我们的条款，且已阅读过我们的<a href="">《使用政策》</a>，包括《Cookie 使用政策》。
-			</div>
-			<input type="submit" value="注册">
+			</p>
+			<p>
+				<input type="submit" value="注册">
+			</p>
 		</form>
 	</fieldset>
 	<br />

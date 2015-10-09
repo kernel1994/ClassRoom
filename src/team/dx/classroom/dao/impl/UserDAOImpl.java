@@ -21,7 +21,7 @@ public class UserDAOImpl extends BasicDAO<User>implements UserDAO {
 				+ "gender = ?, birthday = ?, address = ?, description = ? WHERE id = ?";
 
 		update(sql, user.getNick(), user.getEmail(), user.getPassword(), user.getName(), user.getGender(),
-				user.getBitthday(), user.getAddress(), user.getDescription(), user.getId());
+				user.getBirthday(), user.getAddress(), user.getDescription(), user.getId());
 	}
 
 	@Override
@@ -35,11 +35,11 @@ public class UserDAOImpl extends BasicDAO<User>implements UserDAO {
 	@Override
 	public void addUser(User user) {
 
-		String sql = "INSERT INTO user (id, nick, email, password, name, gender, birthday, address, desctiption) "
+		String sql = "INSERT INTO user (id, nick, email, password, name, gender, birthday, address, description) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		update(sql, user.getId(), user.getNick(), user.getEmail(), user.getPassword(), user.getName(), user.getGender(),
-				user.getBitthday(), user.getAddress(), user.getDescription());
+				user.getBirthday(), user.getAddress(), user.getDescription());
 	}
 
 }
