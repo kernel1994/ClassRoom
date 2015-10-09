@@ -1,6 +1,8 @@
 package team.dx.classroom.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Role {
@@ -8,12 +10,12 @@ public class Role {
 	private String id;
 	private String name;
 	private String description;
-	private Set<Privilege> privilleges = new HashSet();
+	private List<Privilege> privilleges = new ArrayList<>();
 
 	public Role() {
 	}
 
-	public Role(String id, String name, String description, Set<Privilege> privilleges) {
+	public Role(String id, String name, String description, List<Privilege> privilleges) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -44,11 +46,11 @@ public class Role {
 		this.description = description;
 	}
 
-	public Set<Privilege> getPrivilleges() {
+	public List<Privilege> getPrivilleges() {
 		return privilleges;
 	}
 
-	public void setPrivilleges(Set<Privilege> privilleges) {
+	public void setPrivilleges(List<Privilege> privilleges) {
 		this.privilleges = privilleges;
 	}
 
