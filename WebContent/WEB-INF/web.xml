@@ -44,4 +44,13 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<servlet-class>team.dx.classroom.web.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<url-pattern>/loginServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
