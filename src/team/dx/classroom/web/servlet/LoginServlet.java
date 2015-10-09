@@ -31,30 +31,29 @@ public class LoginServlet extends HttpServlet {
     	
     	User user = loginService.getUser(email, password);
     	
-    	// 返回空则表示登录不成功，密码或邮箱错误，暂时这样处理，以后用Ajax + jQuery 完善
-    	if (user == null) {
-    		// response.sendRedirect(request.getContextPath() + "/login.jsp");
-    		PrintWriter out = response.getWriter();
+    	PrintWriter out = response.getWriter();
+    	
+    	// 返回空则表示登录不成功，密码或邮箱错误，用Ajax + jQuery 给出提示信息
+    	if (user != null) {
+    		request.getSession().setAttribute("user", user);
+        	
+        	String role = "";
+        	if (user.getRole().getName().equals("学生")) {
+        		role = "student";
+        	} else if (user.getRole().getName().equals("教师")) {
+        		role = "teacher";
+        	} else if (user.getRole().getName().equals("管理员")) {
+        		role = "admin";
+        	}
+        	
+        	// 重定向到不同身份用户的主页
+        	out.write(request.getContextPath() + "/" + role + "/index.jsp");
+    	} else {
     		out.write("NO");
-    		
-    		out.flush();
-    		out.close();
-    		return;
     	}
     	
-    	request.getSession().setAttribute("user", user);
-    	
-    	String role = "";
-    	if (user.getRole().getName().equals("学生")) {
-    		role = "student";
-    	} else if (user.getRole().getName().equals("教师")) {
-    		role = "teacher";
-    	} else if (user.getRole().getName().equals("管理员")) {
-    		role = "admin";
-    	}
-    	
-    	// 重定向到不同身份用户的主页
-		response.sendRedirect(request.getContextPath() + "/" + role + "/index.jsp");
+    	out.flush();
+		out.close();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
