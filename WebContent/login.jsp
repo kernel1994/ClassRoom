@@ -5,8 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>欢迎使用ClassRoom - 登录、注册或详细了解</title>
-	
 </head>
+<script type="text/javascript">
+	
+</script>
+
 <body>
 	参考链接:
 	<a
@@ -23,25 +26,6 @@
 		</form>
 
 	</fieldset>
-	<br />
-	<!-- 注册 -->
-	<fieldset style="width: 50%;margin:10px;padding: 5px;">
-		<legend>注册</legend>
-		<form action=""></form>
-		昵称:<input type="text" name="name" /> <br /> 密码:<input
-			type="password" name="password" /> <br />确认密码: <input
-			type="password" name="checkpassword" /> <br /> 邮箱: <input
-			type="text" name="email" /> <br /> 生日<br /> <select
-			style="width: 40px" name="year" id="year">
-		</select> <select style="width: 40px" name="month" id="month">
-		</select> <select style="width: 40px" name="day" id="day">
-		</select><br /> <input type="radio" name="Sex" value="Male" checked>男
-		<input type="radio" name="Sex" value="Female">女 <br>
-		<div>
-			点击注册，即表示你同意我们的条款，且已阅读过我们的<a href="">《使用政策》</a>，包括《Cookie 使用政策》。
-		</div>
-		<input type="submit" value="注册">
-	</fieldset>
-	<br />
+
 </body>
 </html>
