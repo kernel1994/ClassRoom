@@ -10,16 +10,16 @@ public class Role {
 	private String id;
 	private String name;
 	private String description;
-	private List<Privilege> privilleges = new ArrayList<>();
+	private List<Privilege> privileges = new ArrayList<>();
 
 	public Role() {
 	}
 
-	public Role(String id, String name, String description, List<Privilege> privilleges) {
+	public Role(String id, String name, String description, List<Privilege> privileges) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.privilleges = privilleges;
+		this.privileges = privileges;
 	}
 
 	public String getId() {
@@ -46,17 +46,17 @@ public class Role {
 		this.description = description;
 	}
 
-	public List<Privilege> getPrivilleges() {
-		return privilleges;
+	public List<Privilege> getPrivileges() {
+		return privileges;
 	}
 
-	public void setPrivilleges(List<Privilege> privilleges) {
-		this.privilleges = privilleges;
+	public void setPrivileges(List<Privilege> privileges) {
+		this.privileges = privileges;
 	}
 
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", name=" + name + ", description=" + description + ", privilleges=" + privilleges + "]";
+		return "Role [id=" + id + ", name=" + name + ", description=" + description + ", privilleges=" + privileges + "]";
 	}
 
 }
