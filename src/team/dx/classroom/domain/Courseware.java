@@ -9,7 +9,7 @@ public class Courseware {
 	private String name;
 	private String description;
 	private Resource resource;
-	private List<Review> list = new ArrayList();
+	private List<Review> list = new ArrayList<Review>();
 
 	public Courseware() {
 	}
