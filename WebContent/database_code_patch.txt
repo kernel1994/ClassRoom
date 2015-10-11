@@ -65,4 +65,18 @@ ADD CONSTRAINT `uploader_id_FK`
   FOREIGN KEY (`id`)
   REFERENCES `classroom`.`user` (`id`);
 
-	
+  
+  
+  
+  
+  
+5015-10-11
+ALTER TABLE `classroom`.`review` 
+ADD COLUMN `user_id` VARCHAR(40) NOT NULL COMMENT '' AFTER `id`;
+ALTER TABLE `classroom`.`review` 
+ADD CONSTRAINT `user_id_FK3`
+  FOREIGN KEY (`id`)
+  REFERENCES `classroom`.`user` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+

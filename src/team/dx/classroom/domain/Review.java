@@ -5,18 +5,22 @@ import java.util.Date;
 public class Review {
 
 	private String id;
-	private String name;
+	private String content;
 	private Date time;
+	/** ÆÀÂÛµÄÈË */
+	private User user;
 
 	public Review() {
 	}
 
-	public Review(String id, String name, Date time) {
+	public Review(String id, User user, String content, Date time) {
 		this.id = id;
-		this.name = name;
+		this.user = user;
+		this.content = content;
 		this.time = time;
 	}
 
+	
 	public String getId() {
 		return id;
 	}
@@ -24,13 +28,21 @@ public class Review {
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	public String getName() {
-		return name;
+	
+	public User getUser() {
+		return user;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public Date getTime() {
@@ -43,7 +55,7 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return "Review [id=" + id + ", name=" + name + ", time=" + time + "]";
+		return "Review [id=" + id + ", user=" + user + ", content=" + content + ", time=" + time + "]";
 	}
 
 }
