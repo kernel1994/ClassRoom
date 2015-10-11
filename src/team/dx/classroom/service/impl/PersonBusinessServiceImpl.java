@@ -21,7 +21,7 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 	public User findUserIsExist(String nick) {
 		String condition = "select id from user where nick = ?";
 		List<User> users = uDAO.getUsers(condition, nick);
-		if (users.size() == 0) {
+		if (users == null || users.size() == 0) {
 			return null;
 		}
 		
@@ -40,7 +40,7 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 		List<User> users = uDAO.getUsers(userCondition, email, password);
 		
 		// Îª¿ÕÔò·µ»Ønull
-		if (users.size() == 0) {
+		if (users == null || users.size() == 0) {
 			return null;
 		}
 		
@@ -63,6 +63,11 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 		user.setRole(role);
 		
 		return user;
+	}
+
+	@Override
+	public void addUser(User user) {
+		
 	}
 
 }

@@ -10,16 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 import team.dx.classroom.domain.User;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.PersonBusinessService;
-
+/**
+ * AJAX异步检测使用是否已经注册
+ */
 public class CheckUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	PersonBusinessService pbs = ObjectFactory.getInstance().createObject(PersonBusinessService.class);
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String nick = request.getParameter("nick");
 		
-		PersonBusinessService pbs = ObjectFactory.getInstance().createObject(PersonBusinessService.class);
+		String nick = request.getParameter("nick");
 		User user = pbs.findUserIsExist(nick);
+		
 		if (user != null) {
 			response.getWriter().write("该账号已经存在");
 		}
