@@ -9,18 +9,18 @@ public class Resource {
 	private String uri;
 	private Date uploadtime;
 	private String description;
-	private User upload;
+	private User uploader;
 
 	public Resource() {
 	}
 
-	public Resource(String id, String name, String uri, Date uploadtime, String description, User upload) {
+	public Resource(String id, String name, String uri, Date uploadtime, String description, User uploader) {
 		this.id = id;
 		this.name = name;
 		this.uri = uri;
 		this.uploadtime = uploadtime;
 		this.description = description;
-		this.upload = upload;
+		this.uploader = uploader;
 	}
 
 	public String getId() {
@@ -63,17 +63,17 @@ public class Resource {
 		this.description = description;
 	}
 
-	public User getUpload() {
-		return upload;
+	public User getUploader() {
+		return uploader;
 	}
 
-	public void setUpload(User upload) {
-		this.upload = upload;
+	public void setUploader(User uploader) {
+		this.uploader = uploader;
 	}
 
 	@Override
 	public String toString() {
-		return "Resource [id=" + id + ", name=" + name + ", uri=" + uri + ", uploadtime=" + uploadtime + ", description=" + description + ", upload=" + upload + "]";
+		return "Resource [id=" + id + ", name=" + name + ", uri=" + uri + ", uploadtime=" + uploadtime + ", description=" + description + ", uploader=" + uploader + "]";
 	}
 
 }

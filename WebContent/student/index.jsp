@@ -8,5 +8,7 @@
 </head>
 <body>
 	<h1>欢迎, ${sessionScope.user.nick }_${sessionScope.user.role.name }</h1>
+	<a href="${pageContext.request.contextPath }/logoutServlet">注销登录</a>
+	
 </body>
 </html>

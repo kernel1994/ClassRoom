@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import team.dx.classroom.domain.User;
-import team.dx.classroom.service.LoginService;
+import team.dx.classroom.service.PersonBusinessService;
+import team.dx.classroom.service.impl.PersonBusinessServiceImpl;
 
 /**
  * 响应登录请求，用于不同用户角色
@@ -18,7 +19,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	/** LoginService 对象，负责返回对应登录的对象  */
-	private LoginService loginService = new LoginService();
+	private PersonBusinessService personBusinessService = new PersonBusinessServiceImpl();
        
     public LoginServlet() {
         super();
@@ -29,7 +30,7 @@ public class LoginServlet extends HttpServlet {
     	String email = request.getParameter("email");
     	String password = request.getParameter("password");
     	
-    	User user = loginService.getUser(email, password);
+    	User user = personBusinessService.getUser(email, password);
     	
     	PrintWriter out = response.getWriter();
     	
@@ -37,7 +38,7 @@ public class LoginServlet extends HttpServlet {
     	if (user != null && user.getRole() != null) {
     		request.getSession().setAttribute("user", user);
         	
-        	String role = ""+"";
+        	String role = "";
         	if (user.getRole().getName().equals("学生")) {
         		role = "student";
         	} else if (user.getRole().getName().equals("教师")) {

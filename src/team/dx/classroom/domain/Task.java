@@ -10,7 +10,7 @@ public class Task {
 	private int score;
 	private String description;
 	private Resource resource;
-	private List<Review> list = new ArrayList();
+	private List<Review> list = new ArrayList<Review>();
 
 	public Task() {
 	}
