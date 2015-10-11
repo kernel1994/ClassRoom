@@ -34,6 +34,10 @@
 				<input id="confirm_password" name="confirm_password" type="password" />
 			</p>
 			<p>
+				<label for="name">姓名: </label>
+				<input id="name" name="name" />
+			</p>
+			<p>
 				<label for="email">邮箱: </label>
 				<input id="email" name="email" />
 			</p>
@@ -110,6 +114,9 @@
 				required: true,
 				email: true
 			},
+			name: {
+				required: true
+			},
 			gender: {
 				required: true
 			},
@@ -135,6 +142,9 @@
 			email: {
 				required: "Please provide a email",
 				email: "Please enter a valid email address"
+			},
+			name: {
+				required: "Please provide a name"
 			},
 			year:{
 				required: "Please provide a year"

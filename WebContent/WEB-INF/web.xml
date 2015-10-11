@@ -67,6 +67,10 @@
     	<param-name>role</param-name>
     	<param-value>学生</param-value>
     </init-param>
+    <init-param>
+    	<param-name>description</param-name>
+    	<param-value>默认注册为学生角色</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>

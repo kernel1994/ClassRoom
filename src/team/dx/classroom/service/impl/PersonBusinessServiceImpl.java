@@ -4,6 +4,7 @@ import java.util.List;
 
 import team.dx.classroom.dao.PrivilegeDAO;
 import team.dx.classroom.dao.RoleDAO;
+import team.dx.classroom.dao.ThirdPartyCommonDAO;
 import team.dx.classroom.dao.UserDAO;
 import team.dx.classroom.domain.Privilege;
 import team.dx.classroom.domain.Role;
@@ -16,6 +17,8 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 	UserDAO uDAO = ObjectFactory.getInstance().createObject(UserDAO.class);
 	RoleDAO rDAO = ObjectFactory.getInstance().createObject(RoleDAO.class);
 	PrivilegeDAO pDAO = ObjectFactory.getInstance().createObject(PrivilegeDAO.class);
+	
+	ThirdPartyCommonDAO tDAO = ObjectFactory.getInstance().createObject(ThirdPartyCommonDAO.class);
 	
 	@Override
 	public User findUserIsExist(String nick) {
@@ -67,7 +70,30 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 
 	@Override
 	public void addUser(User user) {
+		if (user == null) {
+			return;
+		}
+		uDAO.addUser(user);
 		
+		Role role = user.getRole();
+		if (role == null) {
+			return;
+		}
+		rDAO.addRole(role);
+		
+		/*--------插入user与role关系---------*/
+		tDAO.updateUserRole("insert", user.getId(), role.getId());
+		
+		List<Privilege> privileges = role.getPrivileges();
+		if (privileges == null || privileges.size() == 0) {
+			return;
+		}
+		
+		pDAO.addPrivilege(privileges);
+		/*--------插入role与privileges关系---------*/
+		for (Privilege privilege : privileges) {
+			tDAO.updateRolePrivilege("insert", privilege.getId(), role.getId());
+		}
 	}
 
 }

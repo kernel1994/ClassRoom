@@ -18,5 +18,5 @@ public interface PrivilegeDAO {
 	
 	public void deletePrivilege(String id);
 	
-	public void addPrivilege(Privilege privilege);
+	public void addPrivilege(List<Privilege> privileges);
 }

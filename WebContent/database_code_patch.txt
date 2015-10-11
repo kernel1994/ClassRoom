@@ -15,12 +15,14 @@ DROP TABLE `classroom`.`person`;
 
 
 
-
+----------------------------------
 2015-10-10-10
 ALTER TABLE `classroom`.`resource` 
 DROP FOREIGN KEY `upload_id_FK`;
+
 ALTER TABLE `classroom`.`resource` 
 DROP INDEX `upload_id_FK` ;
+
 ALTER TABLE `classroom`.`resource` 
 ADD CONSTRAINT `upload_id_FK`
   FOREIGN KEY (`id`)

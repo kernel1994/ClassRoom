@@ -29,10 +29,14 @@ public class PrivilegeDAOImpl extends BasicDAO<Privilege> implements PrivilegeDA
 	}
 
 	@Override
-	public void addPrivilege(Privilege privilege) {
-		String sql = "INSERT INTO privilege (id, name, description) VALUES (?, ?, ?)";
+	public void addPrivilege(List<Privilege> privileges) {
 		
-		update(sql, privilege.getId(), privilege.getName(), privilege.getDescription());
+		for (Privilege privilege : privileges) {
+			String sql = "INSERT INTO privilege (id, name, description) VALUES (?, ?, ?)";
+			
+			update(sql, privilege.getId(), privilege.getName(), privilege.getDescription());
+		}
+		
 	}
 
 }
