@@ -32,17 +32,13 @@ public class RegisterServlet extends HttpServlet {
 	
 			//检测user数据合法性----待实现
 			
-			//给用户添加角色
-			Role role = new Role();
+			
 			
 			/*--------------读取配置文件中的参数-----------------*/
-			String userRole = this.getServletConfig().getInitParameter("role");
-			String description = this.getServletConfig().getInitParameter("description");
+			String role_id = this.getServletConfig().getInitParameter("role_id");
 			
-			//封装role信息
-			role.setId(WebUtils.getRandomUUID());
-			role.setName(userRole);
-			role.setDescription(description);
+			//给用户添加角色
+			Role role = pbs.getRole(role_id);
 			
 			user.setRole(role);
 			pbs.addUser(user);

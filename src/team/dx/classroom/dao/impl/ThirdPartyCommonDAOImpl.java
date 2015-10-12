@@ -8,25 +8,24 @@ import org.apache.commons.dbutils.QueryRunner;
 import team.dx.classroom.dao.ThirdPartyCommonDAO;
 import team.dx.classroom.exception.DaoException;
 import team.dx.classroom.utils.JDBCUtils;
+import team.dx.classroom.utils.JDBCUtils2;
 
 public class ThirdPartyCommonDAOImpl implements ThirdPartyCommonDAO {
 
 	private QueryRunner queryRunner = new QueryRunner();
-	private Connection connection = null;
+	private Connection connection = JDBCUtils2.getConnection();
 	
 	@Override
 	public void update(String sql, Object... args) {
 
 		try {
-			connection = JDBCUtils.getConnection();
 			queryRunner.update(connection, sql, args);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DaoException("出现异常类为: ");
-		} finally {
-			JDBCUtils.closeConnection(connection);
-		}
+		} 
+		
 	}
 	
 	

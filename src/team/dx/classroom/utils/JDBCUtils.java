@@ -18,7 +18,7 @@ public class JDBCUtils {
 	// 静态代码块只能被创建一次
 	// 在 c3p0-config.xml 中配置的 configName
 	static {
-		dataSource = new ComboPooledDataSource("classroom");
+		dataSource = new ComboPooledDataSource("mysql");
 	}
 	
 	/**

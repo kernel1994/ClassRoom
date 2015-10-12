@@ -2,7 +2,7 @@
 <c3p0-config>
   
   <!-- This app is massive! -->
-  <named-config name="classroom"> 
+  <named-config name="mysql"> 
   
   	<property name="user">root</property>
   	<property name="password">root</property>

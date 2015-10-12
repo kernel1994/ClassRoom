@@ -34,6 +34,16 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   
+  <!-- 开启事务过滤器 -->
+  <filter>
+  	<filter-name>TransationFilter</filter-name>
+  	<filter-class>team.dx.classroom.web.filter.TransationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>TransationFilter</filter-name>
+  	<url-pattern>/servlet/*</url-pattern>
+  </filter-mapping>
+  
   <!-- 主页引导 -->
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
@@ -46,7 +56,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/loginServlet</url-pattern>
+    <url-pattern>/servlet/loginServlet</url-pattern>
   </servlet-mapping>
   
   <!-- 用户登出 -->
@@ -56,7 +66,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/logoutServlet</url-pattern>
+    <url-pattern>/servlet/logoutServlet</url-pattern>
   </servlet-mapping>
   
   <!-- 用户注册 -->
@@ -64,12 +74,8 @@
     <servlet-name>RegisterServlet</servlet-name>
     <servlet-class>team.dx.classroom.web.servlet.RegisterServlet</servlet-class>
     <init-param>
-    	<param-name>role</param-name>
-    	<param-value>学生</param-value>
-    </init-param>
-    <init-param>
-    	<param-name>description</param-name>
-    	<param-value>默认注册为学生角色</param-value>
+    	<param-name>role_id</param-name>
+    	<param-value>student</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>

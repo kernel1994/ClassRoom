@@ -16,7 +16,7 @@ public class ObjectFactory {
 	//启动时加载dao.properties文件进入内存,得到properties配置文件对象
 	static {
 		try {
-			InputStream in = ObjectFactory.class.getClassLoader().getResourceAsStream("dao.properties");
+			InputStream in = ObjectFactory.class.getClassLoader().getResourceAsStream("team/dx/classroom/factory/object.properties");
 			config.load(in);
 		} catch (Exception e) {
 			throw new ExceptionInInitializerError(e);

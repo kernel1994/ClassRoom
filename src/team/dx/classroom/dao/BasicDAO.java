@@ -12,7 +12,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import team.dx.classroom.exception.DaoException;
-import team.dx.classroom.utils.JDBCUtils;
+import team.dx.classroom.utils.JDBCUtils2;
 
 /**
  * 封装了基本的 CRUD 方法, 以供子类继承使用 当前 DAO 直接在方法中获取数据库连接 整个DAO采取DBUtils解决方案 泛型T: 当前 DAO
@@ -22,7 +22,7 @@ import team.dx.classroom.utils.JDBCUtils;
 public class BasicDAO<T> {
 
 	private QueryRunner queryRunner = new QueryRunner();
-	private Connection connection = null;
+	private Connection connection = JDBCUtils2.getConnection();
 	private Class<T> clazz;
 
 	public BasicDAO() {
@@ -60,15 +60,12 @@ public class BasicDAO<T> {
 	public void update(String sql, Object... args) {
 
 		try {
-			connection = JDBCUtils.getConnection();
 			queryRunner.update(connection, sql, args);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DaoException("出现异常类为: " + clazz.getSimpleName());
-		} finally {
-			JDBCUtils.closeConnection(connection);
-		}
+		} 
 	}
 
 	/**
@@ -83,16 +80,12 @@ public class BasicDAO<T> {
 	public T get(String sql, Object... args) {
 
 		try {
-			connection = JDBCUtils.getConnection();
-
 			return queryRunner.query(connection, sql,
 					new BeanHandler<T>(clazz), args);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DaoException("出现异常类为: " + clazz.getSimpleName());
-		} finally {
-			JDBCUtils.closeConnection(connection);
 		}
 	}
 
@@ -108,16 +101,12 @@ public class BasicDAO<T> {
 	public List<T> getForList(String sql, Object... args) {
 
 		try {
-			connection = JDBCUtils.getConnection();
-
 			return queryRunner.query(connection, sql, new BeanListHandler<T>(
 					clazz), args);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DaoException("出现异常类为: " + clazz.getSimpleName());
-		} finally {
-			JDBCUtils.closeConnection(connection);
 		}
 	}
 
@@ -133,16 +122,12 @@ public class BasicDAO<T> {
 	public <E> E getTheValue(String sql, Object... args) {
 
 		try {
-			connection = JDBCUtils.getConnection();
-
 			return queryRunner.query(connection, sql, new ScalarHandler<E>(),
 					args);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DaoException("出现异常类为: " + clazz.getSimpleName());
-		} finally {
-			JDBCUtils.closeConnection(connection);
 		}
 	}
 

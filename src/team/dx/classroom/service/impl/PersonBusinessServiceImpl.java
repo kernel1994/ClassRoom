@@ -70,30 +70,43 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 
 	@Override
 	public void addUser(User user) {
-		if (user == null) {
-			return;
-		}
-		uDAO.addUser(user);
 		
-		Role role = user.getRole();
-		if (role == null) {
-			return;
+		try {
+			if (user == null) {
+				return;
+			}
+			uDAO.addUser(user);
+			
+			Role role = user.getRole();
+			if (role == null) {
+				return;
+			}
+			/*--------插入user与role关系---------*/
+			tDAO.updateUserRole("insert", user.getId(), role.getId());
+			
+			List<Privilege> privileges = role.getPrivileges();
+			if (privileges == null || privileges.size() == 0) {
+				return;
+			}
+			
+			pDAO.addPrivilege(privileges);
+			/*--------插入role与privileges关系---------*/
+			for (Privilege privilege : privileges) {
+				tDAO.updateRolePrivilege("insert", privilege.getId(), role.getId());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
-		rDAO.addRole(role);
 		
-		/*--------插入user与role关系---------*/
-		tDAO.updateUserRole("insert", user.getId(), role.getId());
+	}
+
+	@Override
+	public Role getRole(String role_id) {
 		
-		List<Privilege> privileges = role.getPrivileges();
-		if (privileges == null || privileges.size() == 0) {
-			return;
-		}
+		String condition = "select * from role where id = ?";
 		
-		pDAO.addPrivilege(privileges);
-		/*--------插入role与privileges关系---------*/
-		for (Privilege privilege : privileges) {
-			tDAO.updateRolePrivilege("insert", privilege.getId(), role.getId());
-		}
+		return rDAO.getRole(condition, role_id);
 	}
 
 }
