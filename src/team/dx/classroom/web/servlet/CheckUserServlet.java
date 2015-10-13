@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import team.dx.classroom.domain.User;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.PersonBusinessService;
 /**
@@ -21,13 +20,13 @@ public class CheckUserServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String nick = request.getParameter("nick");
-		User user = pbs.findUserIsExist(nick);
+		Boolean isTrue = pbs.findUserIsExist(nick);
 		
-		if (user != null) {
-			response.getWriter().write("该账号已经存在");
+		if (isTrue) {
+			response.getWriter().write("该账号可用");
 		}
 		else {
-			response.getWriter().write("注册成功");
+			response.getWriter().write("该账号已经存在");
 		}
 		
 	}

@@ -1,7 +1,6 @@
 package team.dx.classroom.web.servlet;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import javax.servlet.ServletException;
@@ -14,29 +13,18 @@ import javax.servlet.http.HttpServletResponse;
  * 拥有doProcess 方法。其作用是利用Java反射机制，进行方法调用method.invoke()<br />
  * 这样就很方便得进行方法的扩展。子类可以继承。实现自己的方法调用。
  */
-public class MethodInvokeServlet extends HttpServlet {
+public class MethodInvokeServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public MethodInvokeServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// 获取的是这样的 /deleteCustomer.do /addCustomer.do
-		String servletPath = request.getServletPath();
-
-		/*
-		 * 路径是这样构成的 http://localhost:8080/工程名/文件夹名/(子文件夹)/文件.jsp或请求名.do
-		 * servletPath 是 /文件夹名/(子文件夹)/文件或请求名 ContextPath 是 /工程名 RequestURL 是
-		 * /工程名/文件夹名/(子文件夹)/文件或请求名 截取servletPath的最后一个/ 和 .ado 之间的字符串
-		 */
-		String methodName = servletPath.substring(servletPath.lastIndexOf("/") + 1, servletPath.length() - 4);
+		// /ClassRoom/servlet/RoleServlet?method=getAll
+		String methodName = request.getParameter("method");
+		
+		if (methodName == null) {
+			throw new RuntimeException("没有指定方法");
+		}
 
 		try {
 			// 获取与methodName对应的方法
@@ -49,16 +37,9 @@ public class MethodInvokeServlet extends HttpServlet {
 			// 利用反射来调用方法
 			method.invoke(this, request, response);
 
-		} catch (NoSuchMethodException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			throw new RuntimeException("类MethodInvokeServlet2出现未知异常");
 		}
 	}
 

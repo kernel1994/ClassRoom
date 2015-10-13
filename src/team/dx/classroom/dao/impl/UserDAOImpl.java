@@ -42,4 +42,9 @@ public class UserDAOImpl extends BasicDAO<User>implements UserDAO {
 				user.getBirthday(), user.getAddress(), user.getDescription());
 	}
 
+	@Override
+	public User getUser(String condition, Object... args) {
+		return get(condition, args);
+	}
+
 }

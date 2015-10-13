@@ -21,14 +21,10 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 	ThirdPartyCommonDAO tDAO = ObjectFactory.getInstance().createObject(ThirdPartyCommonDAO.class);
 	
 	@Override
-	public User findUserIsExist(String nick) {
+	public boolean findUserIsExist(String nick) {
 		String condition = "select id from user where nick = ?";
-		List<User> users = uDAO.getUsers(condition, nick);
-		if (users == null || users.size() == 0) {
-			return null;
-		}
-		
-		return users.get(0);
+		User user = uDAO.getUser(condition, nick);
+		return user == null ? true : false;
 	}
 	
 	@Override
@@ -40,14 +36,12 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 		String userCondition = "SELECT * FROM user WHERE email = ? AND password = ?";
 		
 		// 如果为查到则getUsers() 返回空集合
-		List<User> users = uDAO.getUsers(userCondition, email, password);
+		user = uDAO.getUser(userCondition, email, password);
 		
 		// 为空则返回null
-		if (users == null || users.size() == 0) {
+		if (user == null) {
 			return null;
 		}
-		
-		user = users.get(0);
 		
 		// 然后根据user_id 获取role 对象
 		String roleCondition = "SELECT * FROM role WHERE id = (SELECT role_id FROM user_role WHERE user_id = ?)";
@@ -107,6 +101,12 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 		String condition = "select * from role where id = ?";
 		
 		return rDAO.getRole(condition, role_id);
+	}
+
+	@Override
+	public List<Role> getAllRoles() {
+		String condition = "select * from role";
+		return rDAO.getRoles(condition);
 	}
 
 }

@@ -55,7 +55,7 @@ public class JDBCUtils2 {
 	 * */
 	public static void commitTransaction(){
 		try{
-			Connection conn = getConnection();
+			Connection conn = tlLocal.get();
 			if(conn!=null){
 				conn.commit();
 			}
@@ -72,14 +72,17 @@ public class JDBCUtils2 {
 		Connection connection = null;
 		
 		try {
-			connection = getConnection();
+			connection = tlLocal.get();
 			if (connection != null) {
 				connection.close();
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
-			tlLocal.remove();
+			if (connection != null) {
+				tlLocal.remove();
+			}
+			
 		}
 	}
 

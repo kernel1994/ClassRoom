@@ -7,6 +7,7 @@
     <servlet-name>CheckUserServlet</servlet-name>
     <servlet-class>team.dx.classroom.web.servlet.CheckUserServlet</servlet-class>
   </servlet>
+  <!-- 检测用户是否已经注册测试-->
   <servlet>
     <servlet-name>CharacterEncodingFilterTest</servlet-name>
     <servlet-class>test.web.CharacterEncodingFilterTest</servlet-class>
@@ -78,9 +79,20 @@
     	<param-value>student</param-value>
     </init-param>
   </servlet>
+  
+  <!-- 角色管理 -->
+  <servlet>
+    <servlet-name>RoleServlet</servlet-name>
+    <servlet-class>team.dx.classroom.web.manger.servlet.RoleServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/servlet/RegisterServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RoleServlet</servlet-name>
+    <url-pattern>/servlet/RoleServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

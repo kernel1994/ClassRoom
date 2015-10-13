@@ -101,9 +101,8 @@ public class BasicDAO<T> {
 	public List<T> getForList(String sql, Object... args) {
 
 		try {
-			return queryRunner.query(connection, sql, new BeanListHandler<T>(
-					clazz), args);
-
+				return queryRunner.query(connection, sql, new BeanListHandler<T>(
+						clazz), args);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DaoException("出现异常类为: " + clazz.getSimpleName());

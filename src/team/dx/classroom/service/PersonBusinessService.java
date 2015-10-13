@@ -1,11 +1,13 @@
 package team.dx.classroom.service;
 
+import java.util.List;
+
 import team.dx.classroom.domain.Role;
 import team.dx.classroom.domain.User;
 
 public interface PersonBusinessService {
 	
-	User findUserIsExist(String nick);
+	boolean findUserIsExist(String nick);
 	
 	/**
 	 * 用于用户登录，通过邮箱和密码来数据库查询对应的用户
@@ -26,4 +28,10 @@ public interface PersonBusinessService {
 	 * @param role_id role主键
 	 * */
 	Role getRole(String role_id);
+
+	/**
+	 * 得到所有角色
+	 *
+	 * */
+	List<Role> getAllRoles();
 }

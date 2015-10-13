@@ -1,5 +1,7 @@
 package team.dx.classroom.dao.impl;
 
+import java.util.List;
+
 import team.dx.classroom.dao.BasicDAO;
 import team.dx.classroom.dao.RoleDAO;
 import team.dx.classroom.domain.Role;
@@ -7,9 +9,9 @@ import team.dx.classroom.domain.Role;
 public class RoleDAOImpl extends BasicDAO<Role> implements RoleDAO {
 
 	@Override
-	public Role getRole(String condition, Object... args) {
+	public List<Role> getRoles(String condition, Object... args) {
 		
-		return get(condition, args);
+		return getForList(condition, args);
 	}
 
 	@Override
@@ -34,6 +36,11 @@ public class RoleDAOImpl extends BasicDAO<Role> implements RoleDAO {
 		String sql = "INSERT INTO role (id, name, description) VALUES (?, ?, ?)";
 		
 		update(sql, role.getId(), role.getName(), role.getDescription());
+	}
+
+	@Override
+	public Role getRole(String condition, Object... args) {
+		return get(condition, args);
 	}
 
 }

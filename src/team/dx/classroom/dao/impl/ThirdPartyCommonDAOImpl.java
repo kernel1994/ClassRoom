@@ -7,7 +7,6 @@ import org.apache.commons.dbutils.QueryRunner;
 
 import team.dx.classroom.dao.ThirdPartyCommonDAO;
 import team.dx.classroom.exception.DaoException;
-import team.dx.classroom.utils.JDBCUtils;
 import team.dx.classroom.utils.JDBCUtils2;
 
 public class ThirdPartyCommonDAOImpl implements ThirdPartyCommonDAO {
