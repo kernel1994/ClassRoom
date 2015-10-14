@@ -7,7 +7,12 @@
 <title>教师主页</title>
 </head>
 <body>
-	<jsp:include page="/teacher/manager/head.jsp"></jsp:include><hr/>
-	<jsp:include page="/teacher/manager/listcourse.jsp"></jsp:include>
+	<div style=" float: left">
+		菜单
+	</div>
+	<div style="text-align: right;">
+		${sessionScope.user.nick}_${sessionScope.user.role.name } 
+		<a href="${pageContext.request.contextPath }/logoutServlet">注销登录</a> 
+	</div>
 </body>
 </html>

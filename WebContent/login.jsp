@@ -17,11 +17,11 @@
 		<form action="" method="post">
 			<p>
 				<label for="email">邮箱:</label>
-				<input type="text" name="email" id="email" value="xiaoming@cr.com" /> <span id="loginInfo"></span> 
+				<input type="text" name="email" id="email" value="zhangsan@qq.com" /> <span id="loginInfo"></span> 
 			</p>
 			<p>
 				<label for="email">密码:</label>
-				<input type="password" name="password" id="password" value="123" />
+				<input type="password" name="password" id="password" value="123456" />
 			</p>
 			<p>
 				<input type="checkbox" name="loginstatus" />保持登陆状态<a href="">忘记密码</a> <br /><br />
@@ -39,13 +39,14 @@
 				var email = $('#email').val();
 				var password = $('#password').val();
 				
-				$.get("loginServlet", {email: email, password: password}, function (result) {
+				$.post("servlet/loginServlet", {email: email, password: password}, function (result) {
 					if (result == "NO") {
 						$("#loginInfo").html("<font color='red'>邮箱或密码错误</font>");
 						$('#email,#password').css({
 							"border" : "1px solid red"
 						});
 					} else {
+						
 						window.location.replace(result);
 					}
 				});

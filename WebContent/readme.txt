@@ -133,8 +133,8 @@ create table review
 	content varchar(255),
 	time date not null,
 
-	user_id varchar(40) not null,
-	constraint user_id_FK4 foreign keyuser_id references user(id)
+	user_id varchar(40),
+	constraint user_id_FK4 foreign key(user_id) references user(id)
 );
 
 
