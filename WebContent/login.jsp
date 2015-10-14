@@ -14,7 +14,7 @@
 	<!-- 登陆 -->
 	<fieldset style="width: 50%;margin:10px;padding: 5px;">
 		<legend>登陆</legend>
-		<form action="" method="post">
+		<form action="loginServlet" method="post">
 			<p>
 				<label for="email">邮箱:</label>
 				<input type="text" name="email" id="email" value="xiaoming@cr.com" /> <span id="loginInfo"></span> 
@@ -39,7 +39,7 @@
 				var email = $('#email').val();
 				var password = $('#password').val();
 				
-				$.get("loginServlet", {email: email, password: password}, function (result) {
+				$.post("servlet/loginServlet", {email: email, password: password}, function (result) {
 					if (result == "NO") {
 						$("#loginInfo").html("<font color='red'>邮箱或密码错误</font>");
 						$('#email,#password').css({

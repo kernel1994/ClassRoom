@@ -38,17 +38,9 @@ public class LoginServlet extends HttpServlet {
     	if (user != null && user.getRole() != null) {
     		request.getSession().setAttribute("user", user);
         	
-        	String role = "";
-        	if (user.getRole().getName().equals("学生")) {
-        		role = "student";
-        	} else if (user.getRole().getName().equals("教师")) {
-        		role = "teacher";
-        	} else if (user.getRole().getName().equals("管理员")) {
-        		role = "admin";
-        	}
-        	
         	// 重定向到不同身份用户的主页
-        	out.write(request.getContextPath() + "/" + role + "/index.jsp");
+        	// 规定：在数据库中角色role 表id 字段值为角色名，即student etc.
+        	out.write(request.getContextPath() + "/" + user.getRole().getId() + "/index.jsp");
     	}else if(user != null && user.getRole() == null) {
     		out.write(request.getContextPath() + "/index.jsp");
     	} else {
