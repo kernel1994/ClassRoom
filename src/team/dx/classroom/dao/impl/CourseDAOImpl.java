@@ -11,7 +11,12 @@ public class CourseDAOImpl extends BasicDAO<Course> implements CourseDAO {
 	@Override
 	public List<Course> getCourses(String condition, Object... args) {
 
-		return getForList(condition, args);
+		try {
+			return getForList(condition, args);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		
 	}
 
 	@Override

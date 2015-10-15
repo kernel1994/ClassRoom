@@ -17,11 +17,11 @@
 		<form action="loginServlet" method="post">
 			<p>
 				<label for="email">邮箱:</label>
-				<input type="text" name="email" id="email" value="xiaoming@cr.com" /> <span id="loginInfo"></span> 
+				<input type="text" name="email" id="email" value="zhangsan@qq.com" /> <span id="loginInfo"></span> 
 			</p>
 			<p>
 				<label for="email">密码:</label>
-				<input type="password" name="password" id="password" value="123" />
+				<input type="password" name="password" id="password" value="123456" />
 			</p>
 			<p>
 				<input type="checkbox" name="loginstatus" />保持登陆状态<a href="">忘记密码</a> <br /><br />
@@ -46,6 +46,7 @@
 							"border" : "1px solid red"
 						});
 					} else {
+						
 						window.location.replace(result);
 					}
 				});

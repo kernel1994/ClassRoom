@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,7 +7,7 @@
 <title>教师主页</title>
 </head>
 <body>
-	<h1>欢迎, ${sessionScope.user.nick }_${sessionScope.user.role.name }</h1>
-	<a href="${pageContext.request.contextPath }/servlet/logoutServlet">注销登录</a>
+	<jsp:include page="/teacher/head.jsp"></jsp:include>
+	<jsp:include page="/teacher/manager/listcourse.jsp"></jsp:include>
 </body>
 </html>

@@ -15,7 +15,7 @@ public class CourseServiceImplTest {
 	@Test
 	public void testChooseCourse() {
 		cs.chooseCourse("1", "1");
-		JDBCUtils2.commitTransaction();
+		// JDBCUtils2.commitTransaction();
 	}
 
 	@Test
