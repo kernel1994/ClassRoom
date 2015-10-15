@@ -39,7 +39,7 @@
 				var email = $('#email').val();
 				var password = $('#password').val();
 				
-				$.post("servlet/loginServlet", {email: email, password: password}, function (result) {
+				$.post("servlet/loginServlet", {email: email, password: password, temp: new Date()}, function (result) {
 					if (result == "NO") {
 						$("#loginInfo").html("<font color='red'>邮箱或密码错误</font>");
 						$('#email,#password').css({

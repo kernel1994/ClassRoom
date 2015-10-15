@@ -25,6 +25,14 @@ public class MethodInvokeServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * 计算请求匹配后缀的长度。子类根据需要覆盖此方法。
+	 * */
+	public int getSuffixLen() {
+		
+		return ".dao".length();
+	}
+	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -36,7 +44,7 @@ public class MethodInvokeServlet extends HttpServlet {
 		 * servletPath 是 /文件夹名/(子文件夹)/文件或请求名 ContextPath 是 /工程名 RequestURL 是
 		 * /工程名/文件夹名/(子文件夹)/文件或请求名 截取servletPath的最后一个/ 和 .ado 之间的字符串
 		 */
-		String methodName = servletPath.substring(servletPath.lastIndexOf("/") + 1, servletPath.length() - 4);
+		String methodName = servletPath.substring(servletPath.lastIndexOf("/") + 1, servletPath.length() - getSuffixLen());
 
 		try {
 			// 获取与methodName对应的方法

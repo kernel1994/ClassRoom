@@ -7,6 +7,11 @@ public class Course {
 	private int limitperson;
 	private String description;
 	private User teacher;
+	
+	/** 用于标注用户是否用于该课程
+	 * 1 表示拥有
+	 * 0 表示没有 */
+	private int haveOwn = 0;
 
 	public Course() {
 	}
@@ -61,7 +66,17 @@ public class Course {
 
 	@Override
 	public String toString() {
-		return "Course [id=" + id + ", name=" + name + ", limitperson=" + limitperson + ", description=" + description + ", teacher=" + teacher + "]";
+		return "Course [id=" + id + ", name=" + name + ", limitperson=" 
+	+ limitperson + ", description=" + description + ", teacher=" 
+				+ teacher + ", haveOwn=" + haveOwn + "]";
+	}
+
+	public int getHaveOwn() {
+		return haveOwn;
+	}
+
+	public void setHaveOwn(int haveOwn) {
+		this.haveOwn = haveOwn;
 	}
 
 }

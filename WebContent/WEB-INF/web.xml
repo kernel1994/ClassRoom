@@ -70,6 +70,16 @@
     <url-pattern>/servlet/logoutServlet</url-pattern>
   </servlet-mapping>
   
+  <!-- 学生servlet -->
+  <servlet>
+    <servlet-name>StudentServlet</servlet-name>
+    <servlet-class>team.dx.classroom.web.servlet.student.StudentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentServlet</servlet-name>
+    <url-pattern>*.studentdo</url-pattern>
+  </servlet-mapping>
+  
   <!-- 用户注册 -->
   <servlet>
     <servlet-name>RegisterServlet</servlet-name>

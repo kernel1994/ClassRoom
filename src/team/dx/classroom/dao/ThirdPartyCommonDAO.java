@@ -19,7 +19,7 @@ public interface ThirdPartyCommonDAO {
 	public abstract void updateCoursewareReview(String type, Object... args);
 
 	/**
-	 * 对表courseware_review 进行 INSERT/ DELETE/ UPDATE 操作。其中update 操作只能修改privilege_id
+	 * 对表role_privilege 进行 INSERT/ DELETE/ UPDATE 操作。其中update 操作只能修改privilege_id
 	 * @param type 字符串 INSERT 或  DELETE 或 UPDATE (不区分大小写) 中的一个
 	 * @param args 参数。其中：<br />insert 需要两个参数，顺序是 权限ID 角色ID<br />
 	 * delete 需要两个参数，顺序是 权限ID 角色ID<br />
@@ -28,7 +28,7 @@ public interface ThirdPartyCommonDAO {
 	public abstract void updateRolePrivilege(String type, Object... args);
 
 	/**
-	 * 对表courseware_review 进行 INSERT/ DELETE/ UPDATE 操作。其中update 操作只能修改分数
+	 * 对表student_course 进行 INSERT/ DELETE/ UPDATE 操作。其中update 操作只能修改分数
 	 * @param type 字符串 INSERT 或  DELETE 或 UPDATE (不区分大小写) 中的一个
 	 * @param args 参数。其中：<br />insert 需要 3 个参数，顺序是 学生ID 课程ID 分数<br />
 	 * delete 需要 2 个参数，顺序是 学生ID 课程ID<br />
@@ -37,7 +37,7 @@ public interface ThirdPartyCommonDAO {
 	public abstract void updateStudentCourse(String type, Object... args);
 
 	/**
-	 * 对表courseware_review 进行 INSERT/ DELETE/ <del>UPDATE</del> 操作
+	 * 对表task_review 进行 INSERT/ DELETE/ <del>UPDATE</del> 操作
 	 * @param type 字符串 INSERT 或  DELETE 或 <del>UPDATE</del> (不区分大小写) 中的一个
 	 * @param args 参数。其中：<br />insert 需要 2 个参数，顺序是 作业ID 评论ID<br />
 	 * delete 需要 2 个参数，顺序是 作业ID 评论ID
@@ -45,7 +45,7 @@ public interface ThirdPartyCommonDAO {
 	public abstract void updateTaskReview(String type, Object... args);
 
 	/**
-	 * 对表courseware_review 进行 INSERT/ DELETE/ <del>UPDATE</del> 操作
+	 * 对表user_role 进行 INSERT/ DELETE/ <del>UPDATE</del> 操作
 	 * @param type 字符串 INSERT 或  DELETE 或 <del>UPDATE</del> (不区分大小写) 中的一个
 	 * @param args 参数。其中：<br />insert 需要 2 个参数，顺序是 用户ID 角色ID<br />
 	 * delete 需要 2 个参数，顺序是 用户ID 角色ID
@@ -53,7 +53,7 @@ public interface ThirdPartyCommonDAO {
 	public abstract void updateUserRole(String type, Object... args);
 
 	/**
-	 * 对表courseware_review 进行 INSERT/ DELETE/ UPDATE 操作
+	 * 对表user_task 进行 INSERT/ DELETE/ UPDATE 操作
 	 * @param type 字符串 INSERT 或  DELETE 或 UPDATE (不区分大小写) 中的一个
 	 * @param args 参数。其中：<br />insert 需要 3 个参数，顺序是 学生ID 作业ID 分数<br />
 	 * delete 需要 2 个参数，顺序是 学生ID 作业ID<br />

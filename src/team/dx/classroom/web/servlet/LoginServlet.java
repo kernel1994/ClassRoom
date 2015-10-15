@@ -27,6 +27,12 @@ public class LoginServlet extends HttpServlet {
     
     protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+    	
+    	/* 禁用缓存 */
+		response.setHeader("Cache-Control", "no-store");
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Expires", 0);
+    	
     	String email = request.getParameter("email");
     	String password = request.getParameter("password");
     	
@@ -40,7 +46,12 @@ public class LoginServlet extends HttpServlet {
         	
         	// 重定向到不同身份用户的主页
         	// 规定：在数据库中角色role 表id 字段值为角色名，即student etc.
-        	out.write(request.getContextPath() + "/" + user.getRole().getId() + "/index.jsp");
+    		if (user.getRole().getId().equals("student")) {
+    			out.write("createIndex.studentdo");
+    		} else {
+    			out.write(request.getContextPath() + "/" + user.getRole().getId() + "/index.jsp");
+    		}
+    		
     	}else if(user != null && user.getRole() == null) {
     		out.write(request.getContextPath() + "/index.jsp");
     	} else {
