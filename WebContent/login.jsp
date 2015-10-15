@@ -14,7 +14,7 @@
 	<!-- 登陆 -->
 	<fieldset style="width: 50%;margin:10px;padding: 5px;">
 		<legend>登陆</legend>
-		<form action="" method="post">
+		<form action="loginServlet" method="post">
 			<p>
 				<label for="email">邮箱:</label>
 				<input type="text" name="email" id="email" value="zhangsan@qq.com" /> <span id="loginInfo"></span> 

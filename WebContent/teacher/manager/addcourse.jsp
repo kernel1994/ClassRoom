@@ -4,31 +4,41 @@
 <html>
   <head>
     <title>添加角色界面</title>
+  	<jsp:include page="../head.jsp"></jsp:include>
   </head>
   
   <body>
-   	<form action="${pageContext.request.contextPath }/servlet/RoleServlet?method=add" method="post">
-   	<table>
-   		<tr>
-   			<td>角色名称</td>
-   			<td>
-   				<input type="text" name="name">
-   			</td>
-   		</tr>
-   		<tr>
-   			<td>角色描述</td>
-   			<td>
-				<textarea rows="5" cols="50" name="description"></textarea>
-   			</td>
-   		</tr>
-   		
-   		<tr>
-   			<td></td>
-   			<td>
-				<input type="submit" value="添加角色">
-   			</td>
-   		</tr>
-   	</table>
+  
+   	<form action="${pageContext.request.contextPath }/servlet/TeacherCourseServlet?method=add" method="post">
+	   	<center>
+		   	<table>
+		   		<tr>
+		   			<td>课程名称</td>
+		   			<td>
+		   				<input type="text" name="name">
+		   			</td>
+		   		</tr>
+		   		<tr>
+		   			<td>限选人数</td>
+		   			<td>
+		   				<input type="text" name="limitperson">
+		   			</td>
+		   		</tr>
+		   		<tr>
+		   			<td>课程描述</td>
+		   			<td>
+						<textarea rows="5" cols="50" name="description"></textarea>
+		   			</td>
+		   		</tr>
+		   		
+		   		<tr>
+		   			<td></td>
+		   			<td>
+						<input type="submit" value="添加课程">
+		   			</td>
+		   		</tr>
+		   	</table>
+	   	</center>
    	</form>
   </body>
 </html>

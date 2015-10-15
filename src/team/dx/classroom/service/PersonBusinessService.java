@@ -16,6 +16,14 @@ public interface PersonBusinessService {
 	 * @return 如果成功返回User 对象，否则返回null
 	 * */
 	User getUser(String email, String password);
+	
+
+	/**
+	 * 用于查找用户
+	 * @param id 用户主键
+	 * @return 如果成功返回User 对象，否则返回null
+	 * */
+	User getUser(String id);
 
 	/**
 	 * 用于用户注册，将用户信息封装成user

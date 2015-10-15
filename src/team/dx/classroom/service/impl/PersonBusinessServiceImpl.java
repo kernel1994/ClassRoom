@@ -109,4 +109,12 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 		return rDAO.getRoles(condition);
 	}
 
+	@Override
+	public User getUser(String id) {
+		
+		String condition = "select * from user where id = ?";
+		
+		return uDAO.getUser(condition, id);
+	}
+
 }

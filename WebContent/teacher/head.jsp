@@ -6,13 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>教师主页</title>
 </head>
-<body>
+<body  style="background-color: #e8f2fe">
 	<div style=" float: left">
-		菜单
+		<a href="${pageContext.request.contextPath}/servlet/TeacherIndexServlet?method=getAll">教师主页</a>
 	</div>
 	<div style="text-align: right;">
 		${sessionScope.user.nick}_${sessionScope.user.role.name } 
-		<a href="${pageContext.request.contextPath }/logoutServlet">注销登录</a> 
-	</div>
+		<a href="${pageContext.request.contextPath }/servlet/logoutServlet">注销登录</a> 
+	</div><hr/>
 </body>
 </html>

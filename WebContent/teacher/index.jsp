@@ -7,7 +7,7 @@
 <title>教师主页</title>
 </head>
 <body>
-	<jsp:include page="/teacher/manager/head.jsp"></jsp:include><hr/>
+	<jsp:include page="/teacher/head.jsp"></jsp:include>
 	<jsp:include page="/teacher/manager/listcourse.jsp"></jsp:include>
 </body>
 </html>

@@ -85,6 +85,18 @@
     <servlet-name>RoleServlet</servlet-name>
     <servlet-class>team.dx.classroom.web.manger.servlet.RoleServlet</servlet-class>
   </servlet>
+  
+  <!-- 老师显示主页UI逻辑控制 -->
+  <servlet>
+    <servlet-name>TeacherIndexServlet</servlet-name>
+    <servlet-class>team.dx.classroom.web.teacher.servlet.TeacherIndexServlet</servlet-class>
+  </servlet>
+  
+  <!-- 老师对课程course管理 -->
+  <servlet>
+    <servlet-name>TeacherCourseServlet</servlet-name>
+    <servlet-class>team.dx.classroom.web.teacher.servlet.TeacherCourseServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
@@ -93,6 +105,14 @@
   <servlet-mapping>
     <servlet-name>RoleServlet</servlet-name>
     <url-pattern>/servlet/RoleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TeacherIndexServlet</servlet-name>
+    <url-pattern>/servlet/TeacherIndexServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TeacherCourseServlet</servlet-name>
+    <url-pattern> /servlet/TeacherCourseServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

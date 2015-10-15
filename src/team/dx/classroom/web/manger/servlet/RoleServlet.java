@@ -33,8 +33,6 @@ public class RoleServlet extends MethodInvokeServlet2 {
 			request.setAttribute("message", "RoleServlet类中getAll方法出现异常");
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 		}
-		
-		
-		
+
 	}
 }
