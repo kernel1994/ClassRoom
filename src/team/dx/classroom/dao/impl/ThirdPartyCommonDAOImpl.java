@@ -70,20 +70,26 @@ public class ThirdPartyCommonDAOImpl implements ThirdPartyCommonDAO {
 	@Override
 	public void updateStudentCourse(String type, Object...args) {
 		
-		type = type.toLowerCase();
-		String sql = "";
-				
-		if (type.equals("insert")) {
-			sql = "INSERT INTO student_course (student_id, course_id, score) VALUES (?, ?, ?)";
-		} else if (type.equals("delete")) {
-			sql = "DELETE FROM student_course WHERE student_id = ? AND course_id = ?";
-		} else if (type.equals("update")) {
-			sql = "UPDATE student_course SET score = ? WHERE student_id = ? AND course_id = ?";
-		} else {
-			throw new DaoException("请指定正确的type 值");
+		try {
+			type = type.toLowerCase();
+			String sql = "";
+					
+			if (type.equals("insert")) {
+				sql = "INSERT INTO student_course (student_id, course_id, score) VALUES (?, ?, ?)";
+			} else if (type.equals("delete")) {
+				sql = "DELETE FROM student_course WHERE student_id = ? AND course_id = ?";
+			} else if (type.equals("update")) {
+				sql = "UPDATE student_course SET score = ? WHERE student_id = ? AND course_id = ?";
+			} else {
+				throw new DaoException("请指定正确的type 值");
+			}
+			update(sql, args);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 		
-		update(sql, args);
+		
+		
 	}
 	
 	@Override

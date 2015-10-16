@@ -44,6 +44,10 @@
   	<filter-name>TransationFilter</filter-name>
   	<url-pattern>/servlet/*</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+  	<filter-name>TransationFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
   
   <!-- 主页引导 -->
   <welcome-file-list>

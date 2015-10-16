@@ -107,7 +107,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public void chooseCourse(String studentId, String courseId) {
+	public void chooseCourse(String studentId, String courseId) throws RuntimeException {
 		
 		tDAO.updateStudentCourse("insert", studentId, courseId, 0);
 	}

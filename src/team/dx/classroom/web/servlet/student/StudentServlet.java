@@ -14,6 +14,7 @@ import team.dx.classroom.domain.Course;
 import team.dx.classroom.domain.User;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
+import team.dx.classroom.utils.JDBCUtils2;
 import team.dx.classroom.web.servlet.MethodInvokeServlet;
 
 public class StudentServlet extends MethodInvokeServlet {
@@ -62,21 +63,27 @@ public class StudentServlet extends MethodInvokeServlet {
 	 * */
 	public void chooseCourseAjax(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/* ½ûÓÃ»º´æ */
-		response.setHeader("Cache-Control", "no-store");
-		response.setHeader("Pragma", "no-cache");
-		response.setDateHeader("Expires", 0);
+		try {
+			/* ½ûÓÃ»º´æ */
+			response.setHeader("Cache-Control", "no-store");
+			response.setHeader("Pragma", "no-cache");
+			response.setDateHeader("Expires", -1);
+			
+			String courseId = request.getParameter("courseId");
+			String studentId = request.getParameter("studentId");
+			
+			cService.chooseCourse(studentId, courseId);
+			PrintWriter out = response.getWriter();
+			
+			out.write("OK");
+			out.flush();
+			out.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
 		
-		String courseId = request.getParameter("courseId");
-		String studentId = request.getParameter("studentId");
-		
-		cService.chooseCourse(studentId, courseId);
-		
-		PrintWriter out = response.getWriter();
-		
-		out.write("OK");
-		out.flush();
-		out.close();
 	}
 	
 	/**

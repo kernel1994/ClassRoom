@@ -5,9 +5,50 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.2.min.js"></script>
 <title>学生主页</title>
 </head>
+
+
 <body>
+	
+	<script type="text/javascript">
+		
+			
+			function choose(obj, courseId, studentId) {
+			$.get("chooseCourseAjax.studentdo", {courseId: courseId, studentId: studentId, temp: new Date()}, function (result) {
+				// 如果返回时 OK 则表示成功添加了喜欢。按钮状态应该改为 取消喜欢 。响应的click函数应该改为不喜欢
+				if (result == "OK") {
+					// 改变按钮文字
+					obj.innerHTML = "退选";
+					// 移除按钮事件监听器
+					obj.removeEventListener('click', choose);
+					// 添加新的监听
+					obj.addEventListener('click', unchoose, false);
+					// 在这里应该还需要设置旁边那个查看按钮的haveOwn状态。思路是获取父节点和兄弟节点来定位该元素，但是我不想改了。
+				} else {
+					alert("发送某种错误");
+				}
+			});
+		}
+		
+		function unchoose(obj, courseId, studentId) {
+			$.get("unchooseCourseAjax.studentdo", {courseId: courseId, studentId: studentId, temp: new Date()}, function (result) {
+				// 如果返回时 OK 则表示成功添加了喜欢。按钮状态应该改为 取消喜欢 。响应的click函数应该改为不喜欢
+				if (result == "OK") {
+					// 改变按钮文字
+					obj.innerHTML = "选课";
+					// 移除按钮事件监听器
+					obj.removeEventListener('click', unchoose);
+					// 添加新的监听
+					obj.addEventListener('click', choose, false);
+					// 在这里应该还需要设置旁边那个查看按钮的haveOwn状态。思路是获取父节点和兄弟节点来定位该元素，但是我不想改了。
+				} else {
+					alert("发送某种错误");
+				}
+			});
+		}
+</script>
 	<h1>欢迎, ${sessionScope.user.nick }_${sessionScope.user.role.name }</h1>
 	<a href="${pageContext.request.contextPath }/servlet/logoutServlet">注销登录</a>
 	
@@ -19,7 +60,6 @@
 		
 		<input type="submit" value="查询"><br>
 	</form>
-	
 	
 	<div>
 		<c:if test="${not empty requestScope.courses }">
@@ -42,11 +82,11 @@
 
 							<c:choose>
 								<c:when test="${course.haveOwn == 1 }">
-									<td><button onclick="unchoose(this, ${course.id }, ${sessionScope.user.id })">退选</button></td>
+									<td><button onclick="unchoose(this, '${course.id }', '${sessionScope.user.id }')">退选</button></td>
 								</c:when>
 
 								<c:when test="${course.haveOwn == 0 }">
-									<td><button onclick="choose(this, ${course.id }, ${sessionScope.user.id })">选课</button></td>
+									<td><button onclick="choose(this, '${course.id }', '${sessionScope.user.id }')">选课</button></td>
 								</c:when>
 							</c:choose>
 						</tr>
@@ -56,46 +96,6 @@
 		</c:if>
 	</div>
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.2.min.js"></script>
-	<script >
-		function choose(obj, courseId, studentId) {
-			$.get("chooseCourseAjax.studentdo", {courseId: courseId, studentId: studentId, temp: new Date()}, function (result) {
-				// 如果返回时 OK 则表示成功添加了喜欢。按钮状态应该改为 取消喜欢 。响应的click函数应该改为不喜欢
-				if (result == "OK") {
-					// 改变按钮文字
-					obj.innerHTML = "退选";
-					// 移除按钮事件监听器
-					obj.removeEventListener('click', choose);
-					// 添加新的监听
-					obj.addEventListener('click', unchoose, false);
-
-					// 在这里应该还需要设置旁边那个查看按钮的haveOwn状态。思路是获取父节点和兄弟节点来定位该元素，但是我不想改了。
-				} else {
-					alert("发送某种错误");
-
-				}
-			});
-		}
-
-		function unchoose(obj, courseId, studentId) {
-			$.get("unchooseCourseAjax.studentdo", {courseId: courseId, studentId: studentId, temp: new Date()}, function (result) {
-				// 如果返回时 OK 则表示成功添加了喜欢。按钮状态应该改为 取消喜欢 。响应的click函数应该改为不喜欢
-				if (result == "OK") {
-					// 改变按钮文字
-					obj.innerHTML = "选课";
-					// 移除按钮事件监听器
-					obj.removeEventListener('click', unchoose);
-					// 添加新的监听
-					obj.addEventListener('click', choose, false);
-
-					// 在这里应该还需要设置旁边那个查看按钮的haveOwn状态。思路是获取父节点和兄弟节点来定位该元素，但是我不想改了。
-				} else {
-					alert("发送某种错误");
-
-				}
-			});
-		}
-	</script>
 	
 </body>
 </html>

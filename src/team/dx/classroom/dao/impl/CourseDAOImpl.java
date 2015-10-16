@@ -36,7 +36,7 @@ public class CourseDAOImpl extends BasicDAO<Course> implements CourseDAO {
 	}
 
 	@Override
-	public void addCourse(Course course) {
+	public void addCourse(Course course) throws RuntimeException{
 
 		String sql = "INSERT INTO course (id, name, limitperson, description, teacher_id) VALUES (?, ?, ?, ?, ?)";
 
