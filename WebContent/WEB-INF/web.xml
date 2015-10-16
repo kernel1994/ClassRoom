@@ -46,7 +46,7 @@
   </filter-mapping>
   <filter-mapping>
   	<filter-name>TransationFilter</filter-name>
-  	<url-pattern>/*</url-pattern>
+  	<url-pattern>*.studentdo</url-pattern>
   </filter-mapping>
   
   <!-- 主页引导 -->

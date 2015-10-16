@@ -107,6 +107,15 @@ public class StudentServlet extends MethodInvokeServlet {
 		out.flush();
 		out.close();
 	}
+	
+	public void getMyCourses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String studentId = ((User)request.getSession().getAttribute("user")).getId();
+		
+		request.setAttribute("courses", cService.getStudentCourses(studentId));
+		
+		request.getRequestDispatcher("/student/index.jsp").forward(request, response);
+	}
 }
 
 

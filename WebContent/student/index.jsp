@@ -9,48 +9,11 @@
 <title>学生主页</title>
 </head>
 
-
-<body>
-	
-	<script type="text/javascript">
-		
-			
-			function choose(obj, courseId, studentId) {
-			$.get("chooseCourseAjax.studentdo", {courseId: courseId, studentId: studentId, temp: new Date()}, function (result) {
-				// 如果返回时 OK 则表示成功添加了喜欢。按钮状态应该改为 取消喜欢 。响应的click函数应该改为不喜欢
-				if (result == "OK") {
-					// 改变按钮文字
-					obj.innerHTML = "退选";
-					// 移除按钮事件监听器
-					obj.removeEventListener('click', choose);
-					// 添加新的监听
-					obj.addEventListener('click', unchoose, false);
-					// 在这里应该还需要设置旁边那个查看按钮的haveOwn状态。思路是获取父节点和兄弟节点来定位该元素，但是我不想改了。
-				} else {
-					alert("发送某种错误");
-				}
-			});
-		}
-		
-		function unchoose(obj, courseId, studentId) {
-			$.get("unchooseCourseAjax.studentdo", {courseId: courseId, studentId: studentId, temp: new Date()}, function (result) {
-				// 如果返回时 OK 则表示成功添加了喜欢。按钮状态应该改为 取消喜欢 。响应的click函数应该改为不喜欢
-				if (result == "OK") {
-					// 改变按钮文字
-					obj.innerHTML = "选课";
-					// 移除按钮事件监听器
-					obj.removeEventListener('click', unchoose);
-					// 添加新的监听
-					obj.addEventListener('click', choose, false);
-					// 在这里应该还需要设置旁边那个查看按钮的haveOwn状态。思路是获取父节点和兄弟节点来定位该元素，但是我不想改了。
-				} else {
-					alert("发送某种错误");
-				}
-			});
-		}
-</script>
-	<h1>欢迎, ${sessionScope.user.nick }_${sessionScope.user.role.name }</h1>
-	<a href="${pageContext.request.contextPath }/servlet/logoutServlet">注销登录</a>
+	<h1>欢迎, ${sessionScope.user.nick }_${sessionScope.user.role.name }
+		<font size="3px">
+			<a href="${pageContext.request.contextPath }/servlet/logoutServlet">注销登录</a>
+		</font>
+	</h1>
 	
 	<form action="queryCourse.studentdo" method="post">
 		<input type="text" name="courseName" placeholder="课程名"><br>
@@ -58,8 +21,9 @@
 		<input type="text" name="limitperson" placeholder="限选人数"><br>
 		<input type="text" name="description" placeholder="描述"><br>
 		
-		<input type="submit" value="查询"><br>
+		<input type="submit" value="查询">
 	</form>
+	<a href="getMyCourses.studentdo">我的选课</a>
 	
 	<div>
 		<c:if test="${not empty requestScope.courses }">
@@ -79,7 +43,6 @@
 							<td>${course.teacher.nick }</td>
 							<td>${course.limitperson }</td>
 							<td>${course.description }</td>
-
 							<c:choose>
 								<c:when test="${course.haveOwn == 1 }">
 									<td><button onclick="unchoose(this, '${course.id }', '${sessionScope.user.id }')">退选</button></td>
@@ -96,6 +59,32 @@
 		</c:if>
 	</div>
 	
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.2.min.js"></script>
+	<script >
+		function choose(obj, courseId, studentId) {
+			$.post("chooseCourseAjax.studentdo", {courseId: courseId, studentId: studentId, temp: new Date()}, function (result) {
+				
+				if (result == "OK") {
+					$(obj).html("选课成功").attr('disabled', true).removeAttr('onclick');
+				} else {
+					alert("发生某种错误");
+
+				}
+			});
+		}
+
+		function unchoose(obj, courseId, studentId) {
+			$.post("unchooseCourseAjax.studentdo", {courseId: courseId, studentId: studentId, temp: new Date()}, function (result) {
+				
+				if (result == "OK") {
+					$(obj).html("退选成功").attr('disabled', true).removeAttr('onclick');
+				} else {
+					alert("发生某种错误");
+
+				}
+			});
+		}
+	</script>
 	
 </body>
 </html>

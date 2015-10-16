@@ -37,10 +37,9 @@ public class TransationFilter implements Filter {
 			//获取当前线程上绑定的连接，提交事务，并关闭链接，释放连接与当前线程的绑定
 			JDBCUtils2.commitTransaction();
 		} catch (Exception e) {
-			System.out.println("def");
+
 		} finally {
 			//JDBCUtils2.closeConnection();
-			System.out.println("abc");
 		}
 		
 		
