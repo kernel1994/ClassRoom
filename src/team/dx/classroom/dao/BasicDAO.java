@@ -2,7 +2,6 @@ package team.dx.classroom.dao;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -22,7 +21,6 @@ import team.dx.classroom.utils.JDBCUtils2;
 public class BasicDAO<T> {
 
 	private QueryRunner queryRunner = new QueryRunner();
-	private Connection connection = JDBCUtils2.getConnection();
 	private Class<T> clazz;
 
 	public BasicDAO() {
@@ -60,7 +58,7 @@ public class BasicDAO<T> {
 	public void update(String sql, Object... args) {
 
 		try {
-			queryRunner.update(connection, sql, args);
+			queryRunner.update(JDBCUtils2.getConnection(), sql, args);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -80,7 +78,7 @@ public class BasicDAO<T> {
 	public T get(String sql, Object... args) {
 
 		try {
-			return queryRunner.query(connection, sql,
+			return queryRunner.query(JDBCUtils2.getConnection(), sql,
 					new BeanHandler<T>(clazz), args);
 
 		} catch (SQLException e) {
@@ -101,7 +99,7 @@ public class BasicDAO<T> {
 	public List<T> getForList(String sql, Object... args) {
 
 		try {
-				return queryRunner.query(connection, sql, new BeanListHandler<T>(
+				return queryRunner.query(JDBCUtils2.getConnection(), sql, new BeanListHandler<T>(
 						clazz), args);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -121,7 +119,7 @@ public class BasicDAO<T> {
 	public <E> E getTheValue(String sql, Object... args) {
 
 		try {
-			return queryRunner.query(connection, sql, new ScalarHandler<E>(),
+			return queryRunner.query(JDBCUtils2.getConnection(), sql, new ScalarHandler<E>(),
 					args);
 
 		} catch (SQLException e) {

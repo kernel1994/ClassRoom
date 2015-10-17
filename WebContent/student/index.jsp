@@ -5,9 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.2.min.js"></script>
 <title>学生主页</title>
 </head>
-<body>
+
 	<h1>欢迎, ${sessionScope.user.nick }_${sessionScope.user.role.name }
 		<font size="3px">
 			<a href="${pageContext.request.contextPath }/servlet/logoutServlet">注销登录</a>

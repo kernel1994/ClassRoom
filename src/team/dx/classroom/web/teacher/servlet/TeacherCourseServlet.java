@@ -32,6 +32,8 @@ public class TeacherCourseServlet extends MethodInvokeServlet2 {
 		try {
 			//封装course数据
 			Course course = WebUtils.request2Bean(request.getParameterMap(), Course.class);
+			
+			//未校验course合法性
 			course.setId(WebUtils.getRandomUUID());
 			
 			//得到用户teacher

@@ -5,6 +5,7 @@ import java.util.List;
 import team.dx.classroom.dao.BasicDAO;
 import team.dx.classroom.dao.CourseDAO;
 import team.dx.classroom.domain.Course;
+import team.dx.classroom.utils.JDBCUtils2;
 
 public class CourseDAOImpl extends BasicDAO<Course> implements CourseDAO {
 
@@ -36,7 +37,7 @@ public class CourseDAOImpl extends BasicDAO<Course> implements CourseDAO {
 	}
 
 	@Override
-	public void addCourse(Course course) {
+	public void addCourse(Course course) throws RuntimeException{
 
 		String sql = "INSERT INTO course (id, name, limitperson, description, teacher_id) VALUES (?, ?, ?, ?, ?)";
 
