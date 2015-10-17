@@ -77,7 +77,7 @@
   <!-- 学生servlet -->
   <servlet>
     <servlet-name>StudentServlet</servlet-name>
-    <servlet-class>team.dx.classroom.web.servlet.student.StudentServlet</servlet-class>
+    <servlet-class>team.dx.classroom.web.student.servlet.StudentServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>StudentServlet</servlet-name>
