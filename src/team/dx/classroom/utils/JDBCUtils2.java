@@ -43,6 +43,7 @@ public class JDBCUtils2 {
 				connection.setAutoCommit(false);
 				tlLocal.set(connection);
 			}
+			connection.setAutoCommit(false);
 			return connection;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -76,13 +77,10 @@ public class JDBCUtils2 {
 			if (connection != null) {
 				connection.close();
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		} finally {
-			if (connection != null) {
-				tlLocal.remove();
-			}
-			
+			tlLocal.remove();
 		}
 	}
 

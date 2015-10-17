@@ -28,10 +28,6 @@ public class TransationFilter implements Filter {
 		try {
 			//拦截下来后：获取连接、开启事务、并把连接绑定到当前线程
 			
-			//如何这里得到了connection会往下传，很麻烦，要使用直接调用DBCUtils2.getConnection();
-			//Connection connection = DBCUtils2.getConnection();
-			
-			//如果执行语句中出现异常，则跳过下一句提交语句，数据自动回滚
 			chain.doFilter(request, response);
 			
 			//获取当前线程上绑定的连接，提交事务，并关闭链接，释放连接与当前线程的绑定
@@ -39,7 +35,7 @@ public class TransationFilter implements Filter {
 		} catch (Exception e) {
 
 		} finally {
-			//JDBCUtils2.closeConnection();
+			JDBCUtils2.closeConnection();
 		}
 		
 		

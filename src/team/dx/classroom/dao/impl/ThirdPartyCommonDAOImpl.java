@@ -12,13 +12,12 @@ import team.dx.classroom.utils.JDBCUtils2;
 public class ThirdPartyCommonDAOImpl implements ThirdPartyCommonDAO {
 
 	private QueryRunner queryRunner = new QueryRunner();
-	private Connection connection = JDBCUtils2.getConnection();
 	
 	@Override
 	public void update(String sql, Object... args) {
 
 		try {
-			queryRunner.update(connection, sql, args);
+			queryRunner.update(JDBCUtils2.getConnection(), sql, args);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -5,6 +5,7 @@ import java.util.List;
 import team.dx.classroom.dao.BasicDAO;
 import team.dx.classroom.dao.CourseDAO;
 import team.dx.classroom.domain.Course;
+import team.dx.classroom.utils.JDBCUtils2;
 
 public class CourseDAOImpl extends BasicDAO<Course> implements CourseDAO {
 
