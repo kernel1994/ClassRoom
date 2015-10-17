@@ -113,7 +113,7 @@ public class StudentServlet extends MethodInvokeServlet {
 		String studentId = ((User)request.getSession().getAttribute("user")).getId();
 		
 		request.setAttribute("courses", cService.getStudentCourses(studentId));
-		
+
 		request.getRequestDispatcher("/student/index.jsp").forward(request, response);
 	}
 }
