@@ -1,6 +1,7 @@
 package team.dx.classroom.web.filter;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -30,14 +31,17 @@ public class TransationFilter implements Filter {
 			
 			//如何这里得到了connection会往下传，很麻烦，要使用直接调用DBCUtils2.getConnection();
 			//Connection connection = DBCUtils2.getConnection();
+			JDBCUtils2.startTransaction();
 			
 			//如果执行语句中出现异常，则跳过下一句提交语句，数据自动回滚
 			chain.doFilter(request, response);
 			
 			//获取当前线程上绑定的连接，提交事务，并关闭链接，释放连接与当前线程的绑定
 			JDBCUtils2.commitTransaction();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
-			//JDBCUtils2.closeConnection();
+			JDBCUtils2.closeConnection();
 		}
 		
 		

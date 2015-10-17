@@ -40,9 +40,11 @@ public class JDBCUtils2 {
 			Connection connection = tlLocal.get();
 			if (connection == null) {
 				connection = dataSource.getConnection();
-				connection.setAutoCommit(false);
-				tlLocal.set(connection);
 			}
+			
+			connection.setAutoCommit(false);
+			tlLocal.set(connection);
+			
 			return connection;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -63,6 +65,19 @@ public class JDBCUtils2 {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public static void startTransaction() throws SQLException {
+		Connection conn = tlLocal.get();
+		// 当前线程上是否已经存在连接
+		if (conn == null) {
+			conn = dataSource.getConnection();
+		}
+		// 开启事务
+		conn.setAutoCommit(false);
+		// 放到当前线程上
+		tlLocal.set(conn);
+	}
+
 	
 	/**
 	 * 释放 Connection 的连接
