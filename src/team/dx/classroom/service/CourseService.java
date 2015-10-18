@@ -8,13 +8,6 @@ import team.dx.classroom.domain.Course;
 public interface CourseService {
 
 	/**
-	 * 根据课程id 构造并返回一个课程对象
-	 * @param courseId 课程id
-	 * @return 课程对象
-	 * */
-	public Course getCourse(String courseId);
-
-	/**
 	 * 获取查询条件下的老师开设的课程的通用方法
 	 * @param args Map 对象，封装了查询条件参数(课程名，教师名，限选人数), 
 	 * 未指定该条件的值为空字符串 ""

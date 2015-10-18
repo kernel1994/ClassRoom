@@ -193,12 +193,6 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public Course getCourse(String courseId) {
-		String condition = "select * from course where id = ?";
-		return cDAO.getCourse(condition, courseId);
-	}
-
-	@Override
 	public List<Course> getTeacherCoursesById(String teacherId) {
 
 		String conditionT = "select * from user where id = ?";

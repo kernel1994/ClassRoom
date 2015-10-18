@@ -49,9 +49,4 @@ public class CourseDAOImpl extends BasicDAO<Course> implements CourseDAO {
 		update(sql, course.getId(), course.getName(), course.getLimitperson(), course.getDescription(), course.getTeacher().getId());
 	}
 
-	@Override
-	public Course getCourse(String condition, Object... args) {
-		return get(condition, args);
-	}
-
 }
