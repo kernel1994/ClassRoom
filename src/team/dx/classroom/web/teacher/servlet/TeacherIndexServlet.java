@@ -12,7 +12,7 @@ import team.dx.classroom.domain.Course;
 import team.dx.classroom.domain.User;
 import team.dx.classroom.exception.DaoException;
 import team.dx.classroom.factory.ObjectFactory;
-import team.dx.classroom.service.TeacherBusinessService;
+import team.dx.classroom.service.CourseService;
 
 /* *
  * 显示教师主页UI
@@ -20,7 +20,7 @@ import team.dx.classroom.service.TeacherBusinessService;
 public class TeacherIndexServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private TeacherBusinessService tbs = ObjectFactory.getInstance().createObject(TeacherBusinessService.class);
+	private CourseService cbs = ObjectFactory.getInstance().createObject(CourseService.class);
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -28,7 +28,7 @@ public class TeacherIndexServlet extends HttpServlet {
 		try {
 			/*-----------教师登陆成功后，显示自己所教的课程------------*/
 			String teacherId = ((User)request.getSession().getAttribute("user")).getId();
-			List<Course> courses = tbs.getAllCourses(teacherId);
+			List<Course> courses = cbs.getAllCourses(teacherId);
 			request.setAttribute("courses", courses);
 			request.getRequestDispatcher("/teacher/index.jsp").forward(request, response);
 		} catch (DaoException e) {

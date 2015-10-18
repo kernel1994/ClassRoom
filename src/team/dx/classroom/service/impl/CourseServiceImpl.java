@@ -11,7 +11,6 @@ import team.dx.classroom.domain.Course;
 import team.dx.classroom.domain.User;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
-import team.dx.classroom.utils.JDBCUtils2;
 
 public class CourseServiceImpl implements CourseService {
 
@@ -160,6 +159,24 @@ public class CourseServiceImpl implements CourseService {
 		haveOwn(courses, stuCuorses);
 		
 		return courses;
+	}
+	
+
+	@Override
+	public List<Course> getAllCourses(String teacherId) throws RuntimeException {
+			String condition = "select * from course where teacher_id = ?";
+			return cDAO.getCourses(condition, teacherId);
+	}
+
+	@Override
+	public void addCourses(Course course) throws RuntimeException {
+		cDAO.addCourse(course);
+	}
+
+	@Override
+	public Course getCourse(String courseId) {
+		String condition = "select * from course where id = ?";
+		return cDAO.getCourse(condition, courseId);
 	}
 
 }

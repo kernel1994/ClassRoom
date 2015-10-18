@@ -111,6 +111,12 @@
     <servlet-name>TeacherCourseServlet</servlet-name>
     <servlet-class>team.dx.classroom.web.teacher.servlet.TeacherCourseServlet</servlet-class>
   </servlet>
+  <!-- 老师核心操作管理 -->
+  <servlet>
+    <servlet-name>TeacherCoreServlet</servlet-name>
+    <servlet-class>team.dx.classroom.web.teacher.servlet.TeacherCoreServlet</servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
@@ -127,6 +133,10 @@
   <servlet-mapping>
     <servlet-name>TeacherCourseServlet</servlet-name>
     <url-pattern> /servlet/TeacherCourseServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TeacherCoreServlet</servlet-name>
+    <url-pattern>/servlet/TeacherCoreServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

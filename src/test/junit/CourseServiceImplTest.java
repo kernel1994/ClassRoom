@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import team.dx.classroom.service.CourseService;
 import team.dx.classroom.service.impl.CourseServiceImpl;
-import team.dx.classroom.utils.JDBCUtils2;
 
 public class CourseServiceImplTest {
 

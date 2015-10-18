@@ -5,7 +5,6 @@ import java.util.List;
 import team.dx.classroom.dao.BasicDAO;
 import team.dx.classroom.dao.CourseDAO;
 import team.dx.classroom.domain.Course;
-import team.dx.classroom.utils.JDBCUtils2;
 
 public class CourseDAOImpl extends BasicDAO<Course> implements CourseDAO {
 
@@ -42,6 +41,11 @@ public class CourseDAOImpl extends BasicDAO<Course> implements CourseDAO {
 		String sql = "INSERT INTO course (id, name, limitperson, description, teacher_id) VALUES (?, ?, ?, ?, ?)";
 
 		update(sql, course.getId(), course.getName(), course.getLimitperson(), course.getDescription(), course.getTeacher().getId());
+	}
+
+	@Override
+	public Course getCourse(String condition, Object... args) {
+		return get(condition, args);
 	}
 
 }

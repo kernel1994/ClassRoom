@@ -1,6 +1,5 @@
 package team.dx.classroom.dao.impl;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.QueryRunner;

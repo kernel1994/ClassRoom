@@ -19,8 +19,7 @@
 	   			</td>
 	   		</tr>
 	   	</table>
-   	
-   	
+   
 	   	<table width="80%" frame="border">
 	   		<tr>
 	   			<td>课程名称</td>
@@ -28,10 +27,11 @@
 	   			<td>操作</td>
 	   		</tr>
 	   		
+	   		
 	   		<c:forEach var="course" items="${requestScope.courses}">
 	   			<tr>
 		   			<td>
-		   				<a href="#">${course.name }</a>
+		   				<a href="${pageContext.request.contextPath}/servlet/TeacherCoreServlet?method=coreIndexUI&id=${course.id}">${course.name }</a>
 		   			</td>
 		   			<td>${course.description }</td>
 		   			<td>

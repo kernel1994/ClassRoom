@@ -13,6 +13,6 @@
 	<div style="text-align: right;">
 		${sessionScope.user.nick}_${sessionScope.user.role.name } 
 		<a href="${pageContext.request.contextPath }/servlet/logoutServlet">注销登录</a> 
-	</div><hr/>
+	</div>
 </body>
 </html>

@@ -13,4 +13,6 @@ public interface CourseDAO {
 	public void deleteCourse(String id);
 	
 	public void addCourse(Course course);
+	
+	Course getCourse(String condition, Object ... args);
 }
