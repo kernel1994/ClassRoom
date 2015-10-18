@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import team.dx.classroom.domain.Course;
 import team.dx.classroom.domain.User;
 import team.dx.classroom.factory.ObjectFactory;
-import team.dx.classroom.service.TeacherBusinessService;
+import team.dx.classroom.service.CourseService;
 import team.dx.classroom.utils.WebUtils;
 import team.dx.classroom.web.servlet.MethodInvokeServlet2;
 
@@ -19,7 +19,7 @@ import team.dx.classroom.web.servlet.MethodInvokeServlet2;
 public class TeacherCourseServlet extends MethodInvokeServlet2 {
 	private static final long serialVersionUID = 1L;
 	
-	private TeacherBusinessService tbs = ObjectFactory.getInstance().createObject(TeacherBusinessService.class);
+	private CourseService cbs = ObjectFactory.getInstance().createObject(CourseService.class);
 
 	/*----------转跳UI------------*/
 	public void addUI(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -39,7 +39,7 @@ public class TeacherCourseServlet extends MethodInvokeServlet2 {
 			//得到用户teacher
 			User teacher = (User) request.getSession().getAttribute("user");
 			course.setTeacher(teacher);
-			tbs.addCourses(course);
+			cbs.addCourses(course);
 			response.setHeader("refresh", "3;url=" + request.getContextPath()
 					+ "/servlet/TeacherIndexServlet?method=getAll");
 			request.setAttribute("message","添加课程成功<br/>3秒后跳转这也，如何没有,<a href='/ClassRoom/servlet/TeacherIndexServlet?method=getAll'>点击这里</a>");

@@ -82,8 +82,10 @@ create table task
 	name varchar(100) not null,
 	description varchar(255),
 	
+	course_id varchar(40) ,
 	resource_id varchar(40),    
-	constraint resource_id_FK2 foreign key(resource_id) references resource(id)
+	constraint resource_id_FK2 foreign key(resource_id) references resource(id),
+	constraint course_id_FK2 foreign key(course_id) references course(id)
 );
 --用户user与作业task之间的关系
 create table user_task (
@@ -122,8 +124,10 @@ create table courseware
 	id varchar(40) primary key,
 	name varchar(100) not null,
 	description varchar(255),
-	resource_id varchar(40),    
-	constraint resource_id_FK foreign key(resource_id) references resource(id)
+	resource_id varchar(40),
+	course_id varchar(40),
+	constraint resource_id_FK foreign key(resource_id) references resource(id),
+	constraint course_id_FK3 foreign key(course_id) references course(id)
 );
 
 --评论表
