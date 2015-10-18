@@ -8,13 +8,10 @@
 <title>学生主页</title>
 </head>
 <body>
-	<h1>欢迎, ${sessionScope.user.nick }_${sessionScope.user.role.name }
-		<font size="3px">
-			<a href="${pageContext.request.contextPath }/servlet/logoutServlet">注销登录</a>
-		</font>
-	</h1>
+	<jsp:include page="/student/nav.jsp"></jsp:include>
+	<h1>欢迎, ${sessionScope.user.nick }_${sessionScope.user.role.name}</h1>
 	
-	<form action="queryCourse.studentdo" method="post">
+	<form action="queryCourse.stu" method="post">
 		<input type="text" name="courseName" placeholder="课程名"><br>
 		<input type="text" name="teacherName" placeholder="教师名"><br>
 		<input type="text" name="limitperson" placeholder="限选人数"><br>
@@ -22,8 +19,7 @@
 		
 		<input type="submit" value="查询">
 	</form>
-	<a href="getMyCourses.studentdo">我的选课</a>
-	
+
 	<div>
 		<c:if test="${not empty requestScope.courses }">
 			<table>
@@ -36,10 +32,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${requestScope.courses }" var="course">
+					<c:forEach items="${requestScope.courses}" var="course">
 						<tr>
-							<td>${course.name }</td>
-							<td>${course.teacher.nick }</td>
+							<!-- 转至课程主页(对于已选和未选的学生展示有区别) -->
+							<td><a href="viewCourseIndex.stu?courseId=${course.id}">${course.name}</a></td>
+							<!-- 转至教师展示信息主页 -->
+							<td><a href="javascript:void(0);">${course.teacher.nick }</a></td>
 							<td>${course.limitperson }</td>
 							<td>${course.description }</td>
 							<c:choose>
@@ -59,9 +57,9 @@
 	</div>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.2.min.js"></script>
-	<script >
+	<script>
 		function choose(obj, courseId, studentId) {
-			$.post("chooseCourseAjax.studentdo", {courseId: courseId, studentId: studentId, temp: new Date()}, function (result) {
+			$.post("chooseCourseAjax.stu", {courseId: courseId, studentId: studentId, temp: new Date()}, function (result) {
 				
 				if (result == "OK") {
 					$(obj).html("选课成功").attr('disabled', true).removeAttr('onclick');
@@ -73,7 +71,7 @@
 		}
 
 		function unchoose(obj, courseId, studentId) {
-			$.post("unchooseCourseAjax.studentdo", {courseId: courseId, studentId: studentId, temp: new Date()}, function (result) {
+			$.post("unchooseCourseAjax.stu", {courseId: courseId, studentId: studentId, temp: new Date()}, function (result) {
 				
 				if (result == "OK") {
 					$(obj).html("退选成功").attr('disabled', true).removeAttr('onclick');

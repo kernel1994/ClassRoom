@@ -1,82 +1,113 @@
 package team.dx.classroom.domain;
 
+import java.util.List;
+
 public class Course {
 
-	private String id;
-	private String name;
-	private int limitperson;
-	private String description;
-	private User teacher;
-	
-	/** 用于标注用户是否用于该课程
-	 * 1 表示拥有
-	 * 0 表示没有 */
-	private int haveOwn = 0;
+    private String id;
+    private String name;
+    private int limitperson;
+    private String description;
+    private User teacher;
+    private List<Courseware> coursewares;
+    private List<Task> tasks;
 
-	public Course() {
-	}
+    /**
+     * 用于标注用户是否用于该课程
+     * 1 表示拥有
+     * 0 表示没有
+     */
+    private int haveOwn = 0;
 
-	public Course(String id, String name, int limitperson, String description, User teacher) {
-		this.id = id;
-		this.name = name;
-		this.limitperson = limitperson;
-		this.description = description;
-		this.teacher = teacher;
-	}
+    public Course() {
+    }
 
-	public String getId() {
-		return id;
-	}
+    public Course(String id, String name, int limitperson, String description, User teacher, List<Courseware> coursewares, List<Task> tasks) {
+        this.id = id;
+        this.name = name;
+        this.limitperson = limitperson;
+        this.description = description;
+        this.teacher = teacher;
+        this.coursewares = coursewares;
+        this.tasks = tasks;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public int getLimitperson() {
-		return limitperson;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setLimitperson(int limitperson) {
-		this.limitperson = limitperson;
-	}
+    public int getLimitperson() {
+        return limitperson;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setLimitperson(int limitperson) {
+        this.limitperson = limitperson;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public User getTeacher() {
-		return teacher;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setTeacher(User teacher) {
-		this.teacher = teacher;
-	}
+    public User getTeacher() {
+        return teacher;
+    }
 
-	@Override
-	public String toString() {
-		return "Course [id=" + id + ", name=" + name + ", limitperson=" 
-	+ limitperson + ", description=" + description + ", teacher=" 
-				+ teacher + ", haveOwn=" + haveOwn + "]";
-	}
+    public void setTeacher(User teacher) {
+        this.teacher = teacher;
+    }
 
-	public int getHaveOwn() {
-		return haveOwn;
-	}
+    public List<Courseware> getCoursewares() {
+        return coursewares;
+    }
 
-	public void setHaveOwn(int haveOwn) {
-		this.haveOwn = haveOwn;
-	}
+    public void setCoursewares(List<Courseware> coursewares) {
+        this.coursewares = coursewares;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", limitperson=" + limitperson +
+                ", description='" + description + '\'' +
+                ", teacher=" + teacher +
+                ", coursewares=" + coursewares +
+                ", tasks=" + tasks +
+                ", haveOwn=" + haveOwn +
+                '}';
+    }
+
+    public int getHaveOwn() {
+        return haveOwn;
+    }
+
+    public void setHaveOwn(int haveOwn) {
+        this.haveOwn = haveOwn;
+    }
 
 }

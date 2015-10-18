@@ -23,7 +23,7 @@ public class StudentServlet extends MethodInvokeServlet {
 	@Override
 	public int getSuffixLen() {
 		
-		return ".studentdo".length();
+		return ".stu".length();
 	}
 	
 	public void createIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -113,7 +113,7 @@ public class StudentServlet extends MethodInvokeServlet {
 		out.close();
 	}
 	
-	public void getMyCourses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void getStudentCourses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		User user = (User)request.getSession().getAttribute("user");
 
@@ -127,6 +127,27 @@ public class StudentServlet extends MethodInvokeServlet {
 		request.setAttribute("courses", cService.getStudentCourses(studentId));
 
 		request.getRequestDispatcher("/student/index.jsp").forward(request, response);
+	}
+
+	public void getTeacherCoursesById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String teacherId = request.getParameter("teacherId");
+
+		List<Course> courses = cService.getTeacherCoursesById(teacherId);
+
+		request.setAttribute("courses", courses);
+
+		request.getRequestDispatcher("/student/index.jsp").forward(request, response);
+	}
+
+	public void viewCourseIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String courseId = request.getParameter("courseId");
+
+		Course course = cService.getCourse(courseId);
+
+		request.setAttribute("course", course);
+		request.getRequestDispatcher("/course/index.jsp").forward(request, response);
 	}
 }
 

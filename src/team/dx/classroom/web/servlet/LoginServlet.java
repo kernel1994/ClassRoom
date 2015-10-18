@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
         	// 规定：在数据库中角色role 表id 字段值为角色名，即student etc.
 
     		if (user.getRole().getId().equals("student")) {
-    			out.write("createIndex.studentdo");
+    			out.write("createIndex.stu");
     		} else if ("teacher".equals(user.getRole().getId())) {
     			out.write(request.getContextPath() + "/servlet/TeacherIndexServlet");
     		} else {

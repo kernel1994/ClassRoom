@@ -21,6 +21,12 @@ public class CourseDAOImpl extends BasicDAO<Course> implements CourseDAO {
 	}
 
 	@Override
+	public Course getCourse(String condition, Object... args) {
+
+		return get(condition, args);
+	}
+
+	@Override
 	public void updateCourse(Course course) {
 
 		String sql = "UPDATE course SET name = ?, limitperson = ?, description = ?, teacher_id = ? WHERE id = ?";

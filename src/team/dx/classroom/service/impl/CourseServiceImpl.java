@@ -19,7 +19,26 @@ public class CourseServiceImpl implements CourseService {
 	private CourseDAO cDAO = ObjectFactory.getInstance().createObject(CourseDAO.class);
 	
 	private ThirdPartyCommonDAO tDAO = ObjectFactory.getInstance().createObject(ThirdPartyCommonDAO.class);
-	
+
+	@Override
+	public Course getCourse(String courseId) {
+
+		String sqlC = "SELECT * FROM course WHERE id = ?";
+		Course course = cDAO.getCourse(sqlC, courseId);
+
+		String sqlT = "select * from user "
+				+ "where id = ("
+					+ "select teacher_id "
+					+ "from course as c "
+					+ "where c.id = ?"
+				+ ")";
+		User user = uDAO.getUser(sqlT, course.getId());
+
+		course.setTeacher(user);
+
+		return course;
+	}
+
 	@Override
 	public List<Course> getTeacherCourses(Map<String, String> args) {
 		
@@ -162,4 +181,19 @@ public class CourseServiceImpl implements CourseService {
 		return courses;
 	}
 
+	@Override
+	public List<Course> getTeacherCoursesById(String teacherId) {
+
+		String conditionT = "select * from user where id = ?";
+		User teacher = uDAO.getUser(conditionT, teacherId);
+
+		String conditionC = "select * from course where teacher_id = ?";
+		List<Course> courses = cDAO.getCourses(conditionC, teacherId);
+
+		for (Course c : courses) {
+			c.setTeacher(teacher);
+		}
+
+		return courses;
+	}
 }

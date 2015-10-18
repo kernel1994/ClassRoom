@@ -82,3 +82,26 @@ ADD CONSTRAINT `user_id_FK3`
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
 
+
+  
+  
+2015-10-18
+ALTER TABLE `classroom`.`courseware` 
+ADD COLUMN `course_id` VARCHAR(40) NULL COMMENT '' AFTER `resource_id`;
+ALTER TABLE `classroom`.`courseware` 
+ADD CONSTRAINT `course_id_FK1`
+  FOREIGN KEY (`id`)
+  REFERENCES `classroom`.`course` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+  
+
+ALTER TABLE `classroom`.`task` 
+ADD COLUMN `course_id` VARCHAR(40) NULL COMMENT '' AFTER `resource_id`;
+ALTER TABLE `classroom`.`task` 
+ADD CONSTRAINT `course_id_FK3`
+  FOREIGN KEY (`id`)
+  REFERENCES `classroom`.`course` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
