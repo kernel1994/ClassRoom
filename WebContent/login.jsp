@@ -17,7 +17,7 @@
 		<form action="loginServlet" method="post">
 			<p>
 				<label for="email">邮箱:</label>
-				<input type="text" name="email" id="email" value="wang@qq.com" /> <span id="loginInfo"></span> 
+				<input type="text" name="email" id="email" value="zhangsan@qq.com" /> <span id="loginInfo"></span> 
 			</p>
 			<p>
 				<label for="email">密码:</label>
