@@ -1,21 +1,19 @@
-package team.dx.classroom.web.servlet.student;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+package team.dx.classroom.web.student.servlet;
 
 import team.dx.classroom.domain.Course;
 import team.dx.classroom.domain.User;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
-import team.dx.classroom.utils.JDBCUtils2;
 import team.dx.classroom.web.servlet.MethodInvokeServlet;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class StudentServlet extends MethodInvokeServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,7 +23,7 @@ public class StudentServlet extends MethodInvokeServlet {
 	@Override
 	public int getSuffixLen() {
 		
-		return ".studentdo".length();
+		return ".stu".length();
 	}
 	
 	public void createIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,8 +37,15 @@ public class StudentServlet extends MethodInvokeServlet {
 		String teacherName = request.getParameter("teacherName");
 		String limitperson = request.getParameter("limitperson");
 		String description = request.getParameter("description");
-		
-		String studentId = ((User)request.getSession().getAttribute("user")).getId();
+
+		User user = (User)request.getSession().getAttribute("user");
+
+		if (user == null) {
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			return;
+		}
+
+		String studentId = user.getId();
 		
 		Map<String, String> args = new HashMap<String, String>();
 		
@@ -108,13 +113,41 @@ public class StudentServlet extends MethodInvokeServlet {
 		out.close();
 	}
 	
-	public void getMyCourses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String studentId = ((User)request.getSession().getAttribute("user")).getId();
+	public void getStudentCourses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		User user = (User)request.getSession().getAttribute("user");
+
+		if (user == null) {
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			return;
+		}
+
+		String studentId = user.getId();
 		
 		request.setAttribute("courses", cService.getStudentCourses(studentId));
 
 		request.getRequestDispatcher("/student/index.jsp").forward(request, response);
+	}
+
+	public void getTeacherCoursesById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String teacherId = request.getParameter("teacherId");
+
+		List<Course> courses = cService.getTeacherCoursesById(teacherId);
+
+		request.setAttribute("courses", courses);
+
+		request.getRequestDispatcher("/student/index.jsp").forward(request, response);
+	}
+
+	public void viewCourseIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String courseId = request.getParameter("courseId");
+
+		Course course = cService.getCourse(courseId);
+
+		request.setAttribute("course", course);
+		request.getRequestDispatcher("/course/index.jsp").forward(request, response);
 	}
 }
 

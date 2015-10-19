@@ -6,7 +6,7 @@ import java.util.Map;
 import team.dx.classroom.domain.Course;
 
 public interface CourseService {
-	
+
 	/**
 	 * 获取查询条件下的老师开设的课程的通用方法
 	 * @param args Map 对象，封装了查询条件参数(课程名，教师名，限选人数), 
@@ -64,4 +64,11 @@ public interface CourseService {
 	 * @return 如果成功返回Course对象，否则返回null
 	 * */
 	Course getCourse(String courseId);
-}
+
+	/**
+	 * 根据教师的ID 获取教师的全部课程
+	 * @param teacherId 教师ID
+	 * @return 教师所有课程
+	 * */
+	public List<Course> getTeacherCoursesById(String teacherId);
+ }
