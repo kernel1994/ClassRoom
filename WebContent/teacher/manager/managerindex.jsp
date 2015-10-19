@@ -53,39 +53,26 @@
     	#content_mod1_style1{
     		width: 100%;
     		height: 100px;
+    		text-align: center;
     		background-color: #F6F6F6;
     	}
     	#content_mod1_style2{
     		width: 100%;
     		height: 100px;
-    		
+    		text-align: center;
     		margin-top: 30px;
     		background-color: #F6F6F6;
     	}
     	#content_mod1_style3{
     		width: 100%;
     		height: 100px;
-    		
+    		text-align: center;
     		margin-top: 30px;
     		background-color: #F6F6F6;
     	}
     	
     	#content_mod2_style1{
-    		background-color: #F6F6F6;
-    	}
-    	
-    	#content_mod2_style3{
-    		width: 100%;
-    		height: 100px;
-    		margin-top: 10px;
-    		border: 1px red solid;
-    	}
-    	
-    	#content_mod2_style4{
-    		width: 100%;
-    		height: 100px;
-    		margin-top: 10px;
-    		border: 1px red solid;
+    		
     	}
     	
     	
@@ -127,31 +114,27 @@
  			</a>
  		</span>
  	</div>
+ 	
  	<div id="content">
  		<div id="content_mod1">
  			<div id="content_mod1_style1">
+ 				<p>最新公告&nbsp;<a href="#">发布公告</a></p>
+ 				<p>暂无</p>
  				
  			</div>
  			<div id="content_mod1_style2">
- 		
+ 				<p>设置权限</p>
+ 				<font color="green">仅老师可回复<br/>(可设置为下拉或多选)</font>
+ 				<input type="checkbox" name="isTrue">
  			</div>
  			<div id="content_mod1_style3">
- 		
+ 				<p>课程要求码(为以后非本班人访问留扩展)</p>
+ 				<p>要求码:&nbps;<font color="red">J1fA</font></p>
  			</div>
  		</div>
  		<div id="content_mod2">
  			<div id="content_mod2_style1">
- 				这是一份公告，很重要的
- 			</div>
- 			<div id="content_mod2_style2">
- 				<a href="#">发布公告</a>&nbsp;
- 				<a href="#">发布作业</a>
- 			</div>
- 			<div id="content_mod2_style3">
- 				交流1
- 			</div>
- 			<div id="content_mod2_style4">
- 				交流2
+ 				<a href="#">发布动态</a>
  			</div>
  		</div>
  	</div>

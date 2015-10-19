@@ -11,7 +11,6 @@ public class Task {
 	private String description;
 	private Resource resource;
 	private List<Review> list = new ArrayList<Review>();
-
 	public Task() {
 	}
 

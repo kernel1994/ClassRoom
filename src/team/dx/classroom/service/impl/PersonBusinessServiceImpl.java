@@ -94,21 +94,7 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 		}
 		
 	}
-
-	@Override
-	public Role getRole(String role_id) {
-		
-		String condition = "select * from role where id = ?";
-		
-		return rDAO.getRole(condition, role_id);
-	}
-
-	@Override
-	public List<Role> getAllRoles() {
-		String condition = "select * from role";
-		return rDAO.getRoles(condition);
-	}
-
+	
 	@Override
 	public User getUser(String id) {
 		

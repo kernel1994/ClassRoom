@@ -9,6 +9,7 @@ import java.util.Properties;
  * 使用说明UserDAO uDao = DaoFactory.getInstance().createDao(UserDAO.class);
  * 
  * */
+@SuppressWarnings("all")
 public class ObjectFactory {
 	private static final ObjectFactory instance = new ObjectFactory();
 	private static Properties config = new Properties();
