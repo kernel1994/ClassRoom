@@ -5,6 +5,17 @@
   <head>
     <title>老师管理主页</title>
     <style type="text/css">
+    	a:link {
+    		text-decoration: none;
+    	}
+    	a:hover { 
+			text-decoration: underline ;
+		} 
+    	body{
+    		margin:0px;
+    		padding: 0px;
+    		width: 100%;
+    	}
     	div#title{
     		width: 100%;
     		height: 120px;
@@ -16,35 +27,68 @@
     		height: 50px;
     		text-align: center;
     		line-height: 50px;
-    		background: #8DC5FE;
+    		background: #D9F5FE;
     	}
     	
     	.option_title{
     		font-size:24px;
     		font-family : cursive;
     	}
-    	
-    	
-    	div#content{
-    		width: 100%;
-    		height: 70%;
-    		background: #E1E9EB;
+    	#content_mod1{
+    		width: 20%;
+    		float: left;
+    		margin-left: 5%;
+    		margin-top: 10px;
     	}
     	
-    	#content_mod1{
-    		width: 40%;
+    	#content_mod2{
+    		width: 59%;
     		height: 100%;
+    		float: left;
+    		margin-left: 5%;
+    		margin-top: 10px;
+    		
+    		padding: 10px 3%;
+    	}
+    	#content_mod1_style1{
+    		width: 100%;
+    		height: 100px;
+    		background-color: #F6F6F6;
+    	}
+    	#content_mod1_style2{
+    		width: 100%;
+    		height: 100px;
+    		
+    		margin-top: 30px;
+    		background-color: #F6F6F6;
+    	}
+    	#content_mod1_style3{
+    		width: 100%;
+    		height: 100px;
+    		
+    		margin-top: 30px;
+    		background-color: #F6F6F6;
+    	}
+    	
+    	#content_mod2_style1{
+    		background-color: #F6F6F6;
+    	}
+    	
+    	#content_mod2_style3{
+    		width: 100%;
+    		height: 100px;
+    		margin-top: 10px;
+    		border: 1px red solid;
+    	}
+    	
+    	#content_mod2_style4{
+    		width: 100%;
+    		height: 100px;
+    		margin-top: 10px;
     		border: 1px red solid;
     	}
     	
     	
-    	
-    	a:link {
-    		text-decoration: none;
-    	}
-    	a:hover { 
-			text-decoration: underline ;
-		} 
     </style>
   </head>
   
@@ -64,7 +108,7 @@
  	<div id="option">
  		<span class="option_title">
  			<a href="#">
- 				通知
+ 				stream	
  			</a>
  		</span>&nbsp;&nbsp;
  		<span class="option_title">
@@ -85,10 +129,30 @@
  	</div>
  	<div id="content">
  		<div id="content_mod1">
+ 			<div id="content_mod1_style1">
+ 				
+ 			</div>
+ 			<div id="content_mod1_style2">
  		
+ 			</div>
+ 			<div id="content_mod1_style3">
+ 		
+ 			</div>
  		</div>
  		<div id="content_mod2">
- 		
+ 			<div id="content_mod2_style1">
+ 				这是一份公告，很重要的
+ 			</div>
+ 			<div id="content_mod2_style2">
+ 				<a href="#">发布公告</a>&nbsp;
+ 				<a href="#">发布作业</a>
+ 			</div>
+ 			<div id="content_mod2_style3">
+ 				交流1
+ 			</div>
+ 			<div id="content_mod2_style4">
+ 				交流2
+ 			</div>
  		</div>
  	</div>
   	
