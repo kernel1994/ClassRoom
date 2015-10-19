@@ -8,6 +8,8 @@ public class Courseware {
 	private String id;
 	private String name;
 	private String description;
+	/** 这个属性可以直接从数据库中查出并赋值，添加这个属性可以极大地方便对resource 对象的查询构造 */
+	private String resourceId;
 	private Resource resource;
 	private List<Review> list = new ArrayList<Review>();
 
@@ -53,6 +55,14 @@ public class Courseware {
 	public void setResource(Resource resource) {
 		this.resource = resource;
 	}
+
+	public String getResourceId() {
+		return resourceId;
+	}
+
+//	public void setResourceId(String resourceId) {
+//		this.resourceId = resourceId;
+//	}
 
 	public List<Review> getList() {
 		return list;

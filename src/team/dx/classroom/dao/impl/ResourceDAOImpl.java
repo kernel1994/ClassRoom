@@ -15,6 +15,12 @@ public class ResourceDAOImpl extends BasicDAO<Resource> implements ResourceDAO {
 	}
 
 	@Override
+	public Resource getResource(String condition, Object... args) {
+
+		return get(condition, args);
+	}
+
+	@Override
 	public void updateResource(Resource resource) {
 
 		String sql = "UPDATE resource SET name = ?, uri = ?, uploadtime = ?, description = ?, uploader_id = ? WHERE id = ?";

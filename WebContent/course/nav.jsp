@@ -6,10 +6,10 @@
 <body>
     <nav>
       <a href="${pageContext.request.contextPath}/student/index.jsp">个人主页</a>
-      <a href="${pageContext.request.contextPath}/course/index.jsp">课程主页</a>
-      <a href="${pageContext.request.contextPath}/course/task.jsp">作业</a>
-      <a href="${pageContext.request.contextPath}/course/chapter.jsp">课程</a>
-      <a href="${pageContext.request.contextPath}/course/notice.jsp">公告</a>
+      <a href="javascript:void(0);">课程主页</a>
+      <a href="javascript:void(0);">作业</a>
+      <a href="javascript:void(0);">课程</a>
+      <a href="javascript:void(0);">公告</a>
     </nav>
 </body>
 </html>
