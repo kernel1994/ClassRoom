@@ -9,6 +9,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
 
+@SuppressWarnings("all")
 public class WebUtils {
 
 	public static <T> T request2Bean(Map<?, ?> parameterMap, Class<T> clazz) {

@@ -1,8 +1,5 @@
 package team.dx.classroom.service;
 
-import java.util.List;
-
-import team.dx.classroom.domain.Role;
 import team.dx.classroom.domain.User;
 
 public interface PersonBusinessService {
@@ -30,16 +27,5 @@ public interface PersonBusinessService {
 	 * @param user user中装有角色role信息
 	 * */
 	void addUser(User user);
-
-	/**
-	 * 用于用户注册中，用户分配角色
-	 * @param role_id role主键
-	 * */
-	Role getRole(String role_id);
-
-	/**
-	 * 得到所有角色
-	 *
-	 * */
-	List<Role> getAllRoles();
+	
 }

@@ -10,6 +10,12 @@
    	<form action="${pageContext.request.contextPath }/servlet/RoleServlet?method=add" method="post">
    	<table>
    		<tr>
+   			<td>角色id</td>
+   			<td>
+   				<input type="text" name="id">
+   			</td>
+   		</tr>
+   		<tr>
    			<td>角色名称</td>
    			<td>
    				<input type="text" name="name">

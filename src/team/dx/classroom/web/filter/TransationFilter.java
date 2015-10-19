@@ -1,7 +1,6 @@
 package team.dx.classroom.web.filter;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;

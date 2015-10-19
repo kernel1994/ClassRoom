@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import team.dx.classroom.domain.Role;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.PersonBusinessService;
+import team.dx.classroom.service.RoleService;
+import team.dx.classroom.utils.WebUtils;
 import team.dx.classroom.web.servlet.MethodInvokeServlet2;
 
 /**
@@ -20,12 +22,12 @@ import team.dx.classroom.web.servlet.MethodInvokeServlet2;
 public class RoleServlet extends MethodInvokeServlet2 {
 	
 	private static final long serialVersionUID = 1L;
-	private PersonBusinessService pbs = ObjectFactory.getInstance().createObject(PersonBusinessService.class);
-
+	private RoleService rs = ObjectFactory.getInstance().createObject(
+			RoleService.class);
 	private void getAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			List<Role> roles = pbs.getAllRoles();
+			List<Role> roles = rs.getAllRoles();
 			request.setAttribute("roles", roles);
 			request.getRequestDispatcher("/admin/manager/listrole.jsp").forward(request, response);
 		} catch (Exception e) {
@@ -34,5 +36,24 @@ public class RoleServlet extends MethodInvokeServlet2 {
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 		}
 
+	}
+	
+	public void addUI(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.getRequestDispatcher("/admin/manager/addrole.jsp").forward(request, response);
+	}
+	
+	public void add(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		try {
+			Role role = WebUtils.request2Bean(request.getParameterMap(), Role.class);
+			rs.addRole(role);
+			
+			request.setAttribute("message", "添加成功");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message", "添加成功");
+		}
+		
+		request.getRequestDispatcher("/message.jsp").forward(request, response);
 	}
 }

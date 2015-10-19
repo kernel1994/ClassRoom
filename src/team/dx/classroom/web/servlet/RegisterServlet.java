@@ -12,6 +12,7 @@ import team.dx.classroom.domain.Role;
 import team.dx.classroom.domain.User;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.PersonBusinessService;
+import team.dx.classroom.service.RoleService;
 import team.dx.classroom.utils.WebUtils;
 
 /* *
@@ -23,6 +24,8 @@ public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PersonBusinessService pbs = ObjectFactory.getInstance()
 			.createObject(PersonBusinessService.class);
+	private RoleService rs = ObjectFactory.getInstance().createObject(
+			RoleService.class);
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -41,16 +44,16 @@ public class RegisterServlet extends HttpServlet {
 					.getInitParameter("role_id");
 
 			// 给用户添加角色
-			Role role = pbs.getRole(role_id);
+			Role role = rs.getRole(role_id);
 
 			user.setRole(role);
 			pbs.addUser(user);
-			
-			//注册成功后将user放入session中
+
+			// 注册成功后将user放入session中
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
-			
-//			显示注册成功，然后再跳转到主页面
+
+			// 显示注册成功，然后再跳转到主页面
 			response.setHeader("refresh", "3;url=" + request.getContextPath()
 					+ "/student/index.jsp");
 			request.setAttribute("message", "注册成功");
