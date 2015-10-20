@@ -4,20 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import team.dx.classroom.dao.CourseDAO;
-import team.dx.classroom.dao.ThirdPartyCommonDAO;
-import team.dx.classroom.dao.UserDAO;
+import team.dx.classroom.dao.*;
 import team.dx.classroom.domain.Course;
+import team.dx.classroom.domain.Courseware;
+import team.dx.classroom.domain.Task;
 import team.dx.classroom.domain.User;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
+import team.dx.classroom.service.CoursewareService;
+import team.dx.classroom.service.TaskService;
 
 public class CourseServiceImpl implements CourseService {
 
 	private UserDAO uDAO = ObjectFactory.getInstance().createObject(UserDAO.class);
 	private CourseDAO cDAO = ObjectFactory.getInstance().createObject(CourseDAO.class);
-	
-	private ThirdPartyCommonDAO tDAO = ObjectFactory.getInstance().createObject(ThirdPartyCommonDAO.class);
+	private CoursewareDAO cwDAO = ObjectFactory.getInstance().createObject(CoursewareDAO.class);
+	private TaskDAO tDAO = ObjectFactory.getInstance().createObject(TaskDAO.class);
+	private ThirdPartyCommonDAO tpDAO = ObjectFactory.getInstance().createObject(ThirdPartyCommonDAO.class);
+
+	private TaskService tService = ObjectFactory.getInstance().createObject(TaskService.class);
+	private CoursewareService cwService = ObjectFactory.getInstance().createObject(CoursewareService.class);
 
 	@Override
 	public Course getCourse(String courseId) {
@@ -31,9 +37,14 @@ public class CourseServiceImpl implements CourseService {
 					+ "from course as c "
 					+ "where c.id = ?"
 				+ ")";
-		User user = uDAO.getUser(sqlT, course.getId());
+		User teacher = uDAO.getUser(sqlT, course.getId());
+		course.setTeacher(teacher);
 
-		course.setTeacher(user);
+		List<Task> tasks = tService.getCourseTasks(courseId);
+		course.setTasks(tasks);
+
+		List<Courseware> coursewares = cwService.getCoursewares(courseId);
+		course.setCoursewares(coursewares);
 
 		return course;
 	}
@@ -127,13 +138,13 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public void chooseCourse(String studentId, String courseId) throws RuntimeException {
 		
-		tDAO.updateStudentCourse("insert", studentId, courseId, 0);
+		tpDAO.updateStudentCourse("insert", studentId, courseId, 0);
 	}
 
 	@Override
 	public void unchooseCourse(String studentId, String courseId) {
 		
-		tDAO.updateStudentCourse("delete", studentId, courseId);
+		tpDAO.updateStudentCourse("delete", studentId, courseId);
 	}
 	
 	/**
@@ -203,6 +214,21 @@ public class CourseServiceImpl implements CourseService {
 
 		for (Course c : courses) {
 			c.setTeacher(teacher);
+		}
+
+		return courses;
+	}
+
+	@Override
+	public List<Course> getStudentAllCoursesTasks(String studentId) {
+
+		List<Course> courses = getStudentCourses(studentId);
+		for (Course course : courses) {
+			Course courseTemp = getCourse(course.getId());
+			// 要显式赋值，才能实现深拷贝
+			course.setTasks(courseTemp.getTasks());
+			// 这里不需要课件
+			// course.setCoursewares(courseTemp.getCoursewares());
 		}
 
 		return courses;

@@ -71,4 +71,13 @@ public interface CourseService {
 	 * @return 教师所有课程
 	 * */
 	public List<Course> getTeacherCoursesById(String teacherId);
- }
+
+	/**
+	 * 获取学生所有选课的所有作业列表。
+	 * 根据学生id 获取学生所有选修的课程，组成List 对象。来获取其中的作业列表。
+	 * 其中每门课程主要包含id/ name/ tasks
+	 * @param studentId 学生id
+	 * @return 包含了学生学生所有选课的所有作业的列表
+	 * */
+	public List<Course> getStudentAllCoursesTasks(String studentId);
+}

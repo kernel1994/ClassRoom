@@ -7,7 +7,9 @@ import team.dx.classroom.domain.Resource;
 public interface ResourceDAO {
 
 	public List<Resource> getResources(String condition, Object ... args);
-	
+
+	public Resource getResource(String condition, Object ... args);
+
 	public void updateResource(Resource resource);
 	
 	public void deleteResource(String id);
