@@ -22,7 +22,7 @@ public class CoursewareServiceImpl implements CoursewareService {
 
         String sqlR = "select * from resource where id = ?";
         for (Courseware courseware : coursewares) {
-            Resource resource = rDAO.getResource(sqlR, courseware.getResourceId());
+            Resource resource = rDAO.getResource(sqlR, courseware.getResource_id());
             courseware.setResource(resource);
         }
 

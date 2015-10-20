@@ -1,9 +1,13 @@
 package team.dx.classroom.web.student.servlet;
 
 import team.dx.classroom.domain.Course;
+import team.dx.classroom.domain.Courseware;
+import team.dx.classroom.domain.Task;
 import team.dx.classroom.domain.User;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
+import team.dx.classroom.service.CoursewareService;
+import team.dx.classroom.service.TaskService;
 import team.dx.classroom.web.servlet.MethodInvokeServlet;
 
 import javax.servlet.ServletException;
@@ -19,13 +23,31 @@ public class StudentServlet extends MethodInvokeServlet {
 	private static final long serialVersionUID = 1L;
 	
 	CourseService cService = ObjectFactory.getInstance().createObject(CourseService.class);
+	TaskService tService = ObjectFactory.getInstance().createObject(TaskService.class);
+	CoursewareService cwService = ObjectFactory.getInstance().createObject(CoursewareService.class);
 	
 	@Override
 	public int getSuffixLen() {
 		
 		return ".stu".length();
 	}
-	
+
+	/**
+	 * 从session 中获取用户id
+	 * 如果不能获取则返回登录页面(将来用filter 实现)
+	 * */
+	private String getUserId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		User user = (User)request.getSession().getAttribute("user");
+
+		if (user == null) {
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			return null;
+		}
+
+		return user.getId();
+	}
+
 	public void createIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		queryCourse(request, response);
@@ -38,14 +60,7 @@ public class StudentServlet extends MethodInvokeServlet {
 		String limitperson = request.getParameter("limitperson");
 		String description = request.getParameter("description");
 
-		User user = (User)request.getSession().getAttribute("user");
-
-		if (user == null) {
-			response.sendRedirect(request.getContextPath() + "/login.jsp");
-			return;
-		}
-
-		String studentId = user.getId();
+		String studentId = getUserId(request, response);
 		
 		Map<String, String> args = new HashMap<String, String>();
 		
@@ -115,14 +130,7 @@ public class StudentServlet extends MethodInvokeServlet {
 	
 	public void getStudentCourses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		User user = (User)request.getSession().getAttribute("user");
-
-		if (user == null) {
-			response.sendRedirect(request.getContextPath() + "/login.jsp");
-			return;
-		}
-
-		String studentId = user.getId();
+		String studentId = getUserId(request, response);
 		
 		request.setAttribute("courses", cService.getStudentCourses(studentId));
 
@@ -140,14 +148,49 @@ public class StudentServlet extends MethodInvokeServlet {
 		request.getRequestDispatcher("/student/index.jsp").forward(request, response);
 	}
 
+	/* 下面三个方法貌似不应该写在这？值得考虑 */
 	public void viewCourseIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String courseId = request.getParameter("courseId");
-
 		Course course = cService.getCourse(courseId);
 
 		request.setAttribute("course", course);
 		request.getRequestDispatcher("/course/index.jsp").forward(request, response);
+	}
+
+	public void viewCourseTasks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String courseId = request.getParameter("courseId");
+		List<Task> tasks = tService.getCourseTasks(courseId);
+
+		Course course = new Course();
+		course.setId(courseId);
+		course.setTasks(tasks);
+
+		request.setAttribute("course", course);
+		request.getRequestDispatcher("/course/task.jsp").forward(request, response);
+	}
+
+	public void viewCoursewares(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String courseId = request.getParameter("courseId");
+		List<Courseware> coursewares = cwService.getCoursewares(courseId);
+
+		Course course = new Course();
+		course.setId(courseId);
+		course.setCoursewares(coursewares);
+
+		request.setAttribute("course", course);
+		request.getRequestDispatcher("/course/chapter.jsp").forward(request, response);
+	}
+
+	public void viewStudentAllCoursesTasks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String studentId = getUserId(request, response);
+		List<Course> courses = cService.getStudentAllCoursesTasks(studentId);
+
+		request.setAttribute("courses", courses);
+		request.getRequestDispatcher("/student/task.jsp").forward(request, response);
 	}
 }
 

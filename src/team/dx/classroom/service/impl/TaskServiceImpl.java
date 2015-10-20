@@ -22,7 +22,7 @@ public class TaskServiceImpl implements TaskService {
 
         String sqlR = "select * from resource where id = ?";
         for (Task task : tasks) {
-            Resource resource = rDAO.getResource(sqlR, task.getResourceId());
+            Resource resource = rDAO.getResource(sqlR, task.getResource_id());
             task.setResource(resource);
         }
 

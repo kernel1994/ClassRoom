@@ -17,29 +17,48 @@
 <jsp:include page="/course/nav.jsp"></jsp:include>
 
 <div class="brand">
-<div>最新公告</div>
+    <div>最新公告</div>
+    <c:choose>
+        <c:when test="${not empty null}">
+            <ul>
+                <li><a href="javascript:void(0);">${notice.name}</a></li>
+            </ul>
+            <a href="javascript:void(0);">查看全部</a>
+        </c:when>
+        <c:otherwise>
+            <em>没有公告</em>
+        </c:otherwise>
+    </c:choose>
 </div>
 
 <div class="brand">
     <div>最新作业</div>
-    <c:if test="${not empty requestScope.course.tasks}">
-        <ul>
-            <c:forEach items="${requestScope.course.tasks}" var="task">
-                <li><a href="javascript:void(0);">${task.name}</a></li>
-            </c:forEach>
-        </ul>
-    </c:if>
+    <c:choose>
+        <c:when test="${not empty requestScope.course.tasks}">
+            <ul>
+                <li><a href="javascript:void(0);">${requestScope.course.tasks[0].name}</a></li>
+            </ul>
+            <a href="viewCourseTasks.stu?courseId=${requestScope.course.id}">查看全部</a>
+        </c:when>
+        <c:otherwise>
+            <em>没有作业</em>
+        </c:otherwise>
+    </c:choose>
 </div>
 
 <div class="brand">
-<div>最新章节</div>
-    <c:if test="${not empty requestScope.course.coursewares}">
-        <ul>
-            <c:forEach items="${requestScope.course.coursewares}" var="courseware">
-                <li><a href="javascript:void(0);">${courseware.name}</a></li>
-            </c:forEach>
-        </ul>
-    </c:if>
+    <div>最新章节</div>
+    <c:choose>
+        <c:when test="${not empty requestScope.course.coursewares}">
+            <ul>
+                <li><a href="javascript:void(0);">${requestScope.course.coursewares[0].name}</a></li>
+            </ul>
+            <a href="viewCoursewares.stu?courseId=${requestScope.course.id}">查看全部</a>
+        </c:when>
+        <c:otherwise>
+            <em>没有章节</em>
+        </c:otherwise>
+    </c:choose>
 </div>
 
 <div class="brand">

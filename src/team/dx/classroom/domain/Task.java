@@ -10,7 +10,7 @@ public class Task {
 	private int score;
 	private String description;
 	/** 这个属性可以直接从数据库中查出并赋值，添加这个属性可以极大地方便对resource 对象的查询构造 */
-	private String resourceId;
+	private String resource_id;
 	private Resource resource;
 	private List<Review> list = new ArrayList<Review>();
 	public Task() {
@@ -65,13 +65,13 @@ public class Task {
 		this.resource = resource;
 	}
 
-	public String getResourceId() {
-		return resourceId;
+	public String getResource_id() {
+		return resource_id;
 	}
 
-//	public void setResourceId(String resourceId) {
-//		this.resourceId = resourceId;
-//	}
+	public void setResource_id(String resource_id) {
+		this.resource_id = resource_id;
+	}
 
 	public List<Review> getList() {
 		return list;

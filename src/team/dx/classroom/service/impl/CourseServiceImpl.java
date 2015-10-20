@@ -218,4 +218,19 @@ public class CourseServiceImpl implements CourseService {
 
 		return courses;
 	}
+
+	@Override
+	public List<Course> getStudentAllCoursesTasks(String studentId) {
+
+		List<Course> courses = getStudentCourses(studentId);
+		for (Course course : courses) {
+			Course courseTemp = getCourse(course.getId());
+			// 要显式赋值，才能实现深拷贝
+			course.setTasks(courseTemp.getTasks());
+			// 这里不需要课件
+			// course.setCoursewares(courseTemp.getCoursewares());
+		}
+
+		return courses;
+	}
 }
