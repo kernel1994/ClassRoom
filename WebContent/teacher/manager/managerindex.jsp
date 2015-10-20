@@ -79,7 +79,7 @@
     </style>
   </head>
   
-  <body>
+  <body style="background: #E8F2FE">
  	<div id="title">
  		<jsp:include page="../head.jsp"></jsp:include>
  		<div style="font-size:32px;">
@@ -118,7 +118,7 @@
  	<div id="content">
  		<div id="content_mod1">
  			<div id="content_mod1_style1">
- 				<p>最新公告&nbsp;<a href="#">发布公告</a></p>
+ 				<p>最新公告</p>
  				<p>暂无</p>
  				
  			</div>
@@ -129,12 +129,12 @@
  			</div>
  			<div id="content_mod1_style3">
  				<p>课程要求码(为以后非本班人访问留扩展)</p>
- 				<p>要求码:&nbps;<font color="red">J1fA</font></p>
+ 				<p>要求码:&nbsp;<font color="red">J1fA</font></p>
  			</div>
  		</div>
  		<div id="content_mod2">
  			<div id="content_mod2_style1">
- 				<a href="#">发布动态</a>
+ 				<a href="${pageContext.request.contextPath}/servlet/TaskServlet?method=addTaskUI&courseId=${course.id}">发布作业</a>&nbsp;<a href="#">发布课件</a>&nbsp;<a href="#">发布公告</a>
  			</div>
  		</div>
  	</div>

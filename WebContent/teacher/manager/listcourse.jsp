@@ -7,7 +7,7 @@
     <title>列举老师课程</title>
   </head>
   	
- <body>
+ <body style="background: #E8F2FE">
    	<br/>	<br/>
    	<center>
 	   	<table width="80%">

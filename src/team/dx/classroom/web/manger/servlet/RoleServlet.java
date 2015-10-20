@@ -51,7 +51,7 @@ public class RoleServlet extends MethodInvokeServlet2 {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("message", "添加成功");
+			request.setAttribute("message", "添加失败");
 		}
 		
 		request.getRequestDispatcher("/message.jsp").forward(request, response);

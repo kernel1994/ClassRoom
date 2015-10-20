@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>教师主页</title>
 </head>
-<body  style="background-color: #e8f2fe">
+<body>
 	<div style=" float: left">
 		<a href="${pageContext.request.contextPath}/servlet/TeacherIndexServlet?method=getAll">教师主页</a>
 	</div>
