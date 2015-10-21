@@ -49,8 +49,9 @@ public class StudentServlet extends MethodInvokeServlet {
 	}
 
 	public void createIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		queryCourse(request, response);
+
+		// request.setAttribute("courses", courses);
+		request.getRequestDispatcher("/student/index.jsp").forward(request, response);
 	}
 	
 	public void queryCourse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -75,7 +76,7 @@ public class StudentServlet extends MethodInvokeServlet {
 		
 		request.setAttribute("courses", courses);
 		
-		request.getRequestDispatcher("/student/index.jsp").forward(request, response);
+		request.getRequestDispatcher("/student/choose_course.jsp").forward(request, response);
 	}
 	
 	/**
@@ -134,7 +135,7 @@ public class StudentServlet extends MethodInvokeServlet {
 		
 		request.setAttribute("courses", cService.getStudentCourses(studentId));
 
-		request.getRequestDispatcher("/student/index.jsp").forward(request, response);
+		request.getRequestDispatcher("/student/student_course.jsp").forward(request, response);
 	}
 
 	public void getTeacherCoursesById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

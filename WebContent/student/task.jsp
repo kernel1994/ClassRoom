@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<jsp:include page="/student/nav.jsp"></jsp:include>
+<jsp:include page="/student/comp_nav.jsp"></jsp:include>
 
 <c:choose>
     <c:when test="${not empty requestScope.courses}">
