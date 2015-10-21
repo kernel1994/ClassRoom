@@ -100,10 +100,9 @@
   	<div style="text-align: right;">
   		<a href="${pageContext.request.contextPath}/servlet/TeacherCoreServlet?method=coreIndexUI&id=${course.id}">返回</a>
   	</div>
-  	<center>
 	    <fieldset style="margin:10px;padding: 2px 30px;" >
 			<legend >编辑作业</legend>
-			<form action="#" method="post">
+			<form action="${pageContext.request.contextPath}/servlet/TaskServlet?method=publishTask" method="post">
 				<label for="name">主题：</label>
 				<input type="text" name="name" size="50%"><br/>
 	
@@ -115,9 +114,8 @@
 				<input type="submit" value="提交"/>
 			</form>
 			
-			<input type="button" name="courseware" value="添加附件">
-			
+			<!-- <input type="button" name="courseware" value="添加附件">
+			 -->
 		</fieldset><br>
-	</center>
   </body>
 </html>

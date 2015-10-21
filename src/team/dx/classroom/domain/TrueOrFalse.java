@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class TrueOrFalse implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String id;
 	private String title;
 	private String answer;
 	private String description;
@@ -13,21 +12,12 @@ public class TrueOrFalse implements Serializable {
 	public TrueOrFalse() {
 	}
 
-	public TrueOrFalse(String id, String title, String answer,
+	public TrueOrFalse(String title, String answer,
 			String description) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.answer = answer;
 		this.description = description;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getTitle() {
