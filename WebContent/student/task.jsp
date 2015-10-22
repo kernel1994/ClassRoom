@@ -1,39 +1,46 @@
+<%-- 学生做作业的页面 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>我的作业</title>
+    <title>${requestScope.task.name}</title>
 </head>
 <body>
 
-<jsp:include page="/student/comp_nav.jsp"></jsp:include>
-
-<c:choose>
-    <c:when test="${not empty requestScope.courses}">
+<c:if test="${not empty requestScope.homeWork}">
+    <form action="javascript:void(0);" method="post">
         <ul>
-            <c:forEach items="${requestScope.courses}" var="course">
-                <li>
-                    <a href="viewCourseIndex.stu?courseId=${course.id}">${course.name}</a>
-                    <c:choose>
-                        <c:when test="${not empty course.tasks}">
-                            <ul>
-                                <c:forEach items="${course.tasks}" var="task">
-                                    <li><a href="javascript:void(0);">${task.name}</a></li>
-                                </c:forEach>
-                            </ul>
-                        </c:when>
-                        <c:otherwise>
-                            <em>没有作业</em>
-                        </c:otherwise>
-                    </c:choose>
-                </li>
-            </c:forEach>
+        <%-- 单选题 --%>
+        <c:forEach items="${requestScope.homeWork.selects}" var="select">
+        <li>
+            ${select.title}<br/>
+            <input type="radio" name="select" value="A" />A. ${select.a}<br/>
+            <input type="radio" name="select" value="B" />B. ${select.b}<br/>
+            <input type="radio" name="select" value="C" />C. ${select.c}<br/>
+            <input type="radio" name="select" value="D" />D. ${select.d}<br/>
+        </li>
+        </c:forEach>
+
+          <%-- 判断题 --%>
+          <c:forEach items="${requestScope.homeWork.trueOrFalses}" var="trueOrFalse">
+              <li>
+                ${trueOrFalse.title}<br/>
+                <input type="radio" name="trueOrFalse" value="True" />True
+                <input type="radio" name="trueOrFalse" value="False" />False
+              </li>
+          </c:forEach>
+
+           <%-- 简答题 --%>
+           <c:forEach items="${requestScope.homeWork.shortQuestions}" var="shortQuestion">
+           <li>
+            ${shortQuestion.title}<br/>
+            <textarea name="shortQuestion"></textarea>
+           </li>
+           </c:forEach>
+
         </ul>
-    </c:when>
-    <c:otherwise>
-        <em>没有选课，就没有作业</em>
-    </c:otherwise>
-</c:choose>
+    </form>
+</c:if>
 
 </body>
 </html>

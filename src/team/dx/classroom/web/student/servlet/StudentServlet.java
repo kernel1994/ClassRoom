@@ -1,12 +1,10 @@
 package team.dx.classroom.web.student.servlet;
 
-import team.dx.classroom.domain.Course;
-import team.dx.classroom.domain.Courseware;
-import team.dx.classroom.domain.Task;
-import team.dx.classroom.domain.User;
+import team.dx.classroom.domain.*;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
 import team.dx.classroom.service.CoursewareService;
+import team.dx.classroom.service.HomeWorkService;
 import team.dx.classroom.service.TaskService;
 import team.dx.classroom.web.servlet.MethodInvokeServlet;
 
@@ -25,7 +23,8 @@ public class StudentServlet extends MethodInvokeServlet {
 	CourseService cService = ObjectFactory.getInstance().createObject(CourseService.class);
 	TaskService tService = ObjectFactory.getInstance().createObject(TaskService.class);
 	CoursewareService cwService = ObjectFactory.getInstance().createObject(CoursewareService.class);
-	
+	HomeWorkService hService = ObjectFactory.getInstance().createObject(HomeWorkService.class);
+
 	@Override
 	public int getSuffixLen() {
 		
@@ -169,7 +168,7 @@ public class StudentServlet extends MethodInvokeServlet {
 		course.setTasks(tasks);
 
 		request.setAttribute("course", course);
-		request.getRequestDispatcher("/course/task.jsp").forward(request, response);
+		request.getRequestDispatcher("/course/tasks.jsp").forward(request, response);
 	}
 
 	public void viewCoursewares(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -191,6 +190,16 @@ public class StudentServlet extends MethodInvokeServlet {
 		List<Course> courses = cService.getStudentAllCoursesTasks(studentId);
 
 		request.setAttribute("courses", courses);
+		request.getRequestDispatcher("/student/tasks.jsp").forward(request, response);
+	}
+
+	/* 学生做作业 */
+	public void doTask(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String taskId = request.getParameter("taskId");
+		HomeWork homeWork = hService.getHomeWork(taskId);
+
+		request.setAttribute("homeWork", homeWork);
 		request.getRequestDispatcher("/student/task.jsp").forward(request, response);
 	}
 }
