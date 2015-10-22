@@ -1,5 +1,6 @@
 package team.dx.classroom.utils;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,13 +8,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
 
+import team.dx.classroom.domain.HomeWork;
+import team.dx.classroom.domain.Resource;
 import team.dx.classroom.domain.Select;
 import team.dx.classroom.domain.ShortQuestion;
+import team.dx.classroom.domain.Task;
 import team.dx.classroom.domain.TrueOrFalse;
+import team.dx.classroom.domain.User;
 
 @SuppressWarnings("all")
 public class WebUtils {
@@ -95,7 +102,8 @@ public class WebUtils {
 		int len = ttitles.length;
 		List<TrueOrFalse> trueOrFalses = new ArrayList<TrueOrFalse>();
 		for (int i = 0; i < len; i++) {
-			TrueOrFalse trueOrFalse = new TrueOrFalse(ttitles[i], tanswers[i], tdescriptions[i]);
+			TrueOrFalse trueOrFalse = new TrueOrFalse(ttitles[i], tanswers[i],
+					tdescriptions[i]);
 			trueOrFalses.add(trueOrFalse);
 		}
 		return trueOrFalses;
@@ -106,9 +114,60 @@ public class WebUtils {
 		int len = qtitles.length;
 		List<ShortQuestion> shortQuestions = new ArrayList<ShortQuestion>();
 		for (int i = 0; i < len; i++) {
-			ShortQuestion shortQuestion = new ShortQuestion(qtitles[i], qdescriptions[i]);
+			ShortQuestion shortQuestion = new ShortQuestion(qtitles[i],
+					qdescriptions[i]);
 			shortQuestions.add(shortQuestion);
 		}
 		return shortQuestions;
 	}
+
+	public static Resource conver2Resource(Task task, String path) {
+
+		Resource resource = new Resource();
+		resource.setId(getRandomUUID());
+		resource.setName(task.getName() + "_"+ task.getId()+".xml");
+		resource.setDescription(task.getDescription());
+		resource.setUploadtime(new Date());
+		
+		String uri = path + File.separator + resource.getName();
+		resource.setUri(uri);
+		return resource;
+	}
+
+	// 封装在线编辑作业信息
+	public static HomeWork request2HomeWork(HttpServletRequest request) {
+
+		// 真实的作业数据
+		HomeWork homeWork = new HomeWork();
+
+		// 选择题
+		String[] stitles = request.getParameterValues("stitle");
+		String[] sanswersA = request.getParameterValues("sA");
+		String[] sanswersB = request.getParameterValues("sB");
+		String[] sanswersC = request.getParameterValues("sC");
+		String[] sanswersD = request.getParameterValues("sD");
+		String[] sdescriptions = request.getParameterValues("sdescription");
+		String[] sanswers = request.getParameterValues("sanswer");
+		List<Select> selects = WebUtils.conver2Selects(stitles, sanswersA,
+				sanswersB, sanswersC, sanswersD, sdescriptions, sanswers);
+		homeWork.setSelects(selects);
+
+		// 判断题
+		String[] ttitles = request.getParameterValues("ttitle");
+		String[] tanswers = request.getParameterValues("tanswer");
+		String[] tdescriptions = request.getParameterValues("tdescription");
+		List<TrueOrFalse> trueOrFalses = WebUtils.conver2TrueOrFalse(ttitles,
+				tanswers, tdescriptions);
+		homeWork.setTrueOrFalses(trueOrFalses);
+
+		// 简答题
+		String[] qtitles = request.getParameterValues("qtitle");
+		String[] qdescriptions = request.getParameterValues("qdescription");
+		List<ShortQuestion> shortQuestions = WebUtils.conver2ShortQuestion(
+				qtitles, qdescriptions);
+		homeWork.setShortQuestions(shortQuestions);
+
+		return homeWork;
+	}
+
 }

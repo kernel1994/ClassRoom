@@ -31,11 +31,11 @@ public class TaskDAOImpl extends BasicDAO<Task> implements TaskDAO {
 	}
 
 	@Override
-	public void addTask(Task task) {
+	public void addTask(Task task, String courseId) {
 
-		String sql = "INSERT INTO task (id, name, description, resource_id) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO task (id, name, description,course_id, resource_id) VALUES (?, ?, ?, ?, ?)";
 		
-		update(sql, task.getId(), task.getName(), task.getDescription(), task.getResource().getId());
+		update(sql, task.getId(), task.getName(), task.getDescription(), courseId, task.getResource().getId());
 	}
 
 }

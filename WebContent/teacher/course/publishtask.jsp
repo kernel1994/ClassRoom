@@ -101,7 +101,7 @@
   	</div>
 	    <fieldset style="margin:10px;padding: 2px 30px;" >
 			<legend >编辑作业</legend>
-			<form action="${pageContext.request.contextPath}/servlet/TaskServlet?method=publishTask" method="post">
+			<form action="${pageContext.request.contextPath}/servlet/TaskServlet?method=publishTask&courseId=${course.id}" method="post">
 				<label for="name">主题：</label>
 				<input type="text" name="name" size="50%"><br/>
 	

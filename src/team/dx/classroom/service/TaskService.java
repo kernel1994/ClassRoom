@@ -1,8 +1,9 @@
 package team.dx.classroom.service;
 
-import team.dx.classroom.domain.Task;
-
 import java.util.List;
+
+import team.dx.classroom.domain.HomeWork;
+import team.dx.classroom.domain.Task;
 
 public interface TaskService {
 
@@ -12,4 +13,8 @@ public interface TaskService {
      * @return 该课程号的所有课件List 对象
      * */
     public List<Task> getCourseTasks(String courseId);
+    
+    void addTask(Task task, String courseId);
+    
+    void addHomeWork(HomeWork homeWork, String path, String standardPath);
 }

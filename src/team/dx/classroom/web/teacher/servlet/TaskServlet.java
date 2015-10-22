@@ -1,17 +1,18 @@
 package team.dx.classroom.web.teacher.servlet;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.jmx.snmp.tasks.TaskServer;
+
 import team.dx.classroom.domain.Course;
 import team.dx.classroom.domain.HomeWork;
-import team.dx.classroom.domain.Select;
-import team.dx.classroom.domain.ShortQuestion;
+import team.dx.classroom.domain.Resource;
 import team.dx.classroom.domain.Task;
-import team.dx.classroom.domain.TrueOrFalse;
+import team.dx.classroom.domain.User;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
+import team.dx.classroom.service.TaskService;
 import team.dx.classroom.utils.WebUtils;
 import team.dx.classroom.web.servlet.MethodInvokeServlet2;
 
@@ -21,66 +22,67 @@ import team.dx.classroom.web.servlet.MethodInvokeServlet2;
 public class TaskServlet extends MethodInvokeServlet2 {
 
 	private static final long serialVersionUID = 1L;
-	private CourseService cs = ObjectFactory.getInstance().createObject(CourseService.class);
+	private CourseService cs = ObjectFactory.getInstance().createObject(
+			CourseService.class);
+	private TaskService ts = ObjectFactory.getInstance().createObject(
+			TaskService.class);
 
-	public void addTaskUI(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+	public void addTaskUI(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
 		try {
 			String courseId = request.getParameter("courseId");
 			Course course = cs.getCourse(courseId);
 			request.setAttribute("course", course);
-			request.getRequestDispatcher("/teacher/course/publishtask.jsp").forward(request, response);
+			request.getRequestDispatcher("/teacher/course/publishtask.jsp")
+					.forward(request, response);
 		} catch (Exception e) {
 			request.setAttribute("message", "TaskServlet_addTaskUI未知异常");
-			request.getRequestDispatcher("/message.jsp").forward(request, response);
+			request.getRequestDispatcher("/message.jsp").forward(request,
+					response);
 		}
-		
-	};
-	
-	public void publishTask(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		//作业的描述
-		Task task = WebUtils.request2Bean(request.getParameterMap(), Task.class);
-		
-		//封装作业内容
-		HomeWork homeWork = request2HomeWork(request);
-		
-		System.out.println("ok");
-		
-		
-	}
 
-	//封装在线编辑作业信息
-	private HomeWork request2HomeWork(HttpServletRequest request) {
+	};
+
+	public void publishTask(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		// 得到一个作业资源保存的父路径
+		String path = this.getServletContext().getRealPath(
+				"/resource/task/homework");
 		
-		//真实的作业数据
-		HomeWork homeWork = new HomeWork();
+		/*------------对作业的描述存取到数据库--------------*/
+		// 作业的描述
+
+		Task task = WebUtils
+				.request2Bean(request.getParameterMap(), Task.class);
+		task.setId(WebUtils.getRandomUUID());
+
+		// 作业资源对象
+		Resource resource = WebUtils.conver2Resource(task, path);
+
+		// 上传者
+		User uploader = (User) request.getSession().getAttribute("user");
+		resource.setUploader(uploader);
+
+		task.setResource(resource);
+
+		/*-------------存取真实的作业--------------*/
+		// 封装作业内容
+		HomeWork homeWork = WebUtils.request2HomeWork(request);
 		
-		//选择题
-		String[] stitles = request.getParameterValues("stitle");
-		String[] sanswersA = request.getParameterValues("sA");
-		String[] sanswersB = request.getParameterValues("sB");
-		String[] sanswersC = request.getParameterValues("sC");
-		String[] sanswersD = request.getParameterValues("sD");
-		String[] sdescriptions = request.getParameterValues("sdescription");
-		String[] sanswers = request.getParameterValues("sanswer");
-		List<Select> selects = WebUtils.conver2Selects(stitles, sanswersA, sanswersB, sanswersC, sanswersD, sdescriptions, sanswers);
-		homeWork.setSelects(selects);
+		//得到一个xml作业模板
+		String standardPath = this.getServletContext().getRealPath(
+				"/resource/task/homework_standard.xml");
+		//作业写入目录
+		String desPath =  resource.getUri();
 		
-		//判断题
-		String[] ttitles = request.getParameterValues("ttitle");
-		String[] tanswers = request.getParameterValues("tanswer");
-		String[] tdescriptions = request.getParameterValues("tdescription");
-		List<TrueOrFalse> trueOrFalses =  WebUtils.conver2TrueOrFalse(ttitles,tanswers,tdescriptions);
-		homeWork.setTrueOrFalses(trueOrFalses);
+		//将作业写进硬盘
+		ts.addHomeWork(homeWork, desPath, standardPath);
+		//将作业描述插入数据库
+		//ts.addTask(task, request.getParameter("courseId"));
 		
-		//简答题
-		String[] qtitles = request.getParameterValues("qtitle");
-		String[] qdescriptions = request.getParameterValues("qdescription");
-		List<ShortQuestion> shortQuestions = WebUtils.conver2ShortQuestion(qtitles,qdescriptions);
-		homeWork.setShortQuestions(shortQuestions);
-		
-		return homeWork;
+
 	}
 
 }

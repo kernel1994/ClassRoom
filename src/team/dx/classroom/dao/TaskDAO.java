@@ -12,5 +12,5 @@ public interface TaskDAO {
 	
 	public void deleteTask(String id);
 	
-	public void addTask(Task task);
+	public void addTask(Task task, String courseId);
 }

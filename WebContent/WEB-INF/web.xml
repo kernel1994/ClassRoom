@@ -121,6 +121,11 @@
     <servlet-name>TaskServlet</servlet-name>
     <servlet-class>team.dx.classroom.web.teacher.servlet.TaskServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ServletTestXml</servlet-name>
+    <servlet-class>test.junit.ServletTestXml</servlet-class>
+  </servlet>
+
 
 
 
@@ -147,6 +152,10 @@
   <servlet-mapping>
     <servlet-name>TaskServlet</servlet-name>
     <url-pattern>/servlet/TaskServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ServletTestXml</servlet-name>
+    <url-pattern>/servlet/ServletTestXml</url-pattern>
   </servlet-mapping>
 
 </web-app>

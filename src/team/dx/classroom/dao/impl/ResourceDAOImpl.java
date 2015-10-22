@@ -40,7 +40,7 @@ public class ResourceDAOImpl extends BasicDAO<Resource> implements ResourceDAO {
 	@Override
 	public void addResource(Resource resource) {
 
-		String sql = "INSERT INTO resource (id, name, uri, uploadtime, description, uploader_id) VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO resource (id, name, uri, uploadtime, description, upload_id) VALUES (?, ?, ?, ?, ?, ?)";
 
 		update(sql, resource.getId(), resource.getName(), resource.getUri(), resource.getUploadtime(), resource.getDescription(),
 				resource.getUploader().getId());
