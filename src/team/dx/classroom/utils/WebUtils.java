@@ -12,6 +12,8 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
 
 import team.dx.classroom.domain.Select;
+import team.dx.classroom.domain.ShortQuestion;
+import team.dx.classroom.domain.TrueOrFalse;
 
 @SuppressWarnings("all")
 public class WebUtils {
@@ -81,10 +83,32 @@ public class WebUtils {
 		List<Select> selects = new ArrayList<Select>();
 		for (int i = 0; i < len; i++) {
 			Select select = new Select(titles[i], answersA[i], answersB[i],
-					answersC[i], answersD[i], answers[i], descriptions[i+1]);
+					answersC[i], answersD[i], answers[i], descriptions[i]);
 			selects.add(select);
 		}
 		return selects;
 
+	}
+
+	public static List<TrueOrFalse> conver2TrueOrFalse(String[] ttitles,
+			String[] tanswers, String[] tdescriptions) {
+		int len = ttitles.length;
+		List<TrueOrFalse> trueOrFalses = new ArrayList<TrueOrFalse>();
+		for (int i = 0; i < len; i++) {
+			TrueOrFalse trueOrFalse = new TrueOrFalse(ttitles[i], tanswers[i], tdescriptions[i]);
+			trueOrFalses.add(trueOrFalse);
+		}
+		return trueOrFalses;
+	}
+
+	public static List<ShortQuestion> conver2ShortQuestion(String[] qtitles,
+			String[] qdescriptions) {
+		int len = qtitles.length;
+		List<ShortQuestion> shortQuestions = new ArrayList<ShortQuestion>();
+		for (int i = 0; i < len; i++) {
+			ShortQuestion shortQuestion = new ShortQuestion(qtitles[i], qdescriptions[i]);
+			shortQuestions.add(shortQuestion);
+		}
+		return shortQuestions;
 	}
 }

@@ -31,13 +31,13 @@
   		
   		function createTaskSelect(){
   			var $temp = $(".select").last();
-  			$temp.append("<label for='title'>选择题：</label><textarea rows='1' cols='90%' name='title'></textarea><br/>");
-  			$temp.append("<label for='A'>A：</label><input name='A'/><br/>");
-  			$temp.append("<label for='B'>B：</label><input name='B'/><br/>");
-  			$temp.append("<label for='C'>C：</label><input name='C'/><br/>");
-  			$temp.append("<label for='D'>D：</label><input name='D'/><br/>");
-  			$temp.append("<label for='description'>备注：</label><textarea rows='1' cols='90%' name='description'></textarea><br/>");
-  			$temp.append("<label for='answer'>答案：</label><input name='answer'/>");
+  			$temp.append("<label for='stitle'>选择题：</label><textarea rows='1' cols='90%' name='stitle'></textarea><br/>");
+  			$temp.append("<label for='sA'>A：</label><input name='sA'/><br/>");
+  			$temp.append("<label for='sB'>B：</label><input name='sB'/><br/>");
+  			$temp.append("<label for='sC'>C：</label><input name='sC'/><br/>");
+  			$temp.append("<label for='sD'>D：</label><input name='sD'/><br/>");
+  			$temp.append("<label for='sdescription'>备注：</label><textarea rows='1' cols='90%' name='sdescription'></textarea><br/>");
+  			$temp.append("<label for='sanswer'>答案：</label><input name='sanswer'/>");
   			$temp.append("<input type='button' value='删除'/>");
   			
   			//添加事件按钮
@@ -53,16 +53,15 @@
   			var $div = $("<div class='trueorfalse'><div>");
   			
   			$task.before($div);
-  			createTaskSelectTrueOrFalse();
+  			createTaskTrueOrFalse();
   		});
   		
-  		function createTaskSelectTrueOrFalse(){
+  		function createTaskTrueOrFalse(){
   			var $temp = $(".trueorfalse").last();
-  			$temp.append("<label for='title'>判断题：</label><textarea rows='1' cols='90%' name='title'></textarea><br/>");
-  			$temp.append("<label for='description'>备注：</label><textarea rows='1' cols='90%' name='description'></textarea><br/>");
-  			$temp.append("<label for='answer'>答案：</label>");
-  			$temp.append("<label for='right'>对</label><input type='radio' name='answer' value='true'/>");
-  			$temp.append("<label for='false'>错</label><input type='radio' name='answer' value='false'/>");
+  			$temp.append("<label for='ttitle'>判断题：</label><textarea rows='1' cols='90%' name='ttitle'></textarea><br/>");
+  			$temp.append("<label for='tdescription'>备注：</label><textarea rows='1' cols='90%' name='tdescription'></textarea><br/>");
+  			$temp.append("<label for='tanswer'>答案：</label>");
+  			$temp.append("<label for='tanswer'>答案：</label><input name='tanswer' value='true'/>");
   			$temp.append("<input type='button' value='删除'/>");
   			
   			//添加事件按钮
@@ -82,8 +81,8 @@
   		
   		function createTaskSelectShortQuestion(){
   			var $temp = $(".shortquestion").last();
-  			$temp.append("<label for='title'>简答题：</label><textarea rows='1' cols='90%' name='title'></textarea><br/>");
-  			$temp.append("<label for='description'>备注：</label><textarea rows='1' cols='90%' name='description'></textarea><br/>");
+  			$temp.append("<label for='qtitle'>简答题：</label><textarea rows='1' cols='90%' name='qtitle'></textarea><br/>");
+  			$temp.append("<label for='qdescription'>备注：</label><textarea rows='1' cols='90%' name='qdescription'></textarea><br/>");
   			$temp.append("<input type='button' value='删除'/>");
   			
   			//添加事件按钮

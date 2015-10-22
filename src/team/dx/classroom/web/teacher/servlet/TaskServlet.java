@@ -1,8 +1,5 @@
 package team.dx.classroom.web.teacher.servlet;
-
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import team.dx.classroom.domain.Course;
 import team.dx.classroom.domain.HomeWork;
 import team.dx.classroom.domain.Select;
+import team.dx.classroom.domain.ShortQuestion;
 import team.dx.classroom.domain.Task;
+import team.dx.classroom.domain.TrueOrFalse;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
 import team.dx.classroom.utils.WebUtils;
@@ -39,7 +38,11 @@ public class TaskServlet extends MethodInvokeServlet2 {
 	};
 	
 	public void publishTask(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//封装表单数据
+		
+		//作业的描述
+		Task task = WebUtils.request2Bean(request.getParameterMap(), Task.class);
+		
+		//封装作业内容
 		HomeWork homeWork = request2HomeWork(request);
 		
 		System.out.println("ok");
@@ -47,21 +50,37 @@ public class TaskServlet extends MethodInvokeServlet2 {
 		
 	}
 
+	//封装在线编辑作业信息
 	private HomeWork request2HomeWork(HttpServletRequest request) {
-		//作业的作业
-		Task task = WebUtils.request2Bean(request.getParameterMap(), Task.class);
-		//真实的作业
-		//选择题
-		String[] titles = request.getParameterValues("title");
-		String[] answersA = request.getParameterValues("A");
-		String[] answersB = request.getParameterValues("B");
-		String[] answersC = request.getParameterValues("C");
-		String[] answersD = request.getParameterValues("D");
-		String[] descriptions = request.getParameterValues("description");
-		String[] answers = request.getParameterValues("answer");
-		List<Select> selects = WebUtils.conver2Selects(titles, answersA, answersB, answersC, answersD, descriptions, answers);
 		
-		return null;
+		//真实的作业数据
+		HomeWork homeWork = new HomeWork();
+		
+		//选择题
+		String[] stitles = request.getParameterValues("stitle");
+		String[] sanswersA = request.getParameterValues("sA");
+		String[] sanswersB = request.getParameterValues("sB");
+		String[] sanswersC = request.getParameterValues("sC");
+		String[] sanswersD = request.getParameterValues("sD");
+		String[] sdescriptions = request.getParameterValues("sdescription");
+		String[] sanswers = request.getParameterValues("sanswer");
+		List<Select> selects = WebUtils.conver2Selects(stitles, sanswersA, sanswersB, sanswersC, sanswersD, sdescriptions, sanswers);
+		homeWork.setSelects(selects);
+		
+		//判断题
+		String[] ttitles = request.getParameterValues("ttitle");
+		String[] tanswers = request.getParameterValues("tanswer");
+		String[] tdescriptions = request.getParameterValues("tdescription");
+		List<TrueOrFalse> trueOrFalses =  WebUtils.conver2TrueOrFalse(ttitles,tanswers,tdescriptions);
+		homeWork.setTrueOrFalses(trueOrFalses);
+		
+		//简答题
+		String[] qtitles = request.getParameterValues("qtitle");
+		String[] qdescriptions = request.getParameterValues("qdescription");
+		List<ShortQuestion> shortQuestions = WebUtils.conver2ShortQuestion(qtitles,qdescriptions);
+		homeWork.setShortQuestions(shortQuestions);
+		
+		return homeWork;
 	}
 
 }
