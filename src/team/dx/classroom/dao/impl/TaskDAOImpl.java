@@ -15,6 +15,12 @@ public class TaskDAOImpl extends BasicDAO<Task> implements TaskDAO {
 	}
 
 	@Override
+	public Task getTask(String condition, Object... args) {
+
+		return get(condition, args);
+	}
+
+	@Override
 	public void updateTask(Task task) {
 
 		String sql = "UPDATE task SET name = ?, description = ? resource_id = ? WHERE id = ?";

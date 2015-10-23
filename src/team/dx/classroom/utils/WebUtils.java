@@ -92,7 +92,7 @@ public class WebUtils {
 		}
 		int len = titles.length;
 		for (int i = 0; i < len; i++) {
-			Select select = new Select(titles[i], answersA[i], answersB[i],
+			Select select = new Select("select" + i, titles[i], answersA[i], answersB[i],
 					answersC[i], answersD[i], answers[i], descriptions[i]);
 			selects.add(select);
 		}
@@ -109,7 +109,7 @@ public class WebUtils {
 		int len = ttitles.length;
 		
 		for (int i = 0; i < len; i++) {
-			TrueOrFalse trueOrFalse = new TrueOrFalse(ttitles[i], tanswers[i],
+			TrueOrFalse trueOrFalse = new TrueOrFalse("trueorfalse" + i, ttitles[i], tanswers[i],
 					tdescriptions[i]);
 			trueOrFalses.add(trueOrFalse);
 		}
@@ -125,7 +125,7 @@ public class WebUtils {
 		int len = qtitles.length;
 		
 		for (int i = 0; i < len; i++) {
-			ShortQuestion shortQuestion = new ShortQuestion(qtitles[i],
+			ShortQuestion shortQuestion = new ShortQuestion("shortquestion" + i, qtitles[i],
 					qdescriptions[i]);
 			shortQuestions.add(shortQuestion);
 		}

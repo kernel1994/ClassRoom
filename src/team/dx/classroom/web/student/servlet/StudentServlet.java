@@ -1,5 +1,6 @@
 package team.dx.classroom.web.student.servlet;
 
+import com.google.gson.Gson;
 import team.dx.classroom.domain.*;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
@@ -168,7 +169,7 @@ public class StudentServlet extends MethodInvokeServlet {
 		course.setTasks(tasks);
 
 		request.setAttribute("course", course);
-		request.getRequestDispatcher("/course/tasks.jsp").forward(request, response);
+		request.getRequestDispatcher("/course/task.jsp").forward(request, response);
 	}
 
 	public void viewCoursewares(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -200,7 +201,36 @@ public class StudentServlet extends MethodInvokeServlet {
 		HomeWork homeWork = hService.getHomeWork(taskId);
 
 		request.setAttribute("homeWork", homeWork);
+		request.setAttribute("taskId", taskId);
 		request.getRequestDispatcher("/student/task.jsp").forward(request, response);
+	}
+
+	/* 学生提交作业 */
+	public  void submitTask(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String data = request.getParameter("data");
+		Gson gson = new Gson();
+		HashMap<String, String> map = gson.fromJson(data, HashMap.class);
+
+		String taskId = map.get("taskId");
+		map.remove("taskId");
+
+		HashMap<String, String> wrong = hService.checkHomework(taskId, map);
+		String sWrong = gson.toJson(wrong, HashMap.class);
+
+		// System.out.println("swrong: " + sWrong);
+		// System.out.println("stu: " + map);
+
+		/* 禁用缓存 */
+		response.setHeader("Cache-Control", "no-store");
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Expires", -1);
+
+		PrintWriter out = response.getWriter();
+
+		out.write(sWrong);
+		out.flush();
+		out.close();
 	}
 }
 

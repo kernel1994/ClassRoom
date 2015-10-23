@@ -11,7 +11,7 @@
         <c:when test="${not empty requestScope.course.tasks}">
             <ul>
                 <c:forEach items="${requestScope.course.tasks}" var="task">
-                    <li><a href="javascript:void(0);">${task.name}</a></li>
+                    <li><a href="doTask.stu?taskId=${task.id}">${task.name}</a></li>
                 </c:forEach>
             </ul>
         </c:when>

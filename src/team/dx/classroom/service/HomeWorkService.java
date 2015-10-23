@@ -2,6 +2,9 @@ package team.dx.classroom.service;
 
 import team.dx.classroom.domain.HomeWork;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public interface HomeWorkService {
 
     /**
@@ -10,4 +13,12 @@ public interface HomeWorkService {
      * @return 解析出来的Homework 对象
      * */
     public HomeWork getHomeWork(String taskId);
+
+    /**
+     * 检查学生做的题，并返回其做错的题的Map对象。并计积分写入数据库，把学生的答案存储
+     * @param taskId 作业id，获取标准答案
+     * @param stuAnswer 学生的答案Map 对象
+     * @return 学生做错的题
+     * */
+    public HashMap<String, String> checkHomework(String taskId, Map stuAnswer);
 }

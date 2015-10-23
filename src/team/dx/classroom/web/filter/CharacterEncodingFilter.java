@@ -74,7 +74,7 @@ public class CharacterEncodingFilter implements Filter {
 				return value;
 			}
 			try {
-				value = new String(value.getBytes("iso8859-1"), request.getCharacterEncoding());
+				value = new String(value.getBytes("iso8859-1"), "utf-8");
 				return value;
 			} catch (Exception e) {
 				throw new RuntimeException(e);

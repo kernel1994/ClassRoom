@@ -41,5 +41,13 @@ public class HomeWork implements Serializable {
 	public void setShortQuestions(List<ShortQuestion> shortQuestions) {
 		this.shortQuestions = shortQuestions;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "HomeWork{" +
+				"selects=" + selects +
+				", trueOrFalses=" + trueOrFalses +
+				", shortQuestions=" + shortQuestions +
+				'}';
+	}
 }
