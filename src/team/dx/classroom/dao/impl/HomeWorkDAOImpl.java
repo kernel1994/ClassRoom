@@ -24,30 +24,39 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 			List<TrueOrFalse> trueOrFalses = homeWork.getTrueOrFalses();
 			List<ShortQuestion> shortQuestions = homeWork.getShortQuestions();
 			
-			for (Select select : selects) {
-				Element selectTag = root.addElement( "select" );
-				selectTag.addAttribute( "answer", select.getAnswer() );
-				selectTag.addElement("title").setText(select.getTitle());
-				selectTag.addElement("A").setText(select.getA());
-				selectTag.addElement("B").setText(select.getB());
-				selectTag.addElement("C").setText(select.getC());
-				selectTag.addElement("D").setText(select.getD());
-				selectTag.addElement("description").setText(select.getDescription());
+			if (selects != null && selects.size() != 0) {
+				for (Select select : selects) {
+					Element selectTag = root.addElement( "select" );
+					selectTag.addAttribute( "answer", select.getAnswer() );
+					selectTag.addElement("title").setText(select.getTitle());
+					selectTag.addElement("A").setText(select.getA());
+					selectTag.addElement("B").setText(select.getB());
+					selectTag.addElement("C").setText(select.getC());
+					selectTag.addElement("D").setText(select.getD());
+					selectTag.addElement("description").setText(select.getDescription());
+				}
 			}
 			
-			for (TrueOrFalse trueOrFalse : trueOrFalses) {
-				Element trueOrFalseTag = root.addElement( "trueorfalse" );
-				trueOrFalseTag.addAttribute( "answer", trueOrFalse.getAnswer());
-				trueOrFalseTag.addElement("title").setText(trueOrFalse.getTitle());
-				trueOrFalseTag.addElement("description").setText(trueOrFalse.getDescription());
-		
+			
+			if (trueOrFalses != null && trueOrFalses.size() != 0) {
+				for (TrueOrFalse trueOrFalse : trueOrFalses) {
+					Element trueOrFalseTag = root.addElement( "trueorfalse" );
+					trueOrFalseTag.addAttribute( "answer", trueOrFalse.getAnswer());
+					trueOrFalseTag.addElement("title").setText(trueOrFalse.getTitle());
+					trueOrFalseTag.addElement("description").setText(trueOrFalse.getDescription());
+			
+				}
 			}
 			
-			for (ShortQuestion shortQuestion : shortQuestions) {
-				Element shortQuestionTag = root.addElement( "shortquestion" );
-				shortQuestionTag.addElement("title").setText(shortQuestion.getTitle());
-				shortQuestionTag.addElement("description").setText(shortQuestion.getDescription());
+			
+			if (shortQuestions != null && shortQuestions.size() != 0) {
+				for (ShortQuestion shortQuestion : shortQuestions) {
+					Element shortQuestionTag = root.addElement( "shortquestion" );
+					shortQuestionTag.addElement("title").setText(shortQuestion.getTitle());
+					shortQuestionTag.addElement("description").setText(shortQuestion.getDescription());
+				}
 			}
+			
 			
 			XmlUtils.write(document,path);
 		} catch (Exception e) {

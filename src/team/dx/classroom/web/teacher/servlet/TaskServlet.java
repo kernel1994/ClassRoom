@@ -45,40 +45,48 @@ public class TaskServlet extends MethodInvokeServlet2 {
 	public void publishTask(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		// 得到一个作业资源保存的父路径
-		String path = this.getServletContext().getRealPath(
-				"/resource/task/homework");
-		
-		/*------------对作业的描述存取到数据库--------------*/
-		// 作业的描述
+		try {
+			System.out.println("ok");
+			
+			// 得到一个作业资源保存的父路径
+			String path = this.getServletContext().getRealPath(
+					"/resource/task/homework");
+			
+			/*------------对作业的描述存取到数据库--------------*/
+			// 作业的描述
 
-		Task task = WebUtils
-				.request2Bean(request.getParameterMap(), Task.class);
-		task.setId(WebUtils.getRandomUUID());
-		
-		// 上传者
-		User uploader = (User) request.getSession().getAttribute("user");
-		
-		// 作业资源对象
-		Resource resource = WebUtils.conver2Resource(task, uploader, path);
+			Task task = WebUtils
+					.request2Bean(request.getParameterMap(), Task.class);
+			task.setId(WebUtils.getRandomUUID());
+			
+			// 上传者
+			User uploader = (User) request.getSession().getAttribute("user");
+			
+			// 作业资源对象
+			Resource resource = WebUtils.conver2Resource(task, uploader, path);
 
-		task.setResource(resource);
+			task.setResource(resource);
 
-		/*-------------存取真实的作业--------------*/
-		// 封装作业内容
-		HomeWork homeWork = WebUtils.request2HomeWork(request);
+			/*-------------存取真实的作业--------------*/
+			// 封装作业内容
+			HomeWork homeWork = WebUtils.request2HomeWork(request);
+			
+			//得到一个xml作业模板,空内容
+			String standardPath = this.getServletContext().getRealPath(
+					"/resource/task/homework_standard.xml");
+			//作业写入目录
+			String desPath =  resource.getUri();
+			
+			//将作业写进硬盘
+			ts.addHomeWork(homeWork, desPath, standardPath);
+			
+			//将作业描述插入数据库
+			ts.addTask(task, request.getParameter("courseId"));
+		} catch (Exception e) {
+			
+		}
 		
-		//得到一个xml作业模板,空内容
-		String standardPath = this.getServletContext().getRealPath(
-				"/resource/task/homework_standard.xml");
-		//作业写入目录
-		String desPath =  resource.getUri();
 		
-		//将作业写进硬盘
-		ts.addHomeWork(homeWork, desPath, standardPath);
-		
-		//将作业描述插入数据库
-		//ts.addTask(task, request.getParameter("courseId"));
 		
 
 	}

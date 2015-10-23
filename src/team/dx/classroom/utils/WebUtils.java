@@ -86,8 +86,11 @@ public class WebUtils {
 	public static List<Select> conver2Selects(String[] titles,
 			String[] answersA, String[] answersB, String[] answersC,
 			String[] answersD, String[] descriptions, String[] answers) {
-		int len = titles.length;
 		List<Select> selects = new ArrayList<Select>();
+		if (titles == null) {
+			return selects;
+		}
+		int len = titles.length;
 		for (int i = 0; i < len; i++) {
 			Select select = new Select(titles[i], answersA[i], answersB[i],
 					answersC[i], answersD[i], answers[i], descriptions[i]);
@@ -99,8 +102,12 @@ public class WebUtils {
 
 	public static List<TrueOrFalse> conver2TrueOrFalse(String[] ttitles,
 			String[] tanswers, String[] tdescriptions) {
-		int len = ttitles.length;
 		List<TrueOrFalse> trueOrFalses = new ArrayList<TrueOrFalse>();
+		if (ttitles == null) {
+			return null;
+		}
+		int len = ttitles.length;
+		
 		for (int i = 0; i < len; i++) {
 			TrueOrFalse trueOrFalse = new TrueOrFalse(ttitles[i], tanswers[i],
 					tdescriptions[i]);
@@ -111,8 +118,12 @@ public class WebUtils {
 
 	public static List<ShortQuestion> conver2ShortQuestion(String[] qtitles,
 			String[] qdescriptions) {
-		int len = qtitles.length;
 		List<ShortQuestion> shortQuestions = new ArrayList<ShortQuestion>();
+		if (qtitles == null) {
+			return shortQuestions;
+		}
+		int len = qtitles.length;
+		
 		for (int i = 0; i < len; i++) {
 			ShortQuestion shortQuestion = new ShortQuestion(qtitles[i],
 					qdescriptions[i]);
@@ -149,7 +160,7 @@ public class WebUtils {
 		String[] sanswersD = request.getParameterValues("sD");
 		String[] sdescriptions = request.getParameterValues("sdescription");
 		String[] sanswers = request.getParameterValues("sanswer");
-		List<Select> selects = WebUtils.conver2Selects(stitles, sanswersA,
+		List<Select> selects = conver2Selects(stitles, sanswersA,
 				sanswersB, sanswersC, sanswersD, sdescriptions, sanswers);
 		homeWork.setSelects(selects);
 
@@ -157,14 +168,14 @@ public class WebUtils {
 		String[] ttitles = request.getParameterValues("ttitle");
 		String[] tanswers = request.getParameterValues("tanswer");
 		String[] tdescriptions = request.getParameterValues("tdescription");
-		List<TrueOrFalse> trueOrFalses = WebUtils.conver2TrueOrFalse(ttitles,
+		List<TrueOrFalse> trueOrFalses = conver2TrueOrFalse(ttitles,
 				tanswers, tdescriptions);
 		homeWork.setTrueOrFalses(trueOrFalses);
 
 		// ¼ò´ðÌâ
 		String[] qtitles = request.getParameterValues("qtitle");
 		String[] qdescriptions = request.getParameterValues("qdescription");
-		List<ShortQuestion> shortQuestions = WebUtils.conver2ShortQuestion(
+		List<ShortQuestion> shortQuestions = conver2ShortQuestion(
 				qtitles, qdescriptions);
 		homeWork.setShortQuestions(shortQuestions);
 
