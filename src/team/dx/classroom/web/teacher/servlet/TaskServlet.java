@@ -46,8 +46,6 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			HttpServletResponse response) throws Exception {
 
 		try {
-			System.out.println("ok");
-			
 			// 得到一个作业资源保存的父路径
 			String path = this.getServletContext().getRealPath(
 					"/resource/task/homework");
@@ -82,8 +80,14 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			
 			//将作业描述插入数据库
 			ts.addTask(task, request.getParameter("courseId"));
-		} catch (Exception e) {
 			
+			//回写操作成功后的信息
+			request.setAttribute("task", task);
+			response.sendRedirect(request.getContextPath() + "/servlet/TeacherCoreServlet?method=coreIndexUI&id="+request.getParameter("courseId"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message", "未知异常!<br/>" + e.getMessage());
+			request.getRequestDispatcher("/message.jsp").forward(request, response);
 		}
 		
 		

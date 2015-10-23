@@ -17,6 +17,7 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 	@Override
 	public void add(HomeWork homeWork, String path, String standardPath) {
 		try {
+			//得到一个xml，进行编辑
 			Document document = XmlUtils.parse(standardPath);
 			Element root = document.getRootElement();
 			
@@ -57,7 +58,7 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 				}
 			}
 			
-			
+			/*----------将编辑好的xml写入硬盘--------*/
 			XmlUtils.write(document,path);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
