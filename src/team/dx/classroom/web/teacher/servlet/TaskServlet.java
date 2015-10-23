@@ -3,8 +3,6 @@ package team.dx.classroom.web.teacher.servlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.jmx.snmp.tasks.TaskServer;
-
 import team.dx.classroom.domain.Course;
 import team.dx.classroom.domain.HomeWork;
 import team.dx.classroom.domain.Resource;
@@ -57,13 +55,12 @@ public class TaskServlet extends MethodInvokeServlet2 {
 		Task task = WebUtils
 				.request2Bean(request.getParameterMap(), Task.class);
 		task.setId(WebUtils.getRandomUUID());
-
-		// 作业资源对象
-		Resource resource = WebUtils.conver2Resource(task, path);
-
+		
 		// 上传者
 		User uploader = (User) request.getSession().getAttribute("user");
-		resource.setUploader(uploader);
+		
+		// 作业资源对象
+		Resource resource = WebUtils.conver2Resource(task, uploader, path);
 
 		task.setResource(resource);
 
@@ -71,7 +68,7 @@ public class TaskServlet extends MethodInvokeServlet2 {
 		// 封装作业内容
 		HomeWork homeWork = WebUtils.request2HomeWork(request);
 		
-		//得到一个xml作业模板
+		//得到一个xml作业模板,空内容
 		String standardPath = this.getServletContext().getRealPath(
 				"/resource/task/homework_standard.xml");
 		//作业写入目录
@@ -79,6 +76,7 @@ public class TaskServlet extends MethodInvokeServlet2 {
 		
 		//将作业写进硬盘
 		ts.addHomeWork(homeWork, desPath, standardPath);
+		
 		//将作业描述插入数据库
 		//ts.addTask(task, request.getParameter("courseId"));
 		

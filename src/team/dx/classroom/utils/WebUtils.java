@@ -121,16 +121,17 @@ public class WebUtils {
 		return shortQuestions;
 	}
 
-	public static Resource conver2Resource(Task task, String path) {
+	public static Resource conver2Resource(Task task, User uploader, String path) {
 
 		Resource resource = new Resource();
 		resource.setId(getRandomUUID());
-		resource.setName(task.getName() + "_"+ task.getId()+".xml");
+		resource.setName(task.getName() + "_"+ uploader.getId()+".xml");
 		resource.setDescription(task.getDescription());
 		resource.setUploadtime(new Date());
 		
 		String uri = path + File.separator + resource.getName();
 		resource.setUri(uri);
+		resource.setUploader(uploader);
 		return resource;
 	}
 
