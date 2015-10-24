@@ -92,8 +92,9 @@ public class WebUtils {
 		}
 		int len = titles.length;
 		for (int i = 0; i < len; i++) {
-			Select select = new Select(titles[i], answersA[i], answersB[i],
-					answersC[i], answersD[i], answers[i], descriptions[i]);
+			/*Select select = new Select(titles[i], answersA[i], answersB[i],
+					answersC[i], answersD[i], answers[i], descriptions[i]);*/
+			Select select = new Select(titles[i], answersA[i], answersB[i], answersC[i],answersD[i],answers[i],descriptions[i]);
 			selects.add(select);
 		}
 		return selects;

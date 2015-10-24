@@ -81,8 +81,7 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			//将作业描述插入数据库
 			ts.addTask(task, request.getParameter("courseId"));
 			
-			//回写操作成功后的信息
-			request.setAttribute("task", task);
+			//操作成功后返回
 			response.sendRedirect(request.getContextPath() + "/servlet/TeacherCoreServlet?method=coreIndexUI&id="+request.getParameter("courseId"));
 		} catch (Exception e) {
 			e.printStackTrace();

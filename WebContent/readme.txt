@@ -72,7 +72,7 @@ create table resource
 	uploadtime date not null,
 	description varchar(255),
 	
-	upload_id varchar(40),  
+	uploader_id varchar(40),  
 	constraint upload_id_FK foreign key(upload_id) references user(id)
 );
 --作业表	--name eg.第一次英语作业 --description 老师对作业补充
