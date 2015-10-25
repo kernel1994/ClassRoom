@@ -1,5 +1,6 @@
 package team.dx.classroom.utils;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -20,11 +21,16 @@ public class XmlUtils {
 	// 一般直接传路径,也可以考虑用URL对象
 	public static Document parse(String path) throws DocumentException {
 		SAXReader reader = new SAXReader();
+		if (!path.startsWith("file:///")) {
+			path = "file:///" + path;
+		}
 		Document document = reader.read(path);
+
 		return document;
 	}
 
 	public static void write(Document document, String path) throws IOException {
+
 		// 设置一个书写格式，不然无缩进
 		OutputFormat format = OutputFormat.createPrettyPrint();
 		format.setEncoding("utf-8");

@@ -28,6 +28,8 @@ public class TeacherCoreServlet extends MethodInvokeServlet2 {
 		try {
 			/*---------------进入一门具体的课程-----------------------*/
 			String courseId = request.getParameter("id");
+			request.getSession().setAttribute("courseId", courseId);
+			
 			Course course = cs.getCourse(courseId);
 			request.setAttribute("course", course);
 			

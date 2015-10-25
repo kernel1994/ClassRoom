@@ -5,7 +5,8 @@ import java.io.Serializable;
 public class Select implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
+	private String id;
 	private String title;
 	private String a;
 	private String b;
@@ -18,9 +19,8 @@ public class Select implements Serializable{
 		super();
 	}
 
-	public Select(String title, String a, String b, String c,
-			String d, String answer, String description) {
-		super();
+	public Select(String id, String title, String a, String b, String c, String d, String answer, String description) {
+		this.id = id;
 		this.title = title;
 		this.a = a;
 		this.b = b;
@@ -28,6 +28,14 @@ public class Select implements Serializable{
 		this.d = d;
 		this.answer = answer;
 		this.description = description;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -82,4 +90,17 @@ public class Select implements Serializable{
 		this.description = description;
 	}
 
+	@Override
+	public String toString() {
+		return "Select{" +
+				"id='" + id + '\'' +
+				", title='" + title + '\'' +
+				", a='" + a + '\'' +
+				", b='" + b + '\'' +
+				", c='" + c + '\'' +
+				", d='" + d + '\'' +
+				", answer='" + answer + '\'' +
+				", description='" + description + '\'' +
+				'}';
+	}
 }

@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -43,46 +43,33 @@
     	
     	#content_mod2{
     		width: 59%;
-    		height: 100%;
+    		height: 60%;
     		float: left;
     		margin-left: 5%;
     		margin-top: 10px;
     		
-    		padding: 10px 3%;
+    		border: 1px #002DF1 solid;
     	}
     	#content_mod1_style1{
     		width: 100%;
     		height: 100px;
     		text-align: center;
-    		background-color: #F6F6F6;
+    		border: 1px #002DF1 solid;
     	}
     	#content_mod1_style2{
     		width: 100%;
     		height: 100px;
     		text-align: center;
     		margin-top: 30px;
-    		background-color: #F6F6F6;
+    		border: 1px #002DF1 solid;
     	}
     	#content_mod1_style3{
     		width: 100%;
     		height: 100px;
     		text-align: center;
     		margin-top: 30px;
-    		background-color: #F6F6F6;
+    		border: 1px #002DF1 solid;
     	}
-    	
-    	#content_mod2_style1{
-    		
-    	}
-    	
-    	.message{
-    		width: 100%;
-    		text-align: center;
-    		margin-top: 30px;
-    		background-color: #F6F6F6;
-    		border: 1px solid;
-    	}
-    	
     	
     </style>
   </head>
@@ -103,17 +90,17 @@
  	<div id="option">
  		<span class="option_title">
  			<a href="#">
+ 				stream
+ 			</a>
+ 		</span>&nbsp;&nbsp;
+ 		<span class="option_title">
+ 			<a href="${pageContext.request.contextPath}/servlet/TaskServlet?method=listTask">
  				作业
  			</a>
  		</span>&nbsp;&nbsp;
  		<span class="option_title">
- 			<a href="#">
+ 			<a href="${pageContext.request.contextPath}/servlet/CoursewareServlet?method=listCourseware">
  				课件
- 			</a>
- 		</span>&nbsp;&nbsp;
- 		<span class="option_title">
- 			<a href="#">
- 				stream
  			</a>
  		</span>&nbsp;&nbsp;
  		<span class="option_title">
@@ -140,28 +127,12 @@
  				<p>要求码:&nbsp;<font color="red">J1fA</font></p>
  			</div>
  		</div>
+ 		<!-- 内容 -->
  		<div id="content_mod2">
- 			<div id="content_mod2_style1">
- 				<a href="${pageContext.request.contextPath}/servlet/TaskServlet?method=addTaskUI&courseId=${course.id}">发布作业</a>&nbsp;<a href="#">发布课件</a>&nbsp;<a href="#">发布公告</a>
- 			</div>
- 			
 			
-				<c:forEach var="task" items="${requestScope.tasks}">
-					<table>
-						<tr>
-							<td>${task.name}</td>
-							<td>
-								<a href="#">进入</a>
-								<a href="#">修改</a>
-								<a href="#">删除</a>
-							</td>
-						</tr>
-					</table>
-					
-				</c:forEach>
-			</div>
+		</div>
  			
- 		</div>
+ 	</div>
 
   	
   </body>

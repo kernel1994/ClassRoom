@@ -125,6 +125,12 @@
     <servlet-name>ServletTestXml</servlet-name>
     <servlet-class>test.junit.ServletTestXml</servlet-class>
   </servlet>
+  <!-- 老师对课件的管理 -->
+  <servlet>
+    <servlet-name>CoursewareServlet</servlet-name>
+    <servlet-class>team.dx.classroom.web.teacher.servlet.CoursewareServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -156,6 +162,10 @@
   <servlet-mapping>
     <servlet-name>ServletTestXml</servlet-name>
     <url-pattern>/servlet/ServletTestXml</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CoursewareServlet</servlet-name>
+    <url-pattern>/servlet/CoursewareServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

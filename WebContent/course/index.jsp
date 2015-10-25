@@ -39,7 +39,7 @@
     <c:choose>
         <c:when test="${not empty requestScope.course.tasks}">
             <ul>
-                <li><a href="javascript:void(0);">${requestScope.course.tasks[0].name}</a></li>
+                <li><a href="doTask.stu?taskId=${requestScope.course.tasks[0].id}">${requestScope.course.tasks[0].name}</a></li>
             </ul>
         </c:when>
         <c:otherwise>
