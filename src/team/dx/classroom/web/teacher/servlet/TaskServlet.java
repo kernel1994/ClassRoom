@@ -79,12 +79,16 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			Task task = WebUtils.request2Bean(request.getParameterMap(),
 					Task.class);
 			task.setId(WebUtils.getRandomUUID());
+			
+			//课程
+			String courseId = (String) request.getSession().getAttribute("courseId");
+			Course course = cs.getCourse(courseId);
 
 			// 上传者
 			User uploader = (User) request.getSession().getAttribute("user");
 
 			// 作业资源对象
-			Resource resource = WebUtils.conver2Resource(task, uploader, path);
+			Resource resource = WebUtils.conver2Resource(task, uploader, course, path);
 			task.setResource(resource);
 
 			/*-------------存取真实的作业--------------*/
@@ -101,7 +105,7 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			ts.addHomeWork(homeWork, desPath, standardPath);
 
 			// 将作业描述插入数据库
-			ts.addTask(task, (String)request.getSession().getAttribute("courseId"));
+			ts.addTask(task, course.getId());
 
 			// 操作成功后返回
 			response.sendRedirect(request.getContextPath()

@@ -28,4 +28,10 @@ public class CoursewareServiceImpl implements CoursewareService {
 
         return coursewares;
     }
+
+	@Override
+	public void addCourseware(Courseware courseware, String courseId) {
+		rDAO.addResource(courseware.getResource());
+		cwDAO.addCourseware(courseware, courseId);
+	}
 }

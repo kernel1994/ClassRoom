@@ -31,11 +31,11 @@ public class CoursewareDAOImpl extends BasicDAO<Courseware> implements Coursewar
 	}
 
 	@Override
-	public void addCourseware(Courseware courseware) {
+	public void addCourseware(Courseware courseware, String courseId) {
 
-		String sql = "INSERT INTO courseware (id, name, description, resource_id) VALUES (?, ? ,?, ?)";
+		String sql = "INSERT INTO courseware (id, name, description, resource_id, course_id) VALUES (?, ? ,?, ?, ?)";
 
-		update(sql, courseware.getId(), courseware.getName(), courseware.getDescription(), courseware.getResource().getId());
+		update(sql, courseware.getId(), courseware.getName(), courseware.getDescription(), courseware.getResource().getId(), courseId);
 	}
 
 }
