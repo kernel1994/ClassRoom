@@ -28,9 +28,11 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 			List<TrueOrFalse> trueOrFalses = homeWork.getTrueOrFalses();
 			List<ShortQuestion> shortQuestions = homeWork.getShortQuestions();
 			
+			int i = 1;
 			if (selects != null && selects.size() != 0) {
 				for (Select select : selects) {
 					Element selectTag = root.addElement( "select" );
+					selectTag.addAttribute( "id", "select" + i++ );
 					selectTag.addAttribute( "answer", select.getAnswer() );
 					selectTag.addElement("title").setText(select.getTitle());
 					selectTag.addElement("A").setText(select.getA());
@@ -41,10 +43,11 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 				}
 			}
 			
-			
+			i = 1;
 			if (trueOrFalses != null && trueOrFalses.size() != 0) {
 				for (TrueOrFalse trueOrFalse : trueOrFalses) {
 					Element trueOrFalseTag = root.addElement( "trueorfalse" );
+					trueOrFalseTag.addAttribute( "id", "trueorfalse" + i++ );
 					trueOrFalseTag.addAttribute( "answer", trueOrFalse.getAnswer());
 					trueOrFalseTag.addElement("title").setText(trueOrFalse.getTitle());
 					trueOrFalseTag.addElement("description").setText(trueOrFalse.getDescription());
@@ -52,10 +55,11 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 				}
 			}
 			
-			
+			i = 1;
 			if (shortQuestions != null && shortQuestions.size() != 0) {
 				for (ShortQuestion shortQuestion : shortQuestions) {
 					Element shortQuestionTag = root.addElement( "shortquestion" );
+					shortQuestionTag.addAttribute( "id", "shortquestion" + i++ );
 					shortQuestionTag.addElement("title").setText(shortQuestion.getTitle());
 					shortQuestionTag.addElement("description").setText(shortQuestion.getDescription());
 				}
@@ -79,7 +83,7 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 			Element root = document.getRootElement();
 
 			/* 选择题 */
-			List<Select> sDms = new ArrayList<>();
+			List<Select> sDms = new ArrayList<Select>();
 			for (Iterator i = root.elementIterator("select"); i.hasNext(); ) {
 				Element select = (Element)i.next();
 
@@ -113,7 +117,7 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 			}
 
 			/* 判断题 */
-			List<TrueOrFalse> tfDms = new ArrayList<>();
+			List<TrueOrFalse> tfDms = new ArrayList<TrueOrFalse>();
 			for (Iterator i = root.elementIterator("trueorfalse"); i.hasNext(); ) {
 				Element trueorfalse = (Element)i.next();
 
@@ -135,7 +139,7 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 			}
 
 			/* 简答题 */
-			List<ShortQuestion> sqDms = new ArrayList<>();
+			List<ShortQuestion> sqDms = new ArrayList<ShortQuestion>();
 			for (Iterator i = root.elementIterator("shortquestion"); i.hasNext(); ) {
 				Element shortquestion = (Element)i.next();
 

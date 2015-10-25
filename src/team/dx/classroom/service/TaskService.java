@@ -14,7 +14,27 @@ public interface TaskService {
      * */
     public List<Task> getCourseTasks(String courseId);
     
+    /* *
+     * 添加作业到数据库
+     *  @param courseId 指定的课程id
+     *  @task 作业的信息
+     * 
+     * */
     void addTask(Task task, String courseId);
     
+    
+    /* *
+     *  添加作业到硬盘(用xml文件保存)
+     *  @param homeWork 作业信息
+     *  @path 作业的的保存路径
+     *  @standardPath 空作业的路径
+     * */
     void addHomeWork(HomeWork homeWork, String path, String standardPath);
+    
+    /* *
+     * 
+     * 
+     * 
+     * */
+    
 }

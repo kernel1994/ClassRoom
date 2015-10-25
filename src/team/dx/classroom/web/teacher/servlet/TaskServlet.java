@@ -1,5 +1,7 @@
 package team.dx.classroom.web.teacher.servlet;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,6 +27,27 @@ public class TaskServlet extends MethodInvokeServlet2 {
 	private TaskService ts = ObjectFactory.getInstance().createObject(
 			TaskService.class);
 
+	public void listTask(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+
+			String courseId = (String) request.getSession().getAttribute("courseId");
+			Course course = cs.getCourse(courseId);
+			request.setAttribute("course", course);
+			
+			//作业
+			List<Task> tasks = ts.getCourseTasks(courseId);
+			request.setAttribute("tasks", tasks);
+			
+
+			request.getRequestDispatcher("/teacher/manager/listtask.jsp").forward(request, response);
+		} catch (Exception e) {
+			request.setAttribute("message", "TaskServlet_addTaskUI未知异常");
+			request.getRequestDispatcher("/message.jsp").forward(request,
+					response);
+		}
+	}
+
 	public void addTaskUI(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
@@ -49,49 +72,47 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			// 得到一个作业资源保存的父路径
 			String path = this.getServletContext().getRealPath(
 					"/resource/task/homework");
-			
+
 			/*------------对作业的描述存取到数据库--------------*/
 			// 作业的描述
 
-			Task task = WebUtils
-					.request2Bean(request.getParameterMap(), Task.class);
+			Task task = WebUtils.request2Bean(request.getParameterMap(),
+					Task.class);
 			task.setId(WebUtils.getRandomUUID());
-			
+
 			// 上传者
 			User uploader = (User) request.getSession().getAttribute("user");
-			
+
 			// 作业资源对象
 			Resource resource = WebUtils.conver2Resource(task, uploader, path);
-
 			task.setResource(resource);
 
 			/*-------------存取真实的作业--------------*/
 			// 封装作业内容
 			HomeWork homeWork = WebUtils.request2HomeWork(request);
-			
-			//得到一个xml作业模板,空内容
+
+			// 得到一个xml作业模板,空内容
 			String standardPath = this.getServletContext().getRealPath(
 					"/resource/task/homework_standard.xml");
-			//作业写入目录
-			String desPath =  resource.getUri();
-			
-			//将作业写进硬盘
+			// 作业写入目录
+			String desPath = resource.getUri();
+
+			// 将作业写进硬盘
 			ts.addHomeWork(homeWork, desPath, standardPath);
-			
-			//将作业描述插入数据库
-			ts.addTask(task, request.getParameter("courseId"));
-			
-			//回写操作成功后的信息
-			request.setAttribute("task", task);
-			response.sendRedirect(request.getContextPath() + "/servlet/TeacherCoreServlet?method=coreIndexUI&id="+request.getParameter("courseId"));
+
+			// 将作业描述插入数据库
+			ts.addTask(task, (String)request.getSession().getAttribute("courseId"));
+
+			// 操作成功后返回
+			response.sendRedirect(request.getContextPath()
+					+ "/servlet/TeacherCoreServlet?method=coreIndexUI&id="
+					+ request.getSession().getAttribute("courseId"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("message", "未知异常!<br/>" + e.getMessage());
-			request.getRequestDispatcher("/message.jsp").forward(request, response);
+			request.getRequestDispatcher("/message.jsp").forward(request,
+					response);
 		}
-		
-		
-		
 
 	}
 

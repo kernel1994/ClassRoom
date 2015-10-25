@@ -97,11 +97,11 @@
   <body style="background: #EEEEEE">
   	<br/>
   	<div style="text-align: right;">
-  		<a href="${pageContext.request.contextPath}/servlet/TeacherCoreServlet?method=coreIndexUI&id=${course.id}">返回</a>
+  		<a href="${pageContext.request.contextPath}/servlet/TaskServlet?method=listTask&courseId=${courseId}">返回</a>
   	</div>
 	    <fieldset style="margin:10px;padding: 2px 30px;" >
 			<legend >编辑作业</legend>
-			<form action="${pageContext.request.contextPath}/servlet/TaskServlet?method=publishTask&courseId=${course.id}" method="post">
+			<form action="${pageContext.request.contextPath}/servlet/TaskServlet?method=publishTask" method="post">
 				<label for="name">主题：</label>
 				<input type="text" name="name" size="50%"><br/>
 	

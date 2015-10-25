@@ -35,7 +35,7 @@ public class HomeWorkServiceImpl implements HomeWorkService {
 
         HomeWork homework = getHomeWork(taskId);
 
-        HashMap<String, String> wrongMap = new HashMap<>();
+        HashMap<String, String> wrongMap = new HashMap<String, String>();
 
         for (Select s : homework.getSelects()) {
             if (!s.getAnswer().equalsIgnoreCase((String)stuAnswer.get(s.getId()))) {
