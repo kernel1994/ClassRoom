@@ -215,6 +215,10 @@ public class StudentServlet extends MethodInvokeServlet {
 		String taskId = map.get("taskId");
 		map.remove("taskId");
 
+		// 添加学生id。用于存入答案文件标识
+		String studentId = getUserId(request, response);
+		map.put("studentId", studentId);
+
 		HashMap<String, String> wrong = hService.checkHomework(taskId, map);
 		String sWrong = gson.toJson(wrong, HashMap.class);
 
