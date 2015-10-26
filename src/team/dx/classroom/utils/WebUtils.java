@@ -14,6 +14,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
 
+import team.dx.classroom.domain.Course;
 import team.dx.classroom.domain.HomeWork;
 import team.dx.classroom.domain.Resource;
 import team.dx.classroom.domain.Select;
@@ -132,11 +133,11 @@ public class WebUtils {
 		return shortQuestions;
 	}
 
-	public static Resource conver2Resource(Task task, User uploader, String path) {
+	public static Resource conver2Resource(Task task, User uploader, Course course, String path) {
 
 		Resource resource = new Resource();
 		resource.setId(getRandomUUID());
-		resource.setName(task.getName() + "_"+ uploader.getId()+".xml");
+		resource.setName(course.getName() + "_" + task.getName() + "_"+ uploader.getId()+".xml");
 		resource.setDescription(task.getDescription());
 		resource.setUploadtime(new Date());
 		

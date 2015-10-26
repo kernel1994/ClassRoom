@@ -12,5 +12,5 @@ public interface CoursewareDAO {
 	
 	public void deleteCourseware(String id);
 	
-	public void addCourseware(Courseware courseware);
+	public void addCourseware(Courseware courseware, String courseId);
 }
