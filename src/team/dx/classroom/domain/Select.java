@@ -1,25 +1,18 @@
 package team.dx.classroom.domain;
 
-import java.io.Serializable;
+public class Select extends Topic {
 
-public class Select implements Serializable{
-
-	private static final long serialVersionUID = 1L;
-
-	private String id;
-	private String title;
 	private String a;
 	private String b;
 	private String c;
 	private String d;
-	private String answer;
-	private String description;
 	
 	public Select() {
 		super();
 	}
 
 	public Select(String id, String title, String a, String b, String c, String d, String answer, String description) {
+		super(id, title, answer, description);
 		this.id = id;
 		this.title = title;
 		this.a = a;
@@ -28,21 +21,6 @@ public class Select implements Serializable{
 		this.d = d;
 		this.answer = answer;
 		this.description = description;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
 	}
 	
 	public String getA() {
@@ -75,19 +53,6 @@ public class Select implements Serializable{
 
 	public void setD(String d) {
 		this.d = d;
-	}
-
-	public String getAnswer() {
-		return answer;
-	}
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	@Override

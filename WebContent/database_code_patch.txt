@@ -1,0 +1,84 @@
+2015-10-8
+use classroom;
+
+ALTER TABLE `classroom`.`user` 
+ADD COLUMN `email` VARCHAR(100) NOT NULL COMMENT '' AFTER `nick`;
+
+ALTER TABLE `classroom`.`user` 
+ADD COLUMN `name` VARCHAR(100) NULL COMMENT '' AFTER `password`,
+ADD COLUMN `gender` VARCHAR(10) NULL COMMENT '' AFTER `name`,
+ADD COLUMN `birthday` DATE NULL COMMENT '' AFTER `gender`,
+ADD COLUMN `address` VARCHAR(255) NULL COMMENT '' AFTER `birthday`,
+ADD COLUMN `description` VARCHAR(255) NULL COMMENT '' AFTER `address`;
+
+DROP TABLE `classroom`.`person`;
+
+
+
+----------------------------------
+2015-10-10-10
+ALTER TABLE `classroom`.`resource` 
+DROP FOREIGN KEY `upload_id_FK`;
+
+ALTER TABLE `classroom`.`resource` 
+DROP INDEX `upload_id_FK` ;
+
+ALTER TABLE `classroom`.`resource` 
+ADD CONSTRAINT `upload_id_FK`
+  FOREIGN KEY (`id`)
+  REFERENCES `classroom`.`user` (`id`);
+
+
+  
+ALTER TABLE `classroom`.`task` 
+DROP COLUMN `score`;
+
+
+
+CREATE TABLE `classroom`.`user_task` (
+  `id` VARCHAR(40) NOT NULL COMMENT '',
+  `user_id` VARCHAR(40) NOT NULL COMMENT '',
+  `task_id` VARCHAR(40) NOT NULL COMMENT '',
+  `score` INT NOT NULL DEFAULT 0 COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  CONSTRAINT `task_id_FK1`
+    FOREIGN KEY (`id`)
+    REFERENCES `classroom`.`task` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `user_id_FK2`
+    FOREIGN KEY (`id`)
+    REFERENCES `classroom`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+ALTER TABLE `classroom`.`studentcourse` 
+RENAME TO  `classroom`.`student_course` ;
+
+
+
+ALTER TABLE `classroom`.`resource` 
+DROP FOREIGN KEY `upload_id_FK`;
+ALTER TABLE `classroom`.`resource` 
+CHANGE COLUMN `upload_id` `uploader_id` VARCHAR(40) NULL DEFAULT NULL COMMENT '' ;
+ALTER TABLE `classroom`.`resource` 
+ADD CONSTRAINT `uploader_id_FK`
+  FOREIGN KEY (`id`)
+  REFERENCES `classroom`.`user` (`id`);
+
+  
+  
+  
+  
+  
+2015-10-11
+ALTER TABLE `classroom`.`review` 
+ADD COLUMN `user_id` VARCHAR(40) NOT NULL COMMENT '' AFTER `id`;
+ALTER TABLE `classroom`.`review` 
+ADD CONSTRAINT `user_id_FK3`
+  FOREIGN KEY (`id`)
+  REFERENCES `classroom`.`user` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+

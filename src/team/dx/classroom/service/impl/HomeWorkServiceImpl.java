@@ -23,6 +23,9 @@ public class HomeWorkServiceImpl implements HomeWorkService {
     private ResourceDAO rDAO = ObjectFactory.getInstance().createObject(ResourceDAO.class);
     private HomeWorkDAO hDAO = ObjectFactory.getInstance().createObject(HomeWorkDAO.class);
 
+    /**
+     * 获得task 所对应的文件URI
+     * */
     private String getResourceURIByTaskId(String taskId) {
 
         String sqlT = "select * from task where id = ?";
@@ -60,7 +63,10 @@ public class HomeWorkServiceImpl implements HomeWorkService {
             e.printStackTrace();
         }
 
-        String studentId = (String) stuAnswer.get("studentId");
+        final String studentId = (String) stuAnswer.get("studentId");
+        /** xml 标签不允许以数字开头，故添加前缀 */
+        final String tagName = "stuId_" + studentId;
+
         // 读取文件成document 对象
         Document document = null;
         Element root = null;
@@ -74,38 +80,25 @@ public class HomeWorkServiceImpl implements HomeWorkService {
         /* 选择题 */
         for (Select s : homework.getSelects()) {
             // 插入学生答案
-            String stuAns = (String) stuAnswer.get(s.getId());
-            Element tag = getElementByAttr(root, "id", s.getId());
-            // xml 标签不允许以数字开头，故添加前缀
-            tag.addElement("stuId_" + studentId).setText(stuAns);
+            insertStudentAnswer(s, stuAnswer, root, tagName);
 
             // 批改
-            if (!s.getAnswer().equalsIgnoreCase((String) stuAnswer.get(s.getId()))) {
-                wrongMap.put(s.getId(), s.getAnswer());
-            }
+            scoreTask(s, stuAnswer, wrongMap);
         }
 
         /* 判断题 */
         for (TrueOrFalse s : homework.getTrueOrFalses()) {
             // 插入学生答案
-            String stuAns = (String) stuAnswer.get(s.getId());
-            Element tag = getElementByAttr(root, "id", s.getId());
-            // xml 标签不允许以数字开头，故添加前缀
-            tag.addElement("stuId_" + studentId).setText(stuAns);
+            insertStudentAnswer(s, stuAnswer, root, tagName);
 
             // 批改
-            if (!s.getAnswer().equalsIgnoreCase((String) stuAnswer.get(s.getId()))) {
-                wrongMap.put(s.getId(), s.getAnswer());
-            }
+            scoreTask(s, stuAnswer, wrongMap);
         }
 
         /* 简答题 */
         for (ShortQuestion s : homework.getShortQuestions()) {
             // 插入学生答案
-            String stuAns = (String) stuAnswer.get(s.getId());
-            Element tag = getElementByAttr(root, "id", s.getId());
-            // xml 标签不允许以数字开头，故添加前缀
-            tag.addElement("stuId_" + studentId).setText(stuAns);
+            insertStudentAnswer(s, stuAnswer, root, tagName);
         }
 
         // 还需要写评分，数据库，写文件
@@ -115,25 +108,41 @@ public class HomeWorkServiceImpl implements HomeWorkService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return wrongMap;
     }
 
     /**
-     * 获取属性type 为val 的节点
+     * 插入学生答案到文件中。已作答则改写
+     * @param s 作业对象
+     * @param stuAnswer 学生的答案
+     * @param root 根节点
+     * @param newTagName 插入的新节点名
      * */
-    public Element getElementByAttr(Element node , String type , String val) {
-        for (Iterator iter = node.elementIterator(); iter.hasNext();) {
-            Element element = (Element) iter.next();
-            Attribute name = element.attribute(type);
-            if (name != null) {
-                String value = name.getValue();
-                if (value != null && val.equals(value))
-                    return element;
-                else
-                    getElementByAttr(element, type, val);
-            }
+    private void insertStudentAnswer(Topic s, Map stuAnswer, Element root, String newTagName) {
+
+        String stuAns = (String) stuAnswer.get(s.getId());
+        Element tag = XmlUtils.getElementByAttr(root, "id", s.getId());
+
+        Element exist = tag.element(newTagName);
+        if (exist != null) {
+            exist.setText(stuAns);
+
+            return;
         }
-        return null;
+
+        tag.addElement(newTagName).setText(stuAns);
+    }
+
+    /**
+     * 评分，并将学生回答错的题找出来. 将结果存储在wrongMap 中
+     * */
+    private void scoreTask(Topic s, Map stuAnswer, HashMap wrongMap) {
+
+        if (!s.getAnswer().equalsIgnoreCase((String) stuAnswer.get(s.getId()))) {
+            wrongMap.put(s.getId(), s.getAnswer());
+        }
+
     }
 
     /**
