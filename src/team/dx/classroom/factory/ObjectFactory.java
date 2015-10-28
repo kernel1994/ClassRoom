@@ -4,9 +4,9 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * ²ÉÓÃ¹¤³ÌÉè¼ÆÄ£Ê½£¬½â¾ö½Ó¿ÚÑÓ³ÙÊµÏÖ
+ * é‡‡ç”¨å·¥ç¨‹è®¾è®¡æ¨¡å¼ï¼Œè§£å†³æ¥å£å»¶è¿Ÿå®ç°
  * 
- * Ê¹ÓÃËµÃ÷UserDAO uDao = DaoFactory.getInstance().createDao(UserDAO.class);
+ * ä½¿ç”¨è¯´æ˜UserDAO uDao = DaoFactory.getInstance().createDao(UserDAO.class);
  * 
  * */
 @SuppressWarnings("all")
@@ -14,7 +14,7 @@ public class ObjectFactory {
 	private static final ObjectFactory instance = new ObjectFactory();
 	private static Properties config = new Properties();
 	
-	//Æô¶¯Ê±¼ÓÔØdao.propertiesÎÄ¼ş½øÈëÄÚ´æ,µÃµ½propertiesÅäÖÃÎÄ¼ş¶ÔÏó
+	//å¯åŠ¨æ—¶åŠ è½½dao.propertiesæ–‡ä»¶è¿›å…¥å†…å­˜,å¾—åˆ°propertiesé…ç½®æ–‡ä»¶å¯¹è±¡
 	static {
 		try {
 			InputStream in = ObjectFactory.class.getClassLoader().getResourceAsStream("team/dx/classroom/factory/object.properties");
@@ -28,7 +28,7 @@ public class ObjectFactory {
 		return instance;
 	}
 	
-	//--------ÊµÏÖ´´Ôì¶ÔÏó·½·¨--------------------
+	//--------å®ç°åˆ›é€ å¯¹è±¡æ–¹æ³•--------------------
 	public <T> T createObject(Class<T> interfaceClass) {
 
 		try {

@@ -23,7 +23,7 @@ import team.dx.classroom.utils.WebUtils;
 import team.dx.classroom.web.servlet.MethodInvokeServlet2;
 
 /**
- * ´¦Àí¶Ô¿Î¼şµÄÂß¼­ÏûÏ¢
+ * å¤„ç†å¯¹è¯¾ä»¶çš„é€»è¾‘æ¶ˆæ¯
  * 
  * */
 public class CoursewareServlet extends MethodInvokeServlet2 {
@@ -43,7 +43,7 @@ public class CoursewareServlet extends MethodInvokeServlet2 {
 			Course course = cs.getCourse(courseId);
 			request.setAttribute("course", course);
 
-			// ¿Î¼ş
+			// è¯¾ä»¶
 			List<Courseware> coursewares = cws.getCoursewares(courseId);
 			request.setAttribute("coursewares", coursewares);
 
@@ -51,7 +51,7 @@ public class CoursewareServlet extends MethodInvokeServlet2 {
 					.forward(request, response);
 		} catch (Exception e) {
 			request.setAttribute("message",
-					"CoursewareServletÎ´ÖªÒì³££º" + e.getMessage());
+					"CoursewareServletæœªçŸ¥å¼‚å¸¸ï¼š" + e.getMessage());
 			request.getRequestDispatcher("/message.jsp").forward(request,
 					response);
 		}
@@ -68,7 +68,7 @@ public class CoursewareServlet extends MethodInvokeServlet2 {
 					"/teacher/course/publishcourseware.jsp").forward(request,
 					response);
 		} catch (Exception e) {
-			request.setAttribute("message", "TaskServlet_addTaskUIÎ´ÖªÒì³£");
+			request.setAttribute("message", "TaskServlet_addTaskUIæœªçŸ¥å¼‚å¸¸");
 			request.getRequestDispatcher("/message.jsp").forward(request,
 					response);
 		}
@@ -80,15 +80,15 @@ public class CoursewareServlet extends MethodInvokeServlet2 {
 		String courseId = (String) request.getSession()
 				.getAttribute("courseId");
 		Course course = cs.getCourse(courseId);
-		// ÉÏ´«Õß
+		// ä¸Šä¼ è€…
 		User uploader = (User) request.getSession().getAttribute("user");
 
 		try {
-			// ¼ì²â±íµ¥ÊÇ·ñÓĞÎÄ¼şÉÏ´«µÄÊôĞÔenctype="multipart/form-data"
+			// æ£€æµ‹è¡¨å•æ˜¯å¦æœ‰æ–‡ä»¶ä¸Šä¼ çš„å±æ€§enctype="multipart/form-data"
 			boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 			if (isMultipart == false) {
-				// ÏÔÊ¾Ê§°ÜÏûÏ¢£¬È»ºóÔÙÌø×ªµ½Ìí¼ÓÒ³Ãæ
-				request.setAttribute("message", "ÕâÊÇÎÄ¼şÉÏ´«");
+				// æ˜¾ç¤ºå¤±è´¥æ¶ˆæ¯ï¼Œç„¶åå†è·³è½¬åˆ°æ·»åŠ é¡µé¢
+				request.setAttribute("message", "è¿™æ˜¯æ–‡ä»¶ä¸Šä¼ ");
 				request.getRequestDispatcher("message").forward(request,
 						response);
 				return;
@@ -108,7 +108,7 @@ public class CoursewareServlet extends MethodInvokeServlet2 {
 			// Parse the request
 			List<FileItem> items = upload.parseRequest(request);
 
-			// ¿Î¼şĞÅÏ¢
+			// è¯¾ä»¶ä¿¡æ¯
 			Courseware courseware = new Courseware();
 			courseware.setId(WebUtils.getRandomUUID());
 			// Process the uploaded items
@@ -122,10 +122,10 @@ public class CoursewareServlet extends MethodInvokeServlet2 {
 
 					item.getInputStream().close();
 				} else {
-					// ´æÈ¡Â·¾¶
+					// å­˜å–è·¯å¾„
 					String storePath = getServletContext().getRealPath(
 							"/resource/resourceware");
-					// ´¦ÀíÉÏ´«£¬²¢·µ»Ø×ÊÔ´·â×°¶ÔÏó
+					// å¤„ç†ä¸Šä¼ ï¼Œå¹¶è¿”å›èµ„æºå°è£…å¯¹è±¡
 
 					Resource resource = processUploadedFile(item, storePath,
 							course, courseware, uploader);
@@ -135,11 +135,11 @@ public class CoursewareServlet extends MethodInvokeServlet2 {
 
 			cws.addCourseware(courseware, courseId);
 
-			request.setAttribute("message", "ÉÏ´«ÎÄ¼ş³É¹¦£¡");
+			request.setAttribute("message", "ä¸Šä¼ æ–‡ä»¶æˆåŠŸï¼");
 			request.getRequestDispatcher("/message.jsp").forward(request,
 					response);
 		} catch (Exception e) {
-			request.setAttribute("message", "Î´ÖªÒì³£: " + e.getMessage());
+			request.setAttribute("message", "æœªçŸ¥å¼‚å¸¸: " + e.getMessage());
 			request.getRequestDispatcher("/message.jsp").forward(request,
 					response);
 		}

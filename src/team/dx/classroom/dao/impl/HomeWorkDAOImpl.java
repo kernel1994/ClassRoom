@@ -20,7 +20,7 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 	@Override
 	public void add(HomeWork homeWork, String path, String standardPath) {
 		try {
-			//µÃµ½Ò»¸öxml£¬½øÐÐ±à¼­
+			//å¾—åˆ°ä¸€ä¸ªxmlï¼Œè¿›è¡Œç¼–è¾‘
 			Document document = XmlUtils.parse(standardPath);
 			Element root = document.getRootElement();
 			
@@ -65,7 +65,7 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 				}
 			}
 			
-			/*----------½«±à¼­ºÃµÄxmlÐ´ÈëÓ²ÅÌ--------*/
+			/*----------å°†ç¼–è¾‘å¥½çš„xmlå†™å…¥ç¡¬ç›˜--------*/
 			XmlUtils.write(document,path);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -82,7 +82,7 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 
 			Element root = document.getRootElement();
 
-			/* Ñ¡ÔñÌâ */
+			/* é€‰æ‹©é¢˜ */
 			List<Select> sDms = new ArrayList<Select>();
 			for (Iterator i = root.elementIterator("select"); i.hasNext(); ) {
 				Element select = (Element)i.next();
@@ -116,7 +116,7 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 				sDms.add(sDm);
 			}
 
-			/* ÅÐ¶ÏÌâ */
+			/* åˆ¤æ–­é¢˜ */
 			List<TrueOrFalse> tfDms = new ArrayList<TrueOrFalse>();
 			for (Iterator i = root.elementIterator("trueorfalse"); i.hasNext(); ) {
 				Element trueorfalse = (Element)i.next();
@@ -138,7 +138,7 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 				tfDms.add(tfDm);
 			}
 
-			/* ¼ò´ðÌâ */
+			/* ç®€ç­”é¢˜ */
 			List<ShortQuestion> sqDms = new ArrayList<ShortQuestion>();
 			for (Iterator i = root.elementIterator("shortquestion"); i.hasNext(); ) {
 				Element shortquestion = (Element)i.next();

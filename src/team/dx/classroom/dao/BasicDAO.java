@@ -14,8 +14,8 @@ import team.dx.classroom.exception.DaoException;
 import team.dx.classroom.utils.JDBCUtils2;
 
 /**
- * ·â×°ÁË»ù±¾µÄ CRUD ·½·¨, ÒÔ¹©×ÓÀà¼Ì³ĞÊ¹ÓÃ µ±Ç° DAO Ö±½ÓÔÚ·½·¨ÖĞ»ñÈ¡Êı¾İ¿âÁ¬½Ó Õû¸öDAO²ÉÈ¡DBUtils½â¾ö·½°¸ ·ºĞÍT: µ±Ç° DAO
- * ´¦ÀíµÄÊµÌåÀàµÄÀàĞÍÊÇÊ²Ã´
+ * å°è£…äº†åŸºæœ¬çš„ CRUD æ–¹æ³•, ä»¥ä¾›å­ç±»ç»§æ‰¿ä½¿ç”¨ å½“å‰ DAO ç›´æ¥åœ¨æ–¹æ³•ä¸­è·å–æ•°æ®åº“è¿æ¥ æ•´ä¸ªDAOé‡‡å–DBUtilsè§£å†³æ–¹æ¡ˆ æ³›å‹T: å½“å‰ DAO
+ * å¤„ç†çš„å®ä½“ç±»çš„ç±»å‹æ˜¯ä»€ä¹ˆ
  * */
 @SuppressWarnings("unchecked")
 public class BasicDAO<T> {
@@ -24,19 +24,19 @@ public class BasicDAO<T> {
 	private Class<T> clazz;
 
 	public BasicDAO() {
-		// »ñµÃ¸¸ÀàµÄ·ºĞÍ²ÎÊıµÄÊµ¼ÊÀàĞÍ(thisÊÇÖ¸µÄÊÇµ±Ç°¶ÔÏóµÄÒıÓÃ, ¶ÔÏóÊÇ×ÓÀàÉú³ÉµÄ¶ÔÏó)
+		// è·å¾—çˆ¶ç±»çš„æ³›å‹å‚æ•°çš„å®é™…ç±»å‹(thisæ˜¯æŒ‡çš„æ˜¯å½“å‰å¯¹è±¡çš„å¼•ç”¨, å¯¹è±¡æ˜¯å­ç±»ç”Ÿæˆçš„å¯¹è±¡)
 
 		/*
-		 * Type: Java ±à³ÌÓïÑÔÖĞËùÓĞÀàĞÍµÄ¹«¹²¸ß¼¶½Ó¿Ú¡£ËüÃÇ°üÀ¨Ô­Ê¼ÀàĞÍ¡¢²ÎÊı»¯ÀàĞÍ¡¢Êı×éÀàĞÍ¡¢ÀàĞÍ±äÁ¿ºÍ»ù±¾ÀàĞÍ¡£
-		 * getSuperClass() »ñµÃ¸ÃÀàµÄ¸¸Àà getGenericSuperclass() »ñµÃ¸ÃÀàµÄ´øÓĞ·ºĞÍµÄ¸¸Àà
+		 * Type: Java ç¼–ç¨‹è¯­è¨€ä¸­æ‰€æœ‰ç±»å‹çš„å…¬å…±é«˜çº§æ¥å£ã€‚å®ƒä»¬åŒ…æ‹¬åŸå§‹ç±»å‹ã€å‚æ•°åŒ–ç±»å‹ã€æ•°ç»„ç±»å‹ã€ç±»å‹å˜é‡å’ŒåŸºæœ¬ç±»å‹ã€‚
+		 * getSuperClass() è·å¾—è¯¥ç±»çš„çˆ¶ç±» getGenericSuperclass() è·å¾—è¯¥ç±»çš„å¸¦æœ‰æ³›å‹çš„çˆ¶ç±»
 		 */
 		Type superClass = getClass().getGenericSuperclass();
 
-		// ParameterizedType ²ÎÊı»¯ÀàĞÍ£¬¼´·ºĞÍ
+		// ParameterizedType å‚æ•°åŒ–ç±»å‹ï¼Œå³æ³›å‹
 		if (superClass instanceof ParameterizedType) {
 			ParameterizedType parameterizedType = (ParameterizedType) superClass;
 
-			// getActualTypeArguments() »ñÈ¡²ÎÊı»¯ÀàĞÍµÄÊı×é£¬·ºĞÍ¿ÉÄÜÓĞ¶à¸ö
+			// getActualTypeArguments() è·å–å‚æ•°åŒ–ç±»å‹çš„æ•°ç»„ï¼Œæ³›å‹å¯èƒ½æœ‰å¤šä¸ª
 			Type[] typeArgs = parameterizedType.getActualTypeArguments();
 
 			if (typeArgs != null && typeArgs.length > 0) {
@@ -48,12 +48,12 @@ public class BasicDAO<T> {
 	}
 
 	/**
-	 * ¸Ã·½·¨·â×°ÁË INSERT/ DELETE/ UPDATE ²Ù×÷
-	 * 
+	 * è¯¥æ–¹æ³•å°è£…äº† INSERT/ DELETE/ UPDATE æ“ä½œ
+	 *
 	 * @param sql
-	 *            SQLÓï¾ä
+	 *            SQLè¯­å¥
 	 * @param args
-	 *            Ìî³äSQLÓï¾äµÄÕ¼Î»·ûµÄÊı¾İ
+	 *            å¡«å……SQLè¯­å¥çš„å ä½ç¬¦çš„æ•°æ®
 	 * */
 	public void update(String sql, Object... args) {
 
@@ -62,18 +62,18 @@ public class BasicDAO<T> {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DaoException("³öÏÖÒì³£ÀàÎª: " + clazz.getSimpleName());
+			throw new DaoException("å‡ºç°å¼‚å¸¸ä¸º: " + clazz.getSimpleName());
 		} 
 	}
 
 	/**
-	 * ·µ»Ø¶ÔÓ¦µÄ T µÄÒ»¸öÊµÀıÀàµÄ¶ÔÏó
-	 * 
+	 * è¿”å›å¯¹åº”çš„ T çš„ä¸€ä¸ªå®ä¾‹ç±»çš„å¯¹è±¡
+	 *
 	 * @param sql
-	 *            SQLÓï¾ä
+	 *            SQLè¯­å¥
 	 * @param args
-	 *            Ìî³äSQLÓï¾äµÄÕ¼Î»·ûµÄÊı¾İ
-	 * @return ¶ÔÓ¦µÄ T µÄÒ»¸öÊµÀıÀàµÄ¶ÔÏó
+	 *            å¡«å……SQLè¯­å¥çš„å ä½ç¬¦çš„æ•°æ®
+	 * @return å¯¹åº”çš„ T çš„ä¸€ä¸ªå®ä¾‹ç±»çš„å¯¹è±¡
 	 * */
 	public T get(String sql, Object... args) {
 
@@ -83,18 +83,18 @@ public class BasicDAO<T> {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DaoException("³öÏÖÒì³£ÀàÎª: " + clazz.getSimpleName());
+			throw new DaoException("å‡ºç°å¼‚å¸¸ç±»ä¸º: " + clazz.getSimpleName());
 		}
 	}
 
 	/**
-	 * ·µ»Ø¶ÔÓ¦µÄ T µÄ¶à¸öÊµÀıÀàµÄ¶ÔÏó×é³ÉµÄList
-	 * 
+	 * è¿”å›å¯¹åº”çš„ T çš„å¤šä¸ªå®ä¾‹ç±»çš„å¯¹è±¡ç»„æˆçš„List
+	 *
 	 * @param sql
-	 *            SQLÓï¾ä
+	 *            SQLè¯­å¥
 	 * @param args
-	 *            Ìî³äSQLÓï¾äµÄÕ¼Î»·ûµÄÊı¾İ
-	 * @return ¶ÔÓ¦µÄ T µÄ¶à¸öÊµÀıÀàµÄ¶ÔÏó×é³ÉµÄList
+	 *            å¡«å……SQLè¯­å¥çš„å ä½ç¬¦çš„æ•°æ®
+	 * @return å¯¹åº”çš„ T çš„å¤šä¸ªå®ä¾‹ç±»çš„å¯¹è±¡ç»„æˆçš„List
 	 * */
 	public List<T> getForList(String sql, Object... args) {
 
@@ -103,18 +103,18 @@ public class BasicDAO<T> {
 						clazz), args);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DaoException("³öÏÖÒì³£ÀàÎª: " + clazz.getSimpleName());
+			throw new DaoException("å‡ºç°å¼‚å¸¸ç±»ä¸º: " + clazz.getSimpleName());
 		}
 	}
 
 	/**
-	 * ·µ»ØÒ»¸ö×Ö¶ÎµÄÖµ. ÀıÈç·µ»ØÒ»Ìõstudent¼ÇÂ¼ÖĞµÄstudent_name
-	 * 
+	 * è¿”å›ä¸€ä¸ªå­—æ®µçš„å€¼. ä¾‹å¦‚è¿”å›ä¸€æ¡studentè®°å½•ä¸­çš„student_name
+	 *
 	 * @param sql
-	 *            SQLÓï¾ä
+	 *            SQLè¯­å¥
 	 * @param args
-	 *            Ìî³äSQLÓï¾äµÄÕ¼Î»·ûµÄÊı¾İ
-	 * @return Ò»Ìõ¼ÇÂ¼ÖĞµÄÒ»¸ö×Ö¶ÎµÄÖµ
+	 *            å¡«å……SQLè¯­å¥çš„å ä½ç¬¦çš„æ•°æ®
+	 * @return ä¸€æ¡è®°å½•ä¸­çš„ä¸€ä¸ªå­—æ®µçš„å€¼
 	 * */
 	public <E> E getTheValue(String sql, Object... args) {
 
@@ -124,7 +124,7 @@ public class BasicDAO<T> {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DaoException("³öÏÖÒì³£ÀàÎª: " + clazz.getSimpleName());
+			throw new DaoException("å‡ºç°å¼‚å¸¸ç±»ä¸º: " + clazz.getSimpleName());
 		}
 	}
 

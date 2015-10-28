@@ -7,16 +7,16 @@ import java.util.List;
 public interface CoursewareService {
 
     /**
-     * »ñµÃÖ¸¶¨¿Î³ÌºÅµÄËùÓĞ¿Î¼şÁĞ±í
-     * @param courseId Ö¸¶¨µÄ¿Î³Ìid
-     * @return ¸Ã¿Î³ÌºÅµÄËùÓĞ×÷ÒµList ¶ÔÏó
+     * è·å¾—æŒ‡å®šè¯¾ç¨‹å·çš„æ‰€æœ‰è¯¾ä»¶åˆ—è¡¨
+     * @param courseId æŒ‡å®šçš„è¯¾ç¨‹id
+     * @return è¯¥è¯¾ç¨‹å·çš„æ‰€æœ‰ä½œä¸šList å¯¹è±¡
      * */
     public List<Courseware> getCoursewares(String courseId);
     
 
     /**
-     * Ìí¼Ó¿Î¼şµÄĞÅÏ¢µ½Êı¾İ¿â
-     * @param courseware ·â×°¿Î³ÌµÄĞÅÏ¢
+     * æ·»åŠ è¯¾ä»¶çš„ä¿¡æ¯åˆ°æ•°æ®åº“
+     * @param courseware å°è£…è¯¾ç¨‹çš„ä¿¡æ¯
      * */
     void addCourseware(Courseware courseware, String courseId);
 }

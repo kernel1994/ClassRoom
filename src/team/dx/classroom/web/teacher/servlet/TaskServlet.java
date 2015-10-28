@@ -17,7 +17,7 @@ import team.dx.classroom.utils.WebUtils;
 import team.dx.classroom.web.servlet.MethodInvokeServlet2;
 
 /* *
- * ¸ºÔğ´¦Àí×÷ÒµµÄÂß¼­¿ØÖÆ
+ * è´Ÿè´£å¤„ç†ä½œä¸šçš„é€»è¾‘æ§åˆ¶
  * */
 public class TaskServlet extends MethodInvokeServlet2 {
 
@@ -35,14 +35,14 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			Course course = cs.getCourse(courseId);
 			request.setAttribute("course", course);
 			
-			//×÷Òµ
+			//ä½œä¸š
 			List<Task> tasks = ts.getCourseTasks(courseId);
 			request.setAttribute("tasks", tasks);
 			
 
 			request.getRequestDispatcher("/teacher/manager/listtask.jsp").forward(request, response);
 		} catch (Exception e) {
-			request.setAttribute("message", "TaskServlet_addTaskUIÎ´ÖªÒì³£");
+			request.setAttribute("message", "TaskServlet_addTaskUIæœªçŸ¥å¼‚å¸¸");
 			request.getRequestDispatcher("/message.jsp").forward(request,
 					response);
 		}
@@ -58,7 +58,7 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			request.getRequestDispatcher("/teacher/course/publishtask.jsp")
 					.forward(request, response);
 		} catch (Exception e) {
-			request.setAttribute("message", "TaskServlet_addTaskUIÎ´ÖªÒì³£");
+			request.setAttribute("message", "TaskServlet_addTaskUIæœªçŸ¥å¼‚å¸¸");
 			request.getRequestDispatcher("/message.jsp").forward(request,
 					response);
 		}
@@ -69,51 +69,51 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			HttpServletResponse response) throws Exception {
 
 		try {
-			// µÃµ½Ò»¸ö×÷Òµ×ÊÔ´±£´æµÄ¸¸Â·¾¶
+			// å¾—åˆ°ä¸€ä¸ªä½œä¸šèµ„æºä¿å­˜çš„çˆ¶è·¯å¾„
 			String path = this.getServletContext().getRealPath(
 					"/resource/task/homework");
 
-			/*------------¶Ô×÷ÒµµÄÃèÊö´æÈ¡µ½Êı¾İ¿â--------------*/
-			// ×÷ÒµµÄÃèÊö
+			/*------------å¯¹ä½œä¸šçš„æè¿°å­˜å–åˆ°æ•°æ®åº“--------------*/
+			// ä½œä¸šçš„æè¿°
 
 			Task task = WebUtils.request2Bean(request.getParameterMap(),
 					Task.class);
 			task.setId(WebUtils.getRandomUUID());
 			
-			//¿Î³Ì
+			//è¯¾ç¨‹
 			String courseId = (String) request.getSession().getAttribute("courseId");
 			Course course = cs.getCourse(courseId);
 
-			// ÉÏ´«Õß
+			// ä¸Šä¼ è€…
 			User uploader = (User) request.getSession().getAttribute("user");
 
-			// ×÷Òµ×ÊÔ´¶ÔÏó
+			// ä½œä¸šèµ„æºå¯¹è±¡
 			Resource resource = WebUtils.conver2Resource(task, uploader, course, path);
 			task.setResource(resource);
 
-			/*-------------´æÈ¡ÕæÊµµÄ×÷Òµ--------------*/
-			// ·â×°×÷ÒµÄÚÈİ
+			/*-------------å­˜å–çœŸå®çš„ä½œä¸š--------------*/
+			// å°è£…ä½œä¸šå†…å®¹
 			HomeWork homeWork = WebUtils.request2HomeWork(request);
 
-			// µÃµ½Ò»¸öxml×÷ÒµÄ£°å,¿ÕÄÚÈİ
+			// å¾—åˆ°ä¸€ä¸ªxmlä½œä¸šæ¨¡æ¿,ç©ºå†…å®¹
 			String standardPath = this.getServletContext().getRealPath(
 					"/resource/task/homework_standard.xml");
-			// ×÷ÒµĞ´ÈëÄ¿Â¼
+			// ä½œä¸šå†™å…¥ç›®å½•
 			String desPath = resource.getUri();
 
-			// ½«×÷ÒµĞ´½øÓ²ÅÌ
+			// å°†ä½œä¸šå†™è¿›ç¡¬ç›˜
 			ts.addHomeWork(homeWork, desPath, standardPath);
 
-			// ½«×÷ÒµÃèÊö²åÈëÊı¾İ¿â
+			// å°†ä½œä¸šæè¿°æ’å…¥æ•°æ®åº“
 			ts.addTask(task, course.getId());
 
-			// ²Ù×÷³É¹¦ºó·µ»Ø
+			// æ“ä½œæˆåŠŸåè¿”å›
 			response.sendRedirect(request.getContextPath()
 					+ "/servlet/TeacherCoreServlet?method=coreIndexUI&id="
 					+ request.getSession().getAttribute("courseId"));
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("message", "Î´ÖªÒì³£!<br/>" + e.getMessage());
+			request.setAttribute("message", "æœªçŸ¥å¼‚å¸¸!<br/>" + e.getMessage());
 			request.getRequestDispatcher("/message.jsp").forward(request,
 					response);
 		}

@@ -13,7 +13,7 @@ import team.dx.classroom.service.TaskService;
 import team.dx.classroom.web.servlet.MethodInvokeServlet2;
 
 /* *
- * ������ѧ�����л������߼�
+ * 负责与学生进行互动的逻辑
  * 
  * */
 public class TeacherCoreServlet extends MethodInvokeServlet2 {
@@ -22,27 +22,27 @@ public class TeacherCoreServlet extends MethodInvokeServlet2 {
 	private CourseService cs = ObjectFactory.getInstance().createObject(CourseService.class);
 	private TaskService ts = ObjectFactory.getInstance().createObject(TaskService.class);
 	
-	//��ʾ��ʦ�����γ̵�������
+	//显示老师操作课程的主界面
 	public void coreIndexUI(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		try {
-			/*---------------����һ�ž���Ŀγ�-----------------------*/
+			/*---------------进入一门具体的课程-----------------------*/
 			String courseId = request.getParameter("id");
 			request.getSession().setAttribute("courseId", courseId);
 			
 			Course course = cs.getCourse(courseId);
 			request.setAttribute("course", course);
 			
-			//��װҳ������Ҫ������
-			//��ҵ
+			//封装页面所需要的数据
+			//作业
 			List<Task> tasks = ts.getCourseTasks(courseId);
 			request.setAttribute("tasks", tasks);
 			
-			//��ʾҳ��
+			//显示页面
 			
 			request.getRequestDispatcher("/teacher/manager/managerindex.jsp").forward(request, response);
 		} catch (Exception e) {
-			request.setAttribute("message", "���ִ���: " + e.getMessage());
+			request.setAttribute("message", "出现错误: " + e.getMessage());
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 		}
 		

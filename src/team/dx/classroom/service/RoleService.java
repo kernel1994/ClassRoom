@@ -6,19 +6,19 @@ import team.dx.classroom.domain.Role;
 
 public interface RoleService {
 	/**
-	 * µÃµ½ËùÓĞ½ÇÉ«
+	 * å¾—åˆ°æ‰€æœ‰è§’è‰²
 	 *
 	 * */
 	List<Role> getAllRoles();
 	
 	/**
-	 * µÃµ½Ìí¼Ó½ÇÉ«
+	 * å¾—åˆ°æ·»åŠ è§’è‰²
 	 * 
 	 * */
 	void addRole(Role role);
 	/**
-	 * ÓÃÓÚÓÃ»§×¢²áÖĞ£¬ÓÃ»§·ÖÅä½ÇÉ«
-	 * @param role_id roleÖ÷¼ü
+	 * ç”¨äºç”¨æˆ·æ³¨å†Œä¸­ï¼Œç”¨æˆ·åˆ†é…è§’è‰²
+	 * @param role_id roleä¸»é”®
 	 * */
 	Role getRole(String role_id);
 

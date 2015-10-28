@@ -31,7 +31,7 @@ public class WebUtils {
 		try {
 			T bean = clazz.newInstance();
 
-			// Date²»ÊôÓÚ8ÖÖ»ù±¾ÀàĞÍ£¬ĞèÒª×Ô¼ºĞ´×ª»»Æ÷
+			// Dateä¸å±äº8ç§åŸºæœ¬ç±»å‹ï¼Œéœ€è¦è‡ªå·±å†™è½¬æ¢å™¨
 			ConvertUtils.register(new Converter() {
 				@Override
 				public Object convert(Class type, Object value) {
@@ -51,7 +51,7 @@ public class WebUtils {
 				}
 			}, Date.class);
 
-			// ½²parameterMapÖĞÊı¾İ--->¸´ÖÆµ½beanÖĞ
+			// è®²parameterMapä¸­æ•°æ®--->å¤åˆ¶åˆ°beanä¸­
 			BeanUtils.populate(bean, parameterMap);
 
 			return bean;
@@ -61,7 +61,7 @@ public class WebUtils {
 
 	}
 
-	// ´¦ÀíÌá½»Êı¾İÖĞÄêÔÂÈÕÈı¸ö±äÁ¿£¬×é×°³ÉÍ¬userÓòÏàÍ¬µÄ±äÁ¿
+	// å¤„ç†æäº¤æ•°æ®ä¸­å¹´æœˆæ—¥ä¸‰ä¸ªå˜é‡ï¼Œç»„è£…æˆåŒuseråŸŸç›¸åŒçš„å˜é‡
 	public static Date birthdayUtils(Map<?, ?> parameterMap) {
 		String year = ((String[]) parameterMap.get("year"))[0];
 		String month = ((String[]) parameterMap.get("month"))[0];
@@ -147,13 +147,13 @@ public class WebUtils {
 		return resource;
 	}
 
-	// ·â×°ÔÚÏß±à¼­×÷ÒµĞÅÏ¢
+	// å°è£…åœ¨çº¿ç¼–è¾‘ä½œä¸šä¿¡æ¯
 	public static HomeWork request2HomeWork(HttpServletRequest request) {
 
-		// ÕæÊµµÄ×÷ÒµÊı¾İ
+		// çœŸå®çš„ä½œä¸šæ•°æ®
 		HomeWork homeWork = new HomeWork();
 
-		// Ñ¡ÔñÌâ
+		// é€‰æ‹©é¢˜
 		String[] stitles = request.getParameterValues("stitle");
 		String[] sanswersA = request.getParameterValues("sA");
 		String[] sanswersB = request.getParameterValues("sB");
@@ -165,7 +165,7 @@ public class WebUtils {
 				sanswersB, sanswersC, sanswersD, sdescriptions, sanswers);
 		homeWork.setSelects(selects);
 
-		// ÅĞ¶ÏÌâ
+		// åˆ¤æ–­é¢˜
 		String[] ttitles = request.getParameterValues("ttitle");
 		String[] tanswers = request.getParameterValues("tanswer");
 		String[] tdescriptions = request.getParameterValues("tdescription");
@@ -173,7 +173,7 @@ public class WebUtils {
 				tanswers, tdescriptions);
 		homeWork.setTrueOrFalses(trueOrFalses);
 
-		// ¼ò´ğÌâ
+		// ç®€ç­”é¢˜
 		String[] qtitles = request.getParameterValues("qtitle");
 		String[] qdescriptions = request.getParameterValues("qdescription");
 		List<ShortQuestion> shortQuestions = conver2ShortQuestion(

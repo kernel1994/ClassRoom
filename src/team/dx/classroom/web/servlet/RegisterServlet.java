@@ -16,7 +16,7 @@ import team.dx.classroom.service.RoleService;
 import team.dx.classroom.utils.WebUtils;
 
 /* *
- * ´¦Àí×¢²áÂß¼­ĞÅÏ¢
+ * å¤„ç†æ³¨å†Œé€»è¾‘ä¿¡æ¯
  * 
  * */
 public class RegisterServlet extends HttpServlet {
@@ -31,35 +31,35 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-			// ·â×°user×¢²áĞÅÏ¢
+			// å°è£…useræ³¨å†Œä¿¡æ¯
 			User user = WebUtils.request2Bean(request.getParameterMap(),
 					User.class);
 			user.setId(WebUtils.getRandomUUID());
 			user.setBirthday(WebUtils.birthdayUtils(request.getParameterMap()));
 
-			// ¼ì²âuserÊı¾İºÏ·¨ĞÔ----´ıÊµÏÖ
+			// æ£€æµ‹useræ•°æ®åˆæ³•æ€§----å¾…å®ç°
 
-			/*--------------¶ÁÈ¡ÅäÖÃÎÄ¼şÖĞµÄ²ÎÊı-----------------*/
+			/*--------------è¯»å–é…ç½®æ–‡ä»¶ä¸­çš„å‚æ•°-----------------*/
 			String role_id = this.getServletConfig()
 					.getInitParameter("role_id");
 
-			// ¸øÓÃ»§Ìí¼Ó½ÇÉ«
+			// ç»™ç”¨æˆ·æ·»åŠ è§’è‰²
 			Role role = rs.getRole(role_id);
 
 			user.setRole(role);
 			pbs.addUser(user);
 
-			// ×¢²á³É¹¦ºó½«user·ÅÈësessionÖĞ
+			// æ³¨å†ŒæˆåŠŸåå°†useræ”¾å…¥sessionä¸­
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 
-			// ÏÔÊ¾×¢²á³É¹¦£¬È»ºóÔÙÌø×ªµ½Ö÷Ò³Ãæ
+			// æ˜¾ç¤ºæ³¨å†ŒæˆåŠŸï¼Œç„¶åå†è·³è½¬åˆ°ä¸»é¡µé¢
 			response.setHeader("refresh", "3;url=" + request.getContextPath()
 					+ "/student/index.jsp");
-			request.setAttribute("message", "×¢²á³É¹¦");
+			request.setAttribute("message", "æ³¨å†ŒæˆåŠŸ");
 
 		} catch (Exception e) {
-			request.setAttribute("message", "×¢²áÊ§°Ü");
+			request.setAttribute("message", "æ³¨å†Œå¤±è´¥");
 		}
 		request.getRequestDispatcher("/message.jsp").forward(request, response);
 	}

@@ -7,10 +7,10 @@ import team.dx.classroom.domain.Privilege;
 public interface PrivilegeDAO {
 
 	/**
-	 * ·µ»Øprivilege¶ÔÏó×é³ÉµÄList
-	 * @param condition StringÀàĞÍµÄ²éÑ¯Ìõ¼ş£¬¾ÍÊÇ¶ÔÓ¦µÄsqlÓï¾ä
-	 * @param args ÈÎÒâ¶à¸öÈÎÒâÀàĞÍµÄ²éÑ¯²ÎÊı
-	 * @return privilege¶ÔÏó×é³ÉµÄList
+	 * è¿”å›privilegeå¯¹è±¡ç»„æˆçš„List
+	 * @param condition Stringç±»å‹çš„æŸ¥è¯¢æ¡ä»¶ï¼Œå°±æ˜¯å¯¹åº”çš„sqlè¯­å¥
+	 * @param args ä»»æ„å¤šä¸ªä»»æ„ç±»å‹çš„æŸ¥è¯¢å‚æ•°
+	 * @return privilegeå¯¹è±¡ç»„æˆçš„List
 	 * */
 	public List<Privilege> getPrivileges(String condition, Object ... args);
 	

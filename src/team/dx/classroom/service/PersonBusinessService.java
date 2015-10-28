@@ -7,24 +7,24 @@ public interface PersonBusinessService {
 	boolean findUserIsExist(String nick);
 	
 	/**
-	 * ÓÃÓÚÓÃ»§µÇÂ¼£¬Í¨¹ıÓÊÏäºÍÃÜÂëÀ´Êı¾İ¿â²éÑ¯¶ÔÓ¦µÄÓÃ»§
-	 * @param email ÓÃ»§µÇÂ¼µÄÓÊÏä
-	 * @param password ÃÜÂë
-	 * @return Èç¹û³É¹¦·µ»ØUser ¶ÔÏó£¬·ñÔò·µ»Ønull
+	 * ç”¨äºç”¨æˆ·ç™»å½•ï¼Œé€šè¿‡é‚®ç®±å’Œå¯†ç æ¥æ•°æ®åº“æŸ¥è¯¢å¯¹åº”çš„ç”¨æˆ·
+	 * @param email ç”¨æˆ·ç™»å½•çš„é‚®ç®±
+	 * @param password å¯†ç 
+	 * @return å¦‚æœæˆåŠŸè¿”å›User å¯¹è±¡ï¼Œå¦åˆ™è¿”å›null
 	 * */
 	User getUser(String email, String password);
 	
 
 	/**
-	 * ÓÃÓÚ²éÕÒÓÃ»§
-	 * @param id ÓÃ»§Ö÷¼ü
-	 * @return Èç¹û³É¹¦·µ»ØUser ¶ÔÏó£¬·ñÔò·µ»Ønull
+	 * ç”¨äºæŸ¥æ‰¾ç”¨æˆ·
+	 * @param id ç”¨æˆ·ä¸»é”®
+	 * @return å¦‚æœæˆåŠŸè¿”å›User å¯¹è±¡ï¼Œå¦åˆ™è¿”å›null
 	 * */
 	User getUser(String id);
 
 	/**
-	 * ÓÃÓÚÓÃ»§×¢²á£¬½«ÓÃ»§ĞÅÏ¢·â×°³Éuser
-	 * @param user userÖĞ×°ÓĞ½ÇÉ«roleĞÅÏ¢
+	 * ç”¨äºç”¨æˆ·æ³¨å†Œï¼Œå°†ç”¨æˆ·ä¿¡æ¯å°è£…æˆuser
+	 * @param user userä¸­è£…æœ‰è§’è‰²roleä¿¡æ¯
 	 * */
 	void addUser(User user);
 	

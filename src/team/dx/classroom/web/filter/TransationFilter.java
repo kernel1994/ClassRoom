@@ -12,8 +12,8 @@ import javax.servlet.ServletResponse;
 import team.dx.classroom.utils.JDBCUtils2;
 
 /**
- * ¹¦ÄÜ£º´¦ÀíÊı¾İ¿âÊÂÎñ
- * ÊµÏÖ: Ö´ĞĞservletÖ®Ç°¿ªÆôÊÂÎñ£¬Ö´ĞĞÍêºóÌá½»²¢¹Ø±ÕÊÂÎñ
+ * åŠŸèƒ½ï¼šå¤„ç†æ•°æ®åº“äº‹åŠ¡
+ * å®ç°: æ‰§è¡Œservletä¹‹å‰å¼€å¯äº‹åŠ¡ï¼Œæ‰§è¡Œå®Œåæäº¤å¹¶å…³é—­äº‹åŠ¡
  * */
 public class TransationFilter implements Filter {
 
@@ -26,12 +26,12 @@ public class TransationFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		
 		try {
-			//À¹½ØÏÂÀ´ºó£º»ñÈ¡Á¬½Ó¡¢¿ªÆôÊÂÎñ¡¢²¢°ÑÁ¬½Ó°ó¶¨µ½µ±Ç°Ïß³Ì
+			//æ‹¦æˆªä¸‹æ¥åï¼šè·å–è¿æ¥ã€å¼€å¯äº‹åŠ¡ã€å¹¶æŠŠè¿æ¥ç»‘å®šåˆ°å½“å‰çº¿ç¨‹
 			
 
 			chain.doFilter(request, response);
 			
-			//»ñÈ¡µ±Ç°Ïß³ÌÉÏ°ó¶¨µÄÁ¬½Ó£¬Ìá½»ÊÂÎñ£¬²¢¹Ø±ÕÁ´½Ó£¬ÊÍ·ÅÁ¬½ÓÓëµ±Ç°Ïß³ÌµÄ°ó¶¨
+			//è·å–å½“å‰çº¿ç¨‹ä¸Šç»‘å®šçš„è¿æ¥ï¼Œæäº¤äº‹åŠ¡ï¼Œå¹¶å…³é—­é“¾æ¥ï¼Œé‡Šæ”¾è¿æ¥ä¸å½“å‰çº¿ç¨‹çš„ç»‘å®š
 			JDBCUtils2.commitTransaction();
 
 		} catch (Exception e) {

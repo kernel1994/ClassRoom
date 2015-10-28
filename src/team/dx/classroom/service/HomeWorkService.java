@@ -8,17 +8,17 @@ import java.util.Map;
 public interface HomeWorkService {
 
     /**
-     * ¸ù¾İtaskId ¶ÁÈ¡ÎÄ¼şÉú³ÉHomework
-     * @param taskId ×÷Òµid
-     * @return ½âÎö³öÀ´µÄHomework ¶ÔÏó
+     * æ ¹æ®taskId è¯»å–æ–‡ä»¶ç”ŸæˆHomework
+     * @param taskId ä½œä¸šid
+     * @return è§£æå‡ºæ¥çš„Homework å¯¹è±¡
      * */
     public HomeWork getHomeWork(String taskId);
 
     /**
-     * ¼ì²éÑ§Éú×öµÄÌâ£¬²¢·µ»ØÆä×ö´íµÄÌâµÄMap¶ÔÏó¡£²¢¼Æ»ı·ÖĞ´ÈëÊı¾İ¿â£¬°ÑÑ§ÉúµÄ´ğ°¸´æ´¢
-     * @param taskId ×÷Òµid£¬»ñÈ¡±ê×¼´ğ°¸
-     * @param stuAnswer Ñ§ÉúµÄ´ğ°¸Map ¶ÔÏó
-     * @return Ñ§Éú×ö´íµÄÌâ
+     * æ£€æŸ¥å­¦ç”Ÿåšçš„é¢˜ï¼Œå¹¶è¿”å›å…¶åšé”™çš„é¢˜çš„Mapå¯¹è±¡ã€‚å¹¶è®¡ç§¯åˆ†å†™å…¥æ•°æ®åº“ï¼ŒæŠŠå­¦ç”Ÿçš„ç­”æ¡ˆå­˜å‚¨
+     * @param taskId ä½œä¸šidï¼Œè·å–æ ‡å‡†ç­”æ¡ˆ
+     * @param stuAnswer å­¦ç”Ÿçš„ç­”æ¡ˆMap å¯¹è±¡
+     * @return å­¦ç”Ÿåšé”™çš„é¢˜
      * */
     public HashMap<String, String> checkHomework(String taskId, Map stuAnswer);
 }

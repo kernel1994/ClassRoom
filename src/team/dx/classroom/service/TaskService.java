@@ -8,26 +8,26 @@ import team.dx.classroom.domain.Task;
 public interface TaskService {
 
     /**
-     * »ñµÃÖ¸¶¨¿Î³ÌºÅµÄËùÓĞ¿Î¼şÁĞ±í
-     * @param courseId Ö¸¶¨µÄ¿Î³Ìid
-     * @return ¸Ã¿Î³ÌºÅµÄËùÓĞ¿Î¼şList ¶ÔÏó
+     * è·å¾—æŒ‡å®šè¯¾ç¨‹å·çš„æ‰€æœ‰è¯¾ä»¶åˆ—è¡¨
+     * @param courseId æŒ‡å®šçš„è¯¾ç¨‹id
+     * @return è¯¥è¯¾ç¨‹å·çš„æ‰€æœ‰è¯¾ä»¶List å¯¹è±¡
      * */
     public List<Task> getCourseTasks(String courseId);
     
-    /* *
-     * Ìí¼Ó×÷Òµµ½Êı¾İ¿â
-     *  @param courseId Ö¸¶¨µÄ¿Î³Ìid
-     *  @task ×÷ÒµµÄĞÅÏ¢
+    /***
+     * æ·»åŠ ä½œä¸šåˆ°æ•°æ®åº“
+     *  @param courseId æŒ‡å®šçš„è¯¾ç¨‹id
+     *  @task ä½œä¸šçš„ä¿¡æ¯
      * 
      * */
     void addTask(Task task, String courseId);
     
     
-    /* *
-     *  Ìí¼Ó×÷Òµµ½Ó²ÅÌ(ÓÃxmlÎÄ¼ş±£´æ)
-     *  @param homeWork ×÷ÒµĞÅÏ¢
-     *  @path ×÷ÒµµÄµÄ±£´æÂ·¾¶
-     *  @standardPath ¿Õ×÷ÒµµÄÂ·¾¶
+    /***
+     *  æ·»åŠ ä½œä¸šåˆ°ç¡¬ç›˜(ç”¨xmlæ–‡ä»¶ä¿å­˜)
+     *  @param homeWork ä½œä¸šä¿¡æ¯
+     *  @path ä½œä¸šçš„çš„ä¿å­˜è·¯å¾„
+     *  @standardPath ç©ºä½œä¸šçš„è·¯å¾„
      * */
     void addHomeWork(HomeWork homeWork, String path, String standardPath);
     

@@ -8,7 +8,7 @@ public class Courseware {
 	private String id;
 	private String name;
 	private String description;
-	/** Õâ¸öÊôĞÔ¿ÉÒÔÖ±½Ó´ÓÊı¾İ¿âÖĞ²é³ö²¢¸³Öµ£¬Ìí¼ÓÕâ¸öÊôĞÔ¿ÉÒÔ¼«´óµØ·½±ã¶Ôresource ¶ÔÏóµÄ²éÑ¯¹¹Ôì */
+	/** è¿™ä¸ªå±æ€§å¯ä»¥ç›´æ¥ä»æ•°æ®åº“ä¸­æŸ¥å‡ºå¹¶èµ‹å€¼ï¼Œæ·»åŠ è¿™ä¸ªå±æ€§å¯ä»¥æå¤§åœ°æ–¹ä¾¿å¯¹resource å¯¹è±¡çš„æŸ¥è¯¢æ„é€  */
 	private String resource_id;
 	private Resource resource;
 	private List<Review> list = new ArrayList<Review>();

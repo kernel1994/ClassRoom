@@ -8,30 +8,30 @@ import javax.sql.DataSource;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
- * JDBC ²Ù×÷µÄ¹¤¾ßÀà
+ * JDBC æ“ä½œçš„å·¥å…·ç±»
  * */
 public class JDBCUtils2 {
 	
-	// Ö»ĞèÒªÒ»·İÊı¾İÔ´
+	// åªéœ€è¦ä¸€ä»½æ•°æ®æº
 	private static DataSource dataSource = null;
 	/*
 	 * ThreadLocal
-	 * ¸ÃÀàÌá¹©ÁËÏß³Ì¾Ö²¿ (thread-local) ±äÁ¿,¸Ã±äÁ¿µÄÌØµãÎªget()·½·¨Ã»ÓĞ²ÎÊı£¬set()·½·¨Ã»ÓĞkey
-	 * Ã¿¸öÏß³ÌÎ¨Ò»µÄ¾Ö²¿±êÊ¶·û
-	 * ÉúÃüÖÜÆÚËæÏß³Ì¿ªÊ¼¶ø¿ªÊ¼£¬½áÊø¶ø½áÊø
+	 * è¯¥ç±»æä¾›äº†çº¿ç¨‹å±€éƒ¨ (thread-local) å˜é‡,è¯¥å˜é‡çš„ç‰¹ç‚¹ä¸ºget()æ–¹æ³•æ²¡æœ‰å‚æ•°ï¼Œset()æ–¹æ³•æ²¡æœ‰key
+	 * æ¯ä¸ªçº¿ç¨‹å”¯ä¸€çš„å±€éƒ¨æ ‡è¯†ç¬¦
+	 * ç”Ÿå‘½å‘¨æœŸéšçº¿ç¨‹å¼€å§‹è€Œå¼€å§‹ï¼Œç»“æŸè€Œç»“æŸ
 	 * 
 	 * */
 	private static ThreadLocal<Connection> tlLocal = new ThreadLocal<Connection>();
 	
-	// ¾²Ì¬´úÂë¿éÖ»ÄÜ±»´´½¨Ò»´Î
-	// ÔÚ c3p0-config.xml ÖĞÅäÖÃµÄ configName
+	// é™æ€ä»£ç å—åªèƒ½è¢«åˆ›å»ºä¸€æ¬¡
+	// åœ¨ c3p0-config.xml ä¸­é…ç½®çš„ configName
 	static {
 		dataSource = new ComboPooledDataSource("mysql");
 	}
 	
 	/**
-	 * ·µ»ØÊı¾İÔ´µÄÒ»¸ö Connection ¶ÔÏó
-	 * @return Êı¾İÔ´µÄÒ»¸ö Connection ¶ÔÏó
+	 * è¿”å›æ•°æ®æºçš„ä¸€ä¸ª Connection å¯¹è±¡
+	 * @return æ•°æ®æºçš„ä¸€ä¸ª Connection å¯¹è±¡
 	 * @throws SQLException 
 	 * */
 	public static Connection getConnection() {
@@ -53,7 +53,7 @@ public class JDBCUtils2 {
 	}
 	
 	/**
-	 * Ìá½» Connection µÄÁ´½Ó
+	 * æäº¤ Connection çš„é“¾æ¥
 	 * */
 	public static void commitTransaction(){
 		try{
@@ -68,19 +68,19 @@ public class JDBCUtils2 {
 	
 	public static void startTransaction() throws SQLException {
 		Connection conn = tlLocal.get();
-		// µ±Ç°Ïß³ÌÉÏÊÇ·ñÒÑ¾­´æÔÚÁ¬½Ó
+		// å½“å‰çº¿ç¨‹ä¸Šæ˜¯å¦å·²ç»å­˜åœ¨è¿æ¥
 		if (conn == null) {
 			conn = dataSource.getConnection();
 		}
-		// ¿ªÆôÊÂÎñ
+		// å¼€å¯äº‹åŠ¡
 		conn.setAutoCommit(false);
-		// ·Åµ½µ±Ç°Ïß³ÌÉÏ
+		// æ”¾åˆ°å½“å‰çº¿ç¨‹ä¸Š
 		tlLocal.set(conn);
 	}
 
 	
 	/**
-	 * ÊÍ·Å Connection µÄÁ¬½Ó
+	 * é‡Šæ”¾ Connection çš„è¿æ¥
 	 * */
 	public static void closeConnection() {
 		

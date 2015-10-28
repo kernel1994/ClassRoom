@@ -20,11 +20,11 @@ import java.util.Map;
 
 public class StudentServlet extends MethodInvokeServlet {
 	private static final long serialVersionUID = 1L;
-	
-	CourseService cService = ObjectFactory.getInstance().createObject(CourseService.class);
-	TaskService tService = ObjectFactory.getInstance().createObject(TaskService.class);
-	CoursewareService cwService = ObjectFactory.getInstance().createObject(CoursewareService.class);
-	HomeWorkService hService = ObjectFactory.getInstance().createObject(HomeWorkService.class);
+
+	private CourseService cService = ObjectFactory.getInstance().createObject(CourseService.class);
+	private TaskService tService = ObjectFactory.getInstance().createObject(TaskService.class);
+	private CoursewareService cwService = ObjectFactory.getInstance().createObject(CoursewareService.class);
+	private HomeWorkService hService = ObjectFactory.getInstance().createObject(HomeWorkService.class);
 
 	@Override
 	public int getSuffixLen() {
@@ -33,8 +33,8 @@ public class StudentServlet extends MethodInvokeServlet {
 	}
 
 	/**
-	 * ´Ósession ÖĞ»ñÈ¡ÓÃ»§id
-	 * Èç¹û²»ÄÜ»ñÈ¡Ôò·µ»ØµÇÂ¼Ò³Ãæ(½«À´ÓÃfilter ÊµÏÖ)
+	 * ä»session ä¸­è·å–ç”¨æˆ·id
+	 * å¦‚æœä¸èƒ½è·å–åˆ™è¿”å›ç™»å½•é¡µé¢(å°†æ¥ç”¨filter å®ç°)
 	 * */
 	private String getUserId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -80,12 +80,12 @@ public class StudentServlet extends MethodInvokeServlet {
 	}
 	
 	/**
-	 * Ñ¡Ôñ¿Î³ÌµÄAjax ·½·¨
+	 * é€‰æ‹©è¯¾ç¨‹çš„Ajax æ–¹æ³•
 	 * */
 	public void chooseCourseAjax(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			/* ½ûÓÃ»º´æ */
+			/* ç¦ç”¨ç¼“å­˜ */
 			response.setHeader("Cache-Control", "no-store");
 			response.setHeader("Pragma", "no-cache");
 			response.setDateHeader("Expires", -1);
@@ -108,11 +108,11 @@ public class StudentServlet extends MethodInvokeServlet {
 	}
 	
 	/**
-	 * ÍËÑ¡¿Î³ÌµÄAjax ·½·¨
+	 * é€€é€‰è¯¾ç¨‹çš„Ajax æ–¹æ³•
 	 * */
 	public void unchooseCourseAjax(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/* ½ûÓÃ»º´æ */
+		/* ç¦ç”¨ç¼“å­˜ */
 		response.setHeader("Cache-Control", "no-store");
 		response.setHeader("Pragma", "no-cache");
 		response.setDateHeader("Expires", 0);
@@ -149,7 +149,7 @@ public class StudentServlet extends MethodInvokeServlet {
 		request.getRequestDispatcher("/student/index.jsp").forward(request, response);
 	}
 
-	/* ÏÂÃæÈı¸ö·½·¨Ã²ËÆ²»Ó¦¸ÃĞ´ÔÚÕâ£¿ÖµµÃ¿¼ÂÇ */
+	/* ä¸‹é¢ä¸‰ä¸ªæ–¹æ³•è²Œä¼¼ä¸åº”è¯¥å†™åœ¨è¿™ï¼Ÿå€¼å¾—è€ƒè™‘ */
 	public void viewCourseIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String courseId = request.getParameter("courseId");
@@ -194,7 +194,7 @@ public class StudentServlet extends MethodInvokeServlet {
 		request.getRequestDispatcher("/student/tasks.jsp").forward(request, response);
 	}
 
-	/* Ñ§Éú×ö×÷Òµ */
+	/* å­¦ç”Ÿåšä½œä¸š */
 	public void doTask(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String taskId = request.getParameter("taskId");
@@ -205,7 +205,7 @@ public class StudentServlet extends MethodInvokeServlet {
 		request.getRequestDispatcher("/student/task.jsp").forward(request, response);
 	}
 
-	/* Ñ§ÉúÌá½»×÷Òµ */
+	/* å­¦ç”Ÿæäº¤ä½œä¸š */
 	public  void submitTask(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String data = request.getParameter("data");
@@ -213,9 +213,8 @@ public class StudentServlet extends MethodInvokeServlet {
 		HashMap<String, String> map = gson.fromJson(data, HashMap.class);
 
 		String taskId = map.get("taskId");
-		map.remove("taskId");
 
-		// Ìí¼ÓÑ§Éúid¡£ÓÃÓÚ´æÈë´ğ°¸ÎÄ¼ş±êÊ¶
+		// æ·»åŠ å­¦ç”Ÿidã€‚ç”¨äºå­˜å…¥ç­”æ¡ˆæ–‡ä»¶æ ‡è¯†
 		String studentId = getUserId(request, response);
 		map.put("studentId", studentId);
 
@@ -225,7 +224,7 @@ public class StudentServlet extends MethodInvokeServlet {
 		// System.out.println("swrong: " + sWrong);
 		// System.out.println("stu: " + map);
 
-		/* ½ûÓÃ»º´æ */
+		/* ç¦ç”¨ç¼“å­˜ */
 		response.setHeader("Cache-Control", "no-store");
 		response.setHeader("Pragma", "no-cache");
 		response.setDateHeader("Expires", -1);

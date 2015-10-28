@@ -21,7 +21,7 @@ public class XmlUtils {
 	 * return document; }
 	 */
 
-	// Ò»°ãÖ±½Ó´«Â·¾¶,Ò²¿ÉÒÔ¿¼ÂÇÓÃURL¶ÔÏó
+	// ä¸€èˆ¬ç›´æ¥ä¼ è·¯å¾„,ä¹Ÿå¯ä»¥è€ƒè™‘ç”¨URLå¯¹è±¡
 	public static Document parse(String path) throws DocumentException {
 		SAXReader reader = new SAXReader();
 		if (!path.startsWith("file:///")) {
@@ -34,10 +34,10 @@ public class XmlUtils {
 
 	public static void write(Document document, String path) throws IOException {
 
-		// ÉèÖÃÒ»¸öÊéĞ´¸ñÊ½£¬²»È»ÎŞËõ½ø
+		// è®¾ç½®ä¸€ä¸ªä¹¦å†™æ ¼å¼ï¼Œä¸ç„¶æ— ç¼©è¿›
 		OutputFormat format = OutputFormat.createPrettyPrint();
 		format.setEncoding("utf-8");
-		// Ğ´½øÎÄ¼ş
+		// å†™è¿›æ–‡ä»¶
 		XMLWriter writer = new XMLWriter(new FileOutputStream(path), format);
 		writer.write(document);
 
@@ -45,7 +45,7 @@ public class XmlUtils {
 	}
 
 	/**
-	 * »ñÈ¡ÊôĞÔtype Îªval µÄ½Úµã
+	 * è·å–å±æ€§type ä¸ºval çš„èŠ‚ç‚¹
 	 * */
 	public static Element getElementByAttr(Element node , String type , String val) {
 		for (Iterator iter = node.elementIterator(); iter.hasNext();) {

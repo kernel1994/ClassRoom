@@ -13,7 +13,7 @@ public class User {
 	private Date birthday;
 	private String address;
 	private String description;
-	private Role role; /* 角色，一个账号在系统中的角色类型 */
+	private Role role; /* 瑙掕壊锛屼竴涓处鍙峰湪绯荤粺涓殑瑙掕壊绫诲瀷 */
 
 	public User() {
 	}

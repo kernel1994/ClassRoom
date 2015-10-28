@@ -1,9 +1,6 @@
 package team.dx.classroom.domain;
 
-import java.io.Serializable;
-
 public class TrueOrFalse extends Topic {
-
 
 	public TrueOrFalse() {
 		super();

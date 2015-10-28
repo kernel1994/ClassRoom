@@ -19,7 +19,17 @@
                         <c:when test="${not empty course.tasks}">
                             <ul>
                                 <c:forEach items="${course.tasks}" var="task">
-                                    <li><a href="doTask.stu?taskId=${task.id}">${task.name}</a></li>
+                                    <li>
+                                        <a href="doTask.stu?taskId=${task.id}">${task.name}</a>
+                                        <c:choose>
+                                            <c:when test="${not empty task.score}">
+                                                ${task.score}分
+                                            </c:when>
+                                            <c:otherwise>
+                                                赶快做！！
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </li>
                                 </c:forEach>
                             </ul>
                         </c:when>

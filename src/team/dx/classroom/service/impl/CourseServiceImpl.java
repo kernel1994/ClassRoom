@@ -148,19 +148,19 @@ public class CourseServiceImpl implements CourseService {
 	}
 	
 	/**
-	 * FBI WARNING: Õâ¸ö·½·¨ÖĞµÄÁ½¸öid ±È½ÏÊÊÓÃÓÚString ÀàĞÍ
+	 * FBI WARNING: è¿™ä¸ªæ–¹æ³•ä¸­çš„ä¸¤ä¸ªid æ¯”è¾ƒé€‚ç”¨äºString ç±»å‹
 	 * 
-	 * ÎªÊ²Ã´ÒªĞ´Õâ¸ö·½·¨£ºÒòÎªÎÒĞ´´úÂëµÄÊ±ºòÔÚÌıÍøÒ×ÒôÀÖ£¬ËüÓĞ±ê×¢Ï²»¶µÄ¹¦ÄÜ¡£<br />
-	 * Èç¹ûÃ»ÓĞ±ê×¢¹ı£¬¿ÉÒÔµã»÷ĞÄĞÎ°´Å¥½øĞĞÏ²»¶±ê×¢¡£<br />
-	 * ·´Ö®£¬Èç¹ûÒÑ¾­±ê×¢ÁËÏ²»¶£¬Ôò¸ÃĞÄĞÎ°´Å¥ÏÔÊ¾Îª±ê×¢×´Ì¬£¬ÔÙ´Îµã»÷¾ÍÈ¡ÏûÏ²»¶<br />
-	 * ÎÒµÄÊµÏÖË¼Â·ÊÇ»ñÈ¡×Ô¼ºÒÑÓµÓĞµÄÁĞ±í£¬È»ºóÓëÏÔÊ¾µÄÁĞ±í½øĞĞ±È¶Ô£¬Èç¹ûÓĞ£¬ÕâÉèÖÃ¸Ã×ÊÔ´µÄÒ»¸öÊôĞÔ¡£
-	 * È»ºóÔÚJSPÖĞÓÃc:if±êÇ©½øĞĞÅĞ¶ÏÏÔÊ¾
-	 * @param course ÊµÑé×é£¬Òª½øĞĞÉèÖÃµÄÁĞ±íÊı¾İ
-	 * @param hostCourse ²ÎÕÕ×é£¬Òª½øĞĞ²ÎÕÕµÄÁĞ±íÊı¾İ
+	 * ä¸ºä»€ä¹ˆè¦å†™è¿™ä¸ªæ–¹æ³•ï¼šå› ä¸ºæˆ‘å†™ä»£ç çš„æ—¶å€™åœ¨å¬ç½‘æ˜“éŸ³ä¹ï¼Œå®ƒæœ‰æ ‡æ³¨å–œæ¬¢çš„åŠŸèƒ½ã€‚<br />
+	 * å¦‚æœæ²¡æœ‰æ ‡æ³¨è¿‡ï¼Œå¯ä»¥ç‚¹å‡»å¿ƒå½¢æŒ‰é’®è¿›è¡Œå–œæ¬¢æ ‡æ³¨ã€‚<br />
+	 * åä¹‹ï¼Œå¦‚æœå·²ç»æ ‡æ³¨äº†å–œæ¬¢ï¼Œåˆ™è¯¥å¿ƒå½¢æŒ‰é’®æ˜¾ç¤ºä¸ºæ ‡æ³¨çŠ¶æ€ï¼Œå†æ¬¡ç‚¹å‡»å°±å–æ¶ˆå–œæ¬¢<br />
+	 * æˆ‘çš„å®ç°æ€è·¯æ˜¯è·å–è‡ªå·±å·²æ‹¥æœ‰çš„åˆ—è¡¨ï¼Œç„¶åä¸æ˜¾ç¤ºçš„åˆ—è¡¨è¿›è¡Œæ¯”å¯¹ï¼Œå¦‚æœæœ‰ï¼Œè¿™è®¾ç½®è¯¥èµ„æºçš„ä¸€ä¸ªå±æ€§ã€‚
+	 * ç„¶ååœ¨JSPä¸­ç”¨c:ifæ ‡ç­¾è¿›è¡Œåˆ¤æ–­æ˜¾ç¤º
+	 * @param course å®éªŒç»„ï¼Œè¦è¿›è¡Œè®¾ç½®çš„åˆ—è¡¨æ•°æ®
+	 * @param hostCourse å‚ç…§ç»„ï¼Œè¦è¿›è¡Œå‚ç…§çš„åˆ—è¡¨æ•°æ®
 	 * */
 	private void haveOwn(List<Course> course, List<Course> hostCourse) {
 		
-		// °¤¸ö½øĞĞ±È¶Ô£¬ÉèÖÃÊôĞÔ
+		// æŒ¨ä¸ªè¿›è¡Œæ¯”å¯¹ï¼Œè®¾ç½®å±æ€§
 		for (Course hm : hostCourse) {
 			for (Course ms : course) {
 				if (ms.getHaveOwn() == 0) {
@@ -179,13 +179,13 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public List<Course> getCourses(Map<String, String> args, String studentId) {
 		
-		// ÏÈ»ñÈ¡¸ÃÑ§ÉúËùÓĞÑ¡¿Î
+		// å…ˆè·å–è¯¥å­¦ç”Ÿæ‰€æœ‰é€‰è¯¾
 		List<Course> stuCuorses = getStudentCourses(studentId);
 		
-		// ÔÙ»ñ²éÑ¯Ìõ¼şÏÂµÄ¿Î³Ì
+		// å†è·æŸ¥è¯¢æ¡ä»¶ä¸‹çš„è¯¾ç¨‹
 		List<Course> courses = getTeacherCourses(args);
 		
-		// ×÷±ê¼Ç
+		// ä½œæ ‡è®°
 		haveOwn(courses, stuCuorses);
 		
 		return courses;
@@ -222,13 +222,18 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public List<Course> getStudentAllCoursesTasks(String studentId) {
 
+		String sql = "select score from user_task where user_id = ? and task_id = ?";
 		List<Course> courses = getStudentCourses(studentId);
+
 		for (Course course : courses) {
 			Course courseTemp = getCourse(course.getId());
-			// ÒªÏÔÊ½¸³Öµ£¬²ÅÄÜÊµÏÖÉî¿½±´
+			// åªéœ€è¦æ”¾å…¥task è¦æ˜¾å¼èµ‹å€¼ï¼Œæ‰èƒ½å®ç°æ·±æ‹·è´
 			course.setTasks(courseTemp.getTasks());
-			// ÕâÀï²»ĞèÒª¿Î¼ş
-			// course.setCoursewares(courseTemp.getCoursewares());
+
+			for (Task task : course.getTasks()) {
+				Integer score = tDAO.getScore(sql, studentId, task.getId());
+				task.setScore(score);
+			}
 		}
 
 		return courses;

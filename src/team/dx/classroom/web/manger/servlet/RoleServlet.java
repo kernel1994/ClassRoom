@@ -15,7 +15,7 @@ import team.dx.classroom.utils.WebUtils;
 import team.dx.classroom.web.servlet.MethodInvokeServlet2;
 
 /**
- * RoleServlet类extendsMethodInvokeServlet 负责insert delete 等所以角色逻辑处理
+ * RoleServlet绫籩xtendsMethodInvokeServlet 璐熻矗insert delete 绛夋墍浠ヨ鑹查�昏緫澶勭悊
  * 
  * */
 @SuppressWarnings("all")
@@ -32,7 +32,7 @@ public class RoleServlet extends MethodInvokeServlet2 {
 			request.getRequestDispatcher("/admin/manager/listrole.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("message", "RoleServlet类中getAll方法出现异常");
+			request.setAttribute("message", "RoleServlet绫讳腑getAll鏂规硶鍑虹幇寮傚父");
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 		}
 
@@ -47,11 +47,11 @@ public class RoleServlet extends MethodInvokeServlet2 {
 			Role role = WebUtils.request2Bean(request.getParameterMap(), Role.class);
 			rs.addRole(role);
 			
-			request.setAttribute("message", "添加成功");
+			request.setAttribute("message", "娣诲姞鎴愬姛");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("message", "添加失败");
+			request.setAttribute("message", "娣诲姞澶辫触");
 		}
 		
 		request.getRequestDispatcher("/message.jsp").forward(request, response);

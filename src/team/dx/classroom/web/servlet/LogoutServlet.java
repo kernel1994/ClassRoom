@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * ÓÃ»§×¢ÏúµÇÂ¼µÄServlet
+ * ç”¨æˆ·æ³¨é”€ç™»å½•çš„Servlet
  */
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -20,14 +20,14 @@ public class LogoutServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Ïú»Ùsession
+		// é”€æ¯session
 		HttpSession session = request.getSession();
 
 		if (session != null) {
 			session.removeAttribute("user");
 		}
 
-		// ÖØ¶¨Ïòµ½µÇÂ¼Ò³
+		// é‡å®šå‘åˆ°ç™»å½•é¡µ
 		response.sendRedirect(request.getContextPath() + "/login.jsp");
 	}
 

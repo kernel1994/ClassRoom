@@ -8,76 +8,76 @@ import team.dx.classroom.domain.Course;
 public interface CourseService {
 
 	/**
-	 * »ñÈ¡²éÑ¯Ìõ¼şÏÂµÄÀÏÊ¦¿ªÉèµÄ¿Î³ÌµÄÍ¨ÓÃ·½·¨
-	 * @param args Map ¶ÔÏó£¬·â×°ÁË²éÑ¯Ìõ¼ş²ÎÊı(¿Î³ÌÃû£¬½ÌÊ¦Ãû£¬ÏŞÑ¡ÈËÊı), 
-	 * Î´Ö¸¶¨¸ÃÌõ¼şµÄÖµÎª¿Õ×Ö·û´® ""
-	 * @return Âú×ã²éÑ¯Ìõ¼şµÄ¿Î³ÌList
+	 * è·å–æŸ¥è¯¢æ¡ä»¶ä¸‹çš„è€å¸ˆå¼€è®¾çš„è¯¾ç¨‹çš„é€šç”¨æ–¹æ³•
+	 * @param args Map å¯¹è±¡ï¼Œå°è£…äº†æŸ¥è¯¢æ¡ä»¶å‚æ•°(è¯¾ç¨‹åï¼Œæ•™å¸ˆåï¼Œé™é€‰äººæ•°), 
+	 * æœªæŒ‡å®šè¯¥æ¡ä»¶çš„å€¼ä¸ºç©ºå­—ç¬¦ä¸² ""
+	 * @return æ»¡è¶³æŸ¥è¯¢æ¡ä»¶çš„è¯¾ç¨‹List
 	 * */
 	public List<Course> getTeacherCourses(Map<String, String> args);
 	
 	/**
-	 * »ñÈ¡²éÑ¯Ìõ¼şÏÂµÄÀÏÊ¦¿ªÉèµÄ¿Î³ÌµÄ·½·¨£¬±ê×¢ÁËµÇÂ¼µÄ¸ÃÑ§ÉúÊÇ·ñÒÑ¾­Ñ¡¿ÎÁË
-	 * @param args Map ¶ÔÏó£¬·â×°ÁË²éÑ¯Ìõ¼ş²ÎÊı, Î´Ö¸¶¨¸ÃÌõ¼şµÄÖµÎª¿Õ×Ö·û´® ""
-	 * @param studentId ±ê¼Ç²ÎÕÕÑ§Éúid
-	 * @return Âú×ã²éÑ¯Ìõ¼şµÄ¿Î³ÌList
+	 * è·å–æŸ¥è¯¢æ¡ä»¶ä¸‹çš„è€å¸ˆå¼€è®¾çš„è¯¾ç¨‹çš„æ–¹æ³•ï¼Œæ ‡æ³¨äº†ç™»å½•çš„è¯¥å­¦ç”Ÿæ˜¯å¦å·²ç»é€‰è¯¾äº†
+	 * @param args Map å¯¹è±¡ï¼Œå°è£…äº†æŸ¥è¯¢æ¡ä»¶å‚æ•°, æœªæŒ‡å®šè¯¥æ¡ä»¶çš„å€¼ä¸ºç©ºå­—ç¬¦ä¸² ""
+	 * @param studentId æ ‡è®°å‚ç…§å­¦ç”Ÿid
+	 * @return æ»¡è¶³æŸ¥è¯¢æ¡ä»¶çš„è¯¾ç¨‹List
 	 * */
 	public List<Course> getCourses(Map<String, String> args, String studentId);
 
 	/**
-	 * »ñÈ¡²éÑ¯Ìõ¼şÏÂµÄÑ§ÉúÑ¡ÔñµÄ¿Î³Ì
-	 * @param studentId Ñ§ÉúµÄid
-	 * @return Âú×ã²éÑ¯Ìõ¼şµÄ¿Î³ÌList
+	 * è·å–æŸ¥è¯¢æ¡ä»¶ä¸‹çš„å­¦ç”Ÿé€‰æ‹©çš„è¯¾ç¨‹
+	 * @param studentId å­¦ç”Ÿçš„id
+	 * @return æ»¡è¶³æŸ¥è¯¢æ¡ä»¶çš„è¯¾ç¨‹List
 	 * */
 	public List<Course> getStudentCourses(String studentId);
 	
 	/**
-	 * Ñ§ÉúÑ¡¿Î
-	 * @param studentId Ñ§Éúid
-	 * @param courseId ¿Î³Ìid
+	 * å­¦ç”Ÿé€‰è¯¾
+	 * @param studentId å­¦ç”Ÿid
+	 * @param courseId è¯¾ç¨‹id
 	 * */
 	public void chooseCourse(String studentId, String courseId);
 	
 	/**
-	 * Ñ§ÉúÍË¿Î
-	 * @param studentId Ñ§Éúid
-	 * @param courseId ¿Î³Ìid
+	 * å­¦ç”Ÿé€€è¯¾
+	 * @param studentId å­¦ç”Ÿid
+	 * @param courseId è¯¾ç¨‹id
 	 * */
 	public void unchooseCourse(String studentId, String courseId);
 	
 	/**
-	 * ÓÃÓÚÀÏÊ¦µÇÂ½³É¹¦ºó£¬ÏÔÊ¾ÊôÓÚ¸ÃÀÏÊ¦µÄ¿Î³Ì
-	 * @param teacherId ÀÏÊ¦µÄid
-	 * @return Èç¹û³É¹¦·µ»ØCourse¼¯ºÏ¶ÔÏó£¬·ñÔò·µ»Ønull
+	 * ç”¨äºè€å¸ˆç™»é™†æˆåŠŸåï¼Œæ˜¾ç¤ºå±äºè¯¥è€å¸ˆçš„è¯¾ç¨‹
+	 * @param teacherId è€å¸ˆçš„id
+	 * @return å¦‚æœæˆåŠŸè¿”å›Courseé›†åˆå¯¹è±¡ï¼Œå¦åˆ™è¿”å›null
 	 * */
 	List<Course> getAllCourses(String teacherId);
 	
 	/**
-	 * ÀÏÊ¦Ìí¼Ó¿Î³Ì
-	 * @param course course¶ÔÏó
+	 * è€å¸ˆæ·»åŠ è¯¾ç¨‹
+	 * @param course courseå¯¹è±¡
 	 * 
 	 * */
 	void addCourses(Course course);
 
 	/**
-	 * ÓÃÓÚÀÏÊ¦µÇÂ½³É¹¦ºó£¬½øÈë¾ßÌåµÄ¿Î³Ì
-	 * @param courseId ¿Î³ÌµÄid
-	 * @return Èç¹û³É¹¦·µ»ØCourse¶ÔÏó£¬·ñÔò·µ»Ønull
+	 * ç”¨äºè€å¸ˆç™»é™†æˆåŠŸåï¼Œè¿›å…¥å…·ä½“çš„è¯¾ç¨‹
+	 * @param courseId è¯¾ç¨‹çš„id
+	 * @return å¦‚æœæˆåŠŸè¿”å›Courseå¯¹è±¡ï¼Œå¦åˆ™è¿”å›null
 	 * */
 	Course getCourse(String courseId);
 
 	/**
-	 * ¸ù¾İ½ÌÊ¦µÄID »ñÈ¡½ÌÊ¦µÄÈ«²¿¿Î³Ì
-	 * @param teacherId ½ÌÊ¦ID
-	 * @return ½ÌÊ¦ËùÓĞ¿Î³Ì
+	 * æ ¹æ®æ•™å¸ˆçš„ID è·å–æ•™å¸ˆçš„å…¨éƒ¨è¯¾ç¨‹
+	 * @param teacherId æ•™å¸ˆID
+	 * @return æ•™å¸ˆæ‰€æœ‰è¯¾ç¨‹
 	 * */
 	public List<Course> getTeacherCoursesById(String teacherId);
 
 	/**
-	 * »ñÈ¡Ñ§ÉúËùÓĞÑ¡¿ÎµÄËùÓĞ×÷ÒµÁĞ±í¡£
-	 * ¸ù¾İÑ§Éúid »ñÈ¡Ñ§ÉúËùÓĞÑ¡ĞŞµÄ¿Î³Ì£¬×é³ÉList ¶ÔÏó¡£À´»ñÈ¡ÆäÖĞµÄ×÷ÒµÁĞ±í¡£
-	 * ÆäÖĞÃ¿ÃÅ¿Î³ÌÖ÷Òª°üº¬id/ name/ tasks
-	 * @param studentId Ñ§Éúid
-	 * @return °üº¬ÁËÑ§ÉúÑ§ÉúËùÓĞÑ¡¿ÎµÄËùÓĞ×÷ÒµµÄÁĞ±í
+	 * è·å–å­¦ç”Ÿæ‰€æœ‰é€‰è¯¾çš„æ‰€æœ‰ä½œä¸šåˆ—è¡¨ã€‚
+	 * æ ¹æ®å­¦ç”Ÿid è·å–å­¦ç”Ÿæ‰€æœ‰é€‰ä¿®çš„è¯¾ç¨‹ï¼Œç»„æˆList å¯¹è±¡ã€‚æ¥è·å–å…¶ä¸­çš„ä½œä¸šåˆ—è¡¨ã€‚
+	 * å…¶ä¸­æ¯é—¨è¯¾ç¨‹ä¸»è¦åŒ…å«id/ name/ tasks
+	 * @param studentId å­¦ç”Ÿid
+	 * @return åŒ…å«äº†å­¦ç”Ÿå­¦ç”Ÿæ‰€æœ‰é€‰è¯¾çš„æ‰€æœ‰ä½œä¸šçš„åˆ—è¡¨
 	 * */
 	public List<Course> getStudentAllCoursesTasks(String studentId);
 }

@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * ¹¦ÄÜ£º´¦ÀíµÄ×Ö·û±àÂë
- * ÊµÏÖ:´¦ÀígetÓëpost·½Ê½Ìá½»µÄ±àÂë
+ * åŠŸèƒ½ï¼šå¤„ç†çš„å­—ç¬¦ç¼–ç 
+ * å®ç°:å¤„ç†getä¸postæ–¹å¼æäº¤çš„ç¼–ç 
  * */
 public class CharacterEncodingFilter implements Filter {
 	
-	// ÈçºÎÅäÖÃÎÄ¼şÖĞÎ´Ö¸¶¨±àÂëÀàĞÍ£¬Ä¬ÈÏ²ÉÓÃUTF-8±àÂë
+	// å¦‚ä½•é…ç½®æ–‡ä»¶ä¸­æœªæŒ‡å®šç¼–ç ç±»å‹ï¼Œé»˜è®¤é‡‡ç”¨UTF-8ç¼–ç 
 	private String defaultCharset = "UTF-8";
 	private FilterConfig filterConfig;
 	
@@ -34,7 +34,7 @@ public class CharacterEncodingFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		
-		//»ñÈ¡web.xmlÅäÖÃÎÄ¼şÖĞÅäÖÃ±àÂë
+		//è·å–web.xmlé…ç½®æ–‡ä»¶ä¸­é…ç½®ç¼–ç 
 		String charset = filterConfig.getInitParameter("charset");
 		if (charset == null) {
 			charset = defaultCharset;
@@ -50,8 +50,8 @@ public class CharacterEncodingFilter implements Filter {
 	
 	/* *
 	 * ---------get---------
-	 * ²ÉÓÃ°ü×°Ä£Ê½£¨decorator£©Ôö¼Órequest¹¦ÄÜ£¬¼´
-	 * ½â¾örequestÌá½»Êı¾İÖĞget·½Ê½Ìá½»ÎÊ´¦ÀíµÄ±àÂë¸ñÊ½
+	 * é‡‡ç”¨åŒ…è£…æ¨¡å¼ï¼ˆdecoratorï¼‰å¢åŠ requeståŠŸèƒ½ï¼Œå³
+	 * è§£å†³requestæäº¤æ•°æ®ä¸­getæ–¹å¼æäº¤é—®å¤„ç†çš„ç¼–ç æ ¼å¼
 	 * */
 	class MyRequest extends HttpServletRequestWrapper {
 

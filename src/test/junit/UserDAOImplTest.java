@@ -22,14 +22,14 @@ public class UserDAOImplTest {
 	public void add() {
 		User user = new User();
 		user.setId(UUID.randomUUID().toString());
-		user.setNick("ÎÄÕÂ");
+		user.setNick("æ–‡ç« ");
 		user.setEmail("dengjili@qq.com");
 		user.setPassword("12346");
-		user.setName("ÍõĞ¡Ã÷");
-		user.setGender("ÄĞ");
+		user.setName("ç‹å°æ˜");
+		user.setGender("ç”·");
 		user.setBirthday(new Date());
-		user.setAddress("ËÄ´¨_³É¶¼_Ë«Á÷");
-		user.setDescription("ÕâÊÇÎÒÃÇ°àµÄµÚÒ»¸öÍ¬Ñ§");
+		user.setAddress("å››å·_æˆéƒ½_åŒæµ");
+		user.setDescription("è¿™æ˜¯æˆ‘ä»¬ç­çš„ç¬¬ä¸€ä¸ªåŒå­¦");
 		
 		uDao.addUser(user);
 //		-------------->pass junit test

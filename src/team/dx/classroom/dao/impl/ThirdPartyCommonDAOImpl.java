@@ -20,11 +20,11 @@ public class ThirdPartyCommonDAOImpl implements ThirdPartyCommonDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DaoException("³öÏÖÒì³£ÀàÎª: ");
+			throw new DaoException("å‡ºç°å¼‚å¸¸ç±»ä¸º: ");
 		} 
 		
 	}
-	
+
 	
 	@Override
 	public void updateCoursewareReview(String type, Object...args) {
@@ -37,9 +37,9 @@ public class ThirdPartyCommonDAOImpl implements ThirdPartyCommonDAO {
 		} else if (type.equals("delete")) {
 			sql = "DELETE FROM courseware_review WHERE review_id = ?";
 		} else if (type.equals("update")) {
-			// ÔİÊ±²»Ìá¹©´Ë·½·¨£¬Ô¤ÁôÒÔºó±ä¸ü
+			// æš‚æ—¶ä¸æä¾›æ­¤æ–¹æ³•ï¼Œé¢„ç•™ä»¥åå˜æ›´
 		} else {
-			throw new DaoException("ÇëÖ¸¶¨ÕıÈ·µÄtype Öµ");
+			throw new DaoException("è¯·æŒ‡å®šæ­£ç¡®çš„type å€¼");
 		}
 		
 		update(sql, args);
@@ -58,7 +58,7 @@ public class ThirdPartyCommonDAOImpl implements ThirdPartyCommonDAO {
 		} else if (type.equals("update")) {
 			sql = "UPDATE role_privilege SET privilege_id = ? WHERE privilege_id = ? AND role_id = ?";
 		} else {
-			throw new DaoException("ÇëÖ¸¶¨ÕıÈ·µÄtype Öµ");
+			throw new DaoException("è¯·æŒ‡å®šæ­£ç¡®çš„type å€¼");
 		}
 		
 		update(sql, args);
@@ -79,7 +79,7 @@ public class ThirdPartyCommonDAOImpl implements ThirdPartyCommonDAO {
 			} else if (type.equals("update")) {
 				sql = "UPDATE student_course SET score = ? WHERE student_id = ? AND course_id = ?";
 			} else {
-				throw new DaoException("ÇëÖ¸¶¨ÕıÈ·µÄtype Öµ");
+				throw new DaoException("è¯·æŒ‡å®šæ­£ç¡®çš„type å€¼");
 			}
 			update(sql, args);
 		} catch (Exception e) {
@@ -101,9 +101,9 @@ public class ThirdPartyCommonDAOImpl implements ThirdPartyCommonDAO {
 		} else if (type.equals("delete")) {
 			sql = "DELETE FROM task_review WHERE task_id = ? AND review_id = ?";
 		} else if (type.equals("update")) {
-			// Ôİ²»Ìá¹©´Ë·½·¨
+			// æš‚ä¸æä¾›æ­¤æ–¹æ³•
 		} else {
-			throw new DaoException("ÇëÖ¸¶¨ÕıÈ·µÄtype Öµ");
+			throw new DaoException("è¯·æŒ‡å®šæ­£ç¡®çš„type å€¼");
 		}
 		
 		update(sql, args);
@@ -120,9 +120,9 @@ public class ThirdPartyCommonDAOImpl implements ThirdPartyCommonDAO {
 		} else if (type.equals("delete")) {
 			sql = "DELETE FROM user_role WHERE user_id = ? AND role_id = ?";
 		} else if (type.equals("update")) {
-			// Ôİ²»Ìá¹©´Ë·½·¨
+			// æš‚ä¸æä¾›æ­¤æ–¹æ³•
 		} else {
-			throw new DaoException("ÇëÖ¸¶¨ÕıÈ·µÄtype Öµ");
+			throw new DaoException("è¯·æŒ‡å®šæ­£ç¡®çš„type å€¼");
 		}
 		
 		update(sql, args);
@@ -142,10 +142,10 @@ public class ThirdPartyCommonDAOImpl implements ThirdPartyCommonDAO {
 		} else if (type.equals("update")) {
 			sql = "UPDATE user_task SET score = ? WHERE user_id = ? AND task_id = ?";
 		} else {
-			throw new DaoException("ÇëÖ¸¶¨ÕıÈ·µÄtype Öµ");
+			throw new DaoException("è¯·æŒ‡å®šæ­£ç¡®çš„type å€¼");
 		}
 		
 		update(sql, args);
 	}
-	
+
 }

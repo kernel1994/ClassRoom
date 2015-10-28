@@ -9,19 +9,24 @@ public class Task {
 	private String name;
 	private String description;	
 	
-	/** Õâ¸öÊôĞÔ¿ÉÒÔÖ±½Ó´ÓÊı¾İ¿âÖĞ²é³ö²¢¸³Öµ£¬Ìí¼ÓÕâ¸öÊôĞÔ¿ÉÒÔ¼«´óµØ·½±ã¶Ôresource ¶ÔÏóµÄ²éÑ¯¹¹Ôì */
+	/** è¿™ä¸ªå±æ€§å¯ä»¥ç›´æ¥ä»æ•°æ®åº“ä¸­æŸ¥å‡ºå¹¶èµ‹å€¼ï¼Œæ·»åŠ è¿™ä¸ªå±æ€§å¯ä»¥æå¤§åœ°æ–¹ä¾¿å¯¹resource å¯¹è±¡çš„æŸ¥è¯¢æ„é€  */
 	private String resource_id;
 	private Resource resource;
 	private List<Review> list = new ArrayList<Review>();
+
+	/** å­¦ç”Ÿä¸€ä¸ªä½œä¸šçš„åˆ†æ•° */
+	private Integer score;
+
 	public Task() {
 	}
 
-	public Task(String id, String name, String description, Resource resource, List<Review> list) {
+	public Task(String id, String name, String description, Resource resource, List<Review> list, Integer score) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.resource = resource;
 		this.list = list;
+		this.score = score;
 	}
 
 	public String getId() {
@@ -72,11 +77,24 @@ public class Task {
 		this.list = list;
 	}
 
-	@Override
-	public String toString() {
-		return "Task [id=" + id + ", name=" + name + ", description="
-				+ description + ", resource_id=" + resource_id + ", resource="
-				+ resource + ", list=" + list + "]";
+	public Integer getScore() {
+		return score;
 	}
 
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+
+	@Override
+	public String toString() {
+		return "Task{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				", resource_id='" + resource_id + '\'' +
+				", resource=" + resource +
+				", list=" + list +
+				", score=" + score +
+				'}';
+	}
 }

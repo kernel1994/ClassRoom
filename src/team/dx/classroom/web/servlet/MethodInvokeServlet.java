@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class MethodInvokeServlet<br />
- * ÓµÓĞdoProcess ·½·¨¡£Æä×÷ÓÃÊÇÀûÓÃJava·´Éä»úÖÆ£¬½øĞĞ·½·¨µ÷ÓÃmethod.invoke()<br />
- * ÕâÑù¾ÍºÜ·½±ãµÃ½øĞĞ·½·¨µÄÀ©Õ¹¡£×ÓÀà¿ÉÒÔ¼Ì³Ğ¡£ÊµÏÖ×Ô¼ºµÄ·½·¨µ÷ÓÃ¡£
+ * æ‹¥æœ‰doProcess æ–¹æ³•ã€‚å…¶ä½œç”¨æ˜¯åˆ©ç”¨Javaåå°„æœºåˆ¶ï¼Œè¿›è¡Œæ–¹æ³•è°ƒç”¨method.invoke()<br />
+ * è¿™æ ·å°±å¾ˆæ–¹ä¾¿å¾—è¿›è¡Œæ–¹æ³•çš„æ‰©å±•ã€‚å­ç±»å¯ä»¥ç»§æ‰¿ã€‚å®ç°è‡ªå·±çš„æ–¹æ³•è°ƒç”¨ã€‚
  */
 public class MethodInvokeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,7 +26,7 @@ public class MethodInvokeServlet extends HttpServlet {
 	}
 
 	/**
-	 * ¼ÆËãÇëÇóÆ¥Åäºó×ºµÄ³¤¶È¡£×ÓÀà¸ù¾İĞèÒª¸²¸Ç´Ë·½·¨¡£
+	 * è®¡ç®—è¯·æ±‚åŒ¹é…åç¼€çš„é•¿åº¦ã€‚å­ç±»æ ¹æ®éœ€è¦è¦†ç›–æ­¤æ–¹æ³•ã€‚
 	 * */
 	public int getSuffixLen() {
 		
@@ -36,25 +36,25 @@ public class MethodInvokeServlet extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// »ñÈ¡µÄÊÇÕâÑùµÄ /deleteCustomer.do /addCustomer.do
+		// è·å–çš„æ˜¯è¿™æ ·çš„ /deleteCustomer.do /addCustomer.do
 		String servletPath = request.getServletPath();
 
 		/*
-		 * Â·¾¶ÊÇÕâÑù¹¹³ÉµÄ http://localhost:8080/¹¤³ÌÃû/ÎÄ¼ş¼ĞÃû/(×ÓÎÄ¼ş¼Ğ)/ÎÄ¼ş.jsp»òÇëÇóÃû.do
-		 * servletPath ÊÇ /ÎÄ¼ş¼ĞÃû/(×ÓÎÄ¼ş¼Ğ)/ÎÄ¼ş»òÇëÇóÃû ContextPath ÊÇ /¹¤³ÌÃû RequestURL ÊÇ
-		 * /¹¤³ÌÃû/ÎÄ¼ş¼ĞÃû/(×ÓÎÄ¼ş¼Ğ)/ÎÄ¼ş»òÇëÇóÃû ½ØÈ¡servletPathµÄ×îºóÒ»¸ö/ ºÍ .ado Ö®¼äµÄ×Ö·û´®
+		 * è·¯å¾„æ˜¯è¿™æ ·æ„æˆçš„ http://localhost:8080/å·¥ç¨‹å/æ–‡ä»¶å¤¹å/(å­æ–‡ä»¶å¤¹)/æ–‡ä»¶.jspæˆ–è¯·æ±‚å.do
+		 * servletPath æ˜¯ /æ–‡ä»¶å¤¹å/(å­æ–‡ä»¶å¤¹)/æ–‡ä»¶æˆ–è¯·æ±‚å ContextPath æ˜¯ /å·¥ç¨‹å RequestURL æ˜¯
+		 * /å·¥ç¨‹å/æ–‡ä»¶å¤¹å/(å­æ–‡ä»¶å¤¹)/æ–‡ä»¶æˆ–è¯·æ±‚å æˆªå–servletPathçš„æœ€åä¸€ä¸ª/ å’Œ .ado ä¹‹é—´çš„å­—ç¬¦ä¸²
 		 */
 		String methodName = servletPath.substring(servletPath.lastIndexOf("/") + 1, servletPath.length() - getSuffixLen());
 
 		try {
-			// »ñÈ¡ÓëmethodName¶ÔÓ¦µÄ·½·¨
+			// è·å–ä¸methodNameå¯¹åº”çš„æ–¹æ³•
 			Method method = getClass().getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
 			
-			// ÒÖÖÆJavaµÄ·ÃÎÊ¿ØÖÆ¼ì²é
-			// Èç¹û²»ÉèÖÃÎªtrue£¬½«»áError: TestPrivate can not access a member of class PrivateClass with modifiers "private"
+			// æŠ‘åˆ¶Javaçš„è®¿é—®æ§åˆ¶æ£€æŸ¥
+			// å¦‚æœä¸è®¾ç½®ä¸ºtrueï¼Œå°†ä¼šError: TestPrivate can not access a member of class PrivateClass with modifiers "private"
 			method.setAccessible(true);
 			
-			// ÀûÓÃ·´ÉäÀ´µ÷ÓÃ·½·¨
+			// åˆ©ç”¨åå°„æ¥è°ƒç”¨æ–¹æ³•
 			method.invoke(this, request, response);
 
 		} catch (NoSuchMethodException e) {

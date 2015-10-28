@@ -14,38 +14,38 @@ import team.dx.classroom.utils.WebUtils;
 import team.dx.classroom.web.servlet.MethodInvokeServlet2;
 
 /* *
- * ½ÌÊ¦¶Ô¿Î³ÌµÄ²Ù×÷
+ * æ•™å¸ˆå¯¹è¯¾ç¨‹çš„æ“ä½œ
  * */
 public class TeacherCourseServlet extends MethodInvokeServlet2 {
 	private static final long serialVersionUID = 1L;
 	
 	private CourseService cbs = ObjectFactory.getInstance().createObject(CourseService.class);
 
-	/*----------×ªÌøUI------------*/
+	/*----------è½¬è·³UI------------*/
 	public void addUI(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		request.getRequestDispatcher("/teacher/manager/addcourse.jsp").forward(request, response);
 	}
 	
-	/*----------Ìí¼Ó¿Î³Ì------------*/
+	/*----------æ·»åŠ è¯¾ç¨‹------------*/
 	public void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		try {
-			//·â×°courseÊı¾İ
+			//å°è£…courseæ•°æ®
 			Course course = WebUtils.request2Bean(request.getParameterMap(), Course.class);
 			
-			//Î´Ğ£ÑécourseºÏ·¨ĞÔ
+			//æœªæ ¡éªŒcourseåˆæ³•æ€§
 			course.setId(WebUtils.getRandomUUID());
 			
-			//µÃµ½ÓÃ»§teacher
+			//å¾—åˆ°ç”¨æˆ·teacher
 			User teacher = (User) request.getSession().getAttribute("user");
 			course.setTeacher(teacher);
 			cbs.addCourses(course);
 			response.setHeader("refresh", "3;url=" + request.getContextPath()
 					+ "/servlet/TeacherIndexServlet?method=getAll");
-			request.setAttribute("message","Ìí¼Ó¿Î³Ì³É¹¦<br/>3ÃëºóÌø×ªÕâÒ²£¬ÈçºÎÃ»ÓĞ,<a href='/ClassRoom/servlet/TeacherIndexServlet?method=getAll'>µã»÷ÕâÀï</a>");
+			request.setAttribute("message","æ·»åŠ è¯¾ç¨‹æˆåŠŸ<br/>3ç§’åè·³è½¬è¿™ä¹Ÿï¼Œå¦‚ä½•æ²¡æœ‰,<a href='/ClassRoom/servlet/TeacherIndexServlet?method=getAll'>ç‚¹å‡»è¿™é‡Œ</a>");
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("message", "TeacherCourseServletÀàadd·½·¨Òì³£");
+			request.setAttribute("message", "TeacherCourseServletç±»addæ–¹æ³•å¼‚å¸¸");
 		}
 		request.getRequestDispatcher("/message.jsp").forward(request, response);
 		

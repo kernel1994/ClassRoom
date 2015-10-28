@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class MethodInvokeServlet<br />
- * ÓµÓĞdoProcess ·½·¨¡£Æä×÷ÓÃÊÇÀûÓÃJava·´Éä»úÖÆ£¬½øĞĞ·½·¨µ÷ÓÃmethod.invoke()<br />
- * ÕâÑù¾ÍºÜ·½±ãµÃ½øĞĞ·½·¨µÄÀ©Õ¹¡£×ÓÀà¿ÉÒÔ¼Ì³Ğ¡£ÊµÏÖ×Ô¼ºµÄ·½·¨µ÷ÓÃ¡£
+ * æ‹¥æœ‰doProcess æ–¹æ³•ã€‚å…¶ä½œç”¨æ˜¯åˆ©ç”¨Javaåå°„æœºåˆ¶ï¼Œè¿›è¡Œæ–¹æ³•è°ƒç”¨method.invoke()<br />
+ * è¿™æ ·å°±å¾ˆæ–¹ä¾¿å¾—è¿›è¡Œæ–¹æ³•çš„æ‰©å±•ã€‚å­ç±»å¯ä»¥ç»§æ‰¿ã€‚å®ç°è‡ªå·±çš„æ–¹æ³•è°ƒç”¨ã€‚
  */
 public class MethodInvokeServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,23 +23,23 @@ public class MethodInvokeServlet2 extends HttpServlet {
 		String methodName = request.getParameter("method");
 		
 		if (methodName == null) {
-			throw new RuntimeException("Ã»ÓĞÖ¸¶¨·½·¨");
+			throw new RuntimeException("æ²¡æœ‰æŒ‡å®šæ–¹æ³•");
 		}
 
 		try {
-			// »ñÈ¡ÓëmethodName¶ÔÓ¦µÄ·½·¨
+			// è·å–ä¸methodNameå¯¹åº”çš„æ–¹æ³•
 			Method method = getClass().getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
 			
-			// ÒÖÖÆJavaµÄ·ÃÎÊ¿ØÖÆ¼ì²é
-			// Èç¹û²»ÉèÖÃÎªtrue£¬½«»áError: TestPrivate can not access a member of class PrivateClass with modifiers "private"
+			// æŠ‘åˆ¶Javaçš„è®¿é—®æ§åˆ¶æ£€æŸ¥
+			// å¦‚æœä¸è®¾ç½®ä¸ºtrueï¼Œå°†ä¼šError: TestPrivate can not access a member of class PrivateClass with modifiers "private"
 			method.setAccessible(true);
 			
-			// ÀûÓÃ·´ÉäÀ´µ÷ÓÃ·½·¨
+			// åˆ©ç”¨åå°„æ¥è°ƒç”¨æ–¹æ³•
 			method.invoke(this, request, response);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("ÀàMethodInvokeServlet2³öÏÖÎ´ÖªÒì³£");
+			throw new RuntimeException("ç±»MethodInvokeServlet2å‡ºç°æœªçŸ¥å¼‚å¸¸");
 		}
 	}
 

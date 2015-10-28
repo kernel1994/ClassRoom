@@ -3,61 +3,61 @@ package team.dx.classroom.dao;
 public interface ThirdPartyCommonDAO {
 
 	/**
-	 * ¸Ã·½·¨·â×°ÁË INSERT/ DELETE/ UPDATE ²Ù×÷
+	 * è¯¥æ–¹æ³•å°è£…äº† INSERT/ DELETE/ UPDATE æ“ä½œ
 	 * 
-	 * @param sql SQLÓï¾ä
-	 * @param args Ìî³äSQLÓï¾äµÄÕ¼Î»·ûµÄÊı¾İ
+	 * @param sql SQLè¯­å¥
+	 * @param args å¡«å……SQLè¯­å¥çš„å ä½ç¬¦çš„æ•°æ®
 	 * */
 	public abstract void update(String sql, Object... args);
 
 	/**
-	 * ¶Ô±ícourseware_review ½øĞĞ INSERT/ DELETE/ <del>UPDATE</del> ²Ù×÷
-	 * @param type ×Ö·û´® INSERT »ò  DELETE »ò <del>UPDATE</del> (²»Çø·Ö´óĞ¡Ğ´) ÖĞµÄÒ»¸ö
-	 * @param args ²ÎÊı¡£ÆäÖĞ£º<br />insert ²ÎÊıË³ĞòÊÇ ¿Î³ÌID ÆÀÂÛID<br />
-	 * delete ²ÎÊıÖ»ĞèÒª ÆÀÂÛID
+	 * å¯¹è¡¨courseware_review è¿›è¡Œ INSERT/ DELETE/ <del>UPDATE</del> æ“ä½œ
+	 * @param type å­—ç¬¦ä¸² INSERT æˆ–  DELETE æˆ– <del>UPDATE</del> (ä¸åŒºåˆ†å¤§å°å†™) ä¸­çš„ä¸€ä¸ª
+	 * @param args å‚æ•°ã€‚å…¶ä¸­ï¼š<br />insert å‚æ•°é¡ºåºæ˜¯ è¯¾ç¨‹ID è¯„è®ºID<br />
+	 * delete å‚æ•°åªéœ€è¦ è¯„è®ºID
 	 * */
 	public abstract void updateCoursewareReview(String type, Object... args);
 
 	/**
-	 * ¶Ô±írole_privilege ½øĞĞ INSERT/ DELETE/ UPDATE ²Ù×÷¡£ÆäÖĞupdate ²Ù×÷Ö»ÄÜĞŞ¸Äprivilege_id
-	 * @param type ×Ö·û´® INSERT »ò  DELETE »ò UPDATE (²»Çø·Ö´óĞ¡Ğ´) ÖĞµÄÒ»¸ö
-	 * @param args ²ÎÊı¡£ÆäÖĞ£º<br />insert ĞèÒªÁ½¸ö²ÎÊı£¬Ë³ĞòÊÇ È¨ÏŞID ½ÇÉ«ID<br />
-	 * delete ĞèÒªÁ½¸ö²ÎÊı£¬Ë³ĞòÊÇ È¨ÏŞID ½ÇÉ«ID<br />
-	 * update ĞèÒªÁ½¸ö²ÎÊı£¬Ë³ĞòÊÇ È¨ÏŞID ½ÇÉ«ID
+	 * å¯¹è¡¨role_privilege è¿›è¡Œ INSERT/ DELETE/ UPDATE æ“ä½œã€‚å…¶ä¸­update æ“ä½œåªèƒ½ä¿®æ”¹privilege_id
+	 * @param type å­—ç¬¦ä¸² INSERT æˆ–  DELETE æˆ– UPDATE (ä¸åŒºåˆ†å¤§å°å†™) ä¸­çš„ä¸€ä¸ª
+	 * @param args å‚æ•°ã€‚å…¶ä¸­ï¼š<br />insert éœ€è¦ä¸¤ä¸ªå‚æ•°ï¼Œé¡ºåºæ˜¯ æƒé™ID è§’è‰²ID<br />
+	 * delete éœ€è¦ä¸¤ä¸ªå‚æ•°ï¼Œé¡ºåºæ˜¯ æƒé™ID è§’è‰²ID<br />
+	 * update éœ€è¦ä¸¤ä¸ªå‚æ•°ï¼Œé¡ºåºæ˜¯ æƒé™ID è§’è‰²ID
 	 * */
 	public abstract void updateRolePrivilege(String type, Object... args);
 
 	/**
-	 * ¶Ô±ístudent_course ½øĞĞ INSERT/ DELETE/ UPDATE ²Ù×÷¡£ÆäÖĞupdate ²Ù×÷Ö»ÄÜĞŞ¸Ä·ÖÊı
-	 * @param type ×Ö·û´® INSERT »ò  DELETE »ò UPDATE (²»Çø·Ö´óĞ¡Ğ´) ÖĞµÄÒ»¸ö
-	 * @param args ²ÎÊı¡£ÆäÖĞ£º<br />insert ĞèÒª 3 ¸ö²ÎÊı£¬Ë³ĞòÊÇ Ñ§ÉúID ¿Î³ÌID ·ÖÊı<br />
-	 * delete ĞèÒª 2 ¸ö²ÎÊı£¬Ë³ĞòÊÇ Ñ§ÉúID ¿Î³ÌID<br />
-	 * update ĞèÒª 3 ¸ö²ÎÊı£¬Ë³ĞòÊÇ ·ÖÊı Ñ§ÉúID ¿Î³ÌID
+	 * å¯¹è¡¨student_course è¿›è¡Œ INSERT/ DELETE/ UPDATE æ“ä½œã€‚å…¶ä¸­update æ“ä½œåªèƒ½ä¿®æ”¹åˆ†æ•°
+	 * @param type å­—ç¬¦ä¸² INSERT æˆ–  DELETE æˆ– UPDATE (ä¸åŒºåˆ†å¤§å°å†™) ä¸­çš„ä¸€ä¸ª
+	 * @param args å‚æ•°ã€‚å…¶ä¸­ï¼š<br />insert éœ€è¦ 3 ä¸ªå‚æ•°ï¼Œé¡ºåºæ˜¯ å­¦ç”ŸID è¯¾ç¨‹ID åˆ†æ•°<br />
+	 * delete éœ€è¦ 2 ä¸ªå‚æ•°ï¼Œé¡ºåºæ˜¯ å­¦ç”ŸID è¯¾ç¨‹ID<br />
+	 * update éœ€è¦ 3 ä¸ªå‚æ•°ï¼Œé¡ºåºæ˜¯ åˆ†æ•° å­¦ç”ŸID è¯¾ç¨‹ID
 	 * */
 	public abstract void updateStudentCourse(String type, Object... args);
 
 	/**
-	 * ¶Ô±ítask_review ½øĞĞ INSERT/ DELETE/ <del>UPDATE</del> ²Ù×÷
-	 * @param type ×Ö·û´® INSERT »ò  DELETE »ò <del>UPDATE</del> (²»Çø·Ö´óĞ¡Ğ´) ÖĞµÄÒ»¸ö
-	 * @param args ²ÎÊı¡£ÆäÖĞ£º<br />insert ĞèÒª 2 ¸ö²ÎÊı£¬Ë³ĞòÊÇ ×÷ÒµID ÆÀÂÛID<br />
-	 * delete ĞèÒª 2 ¸ö²ÎÊı£¬Ë³ĞòÊÇ ×÷ÒµID ÆÀÂÛID
+	 * å¯¹è¡¨task_review è¿›è¡Œ INSERT/ DELETE/ <del>UPDATE</del> æ“ä½œ
+	 * @param type å­—ç¬¦ä¸² INSERT æˆ–  DELETE æˆ– <del>UPDATE</del> (ä¸åŒºåˆ†å¤§å°å†™) ä¸­çš„ä¸€ä¸ª
+	 * @param args å‚æ•°ã€‚å…¶ä¸­ï¼š<br />insert éœ€è¦ 2 ä¸ªå‚æ•°ï¼Œé¡ºåºæ˜¯ ä½œä¸šID è¯„è®ºID<br />
+	 * delete éœ€è¦ 2 ä¸ªå‚æ•°ï¼Œé¡ºåºæ˜¯ ä½œä¸šID è¯„è®ºID
 	 * */
 	public abstract void updateTaskReview(String type, Object... args);
 
 	/**
-	 * ¶Ô±íuser_role ½øĞĞ INSERT/ DELETE/ <del>UPDATE</del> ²Ù×÷
-	 * @param type ×Ö·û´® INSERT »ò  DELETE »ò <del>UPDATE</del> (²»Çø·Ö´óĞ¡Ğ´) ÖĞµÄÒ»¸ö
-	 * @param args ²ÎÊı¡£ÆäÖĞ£º<br />insert ĞèÒª 2 ¸ö²ÎÊı£¬Ë³ĞòÊÇ ÓÃ»§ID ½ÇÉ«ID<br />
-	 * delete ĞèÒª 2 ¸ö²ÎÊı£¬Ë³ĞòÊÇ ÓÃ»§ID ½ÇÉ«ID
+	 * å¯¹è¡¨user_role è¿›è¡Œ INSERT/ DELETE/ <del>UPDATE</del> æ“ä½œ
+	 * @param type å­—ç¬¦ä¸² INSERT æˆ–  DELETE æˆ– <del>UPDATE</del> (ä¸åŒºåˆ†å¤§å°å†™) ä¸­çš„ä¸€ä¸ª
+	 * @param args å‚æ•°ã€‚å…¶ä¸­ï¼š<br />insert éœ€è¦ 2 ä¸ªå‚æ•°ï¼Œé¡ºåºæ˜¯ ç”¨æˆ·ID è§’è‰²ID<br />
+	 * delete éœ€è¦ 2 ä¸ªå‚æ•°ï¼Œé¡ºåºæ˜¯ ç”¨æˆ·ID è§’è‰²ID
 	 * */
 	public abstract void updateUserRole(String type, Object... args);
 
 	/**
-	 * ¶Ô±íuser_task ½øĞĞ INSERT/ DELETE/ UPDATE ²Ù×÷
-	 * @param type ×Ö·û´® INSERT »ò  DELETE »ò UPDATE (²»Çø·Ö´óĞ¡Ğ´) ÖĞµÄÒ»¸ö
-	 * @param args ²ÎÊı¡£ÆäÖĞ£º<br />insert ĞèÒª 3 ¸ö²ÎÊı£¬Ë³ĞòÊÇ Ñ§ÉúID ×÷ÒµID ·ÖÊı<br />
-	 * delete ĞèÒª 2 ¸ö²ÎÊı£¬Ë³ĞòÊÇ Ñ§ÉúID ×÷ÒµID<br />
-	 * update ĞèÒª 3 ¸ö²ÎÊı£¬Ë³ĞòÊÇ ·ÖÊı Ñ§ÉúID ×÷ÒµID
+	 * å¯¹è¡¨user_task è¿›è¡Œ INSERT/ DELETE/ UPDATE æ“ä½œ
+	 * @param type å­—ç¬¦ä¸² INSERT æˆ–  DELETE æˆ– UPDATE (ä¸åŒºåˆ†å¤§å°å†™) ä¸­çš„ä¸€ä¸ª
+	 * @param args å‚æ•°ã€‚å…¶ä¸­ï¼š<br />insert éœ€è¦ 3 ä¸ªå‚æ•°ï¼Œé¡ºåºæ˜¯ å­¦ç”ŸID ä½œä¸šID åˆ†æ•°<br />
+	 * delete éœ€è¦ 2 ä¸ªå‚æ•°ï¼Œé¡ºåºæ˜¯ å­¦ç”ŸID ä½œä¸šID<br />
+	 * update éœ€è¦ 3 ä¸ªå‚æ•°ï¼Œé¡ºåºæ˜¯ åˆ†æ•° å­¦ç”ŸID ä½œä¸šID
 	 * */
 	public abstract void updateUserTask(String type, Object... args);
 

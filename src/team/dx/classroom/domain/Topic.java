@@ -3,7 +3,7 @@ package team.dx.classroom.domain;
 import java.io.Serializable;
 
 /**
- * ÃèÊöÒ»µÀÌâ¡£ÊÇÑ¡ÔñÌâ¡¢ÅĞ¶ÏÌâ¡¢ÎÊ´ğÌâµÄ¹«¹²¸¸Àà
+ * æè¿°ä¸€é“é¢˜ã€‚æ˜¯é€‰æ‹©é¢˜ã€åˆ¤æ–­é¢˜ã€é—®ç­”é¢˜çš„å…¬å…±çˆ¶ç±»
  */
 public class Topic implements Serializable {
     protected static final long serialVersionUID = 1L;

@@ -8,22 +8,22 @@ import javax.sql.DataSource;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
- * JDBC ²Ù×÷µÄ¹¤¾ßÀà
+ * JDBC æ“ä½œçš„å·¥å…·ç±»
  * */
 public class JDBCUtils {
 	
-	// Ö»ĞèÒªÒ»·İÊı¾İÔ´
+	// åªéœ€è¦ä¸€ä»½æ•°æ®æº
 	private static DataSource dataSource = null;
 	
-	// ¾²Ì¬´úÂë¿éÖ»ÄÜ±»´´½¨Ò»´Î
-	// ÔÚ c3p0-config.xml ÖĞÅäÖÃµÄ configName
+	// é™æ€ä»£ç å—åªèƒ½è¢«åˆ›å»ºä¸€æ¬¡
+	// åœ¨ c3p0-config.xml ä¸­é…ç½®çš„ configName
 	static {
 		dataSource = new ComboPooledDataSource("mysql");
 	}
 	
 	/**
-	 * ·µ»ØÊı¾İÔ´µÄÒ»¸ö Connection ¶ÔÏó
-	 * @return Êı¾İÔ´µÄÒ»¸ö Connection ¶ÔÏó
+	 * è¿”å›æ•°æ®æºçš„ä¸€ä¸ª Connection å¯¹è±¡
+	 * @return æ•°æ®æºçš„ä¸€ä¸ª Connection å¯¹è±¡
 	 * @throws SQLException 
 	 * */
 	public static Connection getConnection() throws SQLException {
@@ -32,8 +32,8 @@ public class JDBCUtils {
 	}
 	
 	/**
-	 * ÊÍ·Å Connection µÄÁ¬½Ó
-	 * @param connection ĞèÑ½¹Ø±ÕÁ¬½ÓµÄÊı¾İ¿âÁ¬½Ó¶ÔÏó
+	 * é‡Šæ”¾ Connection çš„è¿æ¥
+	 * @param connection éœ€å‘€å…³é—­è¿æ¥çš„æ•°æ®åº“è¿æ¥å¯¹è±¡
 	 * */
 	public static void closeConnection(Connection connection) {
 		

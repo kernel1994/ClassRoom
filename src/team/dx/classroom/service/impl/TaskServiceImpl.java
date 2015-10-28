@@ -37,7 +37,7 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public void addTask(Task task, String courseId) {
-		// 现有资源
+		// 鐜版湁璧勬簮
 		rDAO.addResource(task.getResource());
 		tDAO.addTask(task, courseId);
 	}

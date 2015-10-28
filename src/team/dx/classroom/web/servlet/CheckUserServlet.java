@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.PersonBusinessService;
 /**
- * AJAXÒì²½¼ì²âÊ¹ÓÃÊÇ·ñÒÑ¾­×¢²á
+ * AJAXå¼‚æ­¥æ£€æµ‹ä½¿ç”¨æ˜¯å¦å·²ç»æ³¨å†Œ
  */
 public class CheckUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,10 +23,10 @@ public class CheckUserServlet extends HttpServlet {
 		Boolean isTrue = pbs.findUserIsExist(nick);
 		
 		if (isTrue) {
-			response.getWriter().write("¸ÃÕËºÅ¿ÉÓÃ");
+			response.getWriter().write("è¯¥è´¦å·å¯ç”¨");
 		}
 		else {
-			response.getWriter().write("¸ÃÕËºÅÒÑ¾­´æÔÚ");
+			response.getWriter().write("è¯¥è´¦å·å·²ç»å­˜åœ¨");
 		}
 		
 	}

@@ -9,7 +9,7 @@ public class XmlUtilsTest {
 
 	@Test
 	public void test() throws DocumentException {
-		XmlUtils.parse("file:///Z:\\apache-tomcat-6.0.44\\webapps\\ClassRoom\\resource\\task\\homework\\第二次作业_d4f1ecba-3ece-4472-ad3f-4527b5844849.xml");
+		XmlUtils.parse("file:///Z:\\apache-tomcat-6.0.44\\webapps\\ClassRoom\\resource\\task\\homework\\绗簩娆′綔涓歘d4f1ecba-3ece-4472-ad3f-4527b5844849.xml");
 	}
 
 }

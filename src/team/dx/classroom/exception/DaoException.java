@@ -1,6 +1,6 @@
 package team.dx.classroom.exception;
 /**
- * dao·ÃÎÊ²ãÒì³££¬·½±ã³ÌÐò³ö´íÊ±¶¨Î»µ½dao²ã,ÔÙÕÒµ½¾ßÌåµÄ´íÎóÎ»ÖÃÀà
+ * daoè®¿é—®å±‚å¼‚å¸¸ï¼Œæ–¹ä¾¿ç¨‹åºå‡ºé”™æ—¶å®šä½åˆ°daoå±‚,å†æ‰¾åˆ°å…·ä½“çš„é”™è¯¯ä½ç½®ç±»
  * */
 public class DaoException extends RuntimeException {
 

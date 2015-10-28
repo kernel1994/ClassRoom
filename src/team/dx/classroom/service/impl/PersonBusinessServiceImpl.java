@@ -32,18 +32,18 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 		
 		User user = null;
 		
-		// ÏÈ²éÑ¯user »ñÈ¡user_id
+		// å…ˆæŸ¥è¯¢user è·å–user_id
 		String userCondition = "SELECT * FROM user WHERE email = ? AND password = ?";
 		
-		// Èç¹ûÎª²éµ½ÔògetUsers() ·µ»Ø¿Õ¼¯ºÏ
+		// å¦‚æœä¸ºæŸ¥åˆ°åˆ™getUsers() è¿”å›ç©ºé›†åˆ
 		user = uDAO.getUser(userCondition, email, password);
 		
-		// Îª¿ÕÔò·µ»Ønull
+		// ä¸ºç©ºåˆ™è¿”å›null
 		if (user == null) {
 			return null;
 		}
 		
-		// È»ºó¸ù¾İuser_id »ñÈ¡role ¶ÔÏó
+		// ç„¶åæ ¹æ®user_id è·å–role å¯¹è±¡
 		String roleCondition = "SELECT * FROM role WHERE id = (SELECT role_id FROM user_role WHERE user_id = ?)";
 		Role role = rDAO.getRole(roleCondition, user.getId());
 		
@@ -51,11 +51,11 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 			return user;
 		}
 		
-		// ÔÙ¸ù¾İrole_id »ñÈ¡privilege ¶ÔÏó
+		// å†æ ¹æ®role_id è·å–privilege å¯¹è±¡
 		String privilegeCondition = "SELECT * FROM privilege WHERE id = (SELECT privilege_id FROM role_privilege WHERE role_id = ?)";
 		List<Privilege> privileges = pDAO.getPrivileges(privilegeCondition, role.getId());
 		
-		// ×îºó×éºÏ³ÉÍêÕûµÄUser ¶ÔÏó
+		// æœ€åç»„åˆæˆå®Œæ•´çš„User å¯¹è±¡
 		role.setPrivileges(privileges);
 		user.setRole(role);
 		
@@ -75,7 +75,7 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 			if (role == null) {
 				return;
 			}
-			/*--------²åÈëuserÓërole¹ØÏµ---------*/
+			/*--------æ’å…¥userä¸roleå…³ç³»---------*/
 			tDAO.updateUserRole("insert", user.getId(), role.getId());
 			
 			List<Privilege> privileges = role.getPrivileges();
@@ -84,7 +84,7 @@ public class PersonBusinessServiceImpl implements PersonBusinessService {
 			}
 			
 			pDAO.addPrivilege(privileges);
-			/*--------²åÈëroleÓëprivileges¹ØÏµ---------*/
+			/*--------æ’å…¥roleä¸privilegeså…³ç³»---------*/
 			for (Privilege privilege : privileges) {
 				tDAO.updateRolePrivilege("insert", privilege.getId(), role.getId());
 			}

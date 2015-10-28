@@ -7,9 +7,11 @@ import org.dom4j.Element;
 import team.dx.classroom.dao.HomeWorkDAO;
 import team.dx.classroom.dao.ResourceDAO;
 import team.dx.classroom.dao.TaskDAO;
+import team.dx.classroom.dao.ThirdPartyCommonDAO;
 import team.dx.classroom.domain.*;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.HomeWorkService;
+import team.dx.classroom.utils.WebUtils;
 import team.dx.classroom.utils.XmlUtils;
 
 import java.io.*;
@@ -20,6 +22,7 @@ import java.util.Map;
 public class HomeWorkServiceImpl implements HomeWorkService {
 
     private TaskDAO tDAO = ObjectFactory.getInstance().createObject(TaskDAO.class);
+    private ThirdPartyCommonDAO tpDAO = ObjectFactory.getInstance().createObject(ThirdPartyCommonDAO.class);
     private ResourceDAO rDAO = ObjectFactory.getInstance().createObject(ResourceDAO.class);
     private HomeWorkDAO hDAO = ObjectFactory.getInstance().createObject(HomeWorkDAO.class);
 
@@ -50,6 +53,9 @@ public class HomeWorkServiceImpl implements HomeWorkService {
     @Override
     public HashMap<String, String> checkHomework(String taskId, Map stuAnswer) {
 
+        // 首先要将分数放进去才能累计
+        Integer score = 0;
+        stuAnswer.put("score", String.valueOf(score));
         HomeWork homework = getHomeWork(taskId);
 
         HashMap<String, String> wrongMap = new HashMap<String, String>();
@@ -109,6 +115,12 @@ public class HomeWorkServiceImpl implements HomeWorkService {
             e.printStackTrace();
         }
 
+        // 将学生完成作业写入数据库
+        String sScore = (String) stuAnswer.get("score");
+        Integer iScore = Integer.parseInt(sScore);
+        tpDAO.updateUserTask("insert", stuAnswer.get("studentId"),
+                stuAnswer.get("taskId"), iScore);
+
         return wrongMap;
     }
 
@@ -139,8 +151,15 @@ public class HomeWorkServiceImpl implements HomeWorkService {
      * */
     private void scoreTask(Topic s, Map stuAnswer, HashMap wrongMap) {
 
+
         if (!s.getAnswer().equalsIgnoreCase((String) stuAnswer.get(s.getId()))) {
             wrongMap.put(s.getId(), s.getAnswer());
+        } else {
+            // 对的题一题加5分 (code about the score just like shit!!!)
+            String sScore = (String) stuAnswer.get("score");
+            Integer iScore = Integer.parseInt(sScore);
+            iScore += 5;
+            stuAnswer.put("score", String.valueOf(iScore));
         }
 
     }

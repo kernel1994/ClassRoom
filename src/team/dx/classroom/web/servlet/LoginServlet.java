@@ -13,12 +13,12 @@ import team.dx.classroom.service.PersonBusinessService;
 import team.dx.classroom.service.impl.PersonBusinessServiceImpl;
 
 /**
- * ÏìÓ¦µÇÂ¼ÇëÇó£¬ÓÃÓÚ²»Í¬ÓÃ»§½ÇÉ«
+ * å“åº”ç™»å½•è¯·æ±‚ï¼Œç”¨äºä¸åŒç”¨æˆ·è§’è‰²
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	/** LoginService ¶ÔÏó£¬¸ºÔğ·µ»Ø¶ÔÓ¦µÇÂ¼µÄ¶ÔÏó  */
+	/** LoginService å¯¹è±¡ï¼Œè´Ÿè´£è¿”å›å¯¹åº”ç™»å½•çš„å¯¹è±¡  */
 	private PersonBusinessService personBusinessService = new PersonBusinessServiceImpl();
        
     public LoginServlet() {
@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
     protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
     	
-    	/* ½ûÓÃ»º´æ */
+    	/* ç¦ç”¨ç¼“å­˜ */
 		response.setHeader("Cache-Control", "no-store");
 		response.setHeader("Pragma", "no-cache");
 		response.setDateHeader("Expires", 0);
@@ -40,12 +40,12 @@ public class LoginServlet extends HttpServlet {
     	
     	PrintWriter out = response.getWriter();
     	
-    	// ·µ»Ø¿ÕÔò±íÊ¾µÇÂ¼²»³É¹¦£¬ÃÜÂë»òÓÊÏä´íÎó£¬ÓÃAjax + jQuery ¸ø³öÌáÊ¾ĞÅÏ¢
+    	// è¿”å›ç©ºåˆ™è¡¨ç¤ºç™»å½•ä¸æˆåŠŸï¼Œå¯†ç æˆ–é‚®ç®±é”™è¯¯ï¼Œç”¨Ajax + jQuery ç»™å‡ºæç¤ºä¿¡æ¯
     	if (user != null && user.getRole() != null) {
     		request.getSession().setAttribute("user", user);
         	
-        	// ÖØ¶¨Ïòµ½²»Í¬Éí·İÓÃ»§µÄÖ÷Ò³
-        	// ¹æ¶¨£ºÔÚÊı¾İ¿âÖĞ½ÇÉ«role ±íid ×Ö¶ÎÖµÎª½ÇÉ«Ãû£¬¼´student etc.
+        	// é‡å®šå‘åˆ°ä¸åŒèº«ä»½ç”¨æˆ·çš„ä¸»é¡µ
+        	// è§„å®šï¼šåœ¨æ•°æ®åº“ä¸­è§’è‰²role è¡¨id å­—æ®µå€¼ä¸ºè§’è‰²åï¼Œå³student etc.
 
     		if (user.getRole().getId().equals("student")) {
     			out.write("createIndex.stu");

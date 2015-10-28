@@ -44,4 +44,9 @@ public class TaskDAOImpl extends BasicDAO<Task> implements TaskDAO {
 		update(sql, task.getId(), task.getName(), task.getDescription(), courseId, task.getResource().getId());
 	}
 
+	@Override
+	public Integer getScore(String sql, Object... args) {
+
+		return getTheValue(sql, args);
+	}
 }

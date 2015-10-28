@@ -7,7 +7,7 @@ public interface HomeWorkDAO {
 	void add(HomeWork homeWork, String path, String standardPath);
 
 	/**
-	 * 读取Homework 对象。参数注意添加文件协议file:///
+	 * 璇诲彇Homework 瀵硅薄銆傚弬鏁版敞鎰忔坊鍔犳枃浠跺崗璁甪ile:///
 	 * */
 	public HomeWork get(String path);
 }

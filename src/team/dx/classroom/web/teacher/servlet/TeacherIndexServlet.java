@@ -15,7 +15,7 @@ import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
 
 /* *
- * 显示教师主页UI
+ * 鏄剧ず鏁欏笀涓婚〉UI
  * */
 public class TeacherIndexServlet extends HttpServlet {
 
@@ -26,7 +26,7 @@ public class TeacherIndexServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		try {
-			/*-----------教师登陆成功后，显示自己所教的课程------------*/
+			/*-----------鏁欏笀鐧婚檰鎴愬姛鍚庯紝鏄剧ず鑷繁鎵�鏁欑殑璇剧▼------------*/
 			String teacherId = ((User)request.getSession().getAttribute("user")).getId();
 			List<Course> courses = cbs.getAllCourses(teacherId);
 			request.setAttribute("courses", courses);
@@ -37,7 +37,7 @@ public class TeacherIndexServlet extends HttpServlet {
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("message", "未知异常");
+			request.setAttribute("message", "鏈煡寮傚父");
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 		}
 		

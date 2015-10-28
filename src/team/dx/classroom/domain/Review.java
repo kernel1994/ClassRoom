@@ -7,7 +7,7 @@ public class Review {
 	private String id;
 	private String content;
 	private Date time;
-	/** ÆÀÂÛµÄÈË */
+	/** è¯„è®ºçš„äºº */
 	private User user;
 
 	public Review() {

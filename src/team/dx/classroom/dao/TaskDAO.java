@@ -15,4 +15,7 @@ public interface TaskDAO {
 	public void deleteTask(String id);
 	
 	public void addTask(Task task, String courseId);
+
+	/** 查询一个作业学生的分数 */
+	Integer getScore(String sql, Object... args);
 }
