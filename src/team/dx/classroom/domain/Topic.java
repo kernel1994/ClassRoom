@@ -11,6 +11,7 @@ public class Topic implements Serializable {
     protected String id;
     protected String title;
     protected String answer;
+    protected String stuAnswer;
     protected String description;
 
     public Topic() {
@@ -47,6 +48,14 @@ public class Topic implements Serializable {
         this.answer = answer;
     }
 
+    public String getStuAnswer() {
+        return stuAnswer;
+    }
+
+    public void setStuAnswer(String stuAnswer) {
+        this.stuAnswer = stuAnswer;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -61,6 +70,7 @@ public class Topic implements Serializable {
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", answer='" + answer + '\'' +
+                ", stuAnswer='" + stuAnswer + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

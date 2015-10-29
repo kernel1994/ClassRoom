@@ -74,9 +74,11 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 	}
 
 	@Override
-	public HomeWork get(String path) {
+	public HomeWork get(String path, String studentId) {
 
 		try {
+			// team/dx/classroom/service/impl/HomeWorkServiceImpl.java 提到过。是因为xml 标签不允许数字开头，故加前缀
+			studentId = "stuId_" + studentId;
 
 			Document document = XmlUtils.parse(path);
 
@@ -94,6 +96,9 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 
 				String answer = select.attributeValue("answer");
 				sDm.setAnswer(answer);
+
+				String stuAnswer = select.elementText(studentId);
+				sDm.setStuAnswer(stuAnswer);
 
 				String title = select.elementText("title");
 				sDm.setTitle(title);
@@ -129,6 +134,9 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 				String answer = trueorfalse.attributeValue("answer");
 				tfDm.setAnswer(answer);
 
+				String stuAnswer = trueorfalse.elementText(studentId);
+				tfDm.setStuAnswer(stuAnswer);
+
 				String title = trueorfalse.elementText("title");
 				tfDm.setTitle(title);
 
@@ -147,6 +155,9 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 
 				String id = shortquestion.attributeValue("id");
 				sqDm.setId(id);
+
+				String stuAnswer = shortquestion.elementText(studentId);
+				sqDm.setStuAnswer(stuAnswer);
 
 				String title = shortquestion.elementText("title");
 				sqDm.setTitle(title);

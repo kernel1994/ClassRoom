@@ -13,7 +13,7 @@ public class HomeWorkDAOImplTest {
     public void testGet() {
 
         /* 注意添加文件协议file:/// */
-        HomeWork hw = h.get("file:///G:\\Code_Java_IDEA\\out\\artifacts\\ClassRoom_war_exploded\\resource\\task\\homework\\发_2.xml");
+        HomeWork hw = h.get("file:///G:\\Code_Java_IDEA\\out\\artifacts\\ClassRoom_war_exploded\\resource\\task\\homework\\发_2.xml", "1");
         System.out.println(hw);
     }
 }

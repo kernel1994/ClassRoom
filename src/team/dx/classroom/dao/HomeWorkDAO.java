@@ -9,5 +9,5 @@ public interface HomeWorkDAO {
 	/**
 	 * 读取Homework 对象。参数注意添加文件协议file:///
 	 * */
-	public HomeWork get(String path);
+	public HomeWork get(String path, String studentId);
 }

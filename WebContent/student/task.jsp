@@ -48,10 +48,10 @@
     </form>
     <a type="button" id="submitBtn"
        style="background-color:#eee;
-       border:1px solid #d5d5d5;
-       border-radius:3px;
-       cursor:pointer;
-       padding:5px 12px;">提交
+          border:1px solid #d5d5d5;
+          border-radius:3px;
+          cursor:pointer;
+          padding:5px 12px;">提交
     </a>
 </c:if>
 
@@ -89,7 +89,8 @@
                         .css('color', 'red');
             }
         });
-    });
+    }).attr('disabled', true);
+
 </script>
 
 </body>

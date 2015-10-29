@@ -45,7 +45,7 @@ public class HomeWorkServiceImpl implements HomeWorkService {
 
         String uri = getResourceURIByTaskId(taskId);
 
-        HomeWork homework = hDAO.get(uri);
+        HomeWork homework = hDAO.get(uri, null);
 
         return homework;
     }
@@ -166,6 +166,7 @@ public class HomeWorkServiceImpl implements HomeWorkService {
 
     /**
      * 创建存储学生的答案的xml 文件。文件名为："学生答案_" + 原文件名
+     * 无则创建并返回URI，有则返回URI
      * @return studentAnswerFileURI 学生答案文件URI
      * */
     private String createStudentAnswerFile(String taskResourceURI) throws IOException {
@@ -202,4 +203,30 @@ public class HomeWorkServiceImpl implements HomeWorkService {
 
         return studentAnswerFileURI;
     }
+
+    /**
+     * 获得学生存储作业的文件UIR
+     * */
+    private String getStudentHomeworkURIByTaskId(String taskId) {
+
+        String taskResourceURI = getResourceURIByTaskId(taskId);
+        String studentHomeworkURI = null;
+
+        try {
+            studentHomeworkURI = createStudentAnswerFile(taskResourceURI);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return studentHomeworkURI;
+    }
+
+    @Override
+    public HomeWork getStudentHomeWork(String taskId, String studentId) {
+
+        String studentHomeworkURI = getStudentHomeworkURIByTaskId(taskId);
+
+        return hDAO.get(studentHomeworkURI, studentId);
+    }
+
 }

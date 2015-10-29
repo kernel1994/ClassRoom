@@ -1,6 +1,7 @@
 package team.dx.classroom.web.student.servlet;
 
 import com.google.gson.Gson;
+import team.dx.classroom.dao.TaskDAO;
 import team.dx.classroom.domain.*;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
@@ -194,19 +195,34 @@ public class StudentServlet extends MethodInvokeServlet {
 		request.getRequestDispatcher("/student/tasks.jsp").forward(request, response);
 	}
 
-	/* 学生做作业 */
+	/* 学生做/ 查看作业 */
 	public void doTask(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String taskId = request.getParameter("taskId");
-		HomeWork homeWork = hService.getHomeWork(taskId);
+		String studentId = getUserId(request, response);
+
+		HomeWork homeWork = null;
+		String path = null;
+
+		// 查到分数是null 则表示没有做
+		if (tService.getStudentTaskScore(studentId, taskId) == null) {
+			homeWork = hService.getHomeWork(taskId);
+			path = "/student/task.jsp";
+			request.setAttribute("taskId", taskId);
+
+		} else {
+			/* 学生查看自己做的作业 */
+			homeWork = hService.getStudentHomeWork(taskId, studentId);
+			path = "/student/taskView.jsp";
+
+		}
 
 		request.setAttribute("homeWork", homeWork);
-		request.setAttribute("taskId", taskId);
-		request.getRequestDispatcher("/student/task.jsp").forward(request, response);
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 	/* 学生提交作业 */
-	public  void submitTask(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void submitTask(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String data = request.getParameter("data");
 		Gson gson = new Gson();
@@ -235,6 +251,7 @@ public class StudentServlet extends MethodInvokeServlet {
 		out.flush();
 		out.close();
 	}
+
 }
 
 

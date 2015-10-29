@@ -31,10 +31,9 @@ public interface TaskService {
      * */
     void addHomeWork(HomeWork homeWork, String path, String standardPath);
     
-    /* *
-     * 
-     * 
-     * 
+    /**
+     * 获取学生某次作业的分数
      * */
-    
+    Integer getStudentTaskScore(String studentId, String taskId);
+
 }

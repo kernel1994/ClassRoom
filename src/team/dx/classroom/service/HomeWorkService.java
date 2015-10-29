@@ -21,4 +21,10 @@ public interface HomeWorkService {
      * @return 学生做错的题
      * */
     public HashMap<String, String> checkHomework(String taskId, Map stuAnswer);
+
+    /**
+     * 获得某次作业的及其答案和学生的答案
+     * */
+    HomeWork getStudentHomeWork(String taskId, String studentId);
+
 }

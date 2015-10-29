@@ -46,4 +46,11 @@ public class TaskServiceImpl implements TaskService {
 	public void addHomeWork(HomeWork homeWork, String path, String standardPath) {
 		hDao.add(homeWork, path, standardPath);
 	}
+
+	@Override
+	public Integer getStudentTaskScore(String studentId, String taskId) {
+		String sqlScore = "select score from user_task where user_id = ? and task_id = ?";
+
+		return tDAO.getScore(sqlScore, studentId, taskId);
+	}
 }
