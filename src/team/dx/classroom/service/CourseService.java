@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import team.dx.classroom.domain.Course;
+import team.dx.classroom.domain.User;
 
 public interface CourseService {
 
@@ -80,4 +81,24 @@ public interface CourseService {
 	 * @return 包含了学生学生所有选课的所有作业的列表
 	 * */
 	public List<Course> getStudentAllCoursesTasks(String studentId);
+
+	/**
+	 * 删除一门课程。
+	 * 根据学生id 来删除课程。
+	 * @param courseId 课程id
+	 * */
+	public void deleteCourses(String conrseId);
+
+	/**
+	 * 跟新一门课程。
+	 * @param course 课程course封装了一门课程的基本信息
+	 * */
+	public void updateCourses(Course course);
+
+	/**
+	 * 跟新一门课程中所有学生
+	 * @param course 课程course封装了一门课程的基本信息
+	 * @return 返回所有学生的list集合
+	 * */
+	public List<User> getAllStudent(String courseId);
 }

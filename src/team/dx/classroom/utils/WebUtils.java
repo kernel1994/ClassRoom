@@ -84,38 +84,6 @@ public class WebUtils {
 		return UUID.randomUUID().toString();
 	}
 
-	public static List<Select> conver2Selects(String[] titles,
-			String[] answersA, String[] answersB, String[] answersC,
-			String[] answersD, String[] descriptions, String[] answers) {
-		List<Select> selects = new ArrayList<Select>();
-		if (titles == null) {
-			return selects;
-		}
-		int len = titles.length;
-		for (int i = 0; i < len; i++) {
-			Select select = new Select("select" + i, titles[i], answersA[i], answersB[i],
-					answersC[i], answersD[i], answers[i], descriptions[i]);
-			selects.add(select);
-		}
-		return selects;
-
-	}
-
-	public static List<TrueOrFalse> conver2TrueOrFalse(String[] ttitles,
-			String[] tanswers, String[] tdescriptions) {
-		List<TrueOrFalse> trueOrFalses = new ArrayList<TrueOrFalse>();
-		if (ttitles == null) {
-			return null;
-		}
-		int len = ttitles.length;
-		
-		for (int i = 0; i < len; i++) {
-			TrueOrFalse trueOrFalse = new TrueOrFalse("trueorfalse" + i, ttitles[i], tanswers[i],
-					tdescriptions[i]);
-			trueOrFalses.add(trueOrFalse);
-		}
-		return trueOrFalses;
-	}
 
 	public static List<ShortQuestion> conver2ShortQuestion(String[] qtitles,
 			String[] qdescriptions) {
@@ -154,23 +122,40 @@ public class WebUtils {
 		HomeWork homeWork = new HomeWork();
 
 		// 选择题
-		String[] stitles = request.getParameterValues("stitle");
-		String[] sanswersA = request.getParameterValues("sA");
-		String[] sanswersB = request.getParameterValues("sB");
-		String[] sanswersC = request.getParameterValues("sC");
-		String[] sanswersD = request.getParameterValues("sD");
-		String[] sdescriptions = request.getParameterValues("sdescription");
-		String[] sanswers = request.getParameterValues("sanswer");
-		List<Select> selects = conver2Selects(stitles, sanswersA,
-				sanswersB, sanswersC, sanswersD, sdescriptions, sanswers);
+		String[] selectIds = request.getParameterValues("select_id");
+		List<Select> selects = new ArrayList<Select>();	
+		if (selectIds != null) {
+			for (String id : selectIds) {
+				String stitle = request.getParameter("stitle" + id);
+				String sanswerA = request.getParameter("sA" + id);
+				String sanswerB = request.getParameter("sB" + id);
+				String sanswerC = request.getParameter("sC" + id);
+				String sanswerD = request.getParameter("sD" + id);
+				String sdescription = request.getParameter("sdescription" + id);
+				String sanswer = request.getParameter("sanswer" + id);
+				Select select = new Select("select", stitle, sanswerA, sanswerB,
+						sanswerC, sanswerD, sanswer, sdescription);
+				selects.add(select);
+			}
+		}
+		
 		homeWork.setSelects(selects);
 
 		// 判断题
-		String[] ttitles = request.getParameterValues("ttitle");
-		String[] tanswers = request.getParameterValues("tanswer");
-		String[] tdescriptions = request.getParameterValues("tdescription");
-		List<TrueOrFalse> trueOrFalses = conver2TrueOrFalse(ttitles,
-				tanswers, tdescriptions);
+		String[] trueorfalseId = request.getParameterValues("trueorfalse_id");
+		List<TrueOrFalse> trueOrFalses = new ArrayList<TrueOrFalse>();
+		if (trueorfalseId != null) {
+			for (String id : trueorfalseId) {
+				String ttitle = request.getParameter("ttitle" + id);
+				String tanswer = request.getParameter("tanswer" + id);
+				String tdescription = request.getParameter("tdescription" + id);
+				TrueOrFalse trueOrFalse = new TrueOrFalse("trueorfalse", ttitle, tanswer,
+						tdescription);
+				trueOrFalses.add(trueOrFalse);
+			}
+		}
+		
+		
 		homeWork.setTrueOrFalses(trueOrFalses);
 
 		// 简答题
@@ -183,4 +168,24 @@ public class WebUtils {
 		return homeWork;
 	}
 
+	public static void deleteFile(String pathname) {
+		File file = new File(pathname);
+		
+		//文件不存在直接返回
+		if (!file.exists()) {
+			return;
+		}
+		
+		//文件夹
+		if (file.isDirectory()) {
+			String[] filenames = file.list();
+			File tempFile = null;
+			for (int i = 0, length = filenames.length; i < length; i++) {
+				//删除所有
+			}
+		} else { //删除单个文件
+			file.delete();
+		}
+		
+	}
 }

@@ -14,13 +14,13 @@
     		background: white;
     		border: 1px solid;
     	}
-    	
     </style>
   </head>
   
   <script type="text/javascript">
   	$(function(){
   		//单选题
+  		var select_item = 1;
   		$("#task_select").click(function(){
   			var $task = $("#task_select");
   			var $div = $("<div class='select'><div>");
@@ -30,14 +30,20 @@
   		});
   		
   		function createTaskSelect(){
-  			var $temp = $(".select").last();
-  			$temp.append("<label for='stitle'>选择题：</label><textarea rows='1' cols='90%' name='stitle'></textarea><br/>");
-  			$temp.append("<label for='sA'>A：</label><input name='sA'/><br/>");
-  			$temp.append("<label for='sB'>B：</label><input name='sB'/><br/>");
-  			$temp.append("<label for='sC'>C：</label><input name='sC'/><br/>");
-  			$temp.append("<label for='sD'>D：</label><input name='sD'/><br/>");
-  			$temp.append("<label for='sdescription'>备注：</label><textarea rows='1' cols='90%' name='sdescription'></textarea><br/>");
-  			$temp.append("<label for='sanswer'>答案：</label><input name='sanswer'/>");
+  			var $temp = $("div[class='select']").last();
+  			
+  			$temp.append("<input type='hidden' name='select_id' value='"+select_item+"'/>");
+  			$temp.append("<label for='stitle'>选择题：</label><textarea rows='1' cols='90%' name='stitle"+select_item+"'></textarea><br/>");
+  			$temp.append("<label for='sA'>A：</label><input name='sA"+select_item+"'/><br/>");
+  			$temp.append("<label for='sB'>B：</label><input name='sB"+select_item+"'/><br/>");
+  			$temp.append("<label for='sC'>C：</label><input name='sC"+select_item+"'/><br/>");
+  			$temp.append("<label for='sD'>D：</label><input name='sD"+select_item+"'/><br/>");
+  			$temp.append("<label for='sdescription'>备注：</label><textarea rows='1' cols='90%' name='sdescription"+select_item+"'></textarea><br/>");
+  			$temp.append("<label for='sanswer'>答案：</label>&nbsp;");
+  			$temp.append("<label for='sanswer'>A</label><input type='radio' name='sanswer"+select_item+"' value='A'/>&nbsp;");
+  			$temp.append("<label for='sanswer'>B</label><input type='radio' name='sanswer"+select_item+"' value='B'/>&nbsp;");
+  			$temp.append("<label for='sanswer'>C</label><input type='radio' name='sanswer"+select_item+"' value='C'/>&nbsp;");
+  			$temp.append("<label for='sanswer'>D</label><input type='radio' name='sanswer"+select_item+"' value='D'/><br/>");
   			$temp.append("<input type='button' value='删除'/>");
   			
   			//添加事件按钮
@@ -45,6 +51,7 @@
   				$temp.empty();
   				$temp.remove();
   			});
+  			select_item++;
   		}
   		
   		//判断题
@@ -58,10 +65,12 @@
   		
   		function createTaskTrueOrFalse(){
   			var $temp = $(".trueorfalse").last();
-  			$temp.append("<label for='ttitle'>判断题：</label><textarea rows='1' cols='90%' name='ttitle'></textarea><br/>");
-  			$temp.append("<label for='tdescription'>备注：</label><textarea rows='1' cols='90%' name='tdescription'></textarea><br/>");
-  			$temp.append("<label for='tanswer'>答案：</label>");
-  			$temp.append("<label for='tanswer'>答案：</label><input name='tanswer' value='true'/>");
+  			$temp.append("<input type='hidden' name='trueorfalse_id' value='"+select_item+"'/>");
+  			$temp.append("<label for='ttitle'>判断题：</label><textarea rows='1' cols='90%' name='ttitle"+select_item+"'></textarea><br/>");
+  			$temp.append("<label for='tdescription'>备注：</label><textarea rows='1' cols='90%' name='tdescription"+select_item+"'></textarea><br/>");
+  			$temp.append("<label for='tanswer'>答案：</label>&nbsp;");
+  			$temp.append("<label for='tanswer'>对</label><input type='radio' name='tanswer"+select_item+"' value='true'/>&nbsp;");
+  			$temp.append("<label for='tanswer'>错</label><input type='radio' name='tanswer"+select_item+"' value='false'/>&nbsp;");
   			$temp.append("<input type='button' value='删除'/>");
   			
   			//添加事件按钮
@@ -69,6 +78,7 @@
   				$temp.empty();
   				$temp.remove();
   			});
+  			select_item++;
   		}
   		//简答题task_shortquestion
   		$("#task_shortquestion").click(function(){

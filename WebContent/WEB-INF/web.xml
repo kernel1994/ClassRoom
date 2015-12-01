@@ -130,6 +130,11 @@
     <servlet-name>CoursewareServlet</servlet-name>
     <servlet-class>team.dx.classroom.web.teacher.servlet.CoursewareServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>TestAjaxServlet</servlet-name>
+    <servlet-class>test.web.TestAjaxServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -166,6 +171,10 @@
   <servlet-mapping>
     <servlet-name>CoursewareServlet</servlet-name>
     <url-pattern>/servlet/CoursewareServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TestAjaxServlet</servlet-name>
+    <url-pattern>/servlet/TestAjaxServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

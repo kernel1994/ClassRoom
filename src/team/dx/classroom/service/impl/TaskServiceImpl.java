@@ -53,4 +53,23 @@ public class TaskServiceImpl implements TaskService {
 
 		return tDAO.getScore(sqlScore, studentId, taskId);
 	}
+
+	@Override
+	public String getTaskPath(String taskId) {
+		Task task = tDAO.getTask("select * from task where id = ?", taskId);
+		Resource resource = rDAO.getResource("select * from resource where id = ?", task.getResource_id());
+		return resource.getUri();
+	}
+
+	@Override
+	public void deleteTask(String taskId) {
+		Task task = tDAO.getTask("select * from task where id = ?", taskId);
+		
+		//删除task中记录
+		tDAO.deleteTask(taskId);
+		
+		//删除资源resource中的记录
+		
+		rDAO.deleteResource(task.getResource_id());
+	}
 }

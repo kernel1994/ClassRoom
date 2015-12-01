@@ -238,4 +238,21 @@ public class CourseServiceImpl implements CourseService {
 
 		return courses;
 	}
+
+	@Override
+	public void deleteCourses(String conrseId) {
+		cDAO.deleteCourse(conrseId);
+		
+	}
+
+	@Override
+	public void updateCourses(Course course) {
+		cDAO.updateCourse(course);
+	}
+
+	@Override
+	public List<User> getAllStudent(String courseId) {
+		String sql = "select user.* from user,student_course where student_course.student_id = user.id and student_course.course_id = ?;";
+		return uDAO.getUsers(sql, courseId);
+	}
 }

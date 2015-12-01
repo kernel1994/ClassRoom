@@ -12,6 +12,7 @@ import team.dx.classroom.domain.Task;
 import team.dx.classroom.domain.User;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
+import team.dx.classroom.service.HomeWorkService;
 import team.dx.classroom.service.TaskService;
 import team.dx.classroom.utils.WebUtils;
 import team.dx.classroom.web.servlet.MethodInvokeServlet2;
@@ -26,6 +27,7 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			CourseService.class);
 	private TaskService ts = ObjectFactory.getInstance().createObject(
 			TaskService.class);
+	private HomeWorkService hs = ObjectFactory.getInstance().createObject(HomeWorkService.class);
 
 	public void listTask(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -109,8 +111,7 @@ public class TaskServlet extends MethodInvokeServlet2 {
 
 			// 操作成功后返回
 			response.sendRedirect(request.getContextPath()
-					+ "/servlet/TeacherCoreServlet?method=coreIndexUI&id="
-					+ request.getSession().getAttribute("courseId"));
+					+ "/servlet/TaskServlet?method=listTask");
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("message", "未知异常!<br/>" + e.getMessage());
@@ -118,6 +119,56 @@ public class TaskServlet extends MethodInvokeServlet2 {
 					response);
 		}
 
+	}
+	
+	public void checkTask(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		try {
+			String taskId = request.getParameter("taskid");
+			HomeWork homeWork = hs.getHomeWork(taskId);
+			request.setAttribute("homeWork", homeWork);
+			request.getRequestDispatcher("/teacher/manager/checkatask.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message", "checkTask异常!<br/>" + e.getMessage());
+			request.getRequestDispatcher("/message.jsp").forward(request,
+					response);
+		}
+	}
+	
+	public void deleteTask(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			String taskId = request.getParameter("taskid");
+			
+			//先得到路径，不然数据库中记录删除了就没有记录了
+			String pathname = ts.getTaskPath(taskId);
+			
+			//删除数据库中记录
+			ts.deleteTask(taskId);
+			
+			System.out.println("ok");
+			//删除真实存储
+			WebUtils.deleteFile(pathname);
+			
+
+			String courseId = (String) request.getSession().getAttribute("courseId");
+			Course course = cs.getCourse(courseId);
+			request.setAttribute("course", course);
+			
+			//作业
+			List<Task> tasks = ts.getCourseTasks(courseId);
+			request.setAttribute("tasks", tasks);
+			
+
+			request.getRequestDispatcher("/teacher/manager/listtask.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message", "TaskServlet_deleteTask未知异常");
+			request.getRequestDispatcher("/message.jsp").forward(request,
+					response);
+		}
 	}
 
 }

@@ -36,4 +36,17 @@ public interface TaskService {
      * */
     Integer getStudentTaskScore(String studentId, String taskId);
 
+    /**
+     * 获取一次作业的路径
+     * @taskId 作业的保存路径id
+     * @pathName 作业的的保存路径
+     * */
+	String getTaskPath(String taskId);
+
+	/**
+     * 删除一次作业
+     * @taskId 作业的id
+     * */
+	public void deleteTask(String taskId);
+
 }
