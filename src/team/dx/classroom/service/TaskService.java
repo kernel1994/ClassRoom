@@ -86,4 +86,6 @@ public interface TaskService {
      * @return 还没有完成作业List 学生对象
      * */
 	List<User> getNoNeedMarkGradeStudent(String taskId);
+
+	public void markScore2(String taskId, String studentId, int score2);
 }

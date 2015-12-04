@@ -166,4 +166,11 @@ create table task_review
 	constraint review_id_FK foreign key(review_id) references review(id)
 );
 
+create table message(
+	src varchar(40) not null,
+	des varchar(40) not null,
+	father varchar(40),
+	time date,
+	content varchar(255)
+);
 

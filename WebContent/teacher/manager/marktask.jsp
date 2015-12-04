@@ -52,6 +52,15 @@
 
 </c:if>
 
+	<form action="${pageContext.request.contextPath }/servlet/TaskServlet">
+		<input type="hidden" name="method" value="markScore2">
+		<input type="hidden" name="studentid" value="${requestScope.studentId}">
+		<input type="hidden" name="taskid" value="${requestScope.taskId}">
+		<label>成绩：</label>
+		<input type="text" name="score2">
+		<input type="submit" value="打分">
+	</form>
+
 
 <script >
 
@@ -62,10 +71,6 @@
       if ($(this).val() == stuAnswer) {
         $(this).attr('checked', 'checked');
       }
-    });
-
-    $('input').each(function() {
-      $(this).attr('disabled', 'disabled');
     });
   }
 

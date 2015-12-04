@@ -114,4 +114,9 @@ public class TaskServiceImpl implements TaskService {
 		String condition = "select * from user,user_task where user.id = user_task.user_id and user_task.score2!=0 and user_task.task_id='"+taskId+"';";
 		return uDAO.getUsers(condition);
 	}
+
+	@Override
+	public void markScore2(String taskId, String studentId, int score2) {
+		tpcDao.updateUserTask("update", score2,studentId,taskId);
+	}
 }

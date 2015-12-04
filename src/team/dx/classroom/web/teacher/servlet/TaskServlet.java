@@ -189,7 +189,7 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			// 找出还还没做了作业的所有学生
 			List<User> notHaveFinishStudents = ts.getNotHaveFinishStudent(
 					courseId, taskId);
-			
+
 			if (noNeedMarkGradeStudents != null) {
 				request.setAttribute("noNeedMarkGradeStudentCount",
 						noNeedMarkGradeStudents.size());
@@ -212,7 +212,8 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			}
 
 			request.setAttribute("task", task);
-			request.setAttribute("noNeedMarkGradeStudents", noNeedMarkGradeStudents);
+			request.setAttribute("noNeedMarkGradeStudents",
+					noNeedMarkGradeStudents);
 			request.setAttribute("needMarkGradeStudents", needMarkGradeStudents);
 			request.setAttribute("notHaveFinishStudents", notHaveFinishStudents);
 
@@ -233,12 +234,14 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			HomeWorkService hService = ObjectFactory.getInstance()
 					.createObject(HomeWorkService.class);
 
-			String taskId = request.getParameter("taskId");
-			String studentId = request.getParameter("studentId");
+			String taskId = request.getParameter("taskid");
+			String studentId = request.getParameter("studentid");
 
 			HomeWork homeWork = hService.getStudentHomeWork(taskId, studentId);
 
 			request.setAttribute("homeWork", homeWork);
+			request.setAttribute("taskId", taskId);
+			request.setAttribute("studentId", studentId);
 
 			request.getRequestDispatcher("/teacher/manager/marktask.jsp")
 					.forward(request, response);
@@ -252,4 +255,21 @@ public class TaskServlet extends MethodInvokeServlet2 {
 
 	}
 
+	public void markScore2(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			String taskId = request.getParameter("taskid");
+			String studentId = request.getParameter("studentid");
+			String score2 = request.getParameter("score2");
+
+			ts.markScore2(taskId, studentId, Integer.parseInt(score2));
+			taskProgress(request,response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message",
+					"markScore2异常!<br/>" + e.getMessage());
+			request.getRequestDispatcher("/message.jsp").forward(request,
+					response);
+		}
+	}
 }

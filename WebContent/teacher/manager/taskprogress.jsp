@@ -59,7 +59,7 @@
 						<tr>
 					<td>${student.name}</td>
   					<td>
-  						<a href="${pageContext.request.contextPath }/servlet/TaskServlet?method=markGrade&studentId=${student.id}&taskId=${requestScope.task.id}">批改</a>
+  						<a href="${pageContext.request.contextPath }/servlet/TaskServlet?method=markGrade&studentid=${student.id}&taskid=${requestScope.task.id}">批改</a>
   					</td>
   					</tr>
 				</c:forEach>
