@@ -34,4 +34,21 @@ public class CoursewareServiceImpl implements CoursewareService {
 		rDAO.addResource(courseware.getResource());
 		cwDAO.addCourseware(courseware, courseId);
 	}
+
+	@Override
+	public String getCoursewarePath(String coursewareId) {
+		
+		Courseware courseware = cwDAO.getCourseware("select * from courseware where id = ?", coursewareId);
+		Resource resource = rDAO.getResource("select * from resource where id = ?", courseware.getResource_id());
+		return resource.getUri();
+	}
+
+	@Override
+	public void deleteCourseware(String coursewareId) {
+		Courseware courseware = cwDAO.getCourseware("select * from courseware where id = ?", coursewareId);
+		//删除courseware中记录
+		cwDAO.deleteCourseware(coursewareId);
+		//删除资源resource中的记录
+		rDAO.deleteResource(courseware.getResource_id());
+	}
 }

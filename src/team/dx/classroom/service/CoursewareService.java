@@ -19,4 +19,19 @@ public interface CoursewareService {
      * @param courseware 封装课程的信息
      * */
     void addCourseware(Courseware courseware, String courseId);
+
+
+    /**
+     * 获取一次课件的路径
+     * @taskId 课件的保存路径id
+     * @pathName 作课件的保存路径
+     * */
+	public String getCoursewarePath(String coursewareId);
+
+
+	/**
+     * 删除一次课件
+     * @taskId 课件的id
+     * */
+	public void deleteCourseware(String coursewareId);
 }

@@ -18,4 +18,5 @@ public interface TaskDAO {
 
 	/** 查询一个作业学生的分数 */
 	Integer getScore(String sql, Object... args);
+
 }

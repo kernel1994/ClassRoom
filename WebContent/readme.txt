@@ -92,6 +92,7 @@ create table user_task (
   user_id varchar(40) not null,
   task_id varchar(40) not null,
   score int DEFAULT 0,
+  score2 int default 0,
   primary key(user_id,task_id),
   constraint user_id_FK3 foreign key(user_id) references user(id),
   constraint task_id_FK3 foreign key(task_id) references task(id)

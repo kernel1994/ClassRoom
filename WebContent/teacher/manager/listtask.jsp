@@ -33,6 +33,7 @@
 					<td>${task.description}</td>
 					<td>${task.resource.uploadtime}</td>
 					<td>
+						<a href="${pageContext.request.contextPath}/servlet/TaskServlet?method=taskProgress&taskid=${task.id}">学生进展</a>
 						<a href="${pageContext.request.contextPath}/servlet/TaskServlet?method=checkTask&taskid=${task.id}">查看</a>
 						<a href="#">修改</a>
 						<a href="javascript:void(0)" onclick="del('${task.id}')">删除</a>

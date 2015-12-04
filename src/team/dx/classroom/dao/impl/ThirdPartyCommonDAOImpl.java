@@ -136,9 +136,11 @@ public class ThirdPartyCommonDAOImpl implements ThirdPartyCommonDAO {
 		String sql = "";
 				
 		if (type.equals("insert")) {
-			sql = "INSERT INTO user_task (user_id, task_id, score) VALUES (?, ?, ?)";
+			sql = "INSERT INTO user_task (user_id, task_id, score, score2) VALUES (?, ?, ?, ?)";
 		} else if (type.equals("delete")) {
 			sql = "DELETE FROM user_task WHERE user_id = ? AND task_id = ?";
+		} else if (type.equals("deleteall")) {
+			sql = "DELETE FROM user_task WHERE task_id = ?";
 		} else if (type.equals("update")) {
 			sql = "UPDATE user_task SET score = ? WHERE user_id = ? AND task_id = ?";
 		} else {

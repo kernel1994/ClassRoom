@@ -27,22 +27,24 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			CourseService.class);
 	private TaskService ts = ObjectFactory.getInstance().createObject(
 			TaskService.class);
-	private HomeWorkService hs = ObjectFactory.getInstance().createObject(HomeWorkService.class);
+	private HomeWorkService hs = ObjectFactory.getInstance().createObject(
+			HomeWorkService.class);
 
 	public void listTask(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
 
-			String courseId = (String) request.getSession().getAttribute("courseId");
+			String courseId = (String) request.getSession().getAttribute(
+					"courseId");
 			Course course = cs.getCourse(courseId);
 			request.setAttribute("course", course);
-			
-			//作业
+
+			// 作业
 			List<Task> tasks = ts.getCourseTasks(courseId);
 			request.setAttribute("tasks", tasks);
-			
 
-			request.getRequestDispatcher("/teacher/manager/listtask.jsp").forward(request, response);
+			request.getRequestDispatcher("/teacher/manager/listtask.jsp")
+					.forward(request, response);
 		} catch (Exception e) {
 			request.setAttribute("message", "TaskServlet_addTaskUI未知异常");
 			request.getRequestDispatcher("/message.jsp").forward(request,
@@ -81,16 +83,18 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			Task task = WebUtils.request2Bean(request.getParameterMap(),
 					Task.class);
 			task.setId(WebUtils.getRandomUUID());
-			
-			//课程
-			String courseId = (String) request.getSession().getAttribute("courseId");
+
+			// 课程
+			String courseId = (String) request.getSession().getAttribute(
+					"courseId");
 			Course course = cs.getCourse(courseId);
 
 			// 上传者
 			User uploader = (User) request.getSession().getAttribute("user");
 
 			// 作业资源对象
-			Resource resource = WebUtils.conver2Resource(task, uploader, course, path);
+			Resource resource = WebUtils.conver2Resource(task, uploader,
+					course, path);
 			task.setResource(resource);
 
 			/*-------------存取真实的作业--------------*/
@@ -120,55 +124,132 @@ public class TaskServlet extends MethodInvokeServlet2 {
 		}
 
 	}
-	
+
 	public void checkTask(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		
+
 		try {
 			String taskId = request.getParameter("taskid");
 			HomeWork homeWork = hs.getHomeWork(taskId);
 			request.setAttribute("homeWork", homeWork);
-			request.getRequestDispatcher("/teacher/manager/checkatask.jsp").forward(request, response);
+			request.getRequestDispatcher("/teacher/manager/checkatask.jsp")
+					.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("message", "checkTask异常!<br/>" + e.getMessage());
+			request.setAttribute("message",
+					"checkTask异常!<br/>" + e.getMessage());
 			request.getRequestDispatcher("/message.jsp").forward(request,
 					response);
 		}
 	}
-	
+
 	public void deleteTask(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
 			String taskId = request.getParameter("taskid");
-			
-			//先得到路径，不然数据库中记录删除了就没有记录了
+
+			// 先得到路径，不然数据库中记录删除了就没有记录了
 			String pathname = ts.getTaskPath(taskId);
-			
-			//删除数据库中记录
+
+			// 删除数据库中记录
 			ts.deleteTask(taskId);
-			
-			System.out.println("ok");
-			//删除真实存储
+
+			// 删除真实存储
 			WebUtils.deleteFile(pathname);
-			
 
-			String courseId = (String) request.getSession().getAttribute("courseId");
-			Course course = cs.getCourse(courseId);
-			request.setAttribute("course", course);
-			
-			//作业
-			List<Task> tasks = ts.getCourseTasks(courseId);
-			request.setAttribute("tasks", tasks);
-			
-
-			request.getRequestDispatcher("/teacher/manager/listtask.jsp").forward(request, response);
+			// 回显
+			listTask(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("message", "TaskServlet_deleteTask未知异常");
 			request.getRequestDispatcher("/message.jsp").forward(request,
 					response);
 		}
+	}
+
+	public void taskProgress(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			// 作业id
+			String taskId = request.getParameter("taskid");
+			// 课程id
+			String courseId = (String) request.getSession().getAttribute(
+					"courseId");
+
+			// 描述作业
+			Task task = ts.getTask(taskId);
+			// 找出已经做了作业的所有学生
+			// 提交已经批改的作业的所有学生
+			List<User> noNeedMarkGradeStudents = ts
+					.getNoNeedMarkGradeStudent(taskId);
+			// 提交未批改的作业的所有学生
+			List<User> needMarkGradeStudents = ts
+					.getNeedMarkGradeStudent(taskId);
+
+			// 找出还还没做了作业的所有学生
+			List<User> notHaveFinishStudents = ts.getNotHaveFinishStudent(
+					courseId, taskId);
+			
+			if (noNeedMarkGradeStudents != null) {
+				request.setAttribute("noNeedMarkGradeStudentCount",
+						noNeedMarkGradeStudents.size());
+			} else {
+				request.setAttribute("noNeedMarkGradeStudentCount", 0);
+			}
+
+			if (needMarkGradeStudents != null) {
+				request.setAttribute("needMarkGradeStudentCount",
+						needMarkGradeStudents.size());
+			} else {
+				request.setAttribute("needMarkGradeStudentCount", 0);
+			}
+
+			if (notHaveFinishStudents != null) {
+				request.setAttribute("notHaveFinishStudentCount",
+						notHaveFinishStudents.size());
+			} else {
+				request.setAttribute("notHaveFinishStudentCount", 0);
+			}
+
+			request.setAttribute("task", task);
+			request.setAttribute("noNeedMarkGradeStudents", noNeedMarkGradeStudents);
+			request.setAttribute("needMarkGradeStudents", needMarkGradeStudents);
+			request.setAttribute("notHaveFinishStudents", notHaveFinishStudents);
+
+			request.getRequestDispatcher("/teacher/manager/taskprogress.jsp")
+					.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message",
+					"taskProgress异常!<br/>" + e.getMessage());
+			request.getRequestDispatcher("/message.jsp").forward(request,
+					response);
+		}
+	}
+
+	public void markGrade(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			HomeWorkService hService = ObjectFactory.getInstance()
+					.createObject(HomeWorkService.class);
+
+			String taskId = request.getParameter("taskId");
+			String studentId = request.getParameter("studentId");
+
+			HomeWork homeWork = hService.getStudentHomeWork(taskId, studentId);
+
+			request.setAttribute("homeWork", homeWork);
+
+			request.getRequestDispatcher("/teacher/manager/marktask.jsp")
+					.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message",
+					"markGrade异常!<br/>" + e.getMessage());
+			request.getRequestDispatcher("/message.jsp").forward(request,
+					response);
+		}
+
 	}
 
 }

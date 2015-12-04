@@ -8,6 +8,8 @@ public interface CoursewareDAO {
 
 	public List<Courseware> getCoursewares(String condition, Object ... args);
 	
+	public Courseware getCourseware(String condition, Object... args);
+	
 	public void updateCourseware(Courseware courseware);
 	
 	public void deleteCourseware(String id);

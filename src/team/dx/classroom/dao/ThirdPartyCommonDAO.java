@@ -61,4 +61,5 @@ public interface ThirdPartyCommonDAO {
 	 * */
 	public abstract void updateUserTask(String type, Object... args);
 
+
 }

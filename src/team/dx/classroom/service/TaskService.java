@@ -4,6 +4,7 @@ import java.util.List;
 
 import team.dx.classroom.domain.HomeWork;
 import team.dx.classroom.domain.Task;
+import team.dx.classroom.domain.User;
 
 public interface TaskService {
 
@@ -47,6 +48,42 @@ public interface TaskService {
      * 删除一次作业
      * @taskId 作业的id
      * */
-	public void deleteTask(String taskId);
+	void deleteTask(String taskId);
+	
+	/**
+     * 找出已经做了作业的所有学生
+     * @taskId 作业的id
+     * @courseId 课程的id
+     * @return 完成作业List 学生对象
+     * */
+	List<User> getHaveFinishStudent(String courseId, String taskId);
 
+	/**
+     * 找出还没有做了作业的所有学生
+     * @taskId 作业的id
+     * @courseId 课程的id
+     * @return 还没有完成作业List 学生对象
+     * */
+	List<User> getNotHaveFinishStudent(String courseId, String taskId);
+
+	/**
+     * 作业的描述
+     * @taskId 作业的id
+     * @return 作业对象
+     * */
+	Task getTask(String taskId);
+
+	/**
+     * 找出还需要批改作业的所有学生
+     * @taskId 作业的id
+     * @return 还没有完成作业List 学生对象
+     * */
+	List<User> getNeedMarkGradeStudent(String taskId);
+	
+	/**
+     * 找出不需要批改作业的所有学生
+     * @taskId 作业的id
+     * @return 还没有完成作业List 学生对象
+     * */
+	List<User> getNoNeedMarkGradeStudent(String taskId);
 }
