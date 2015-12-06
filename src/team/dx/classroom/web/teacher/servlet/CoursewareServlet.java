@@ -135,9 +135,9 @@ public class CoursewareServlet extends MethodInvokeServlet2 {
 
 			cws.addCourseware(courseware, courseId);
 
-			request.setAttribute("message", "上传文件成功！");
-			request.getRequestDispatcher("/message.jsp").forward(request,
-					response);
+			// 操作成功后返回
+			response.sendRedirect(request.getContextPath()
+								+ "/servlet/CoursewareServlet?method=listCourseware");
 		} catch (Exception e) {
 			request.setAttribute("message", "未知异常: " + e.getMessage());
 			request.getRequestDispatcher("/message.jsp").forward(request,
@@ -163,5 +163,26 @@ public class CoursewareServlet extends MethodInvokeServlet2 {
 			throw new RuntimeException(e);
 		}
 
+	}
+	
+	public void deleteCourseware(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			String coursewareId = request.getParameter("coursewareid");
+			
+			//先得到路径，不然数据库中记录删除了就没有记录了
+			String pathname = cws.getCoursewarePath(coursewareId);
+			//删除数据库中记录
+			cws.deleteCourseware(coursewareId);
+			
+			//删除真实存储
+			WebUtils.deleteFile(pathname);
+			listCourseware(request,response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message", "TaskServlet_deleteTask未知异常");
+			request.getRequestDispatcher("/message.jsp").forward(request,
+					response);
+		}
 	}
 }

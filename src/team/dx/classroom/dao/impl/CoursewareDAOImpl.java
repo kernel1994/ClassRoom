@@ -44,4 +44,9 @@ public class CoursewareDAOImpl extends BasicDAO<Courseware> implements Coursewar
 		update(sql, courseware.getId(), courseware.getName(), courseware.getDescription(), courseware.getResource().getId(), courseId);
 	}
 
+	@Override
+	public Courseware getCourseware(String condition, Object... args) {
+		return get(condition, args);
+	}
+
 }

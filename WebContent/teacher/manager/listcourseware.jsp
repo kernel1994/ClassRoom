@@ -4,6 +4,13 @@
 <html>
   <head>
     <title>课件管理</title>
+    <script type="text/javascript">
+	    function del(coursewareid) {
+			if (window.confirm("确认删除")) {
+				location.href = "${pageContext.request.contextPath }/servlet/CoursewareServlet?method=deleteCourseware&coursewareid="+coursewareid;
+			}
+		}
+    </script>
      <jsp:include page="../head.jsp"></jsp:include>
   </head>
   
@@ -26,9 +33,7 @@
 					<td>${courseware.description}</td>
 					<td>${courseware.resource.uploadtime}</td>
 					<td>
-						<a href="#">管理</a>
-						<a href="#">修改</a>
-						<a href="#">删除</a>
+						<a href="javascript:void(0)" onclick="del('${courseware.id}')">删除</a>
 					</td>
 				</tr>
 		</c:forEach>
