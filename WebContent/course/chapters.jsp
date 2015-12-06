@@ -5,13 +5,18 @@
     <title>章节</title>
 </head>
 <body>
-    <jsp:include page="/course/nav.jsp"></jsp:include>
 
+<jsp:include page="/course/nav.jsp"></jsp:include>
+
+<div class="container">
     <c:choose>
         <c:when test="${not empty requestScope.course.coursewares}">
-            <ul>
+            <ul class="collection with-header">
+                <li class="collection-header"><h4>课程章节</h4></li>
                 <c:forEach items="${requestScope.course.coursewares}" var="courseware">
-                    <li><a href="javascript:void(0);">${courseware.name}</a></li>
+                    <li>
+                        <a href="viewOneChapter.stu?coursewareID=${courseware.id}" class="collection-item">${courseware.name}</a>
+                    </li>
                 </c:forEach>
             </ul>
         </c:when>
@@ -19,5 +24,7 @@
             <em>没有章节</em>
         </c:otherwise>
     </c:choose>
+</div>
+
 </body>
 </html>

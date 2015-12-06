@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div>
+<div class="container">
   <c:if test="${not empty requestScope.courses }">
     <table>
       <thead>
@@ -23,13 +23,15 @@
           <td>${course.description }</td>
           <c:choose>
             <c:when test="${course.haveOwn == 1 }">
-              <td><button onclick="unchoose(this, '${course.id }', '${sessionScope.user.id }')"
-                          style="background-color: #d9534f">退选</button></td>
+              <td><button class="btn waves-effect waves-light red"
+                          onclick="unchoose(this, '${course.id }', '${sessionScope.user.id }')"
+                          >退选</button></td>
             </c:when>
 
             <c:when test="${course.haveOwn == 0 }">
-              <td><button onclick="choose(this, '${course.id }', '${sessionScope.user.id }')"
-                          style="background-color: #5cb85c">选课</button></td>
+              <td><button class="btn waves-effect waves-light blue"
+                          onclick="choose(this, '${course.id }', '${sessionScope.user.id }')"
+                          >选课</button></td>
             </c:when>
           </c:choose>
         </tr>

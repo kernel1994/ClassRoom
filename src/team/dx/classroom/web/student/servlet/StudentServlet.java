@@ -13,8 +13,8 @@ import team.dx.classroom.web.servlet.MethodInvokeServlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +37,7 @@ public class StudentServlet extends MethodInvokeServlet {
 	 * 从session 中获取用户id
 	 * 如果不能获取则返回登录页面(将来用filter 实现)
 	 * */
-	private String getUserId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public static String getUserId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		User user = (User)request.getSession().getAttribute("user");
 
@@ -183,8 +183,42 @@ public class StudentServlet extends MethodInvokeServlet {
 		course.setCoursewares(coursewares);
 
 		request.setAttribute("course", course);
-		request.getRequestDispatcher("/course/chapter.jsp").forward(request, response);
+		request.getRequestDispatcher("/course/chapters.jsp").forward(request, response);
 	}
+
+	public void viewOneChapter(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String coursewareID = request.getParameter("coursewareID");
+		Courseware courseware = cwService.getCourseware(coursewareID);
+
+		request.setAttribute("courseware", courseware);
+		request.getRequestDispatcher("/course/oneChapter.jsp").forward(request, response);
+	}
+
+	public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		response.setContentType("application/x-msdownload");
+
+		String uri = request.getParameter("uri");
+
+		String fileName = uri;
+		String filePath = uri;
+
+		// 注意这里的filename = 需要转码URLEncoder.encode(fileName, "utf-8") ，不然会变现为下载文件名为----。具体原因能上网的时候再查。
+		response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "utf-8"));
+
+		OutputStream out = response.getOutputStream();
+		InputStream in = new FileInputStream(filePath);
+
+		byte[] buffer = new byte[1024];
+		int len;
+
+		while ((len = in.read(buffer)) != -1) {
+			out.write(buffer, 0, len);
+		}
+
+		in.close();
+	}
+
 
 	public void viewStudentAllCoursesTasks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

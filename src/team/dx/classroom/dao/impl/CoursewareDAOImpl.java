@@ -9,6 +9,12 @@ import team.dx.classroom.domain.Courseware;
 public class CoursewareDAOImpl extends BasicDAO<Courseware> implements CoursewareDAO {
 
 	@Override
+	public Courseware getCourseware(String condition, Object... args) {
+
+		return get(condition, args);
+	}
+
+	@Override
 	public List<Courseware> getCoursewares(String condition, Object... args) {
 
 		return getForList(condition, args);

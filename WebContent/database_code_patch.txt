@@ -81,4 +81,30 @@ ADD CONSTRAINT `user_id_FK3`
   REFERENCES `classroom`.`user` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+2015-12-2
+CREATE TABLE `classroom`.`course_review` (
+  `course_id` VARCHAR(40) NOT NULL COMMENT '',
+  `review_id` VARCHAR(40) NOT NULL COMMENT '',
+  PRIMARY KEY (`course_id`, `review_id`)  COMMENT '',
+  INDEX `review_id_FK_idx` (`review_id` ASC)  COMMENT '',
+  CONSTRAINT `course_id_FK4`
+    FOREIGN KEY (`course_id`)
+    REFERENCES `classroom`.`course` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `review_id_FK3`
+    FOREIGN KEY (`review_id`)
+    REFERENCES `classroom`.`review` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 

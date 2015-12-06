@@ -7,6 +7,11 @@ import java.util.List;
 public interface CoursewareService {
 
     /**
+     * 根据课件ID 获取对象
+     * */
+    public Courseware getCourseware(String coursewareID);
+
+     /**
      * 获得指定课程号的所有课件列表
      * @param courseId 指定的课程id
      * @return 该课程号的所有作业List 对象

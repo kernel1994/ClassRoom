@@ -11,6 +11,7 @@ public class Course {
     private User teacher;
     private List<Courseware> coursewares;
     private List<Task> tasks;
+    private List<Review> reviews;
 
     /**
      * 用于标注用户是否用于该课程
@@ -22,7 +23,10 @@ public class Course {
     public Course() {
     }
 
-    public Course(String id, String name, int limitperson, String description, User teacher, List<Courseware> coursewares, List<Task> tasks) {
+    public Course(String id, String name, int limitperson,
+                  String description, User teacher,
+                  List<Courseware> coursewares, List<Task> tasks,
+                  List<Review> reviews) {
         this.id = id;
         this.name = name;
         this.limitperson = limitperson;
@@ -30,6 +34,7 @@ public class Course {
         this.teacher = teacher;
         this.coursewares = coursewares;
         this.tasks = tasks;
+        this.reviews = reviews;
     }
 
     public String getId() {
@@ -88,6 +93,14 @@ public class Course {
         this.tasks = tasks;
     }
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
@@ -98,6 +111,7 @@ public class Course {
                 ", teacher=" + teacher +
                 ", coursewares=" + coursewares +
                 ", tasks=" + tasks +
+                ", reviews=" + reviews +
                 ", haveOwn=" + haveOwn +
                 '}';
     }

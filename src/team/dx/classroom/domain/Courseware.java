@@ -60,9 +60,9 @@ public class Courseware {
 		return resource_id;
 	}
 
-//	public void setResource_id(String resource_id) {
-//		this.resource_id = resource_id;
-//	}
+	public void setResource_id(String resource_id) {
+		this.resource_id = resource_id;
+	}
 
 	public List<Review> getList() {
 		return list;
