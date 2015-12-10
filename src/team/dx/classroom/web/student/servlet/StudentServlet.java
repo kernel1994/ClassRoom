@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,8 +52,65 @@ public class StudentServlet extends MethodInvokeServlet {
 
 	public void createIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// request.setAttribute("courses", courses);
 		request.getRequestDispatcher("/student/index.jsp").forward(request, response);
+	}
+
+	public void createIndexChartData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String studentId = getUserId(request, response);
+		List<Course> courses = cService.getStudentAllCoursesTasks(studentId);
+
+		ArrayList<HashMap<String, ArrayList<String>>> coursesList = new ArrayList<>();
+
+		for (Course c : courses) {
+			HashMap<String, ArrayList<String>> oneCourse = new HashMap<>();
+
+			ArrayList<String> nameTemp = new ArrayList<>();
+			nameTemp.add(c.getName());
+			oneCourse.put("name", nameTemp);
+
+			Integer allTasksScore = 0;
+
+			ArrayList<String> tasksTemp = new ArrayList<>();
+			for (Task t : c.getTasks()) {
+				if (t == null) {
+					break;
+				}
+				tasksTemp.add(t.getName());
+				Integer score = 0;
+				if (t.getScore() == null) {
+					score = 0;
+				} else {
+					score = t.getScore();
+				}
+				tasksTemp.add(score.toString());
+
+				allTasksScore += score;
+			}
+			oneCourse.put("tasks", tasksTemp);
+
+			ArrayList<String> scoreTemp = new ArrayList<>();
+			scoreTemp.add(allTasksScore.toString());
+			oneCourse.put("score", scoreTemp);
+
+			coursesList.add(oneCourse);
+		}
+
+		HashMap<String, ArrayList<HashMap<String, ArrayList<String>>>> coursesScoresMap = new HashMap<>();
+		coursesScoresMap.put("courses", coursesList);
+
+		Gson gson = new Gson();
+		String stringData = gson.toJson(coursesScoresMap, HashMap.class);
+
+		/* 禁用缓存 */
+		response.setHeader("Cache-Control", "no-store");
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Expires", -1);
+
+		PrintWriter out = response.getWriter();
+
+		out.write(stringData);
+		out.flush();
+		out.close();
 	}
 	
 	public void queryCourse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

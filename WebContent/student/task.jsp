@@ -77,7 +77,7 @@
                             <div class="card-action white-text">
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                        <textarea name="${shortQuestion.id}" id="textarea1" class="materialize-textarea"></textarea>
                                         <label for="textarea1">请作答</label>
                                     </div>
                                 </div>

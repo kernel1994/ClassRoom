@@ -89,8 +89,7 @@
                         <div class="card-action white-text">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <textarea id="textarea1" class="materialize-textarea"></textarea>
-                                    <label for="textarea1">请作答</label>
+                                    <textarea class="materialize-textarea white-text">${shortQuestion.stuAnswer}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -113,6 +112,10 @@
         });
 
         $('input').each(function () {
+            $(this).attr('disabled', 'disabled');
+        });
+
+        $('textarea').each(function () {
             $(this).attr('disabled', 'disabled');
         });
     }

@@ -17,7 +17,14 @@
 <jsp:include page="/course/nav.jsp"></jsp:include>
 
 <div class="container">
+
     <div class="brand">
+        <p>课程名：<span class="orange-text">${requestScope.course.name}</span></p>
+        <p>教师：<span class="orange-text">${requestScope.course.teacher.nick}</span></p>
+        <p>简介：<span class="orange-text">${requestScope.course.description}</span></p>
+    </div>
+
+    <%--<div class="brand">
         <div>最新公告
             <span style="font-size: 4px;"><a href="javascript:void(0);">查看全部</a></span>
         </div>
@@ -31,7 +38,7 @@
                 <em>没有公告</em>
             </c:otherwise>
         </c:choose>
-    </div>
+    </div>--%>
 
     <div class="brand">
         <div>最新作业
