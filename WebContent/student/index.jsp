@@ -16,7 +16,7 @@
     <div class="col s2">
         <div class="card">
             <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="${pageContext.request.contextPath }/images/office.jpg">
+                <img class="activator" src="${pageContext.request.contextPath }/images/office.jpg" alt="photo">
             </div>
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">${sessionScope.user.nick }</span>
@@ -101,15 +101,16 @@
             var data = JSON.parse(result);
             // console.log(data);
 
-//            $.each(data.courses, function (i, c) {
-//                var array = new Array();
-//                array[i] = {
-//                    "name": c.tasks[0],
-//                    "score": c.tasks[1]
-//                };
-//                c.tasks = array;
-//                array.clean();
-//            });
+            $.each(data.courses, function (i, c) {
+                var array = [];
+                for (var j = 0; j < (c.tasks.length / 2); j++) {
+                    array[j] = {
+                        "name": c.tasks[2 * j],
+                        "score": Number(c.tasks[2 * j + 1])
+                    };
+                }
+                c.tasks = array;
+            });
 
             var chartData = {
                 chart: {
@@ -119,7 +120,7 @@
                     text: '我的成绩'
                 },
                 subtitle: {
-                    text: '当前各门课的总成绩'
+                    text: '当前各门课的总成绩(点击可看每次作业成绩)'
                 },
                 xAxis: {
                     type: 'category'
@@ -152,45 +153,47 @@
                     name: '课程',
                     colorByPoint: true,
                     data: []
-                }]
+                }],
 
-//                drilldown: {
-//                    series: []
-//                }
+                drilldown: {
+                    series: []
+                }
             };
 
-            $('#chartsContainer').highcharts(chartData);
+            // 推荐将重复的jQuery 选择使用变量存储起来
+            var chartsContainer = $('#chartsContainer');
+            chartsContainer.highcharts(chartData);
             $.each(data.courses, function (i, c) {
                 chartData.series[0].data[i] = {
                     name: c.name[0],
-                    y: Number(c.score[0])
-                    // drilldown: c.name[0]
+                    y: Number(c.score[0]),
+                    drilldown: c.name[0]
                 };
 
-//                chartData.drilldown.series[i] = {
-//                    name: c.name[0],
-//                    id: c.name[0],
-//                    /*
-//                     * 这里的data 属性是一个二维数组，
-//                     * 开始尝试使用 data: [[]] 的方式
-//                     * 直接定义一个二维数组，但是在读写其第二维的时候失败了，
-//                     * 错误信息是：Uncaught TypeError: Cannot set property '0' of undefined
-//                     * 于是解决办法是先定义一个一位数组，然后在循环中把一位数组的每一个元素定义成一个一位数组，
-//                     * 那么data 这个属性就成为了一个二维数组
-//                     * */
-//                    data: []
-//                };
+                chartData.drilldown.series[i] = {
+                    name: c.name[0],
+                    id: c.name[0],
+                    /*
+                     * 这里的data 属性是一个二维数组，
+                     * 开始尝试使用 data: [[]] 的方式
+                     * 直接定义一个二维数组，但是在读写其第二维的时候失败了，
+                     * 错误信息是：Uncaught TypeError: Cannot set property '0' of undefined
+                     * 于是解决办法是先定义一个一位数组，然后在循环中把一位数组的每一个元素定义成一个一位数组，
+                     * 那么data 这个属性就成为了一个二维数组
+                     * */
+                    data: []
+                };
 
-//                $.each(c.tasks, function (j, t) {
-//                    // 在这里把数组中每一个元素定义成一个以为数组
-//                    chartData.drilldown.series[i].data[j] = [];
-//
-//                    chartData.drilldown.series[i].data[j][0] = t.name;
-//                    chartData.drilldown.series[i].data[j][1] = t.score;
-//                });
+                $.each(c.tasks, function (j, t) {
+                    // 在这里把数组中每一个元素定义成一个以为数组
+                    chartData.drilldown.series[i].data[j] = [];
+
+                    chartData.drilldown.series[i].data[j][0] = t.name;
+                    chartData.drilldown.series[i].data[j][1] = t.score;
+                });
 
             });
-            $('#chartsContainer').highcharts(chartData);
+            chartsContainer.highcharts(chartData);
 
         });
 

@@ -6,6 +6,6 @@
   </head>
   
   <body>
-	    这是主页
+	    这是主页!
   </body>
 </html>
