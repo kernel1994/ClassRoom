@@ -12,13 +12,66 @@
 		}
     </script>
      <jsp:include page="../head.jsp"></jsp:include>
+     <link href="../css/bootstrap.min.css" rel="stylesheet">
+      <style type="text/css">
+      	#content {
+      		margin-top: 20px;
+      		margin-left: 50px;
+      		margin-right: 50px;
+      	}
+      </style>
   </head>
   
-  <body style="background: #EEEEEE">
+  <body>
+  	<div id="content">
+  
   	<div style="text-align: right;">
-  		<a href="${pageContext.request.contextPath}/servlet/TeacherCoreServlet?method=coreIndexUI&id=${courseId}">返回</a>
-   		<a href="${pageContext.request.contextPath}/servlet/CoursewareServlet?method=addCoursewareUI">发布课件</a>
+  		<button type="button" class="btn btn-info" onclick="window.location.href='${pageContext.request.contextPath}/servlet/TeacherCoreServlet?method=coreIndexUI&id=${course.id}'">返回</button>
+ 		<button type="button" class="btn btn-info" onclick="location.href='${pageContext.request.contextPath}/servlet/CoursewareServlet?method=addCoursewareUI'">发布课件</button>
    	</div>
+   	
+   	<div class="row">
+   		
+    	<c:forEach var="courseware" items="${requestScope.coursewares}">
+    	
+        <div class="col-sm-4">
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">${courseware.name}</h3>
+            </div>
+            <div class="panel-body">
+               <div>
+		          <table class="table">
+		            <tbody>
+		              <tr>
+		                <td>说明</td>
+		                <td>${courseware.description}</td>
+		              </tr>
+		              <tr>
+		                <td>上传时间</td>
+		                <td>${courseware.resource.uploadtime}</td>
+		              </tr>
+		              <tr>
+		                <td>操作</td>
+		                <td>
+		                	<button type="button" class="btn btn-xs btn-success" onclick="del('${courseware.id}')">删除</button>
+		                </td>
+		              </tr>
+		             
+		            </tbody>
+		          </table>
+		        </div>
+		        
+            </div>
+          </div>
+          
+        </div><!-- /.col-sm-4 -->
+        </c:forEach>
+        
+      </div>
+   	
+   	<!-- 
+   	
    	<div>
 		<table width="100%"  frame="border">
 			<tr>
@@ -38,6 +91,9 @@
 				</tr>
 		</c:forEach>
 	</table>
+	</div>
+	 -->
+	
 	</div>
   </body>
 </html>

@@ -5,14 +5,23 @@
   <head>
     <title>添加角色界面</title>
   	<jsp:include page="../head.jsp"></jsp:include>
+  	<link href="../css/bootstrap.min.css" rel="stylesheet">
+  	<style type="text/css">
+  		.col-md-6{
+  			margin-left: 27%;
+  		}
+  	
+  	</style>
   </head>
   
   <body>
   
+    <h2 style="text-align: center;">修改课程</h2>
+  
    	<form action="${pageContext.request.contextPath }/servlet/TeacherCourseServlet?method=update" method="post">
 	   	<input type="hidden" name="id" value="${course.id}"> 
-	   	<center>
-		   	<table>
+		   <div class="col-md-6">
+				  <table class="table">
 		   		<tr>
 		   			<td>课程名称</td>
 		   			<td>
@@ -34,11 +43,11 @@
 		   		
 		   		<tr>
 		   			<td>
-						<input type="submit" value="确认修改课程">
+						<input type="submit" class="btn btn-sm btn-info" value="确认修改课程">
 		   			</td>
 		   		</tr>
 		   	</table>
-	   	</center>
+		   	</div>
    	</form>
   </body>
 </html>

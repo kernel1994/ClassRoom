@@ -150,4 +150,5 @@ public class ThirdPartyCommonDAOImpl implements ThirdPartyCommonDAO {
 		update(sql, args);
 	}
 
+
 }

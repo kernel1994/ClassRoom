@@ -58,11 +58,9 @@ public class TeacherCourseServlet extends MethodInvokeServlet2 {
 			User teacher = (User) request.getSession().getAttribute("user");
 			course.setTeacher(teacher);
 			cbs.addCourses(course);
-			response.setHeader("refresh", "3;url=" + request.getContextPath()
+			
+			response.sendRedirect(request.getContextPath()
 					+ "/servlet/TeacherIndexServlet?method=getAll");
-			request.setAttribute(
-					"message",
-					"添加课程成功<br/>3秒后跳转这也，如何没有,<a href='/ClassRoom/servlet/TeacherIndexServlet?method=getAll'>点击这里</a>");
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("message", "TeacherCourseServlet类add方法异常");
@@ -88,11 +86,8 @@ public class TeacherCourseServlet extends MethodInvokeServlet2 {
 			course.setTeacher(teacher);
 			cbs.updateCourses(course);
 			
-			response.setHeader("refresh", "3;url=" + request.getContextPath()
+			response.sendRedirect(request.getContextPath()
 					+ "/servlet/TeacherIndexServlet?method=getAll");
-			request.setAttribute(
-					"message",
-					"更新课程成功<br/>3秒后跳转这也，如何没有,<a href='/ClassRoom/servlet/TeacherIndexServlet?method=getAll'>点击这里</a>");
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("message", "TeacherCourseServlet类update方法异常");
@@ -114,11 +109,8 @@ public class TeacherCourseServlet extends MethodInvokeServlet2 {
 			// 删除该课程
 			cbs.deleteCourses(conrseId);
 
-			response.setHeader("refresh", "3;url=" + request.getContextPath()
+			response.sendRedirect(request.getContextPath()
 					+ "/servlet/TeacherIndexServlet?method=getAll");
-			request.setAttribute(
-					"message",
-					"删除课程成功<br/>3秒后跳转这也，如何没有,<a href='/ClassRoom/servlet/TeacherIndexServlet?method=getAll'>点击这里</a>");
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("message", "TeacherCourseServlet类delete方法异常");

@@ -4,15 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="../css/blog.css" rel="stylesheet">
+ <link href="../css/bootstrap.min.css" rel="stylesheet">
 <title>教师主页</title>
 </head>
 <body>
-	<div style=" float: left">
-		<a href="${pageContext.request.contextPath}/servlet/TeacherIndexServlet?method=getAll">教师主页</a>
-	</div>
-	<div style="text-align: right;">
-		${sessionScope.user.nick}_${sessionScope.user.role.name } 
-		<a href="${pageContext.request.contextPath }/servlet/logoutServlet">注销登录</a> 
-	</div>
+	<div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item active" href="${pageContext.request.contextPath}/servlet/TeacherIndexServlet?method=getAll">教师主页</a>
+          <a class="blog-nav-item" href="#">${sessionScope.user.nick}_${sessionScope.user.role.name } </a>
+          <a class="blog-nav-item" href="#">关于</a>
+          <a class="blog-nav-item" href="${pageContext.request.contextPath }/servlet/logoutServlet">注销登录</a>
+        </nav>
+      </div>
+    </div>
 </body>
 </html>

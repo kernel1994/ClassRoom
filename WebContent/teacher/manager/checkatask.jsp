@@ -5,9 +5,19 @@
   <head>
     <title>查看作业</title>
      <jsp:include page="../head.jsp"></jsp:include>
+      <link href="../css/bootstrap.min.css" rel="stylesheet">
+      <style type="text/css">
+      	#content {
+      		margin-top: 20px;
+      		margin-left: 50px;
+      		margin-right: 50px;
+      	}
+      </style>
   </head>
   
   <body>
+ 	 <div id="content">	
+  
     <div style="text-align: right;">
   		<a href="/ClassRoom/servlet/TaskServlet?method=listTask">返回</a>
    	</div>
@@ -44,5 +54,7 @@
 			</dl>
    		</c:forEach>
    	</div>
+   	
+   	</dt>
   </body>
 </html>

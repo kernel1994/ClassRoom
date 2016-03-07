@@ -26,7 +26,7 @@ public class TaskServiceImpl implements TaskService {
 			HomeWorkDAO.class);
 	private ThirdPartyCommonDAO tpcDao = ObjectFactory.getInstance().createObject(
 			ThirdPartyCommonDAO.class);
-
+	
 	@Override
 	public List<Task> getCourseTasks(String courseId) {
 
@@ -118,5 +118,19 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public void markScore2(String taskId, String studentId, int score2) {
 		tpcDao.updateUserTask("update", score2,studentId,taskId);
+	}
+
+	@Override
+	public List<Task> getAllTasks(String courseId) {
+		String sqlTask = "select * from task where course_id = ?";
+		List<Task> tasks = tDAO.getTasks(sqlTask, courseId);
+		
+		return tasks;
+	}
+
+	@Override
+	public List<User> getAllStudents(String courseId) {
+		String condition = "select user.* from user,student_course where user.id = student_course.student_id and student_course.course_id='"+courseId+"';";
+		return uDAO.getUsers(condition);
 	}
 }
