@@ -175,7 +175,7 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			// 课程id
 			String courseId = (String) request.getSession().getAttribute(
 					"courseId");
-
+			
 			// 描述作业
 			Task task = ts.getTask(taskId);
 			// 找出已经做了作业的所有学生
@@ -272,4 +272,25 @@ public class TaskServlet extends MethodInvokeServlet2 {
 					response);
 		}
 	}
+	
+	public void scoreManager(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			// 课程id
+			String courseId = (String) request.getSession().getAttribute(
+								"courseId");
+			List<Task> tasks = ts.getAllTasks(courseId);
+			request.setAttribute("tasks", tasks);
+			
+			request.getRequestDispatcher("/teacher/manager/scoremanager.jsp").forward(request,
+					response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message",
+					"scoreManager异常!<br/>" + e.getMessage());
+			request.getRequestDispatcher("/message.jsp").forward(request,
+					response);
+		}
+	}
+	
 }

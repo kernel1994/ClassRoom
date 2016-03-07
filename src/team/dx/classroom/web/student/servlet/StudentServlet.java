@@ -1,7 +1,6 @@
 package team.dx.classroom.web.student.servlet;
 
 import com.google.gson.Gson;
-import team.dx.classroom.dao.TaskDAO;
 import team.dx.classroom.domain.*;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
@@ -59,18 +58,18 @@ public class StudentServlet extends MethodInvokeServlet {
 		String studentId = getUserId(request, response);
 		List<Course> courses = cService.getStudentAllCoursesTasks(studentId);
 
-		ArrayList<HashMap<String, ArrayList<String>>> coursesList = new ArrayList<>();
+		ArrayList<HashMap<String, ArrayList<String>>> coursesList = new ArrayList<HashMap<String, ArrayList<String>>>();
 
 		for (Course c : courses) {
-			HashMap<String, ArrayList<String>> oneCourse = new HashMap<>();
+			HashMap<String, ArrayList<String>> oneCourse = new HashMap<String, ArrayList<String>>();
 
-			ArrayList<String> nameTemp = new ArrayList<>();
+			ArrayList<String> nameTemp = new ArrayList<String>();
 			nameTemp.add(c.getName());
 			oneCourse.put("name", nameTemp);
 
 			Integer allTasksScore = 0;
 
-			ArrayList<String> tasksTemp = new ArrayList<>();
+			ArrayList<String> tasksTemp = new ArrayList<String>();
 			for (Task t : c.getTasks()) {
 				if (t == null) {
 					break;
@@ -88,14 +87,14 @@ public class StudentServlet extends MethodInvokeServlet {
 			}
 			oneCourse.put("tasks", tasksTemp);
 
-			ArrayList<String> scoreTemp = new ArrayList<>();
+			ArrayList<String> scoreTemp = new ArrayList<String>();
 			scoreTemp.add(allTasksScore.toString());
 			oneCourse.put("score", scoreTemp);
 
 			coursesList.add(oneCourse);
 		}
 
-		HashMap<String, ArrayList<HashMap<String, ArrayList<String>>>> coursesScoresMap = new HashMap<>();
+		HashMap<String, ArrayList<HashMap<String, ArrayList<String>>>> coursesScoresMap = new HashMap<String, ArrayList<HashMap<String, ArrayList<String>>>>();
 		coursesScoresMap.put("courses", coursesList);
 
 		Gson gson = new Gson();

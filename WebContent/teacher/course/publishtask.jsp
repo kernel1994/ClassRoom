@@ -6,6 +6,14 @@
     <title>发布作业</title>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.4.2.min.js"></script>
     <jsp:include page="../head.jsp"></jsp:include>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+  	<style type="text/css">
+  			#content {
+      		margin-top: 20px;
+      		margin-left: 50px;
+      		margin-right: 50px;
+      	}
+  	</style>
     <style type="text/css">
     	.select,.trueorfalse,.shortquestion{
     		width: 70%;
@@ -104,13 +112,15 @@
   	});
   </script>
   
-  <body style="background: #EEEEEE">
+  <body>
+  	<h2 style="text-align: center;">发布作业</h2>
+  	<div id="content">
   	<br/>
   	<div style="text-align: right;">
-  		<a href="${pageContext.request.contextPath}/servlet/TaskServlet?method=listTask&courseId=${courseId}">返回</a>
-  	</div>
+  		<button type="button" class="btn btn-info" onclick="window.location.href='${pageContext.request.contextPath}/servlet/TaskServlet?method=listTask&courseId=${courseId}'">返回</button>
+   	</div>
+   
 	    <fieldset style="margin:10px;padding: 2px 30px;" >
-			<legend >编辑作业</legend>
 			<form action="${pageContext.request.contextPath}/servlet/TaskServlet?method=publishTask" method="post">
 				<label for="name">主题：</label>
 				<input type="text" name="name" size="50%"><br/>
@@ -126,5 +136,7 @@
 			<!-- <input type="button" name="courseware" value="添加附件">
 			 -->
 		</fieldset><br>
+		
+	</div>
   </body>
 </html>

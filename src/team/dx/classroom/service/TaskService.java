@@ -88,4 +88,8 @@ public interface TaskService {
 	List<User> getNoNeedMarkGradeStudent(String taskId);
 
 	public void markScore2(String taskId, String studentId, int score2);
+
+	List<Task> getAllTasks(String courseId);
+
+	public List<User> getAllStudents(String courseId);
 }
