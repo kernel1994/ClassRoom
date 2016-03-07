@@ -21,7 +21,7 @@
 			</p>
 			<p>
 				<label for="email">密码:</label>
-				<input type="password" name="password" id="password" value="123" />
+				<input type="password" name="password" id="password" value="123456" />
 			</p>
 			<p>
 				<input type="checkbox" name="loginstatus" />保持登陆状态<a href="">忘记密码</a> <br /><br />
