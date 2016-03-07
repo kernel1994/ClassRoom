@@ -61,5 +61,12 @@ public interface ThirdPartyCommonDAO {
 	 * */
 	public abstract void updateUserTask(String type, Object... args);
 
+	/**
+	 * 对表task_review 进行 INSERT/ DELETE/ <del>UPDATE</del> 操作
+	 * @param type 字符串 INSERT 或  DELETE 或 <del>UPDATE</del> (不区分大小写) 中的一个
+	 * @param args 参数。其中：<br />insert 需要 2 个参数，顺序是 课程ID 评论ID<br />
+	 * delete 需要 2 个参数，顺序是 课程ID 评论ID
+	 * */
+	public abstract void updateCourseReview(String type, Object... args);
 
 }

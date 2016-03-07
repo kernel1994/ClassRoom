@@ -79,6 +79,7 @@
   </head>
   
   <body>
+<<<<<<< HEAD
   	<div id="head">
   		<div id="head1">
   			<p id="title">教学辅助系统</p>

@@ -48,7 +48,11 @@
   	<filter-name>TransationFilter</filter-name>
   	<url-pattern>*.stu</url-pattern>
   </filter-mapping>
-  
+  <filter-mapping>
+  	<filter-name>TransationFilter</filter-name>
+  	<url-pattern>*.rev</url-pattern>
+  </filter-mapping>
+
   <!-- 主页引导 -->
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
@@ -151,7 +155,15 @@
 
 
 
-
+  <!-- 评论servlet -->
+  <servlet>
+    <servlet-name>ReviewServlet</servlet-name>
+    <servlet-class>team.dx.classroom.web.servlet.ReviewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReviewServlet</servlet-name>
+    <url-pattern>*.rev</url-pattern>
+  </servlet-mapping>
 
 
 

@@ -150,5 +150,23 @@ public class ThirdPartyCommonDAOImpl implements ThirdPartyCommonDAO {
 		update(sql, args);
 	}
 
+	@Override
+	public void updateCourseReview(String type, Object... args) {
+
+		type = type.toLowerCase();
+		String sql = "";
+
+		if (type.equals("insert")) {
+			sql = "INSERT INTO course_review (course_id, review_id) VALUES (?, ?)";
+		} else if (type.equals("delete")) {
+			sql = "DELETE FROM course_review WHERE course_id = ? AND review_id = ?";
+		} else if (type.equals("update")) {
+			// 暂不提供此方法
+		} else {
+			throw new DaoException("请指定正确的type 值");
+		}
+
+		update(sql, args);
+	}
 
 }

@@ -5,11 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import team.dx.classroom.dao.*;
-import team.dx.classroom.domain.Course;
-import team.dx.classroom.domain.Courseware;
-import team.dx.classroom.domain.Task;
-import team.dx.classroom.domain.User;
+import team.dx.classroom.domain.*;
 import team.dx.classroom.factory.ObjectFactory;
+import team.dx.classroom.service.ReviewService;
 import team.dx.classroom.service.CourseService;
 import team.dx.classroom.service.CoursewareService;
 import team.dx.classroom.service.TaskService;
@@ -24,6 +22,7 @@ public class CourseServiceImpl implements CourseService {
 
 	private TaskService tService = ObjectFactory.getInstance().createObject(TaskService.class);
 	private CoursewareService cwService = ObjectFactory.getInstance().createObject(CoursewareService.class);
+	private ReviewService rService = ObjectFactory.getInstance().createObject(ReviewService.class);
 
 	@Override
 	public Course getCourse(String courseId) {
@@ -45,6 +44,9 @@ public class CourseServiceImpl implements CourseService {
 
 		List<Courseware> coursewares = cwService.getCoursewares(courseId);
 		course.setCoursewares(coursewares);
+
+		List<Review> reviews = rService.getCourseReviews(courseId);
+		course.setReviews(reviews);
 
 		return course;
 	}

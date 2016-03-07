@@ -9,6 +9,12 @@ import team.dx.classroom.domain.Courseware;
 public class CoursewareDAOImpl extends BasicDAO<Courseware> implements CoursewareDAO {
 
 	@Override
+	public Courseware getCourseware(String condition, Object... args) {
+
+		return get(condition, args);
+	}
+
+	@Override
 	public List<Courseware> getCoursewares(String condition, Object... args) {
 
 		return getForList(condition, args);
@@ -36,11 +42,6 @@ public class CoursewareDAOImpl extends BasicDAO<Courseware> implements Coursewar
 		String sql = "INSERT INTO courseware (id, name, description, resource_id, course_id) VALUES (?, ? ,?, ?, ?)";
 
 		update(sql, courseware.getId(), courseware.getName(), courseware.getDescription(), courseware.getResource().getId(), courseId);
-	}
-
-	@Override
-	public Courseware getCourseware(String condition, Object... args) {
-		return get(condition, args);
 	}
 
 }

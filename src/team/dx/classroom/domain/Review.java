@@ -9,6 +9,7 @@ public class Review {
 	private Date time;
 	/** 评论的人 */
 	private User user;
+	private String user_id;
 
 	public Review() {
 	}
@@ -51,6 +52,14 @@ public class Review {
 
 	public void setTime(Date time) {
 		this.time = time;
+	}
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 
 	@Override

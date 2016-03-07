@@ -1,7 +1,6 @@
 package team.dx.classroom.web.student.servlet;
 
 import com.google.gson.Gson;
-import team.dx.classroom.dao.TaskDAO;
 import team.dx.classroom.domain.*;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
@@ -13,8 +12,9 @@ import team.dx.classroom.web.servlet.MethodInvokeServlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +37,7 @@ public class StudentServlet extends MethodInvokeServlet {
 	 * 从session 中获取用户id
 	 * 如果不能获取则返回登录页面(将来用filter 实现)
 	 * */
-	private String getUserId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public static String getUserId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		User user = (User)request.getSession().getAttribute("user");
 
@@ -51,8 +51,65 @@ public class StudentServlet extends MethodInvokeServlet {
 
 	public void createIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// request.setAttribute("courses", courses);
 		request.getRequestDispatcher("/student/index.jsp").forward(request, response);
+	}
+
+	public void createIndexChartData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String studentId = getUserId(request, response);
+		List<Course> courses = cService.getStudentAllCoursesTasks(studentId);
+
+		ArrayList<HashMap<String, ArrayList<String>>> coursesList = new ArrayList<HashMap<String, ArrayList<String>>>();
+
+		for (Course c : courses) {
+			HashMap<String, ArrayList<String>> oneCourse = new HashMap<String, ArrayList<String>>();
+
+			ArrayList<String> nameTemp = new ArrayList<String>();
+			nameTemp.add(c.getName());
+			oneCourse.put("name", nameTemp);
+
+			Integer allTasksScore = 0;
+
+			ArrayList<String> tasksTemp = new ArrayList<String>();
+			for (Task t : c.getTasks()) {
+				if (t == null) {
+					break;
+				}
+				tasksTemp.add(t.getName());
+				Integer score = 0;
+				if (t.getScore() == null) {
+					score = 0;
+				} else {
+					score = t.getScore();
+				}
+				tasksTemp.add(score.toString());
+
+				allTasksScore += score;
+			}
+			oneCourse.put("tasks", tasksTemp);
+
+			ArrayList<String> scoreTemp = new ArrayList<String>();
+			scoreTemp.add(allTasksScore.toString());
+			oneCourse.put("score", scoreTemp);
+
+			coursesList.add(oneCourse);
+		}
+
+		HashMap<String, ArrayList<HashMap<String, ArrayList<String>>>> coursesScoresMap = new HashMap<String, ArrayList<HashMap<String, ArrayList<String>>>>();
+		coursesScoresMap.put("courses", coursesList);
+
+		Gson gson = new Gson();
+		String stringData = gson.toJson(coursesScoresMap, HashMap.class);
+
+		/* 禁用缓存 */
+		response.setHeader("Cache-Control", "no-store");
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Expires", -1);
+
+		PrintWriter out = response.getWriter();
+
+		out.write(stringData);
+		out.flush();
+		out.close();
 	}
 	
 	public void queryCourse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -183,8 +240,42 @@ public class StudentServlet extends MethodInvokeServlet {
 		course.setCoursewares(coursewares);
 
 		request.setAttribute("course", course);
-		request.getRequestDispatcher("/course/chapter.jsp").forward(request, response);
+		request.getRequestDispatcher("/course/chapters.jsp").forward(request, response);
 	}
+
+	public void viewOneChapter(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String coursewareID = request.getParameter("coursewareID");
+		Courseware courseware = cwService.getCourseware(coursewareID);
+
+		request.setAttribute("courseware", courseware);
+		request.getRequestDispatcher("/course/oneChapter.jsp").forward(request, response);
+	}
+
+	public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		response.setContentType("application/x-msdownload");
+
+		String uri = request.getParameter("uri");
+
+		String fileName = uri;
+		String filePath = uri;
+
+		// 注意这里的filename = 需要转码URLEncoder.encode(fileName, "utf-8") ，不然会变现为下载文件名为----。具体原因能上网的时候再查。
+		response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "utf-8"));
+
+		OutputStream out = response.getOutputStream();
+		InputStream in = new FileInputStream(filePath);
+
+		byte[] buffer = new byte[1024];
+		int len;
+
+		while ((len = in.read(buffer)) != -1) {
+			out.write(buffer, 0, len);
+		}
+
+		in.close();
+	}
+
 
 	public void viewStudentAllCoursesTasks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
