@@ -33,11 +33,9 @@ public class TeacherCoreServlet extends MethodInvokeServlet2 {
 			Course course = cs.getCourse(courseId);
 			request.setAttribute("course", course);
 			
-			//封装页面所需要的数据
-			//作业
-			List<Task> tasks = ts.getCourseTasks(courseId);
-			request.setAttribute("tasks", tasks);
-			
+			//查找出所有对课程的评论(:考虑分页)
+			request.setAttribute("course", course);
+		
 			//显示页面
 			
 			request.getRequestDispatcher("/teacher/manager/managerindex.jsp").forward(request, response);

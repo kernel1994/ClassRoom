@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -9,6 +10,17 @@
      	#content {
      		margin: 50px;
      	}
+     	.chip {
+		    display: inline-block;
+		    height: 32px;
+		    font-size: 13px;
+		    font-weight: 500;
+		    color: rgba(0,0,0,0.6);
+		    line-height: 32px;
+		    padding: 0 12px;
+		    border-radius: 16px;
+		    background-color: #e4e4e4;
+		}
      </style>
   </head>
   
@@ -26,32 +38,18 @@
             <a href="${pageContext.request.contextPath}/servlet/TaskServlet?method=scoreManager" class="list-group-item" class="list-group-item">成绩管理</a>
             <a href="#" class="list-group-item">其他</a>
           </div>
-        </div><!-- /.col-sm-4 -->
-	    <!-- 
-	 	<div id="option">
-	 		<span class="option_title">
-	 			<a href="#">
-	 				stream
-	 			</a>
-	 		</span>&nbsp;&nbsp;
-	 		<span class="option_title">
-	 			<a href="${pageContext.request.contextPath}/servlet/TaskServlet?method=listTask">
-	 				作业
-	 			</a>
-	 		</span>&nbsp;&nbsp;
-	 		<span class="option_title">
-	 			<a href="${pageContext.request.contextPath}/servlet/CoursewareServlet?method=listCourseware">
-	 				课件
-	 			</a>
-	 		</span>&nbsp;&nbsp;
-	 		<span class="option_title">
-	 			<a href="#">
-	 				关于
-	 			</a>
-	 		</span>
-	 		
-	 	</div>
-	 	 -->
+        </div>
+        
+        <div class="col-sm-4 col-md-offset-1">
+    		 <h3 id="review">学生评论</h3>
+	       	 <ul>
+                    <c:forEach items="${requestScope.course.reviews}" var="review">
+                        <li><div class="chip">${review.user.nick} ${review.time} <br/> ${review.content}</div></li>
+                        <hr>
+                    </c:forEach>
+             </ul>
+        
+        </div>
 	</div>
   	
   </body>
