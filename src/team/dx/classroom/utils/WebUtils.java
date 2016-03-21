@@ -51,7 +51,7 @@ public class WebUtils {
 				}
 			}, Date.class);
 
-			// 讲parameterMap中数据--->复制到bean中
+			// 将parameterMap中数据--->复制到bean中
 			BeanUtils.populate(bean, parameterMap);
 
 			return bean;

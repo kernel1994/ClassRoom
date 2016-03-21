@@ -34,7 +34,7 @@
           <div class="list-group">
             <a href="${pageContext.request.contextPath}/servlet/TaskServlet?method=listTask" class="list-group-item">作业</a>
             <a href="${pageContext.request.contextPath}/servlet/CoursewareServlet?method=listCourseware" class="list-group-item">课件</a>
-            <a href="#" class="list-group-item">交流</a>
+            <a href="${pageContext.request.contextPath}/servlet/ExperimentServlet?method=listExperiment" class="list-group-item">实验</a>
             <a href="${pageContext.request.contextPath}/servlet/TaskServlet?method=scoreManager" class="list-group-item" class="list-group-item">成绩管理</a>
             <a href="#" class="list-group-item">其他</a>
           </div>

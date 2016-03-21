@@ -33,7 +33,7 @@ public class TaskServlet extends MethodInvokeServlet2 {
 	public void listTask(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
-
+			
 			String courseId = (String) request.getSession().getAttribute(
 					"courseId");
 			Course course = cs.getCourse(courseId);
@@ -73,9 +73,9 @@ public class TaskServlet extends MethodInvokeServlet2 {
 			HttpServletResponse response) throws Exception {
 
 		try {
-			// 得到一个作业资源保存的父路径
+			// 得到一个 资源保存的父路径
 			String path = this.getServletContext().getRealPath(
-					"/resource/task/homework");
+					"/resource/experiment");
 
 			/*------------对作业的描述存取到数据库--------------*/
 			// 作业的描述

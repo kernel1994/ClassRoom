@@ -133,8 +133,6 @@
 				<input type="submit" value="提交"/>
 			</form>
 			
-			<!-- <input type="button" name="courseware" value="添加附件">
-			 -->
 		</fieldset><br>
 		
 	</div>
