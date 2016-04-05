@@ -305,7 +305,6 @@ public class StudentServlet extends MethodInvokeServlet {
 			/* 学生查看自己做的作业 */
 			homeWork = hService.getStudentHomeWork(taskId, studentId);
 			path = "/student/taskView.jsp";
-
 		}
 
 		request.setAttribute("homeWork", homeWork);
@@ -344,5 +343,3 @@ public class StudentServlet extends MethodInvokeServlet {
 	}
 
 }
-
-

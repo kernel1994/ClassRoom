@@ -11,6 +11,7 @@ public class Course {
     private User teacher;
     private List<Courseware> coursewares;
     private List<Task> tasks;
+    private List<Experiment> experiments;
     private List<Review> reviews;
 
     /**
@@ -100,8 +101,16 @@ public class Course {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
+    
+    public List<Experiment> getExperiments() {
+		return experiments;
+	}
 
-    @Override
+	public void setExperiments(List<Experiment> experiments) {
+		this.experiments = experiments;
+	}
+
+	@Override
     public String toString() {
         return "Course{" +
                 "id='" + id + '\'' +

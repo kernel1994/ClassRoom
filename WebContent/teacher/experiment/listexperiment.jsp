@@ -26,18 +26,18 @@
   	<div id="content">
   
   	<div style="text-align: right;">
-  		<button type="button" class="btn btn-info" onclick="window.location.href='${pageContext.request.contextPath}/servlet/TeacherCoreServlet?method=coreIndexUI&id=${course.id}'">返回</button>
+  		<button type="button" class="btn btn-info" onclick="window.location.href='${pageContext.request.contextPath}/servlet/TeacherCoreServlet?method=coreIndexUI&id=${courseId}'">返回</button>
  		<button type="button" class="btn btn-info" onclick="location.href='${pageContext.request.contextPath}/servlet/ExperimentServlet?method=addExperimentUI'">发布实验</button>
    	</div>
    	
    	<div class="row">
    		
-    	<c:forEach var="courseware" items="${requestScope.experiments}">
+    	<c:forEach var="experiment" items="${requestScope.experiments}">
     	
         <div class="col-sm-4">
           <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title">${courseware.name}</h3>
+              <h3 class="panel-title">${experiment.name}</h3>
             </div>
             <div class="panel-body">
                <div>
@@ -45,16 +45,12 @@
 		            <tbody>
 		              <tr>
 		                <td>说明</td>
-		                <td>${courseware.description}</td>
-		              </tr>
-		              <tr>
-		                <td>上传时间</td>
-		                <td>${courseware.resource.uploadtime}</td>
+		                <td>${experiment.description}</td>
 		              </tr>
 		              <tr>
 		                <td>操作</td>
 		                <td>
-		                	<button type="button" class="btn btn-xs btn-success" onclick="del('${courseware.id}')">删除</button>
+		                	<button type="button" class="btn btn-xs btn-success" onclick="del('${experiment.id}')">删除</button>
 		                </td>
 		              </tr>
 		             
@@ -65,34 +61,11 @@
             </div>
           </div>
           
-        </div><!-- /.col-sm-4 -->
+        </div>
         </c:forEach>
         
       </div>
    	
-   	<!-- 
-   	
-   	<div>
-		<table width="100%"  frame="border">
-			<tr>
-	   			<td>课件名称</td>
-	   			<td>课件描述</td>
-	   			<td>上传时间</td>
-	   			<td>操作</td>
-	   		</tr>
-		<c:forEach var="courseware" items="${requestScope.coursewares}">
-				<tr>
-					<td>${courseware.name}</td>
-					<td>${courseware.description}</td>
-					<td>${courseware.resource.uploadtime}</td>
-					<td>
-						<a href="javascript:void(0)" onclick="del('${courseware.id}')">删除</a>
-					</td>
-				</tr>
-		</c:forEach>
-	</table>
-	</div>
-	 -->
 	
 	</div>
   </body>

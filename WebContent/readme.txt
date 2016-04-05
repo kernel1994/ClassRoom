@@ -174,3 +174,13 @@ create table message(
 	content varchar(255)
 );
 
+--用户user与作业experiment之间的关系
+create table user_experiment (
+  user_id varchar(40) not null,
+  experiment_id varchar(40) not null,
+  score int DEFAULT 0,
+  score2 int default 0,
+  primary key(user_id,experiment_id),
+  constraint user_id_FK10 foreign key(user_id) references user(id),
+  constraint experiment_id_FK10 foreign key(experiment_id) references experiment(id)
+)

@@ -62,6 +62,16 @@ public interface ThirdPartyCommonDAO {
 	public abstract void updateUserTask(String type, Object... args);
 
 	/**
+	 * 对表user_experiment 进行 INSERT/ DELETE/ UPDATE 操作
+	 * @param type 字符串 INSERT 或  DELETE 或 UPDATE (不区分大小写) 中的一个
+	 * @param args 参数。其中：<br />insert 需要 3 个参数，顺序是 学生ID 作业ID 分数<br />
+	 * delete 需要 2 个参数，顺序是 学生ID 作业ID<br />
+	 * update 需要 3 个参数，顺序是 分数 学生ID 作业ID
+	 * */
+	public abstract void updateUserExperiment(String type, Object... args);
+
+	
+	/**
 	 * 对表task_review 进行 INSERT/ DELETE/ <del>UPDATE</del> 操作
 	 * @param type 字符串 INSERT 或  DELETE 或 <del>UPDATE</del> (不区分大小写) 中的一个
 	 * @param args 参数。其中：<br />insert 需要 2 个参数，顺序是 课程ID 评论ID<br />

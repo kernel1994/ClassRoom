@@ -29,6 +29,13 @@
 			                <td>备注</td>
 			                <td><textarea rows="2" cols="100%" name="description"></textarea><br/></td>
 			              </tr>
+			              <tr>
+			                <td>输入输出</td>
+			                <td>
+			              		<input type="radio" name="flag" value="0" checked="checked">字符
+			              		<input type="radio" name="flag" value="1">数字
+							</td>
+			              </tr>
 			             
 			              <tr>
 			                <td><label for='input'>输入项目</label></td>
@@ -39,6 +46,7 @@
 			              
 			              <tr>
 			                <td><label for='output'>输出项</label></td>
+			                
 			              </tr>
 			              <tr>
 			                <td><input type="button" id="output" name="output" value="添加输出项"></td>
@@ -61,7 +69,6 @@
 	  <script type="text/javascript">
   	$(function(){
   		//输入项
-  		var select_item = 1;
   		$("#input").click(function(){
   			var $input = $("#input");
   			var $div = $("<div class='input'><div>");
@@ -72,7 +79,7 @@
   		function createInput(){
   			var $temp = $("div[class='input']").last();
   			
-  			$temp.append("<input name='input"+select_item+"'/><br/>");
+  			$temp.append("<input name='input'/><br/>");
   			$temp.append("<input type='button' value='删除'/>");
   			
   			//添加事件按钮
@@ -80,11 +87,9 @@
   				$temp.empty();
   				$temp.remove();
   			});
-  			
-  			select_item++;
   		}
   		
-  		//判断题
+  		//输出项目
   		$("#output").click(function(){
   			var $output = $("#output");
   			var $div = $("<div class='output'><div>");
@@ -97,7 +102,7 @@
   			
   			var $temp = $(".output").last();
   
-  			$temp.append("<input name='output"+select_item+"'/><br/>");
+  			$temp.append("<input name='output'/><br/>");
   			$temp.append("<input type='button' value='删除'/>");
   		
   			//添加事件按钮
@@ -105,8 +110,6 @@
   				$temp.empty();
   				$temp.remove();
   			});
-
-  			select_item++;
   		}
   	});
   </script>

@@ -101,4 +101,14 @@ public interface CourseService {
 	 * @return 返回所有学生的list集合
 	 * */
 	public List<User> getAllStudent(String courseId);
+
+	
+	/**
+	 * 获取学生所有选课的所有实验列表。
+	 * 根据学生id 获取学生所有选修的课程，组成List 对象。来获取其中的实验列表。
+	 * 其中每门课程主要包含id/ name/ tasks
+	 * @param studentId 学生id
+	 * @return 包含了学生学生所有选课的所有实验的列表
+	 * */
+	public List<Course> getStudentAllCoursesExperiments(String studentId);
 }

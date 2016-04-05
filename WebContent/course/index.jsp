@@ -58,6 +58,25 @@
             </c:otherwise>
         </c:choose>
     </div>
+    
+    <div class="brand">
+        <div>最新实验
+            <span style="font-size: 4px;"><a
+                    href="#">查看全部</a></span>
+        </div>
+        <c:choose>
+            <c:when test="${not empty requestScope.course.experiments}">
+                <ul>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/servlet/StudentExperimentServlet?method=doExperiment&experimentId=${requestScope.course.experiments[0].id}">${requestScope.course.experiments[0].name}</a>
+                    </li>
+                </ul>
+            </c:when>
+            <c:otherwise>
+                <em>没有实验</em>
+            </c:otherwise>
+        </c:choose>
+    </div>
 
     <div class="brand">
         <div>最新章节

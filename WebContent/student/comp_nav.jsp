@@ -12,6 +12,8 @@
                 <li><a href="${pageContext.request.contextPath}/student/choose_course.jsp">选课/退选</a></li>
                 <li><a href="getStudentCourses.stu">我的课程</a></li>
                 <li><a href="viewStudentAllCoursesTasks.stu">我的作业</a></li>
+                
+                <li><a href="${pageContext.request.contextPath}/servlet/StudentExperimentServlet?method=getAddCourseExperiments">我的实验</a></li>
                 <%--<li><a href="javascript:void(0);">查看公告</a></li>--%>
             </ul>
         </div>

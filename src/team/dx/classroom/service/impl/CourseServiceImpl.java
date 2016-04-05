@@ -7,6 +7,7 @@ import java.util.Map;
 import team.dx.classroom.dao.*;
 import team.dx.classroom.domain.*;
 import team.dx.classroom.factory.ObjectFactory;
+import team.dx.classroom.service.ExperimentService;
 import team.dx.classroom.service.ReviewService;
 import team.dx.classroom.service.CourseService;
 import team.dx.classroom.service.CoursewareService;
@@ -16,12 +17,15 @@ public class CourseServiceImpl implements CourseService {
 
 	private UserDAO uDAO = ObjectFactory.getInstance().createObject(UserDAO.class);
 	private CourseDAO cDAO = ObjectFactory.getInstance().createObject(CourseDAO.class);
-	private CoursewareDAO cwDAO = ObjectFactory.getInstance().createObject(CoursewareDAO.class);
 	private TaskDAO tDAO = ObjectFactory.getInstance().createObject(TaskDAO.class);
+	private ExperimentDAO eDAO = ObjectFactory.getInstance().createObject(ExperimentDAO.class);
+	
 	private ThirdPartyCommonDAO tpDAO = ObjectFactory.getInstance().createObject(ThirdPartyCommonDAO.class);
 
 	private TaskService tService = ObjectFactory.getInstance().createObject(TaskService.class);
 	private CoursewareService cwService = ObjectFactory.getInstance().createObject(CoursewareService.class);
+	private ExperimentService eService = ObjectFactory.getInstance().createObject(ExperimentService.class);
+	
 	private ReviewService rService = ObjectFactory.getInstance().createObject(ReviewService.class);
 
 	@Override
@@ -44,6 +48,10 @@ public class CourseServiceImpl implements CourseService {
 
 		List<Courseware> coursewares = cwService.getCoursewares(courseId);
 		course.setCoursewares(coursewares);
+		
+		//实验
+		List<Experiment> experiments = eService.getExperiments(courseId);
+		course.setExperiments(experiments);
 
 		List<Review> reviews = rService.getCourseReviews(courseId);
 		course.setReviews(reviews);
@@ -221,6 +229,24 @@ public class CourseServiceImpl implements CourseService {
 		return courses;
 	}
 
+	
+	@Override
+	public void deleteCourses(String conrseId) {
+		cDAO.deleteCourse(conrseId);
+		
+	}
+
+	@Override
+	public void updateCourses(Course course) {
+		cDAO.updateCourse(course);
+	}
+
+	@Override
+	public List<User> getAllStudent(String courseId) {
+		String sql = "select user.* from user,student_course where student_course.student_id = user.id and student_course.course_id = ?;";
+		return uDAO.getUsers(sql, courseId);
+	}
+	
 	@Override
 	public List<Course> getStudentAllCoursesTasks(String studentId) {
 
@@ -241,20 +267,24 @@ public class CourseServiceImpl implements CourseService {
 		return courses;
 	}
 
+
 	@Override
-	public void deleteCourses(String conrseId) {
-		cDAO.deleteCourse(conrseId);
+	public List<Course> getStudentAllCoursesExperiments(String studentId) {
 		
-	}
+		String sql = "select score from user_experiment where user_id = ? and experiment_id = ?";
+		List<Course> courses = getStudentCourses(studentId);
+		
+		for (Course course : courses) {
+			Course courseTemp = getCourse(course.getId());
+			// 只需要放入task 要显式赋值，才能实现深拷贝
+			course.setExperiments(courseTemp.getExperiments());;
 
-	@Override
-	public void updateCourses(Course course) {
-		cDAO.updateCourse(course);
-	}
+			for (Experiment experiment : course.getExperiments()) {
+				Integer score = eDAO.getScore(sql, studentId, experiment.getId());
+				experiment.setScore(score);
+			}
+		}
 
-	@Override
-	public List<User> getAllStudent(String courseId) {
-		String sql = "select user.* from user,student_course where student_course.student_id = user.id and student_course.course_id = ?;";
-		return uDAO.getUsers(sql, courseId);
+		return courses;
 	}
 }

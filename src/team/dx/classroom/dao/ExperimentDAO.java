@@ -16,4 +16,6 @@ public interface ExperimentDAO {
 
 	void addExperiment(Experiment experiment, String courseId);
 
+	Integer getScore(String sql, Object... args);
+
 }

@@ -75,7 +75,7 @@ public class TaskServlet extends MethodInvokeServlet2 {
 		try {
 			// 得到一个 资源保存的父路径
 			String path = this.getServletContext().getRealPath(
-					"/resource/experiment");
+					"/resource/task/homework");
 
 			/*------------对作业的描述存取到数据库--------------*/
 			// 作业的描述

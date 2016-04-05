@@ -15,11 +15,11 @@ public class Experiment implements Serializable {
 	private String input;
 	private String output;
 	
-	/** 这个属性可以直接从数据库中查出并赋值，添加这个属性可以极大地方便对resource 对象的查询构造 */
-	private String resource_id;
-	private Resource resource;
-	
 	private List<Review> list = new ArrayList<Review>();
+	
+	/** 学生一个作业的分数 */
+	private Integer score;
+	
 	public String getId() {
 		return id;
 	}
@@ -56,27 +56,20 @@ public class Experiment implements Serializable {
 	public void setOutput(String output) {
 		this.output = output;
 	}
-	public String getResource_id() {
-		return resource_id;
-	}
-	public void setResource_id(String resource_id) {
-		this.resource_id = resource_id;
-	}
-	public Resource getResource() {
-		return resource;
-	}
-	public void setResource(Resource resource) {
-		this.resource = resource;
-	}
+	
 	public List<Review> getList() {
 		return list;
 	}
 	public void setList(List<Review> list) {
 		this.list = list;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 	
+	public Integer getScore() {
+		return score;
+	}
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+
 	
 }

@@ -25,7 +25,7 @@ public class ExperimentDAOImpl extends BasicDAO<Experiment> implements Experimen
 
 		String sql = "UPDATE Experiment SET name = ?, description = ?, flag = ?, input = ?, output = ?,  resource_id = ? WHERE id = ?";
 		
-		update(sql, experiment.getName(), experiment.getDescription(), experiment.getFlag(), experiment.getInput(), experiment.getOutput(),  experiment.getResource().getId(), experiment.getId());
+		update(sql, experiment.getName(), experiment.getDescription(), experiment.getFlag(), experiment.getInput(), experiment.getOutput(), experiment.getId());
 	}
 
 
@@ -41,8 +41,14 @@ public class ExperimentDAOImpl extends BasicDAO<Experiment> implements Experimen
 	@Override
 	public void addExperiment(Experiment experiment, String courseId) {
 
-		String sql = "INSERT INTO experiment (id, name, description, flag, input, output, course_id, resource_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO experiment (id, name, description, flag, input, output, course_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
-		update(sql, experiment.getId(), experiment.getName(), experiment.getDescription(), experiment.getFlag(), experiment.getInput(), experiment.getOutput(), courseId, experiment.getResource().getId());
+		update(sql, experiment.getId(), experiment.getName(), experiment.getDescription(), experiment.getFlag(), experiment.getInput(), experiment.getOutput(), courseId);
+	}
+
+	@Override
+	public Integer getScore(String sql, Object... args) {
+	
+		return getTheValue(sql, args);
 	}
 }
