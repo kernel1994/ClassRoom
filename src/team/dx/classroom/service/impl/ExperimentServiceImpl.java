@@ -42,14 +42,17 @@ public class ExperimentServiceImpl implements ExperimentService {
 
 	@Override
 	public boolean isUplod(String id, String userId) {
-		Experiment experiment = eDAO.getExperiment("select * from user_experiment WHERE user_id = ? AND experiment_id = ?", userId, id);
-		if (experiment != null) {
+		Integer score = eDAO.getScore("select score from user_experiment WHERE user_id = ? AND experiment_id = ?", userId, id);
+		
+		if (score != null) {
 			return true;
 		} else {
 			return false;
 		}
 		
 	}
+	
+	
 
 	@Override
 	public void updateExperimentScore(String experimentId, String userId,
@@ -61,6 +64,13 @@ public class ExperimentServiceImpl implements ExperimentService {
 	public void insertExperimentScore(String experimentId, String userId,
 			int score) {
 		tpDAO.updateUserExperiment("insert", userId, experimentId, score);
+	}
+
+	@Override
+	public Integer getExperimentScore(String id, String userId) {
+		Integer score = eDAO.getScore("select score from user_experiment WHERE user_id = ? AND experiment_id = ?", userId, id);
+		
+		return score;
 	}
 
 }

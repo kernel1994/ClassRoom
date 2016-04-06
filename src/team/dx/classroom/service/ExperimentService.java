@@ -22,5 +22,8 @@ public interface ExperimentService {
 	void updateExperimentScore(String experimentId, String userId, int score);
 
 	void insertExperimentScore(String experimentId, String userId, int score);
+	
+	//得到用户分数
+	Integer getExperimentScore(String id, String userId);
 
 }

@@ -61,7 +61,9 @@ public class StudentExperimentServlet extends MethodInvokeServlet2 {
 		String experimentId = request.getParameter("experimentId");
 
 		Experiment experiment = eService.getExperiment(experimentId);
+		Integer score = eService.getExperimentScore(experimentId, getUserId(request, response));
 
+		request.setAttribute("score", score);
 		request.setAttribute("experiment", experiment);
 		request.getRequestDispatcher("/student/experiment.jsp").forward(request, response);
 	}
@@ -143,8 +145,8 @@ public class StudentExperimentServlet extends MethodInvokeServlet2 {
 
 			// 操作成功后返回
 			request.setAttribute("score", score);
-			//response.sendRedirect(request.getContextPath()
-							//	+ "/servlet/CoursewareServlet?method=listCourseware");
+			response.sendRedirect(request.getContextPath()
+								+ "/servlet/StudentExperimentServlet?method=doExperiment&experimentId="+experimentId);
 		} catch (Exception e) {
 			request.setAttribute("message", "未知异常: " + e.getMessage());
 			request.getRequestDispatcher("/message.jsp").forward(request,

@@ -1,7 +1,7 @@
 package team.dx.classroom.dao;
 
 public interface ThirdPartyCommonDAO {
-
+	
 	/**
 	 * 该方法封装了 INSERT/ DELETE/ UPDATE 操作
 	 * 

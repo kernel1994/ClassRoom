@@ -18,7 +18,9 @@
     <h4>检测数据</h4>
     <div>输入：${experiment.input }</div>
     <div>输出：${experiment.output }</div>
-    
+    <c:if test="${not empty requestScope.score}">
+    	 <div>之前得分：${requestScope.score}</div>
+    </c:if>
     
     <form action="${pageContext.request.contextPath}/servlet/StudentExperimentServlet?method=checkCode&experimentId=${experiment.id }" method="post" enctype="multipart/form-data">
 			<div class="panel-body">
