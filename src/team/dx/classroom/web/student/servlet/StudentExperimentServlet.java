@@ -51,7 +51,6 @@ public class StudentExperimentServlet extends MethodInvokeServlet2 {
 		request.setAttribute("course", course);
 		request.getRequestDispatcher("/course/experiment.jsp").forward(request, response);
 	
-		
 	}
 	
 	/* 学生做/ 查看实验 */
@@ -171,16 +170,24 @@ public class StudentExperimentServlet extends MethodInvokeServlet2 {
 		
 		//0代表字符串，1代替数字，其他留着扩展
 		int flag = experiment.getFlag();
+		int length = inputs.length;
+		Object[] result = null;
 		if (flag == 0) {
 			
+			//inputs本身就是字符串
+			result = CompilerUtils.run(path, fileName, inputs);
+			
+			
 		} else if (flag == 1) {
-			int length = inputs.length;
+			
 			for (int i = 0; i < length; i++) {
 				inputNums[i] = new Integer(inputs[i]);
 			}
+			
+			result = CompilerUtils.run(path, fileName, inputNums);
+			
 		}
 		
-		Object[] result = CompilerUtils.run(path, fileName, inputNums);
 		String output = experiment.getOutput();
 		if (output.equals("" + result[0])) {
 			return true;
