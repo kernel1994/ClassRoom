@@ -9,6 +9,7 @@ public class Resource {
 	private String uri;
 	private Date uploadtime;
 	private String description;
+	
 	private User uploader;
 
 	public Resource() {

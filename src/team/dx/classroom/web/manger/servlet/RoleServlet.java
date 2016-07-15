@@ -29,7 +29,7 @@ public class RoleServlet extends MethodInvokeServlet2 {
 		try {
 			List<Role> roles = rs.getAllRoles();
 			request.setAttribute("roles", roles);
-			request.getRequestDispatcher("/admin/manager/listrole.jsp").forward(request, response);
+			request.getRequestDispatcher("/manager/listrole.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("message", "RoleServlet类中getAll方法出现异常");

@@ -41,6 +41,7 @@
     		float: left;
     	}
     	#head4{
+    	    margin-top: 52px;
     		width:5%;
     		height:100%;
     		float: left;
