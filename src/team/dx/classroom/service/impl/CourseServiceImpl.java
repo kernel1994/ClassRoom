@@ -1,17 +1,13 @@
 package team.dx.classroom.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import team.dx.classroom.dao.*;
 import team.dx.classroom.domain.*;
 import team.dx.classroom.factory.ObjectFactory;
-import team.dx.classroom.service.ExperimentService;
-import team.dx.classroom.service.ReviewService;
-import team.dx.classroom.service.CourseService;
-import team.dx.classroom.service.CoursewareService;
-import team.dx.classroom.service.TaskService;
+import team.dx.classroom.service.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class CourseServiceImpl implements CourseService {
 
@@ -19,14 +15,13 @@ public class CourseServiceImpl implements CourseService {
 	private CourseDAO cDAO = ObjectFactory.getInstance().createObject(CourseDAO.class);
 	private TaskDAO tDAO = ObjectFactory.getInstance().createObject(TaskDAO.class);
 	private ExperimentDAO eDAO = ObjectFactory.getInstance().createObject(ExperimentDAO.class);
-	
 	private ThirdPartyCommonDAO tpDAO = ObjectFactory.getInstance().createObject(ThirdPartyCommonDAO.class);
 
 	private TaskService tService = ObjectFactory.getInstance().createObject(TaskService.class);
 	private CoursewareService cwService = ObjectFactory.getInstance().createObject(CoursewareService.class);
 	private ExperimentService eService = ObjectFactory.getInstance().createObject(ExperimentService.class);
-	
 	private ReviewService rService = ObjectFactory.getInstance().createObject(ReviewService.class);
+	private AnnouncementService aService = ObjectFactory.getInstance().createObject(AnnouncementService.class);
 
 	@Override
 	public Course getCourse(String courseId) {
@@ -55,6 +50,10 @@ public class CourseServiceImpl implements CourseService {
 
 		List<Review> reviews = rService.getCourseReviews(courseId);
 		course.setReviews(reviews);
+
+		// 公告
+		List<Announcement> announcements = aService.getCourseAnnouncements(courseId);
+		course.setAnnouncements(announcements);
 
 		return course;
 	}
@@ -117,32 +116,8 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public List<Course> getStudentCourses(String studentId) {
-		
-		String sqlC = "select * from course as c "
-				+ "where c.id "
-				+ "in ("
-					+ "select course_id "
-					+ "from student_course as sc "
-					+ "where sc.student_id = ?"
-				+ ")";
-		
-		List<Course> courses = cDAO.getCourses(sqlC, studentId);
-		
-		/* f**k */
-		String sqlT = "select * from user "
-				+ "where id = ("
-					+ "select teacher_id "
-					+ "from course as c "
-					+ "where c.id = ?"
-				+ ")";
-		
-		for (Course c : courses) {
-			User teacher = uDAO.getUser(sqlT, c.getId());
-			c.setTeacher(teacher);
-			c.setHaveOwn(1);
-		}
-		
-		return courses;
+
+		return cDAO.getStudentCourses(studentId);
 	}
 
 	@Override
@@ -277,12 +252,25 @@ public class CourseServiceImpl implements CourseService {
 		for (Course course : courses) {
 			Course courseTemp = getCourse(course.getId());
 			// 只需要放入task 要显式赋值，才能实现深拷贝
-			course.setExperiments(courseTemp.getExperiments());;
+			course.setExperiments(courseTemp.getExperiments());
 
 			for (Experiment experiment : course.getExperiments()) {
 				Integer score = eDAO.getScore(sql, studentId, experiment.getId());
 				experiment.setScore(score);
 			}
+		}
+
+		return courses;
+	}
+
+	@Override
+	public List<Course> getStudentAllCoursesAnnouncements(String studentId) {
+		List<Course> courses = getStudentCourses(studentId);
+
+		for (Course course : courses) {
+			Course courseTemp = getCourse(course.getId());
+			// 只需要放入task 要显式赋值，才能实现深拷贝
+			course.setAnnouncements(courseTemp.getAnnouncements());
 		}
 
 		return courses;

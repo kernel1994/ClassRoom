@@ -39,7 +39,7 @@ public class AnnouncementServiceImplTest {
         a.setId(WebUtils.getRandomUUID());
         a.setCourse_id("d236b5cd-6533-45b2-925f-b96fae1ce6bf");
         a.setTime(new Date());
-        a.setContent("明天不上课3");
+        a.setContent("明天不上课4");
 //        User u = new User();
 //        u.setId("da2e8098-9b26-4e47-8ddd-1e5dab5e6294");
 //        a.setUser(u);

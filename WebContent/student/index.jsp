@@ -5,6 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>学生主页</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/kernel-app.css">
 </head>
 <body>
 
@@ -12,9 +13,8 @@
 <jsp:include page="/student/comp_nav.jsp"></jsp:include>
 
 <div class="row">
-
     <div class="col s2">
-        <div class="card">
+        <div class="card hoverable">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="${pageContext.request.contextPath }/images/office.jpg" alt="photo">
             </div>
@@ -33,8 +33,16 @@
     </div>
 
     <div class="col s10">
+        <div class="row">
+            <div class="announcement card-panel hoverable">
+                <div class="container">
+                    <div class="title">公告</div>
+                    <div class="content" id="announcement-content"></div>
+                </div>
+            </div>
 
-        <div id="chartsContainer" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <div class="card-panel hoverable" id="chartsContainer" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
     </div>
 
 </div>
@@ -197,7 +205,21 @@
 
         });
 
+        $.post("createIndexAnnouncementData.stu", {data: new Date()}, function (result) {
+            let ann = $('#announcement-content');
+            let data = JSON.parse(result);
 
+            $.each(data, function (i, e) {
+                ann.append(
+                        "<div class='announcement-item'>" +
+                            "<span class='user blue lighten-2'>" + e.user.name + "</span>" +
+                            "<span class='course blue lighten-2'>" + e.courseName + "</span>" +
+                            "<span class='time blue lighten-3'>" + e.time + "</span>" +
+                            "<span class='content blue lighten-4'>" + e.content + "</span>" +
+                         "</div>"
+                );
+            });
+        });
 
     });
 </script>

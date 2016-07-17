@@ -3,10 +3,7 @@ package team.dx.classroom.web.student.servlet;
 import com.google.gson.Gson;
 import team.dx.classroom.domain.*;
 import team.dx.classroom.factory.ObjectFactory;
-import team.dx.classroom.service.CourseService;
-import team.dx.classroom.service.CoursewareService;
-import team.dx.classroom.service.HomeWorkService;
-import team.dx.classroom.service.TaskService;
+import team.dx.classroom.service.*;
 import team.dx.classroom.web.servlet.MethodInvokeServlet;
 
 import javax.servlet.ServletException;
@@ -26,6 +23,7 @@ public class StudentServlet extends MethodInvokeServlet {
 	private TaskService tService = ObjectFactory.getInstance().createObject(TaskService.class);
 	private CoursewareService cwService = ObjectFactory.getInstance().createObject(CoursewareService.class);
 	private HomeWorkService hService = ObjectFactory.getInstance().createObject(HomeWorkService.class);
+	private AnnouncementService aService = ObjectFactory.getInstance().createObject(AnnouncementService.class);
 
 	@Override
 	public int getSuffixLen() {
@@ -342,4 +340,30 @@ public class StudentServlet extends MethodInvokeServlet {
 		out.close();
 	}
 
+	public void viewAnnouncements(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String studentID = getUserId(request, response);
+		List<Course> courses = cService.getStudentAllCoursesAnnouncements(studentID);
+
+		request.setAttribute("courses", courses);
+		request.getRequestDispatcher("/student/announcements.jsp").forward(request, response);
+	}
+
+	public void createIndexAnnouncementData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String studentID = getUserId(request, response);
+		List<Announcement> announcements = aService.getStudentCoursesAnnouncementsWithLimited(studentID, 2);
+
+		Gson gson = new Gson();
+		String stringData = gson.toJson(announcements, List.class);
+
+		/* 禁用缓存 */
+		response.setHeader("Cache-Control", "no-store");
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Expires", -1);
+
+		PrintWriter out = response.getWriter();
+
+		out.write(stringData);
+		out.flush();
+		out.close();
+	}
 }

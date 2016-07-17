@@ -1,10 +1,13 @@
 package team.dx.classroom.dao.impl;
 
-import java.util.List;
-
 import team.dx.classroom.dao.BasicDAO;
 import team.dx.classroom.dao.CourseDAO;
+import team.dx.classroom.dao.UserDAO;
 import team.dx.classroom.domain.Course;
+import team.dx.classroom.domain.User;
+import team.dx.classroom.factory.ObjectFactory;
+
+import java.util.List;
 
 public class CourseDAOImpl extends BasicDAO<Course> implements CourseDAO {
 
@@ -17,6 +20,36 @@ public class CourseDAOImpl extends BasicDAO<Course> implements CourseDAO {
 			throw new RuntimeException(e);
 		}
 		
+	}
+
+	@Override
+	public List<Course> getStudentCourses(String studentId) {
+		String sqlC = "select * from course as c "
+				+ "where c.id "
+				+ "in ("
+				+ "select course_id "
+				+ "from student_course as sc "
+				+ "where sc.student_id = ?"
+				+ ")";
+
+		List<Course> courses = getCourses(sqlC, studentId);
+
+		/* f**k */
+		String sqlT = "select * from user "
+				+ "where id = ("
+				+ "select teacher_id "
+				+ "from course as c "
+				+ "where c.id = ?"
+				+ ")";
+
+		UserDAO uDAO = ObjectFactory.getInstance().createObject(UserDAO.class);
+		for (Course c : courses) {
+			User teacher = uDAO.getUser(sqlT, c.getId());
+			c.setTeacher(teacher);
+			c.setHaveOwn(1);
+		}
+
+		return courses;
 	}
 
 	@Override

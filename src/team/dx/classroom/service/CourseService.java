@@ -111,4 +111,11 @@ public interface CourseService {
 	 * @return 包含了学生学生所有选课的所有实验的列表
 	 * */
 	public List<Course> getStudentAllCoursesExperiments(String studentId);
+
+	/**
+	 * 获取学生所有选课的所有公告列表
+	 * @param studentId 学生id
+	 * @return 包含了学生学生所有选课的所有公告的列表
+     */
+	List<Course> getStudentAllCoursesAnnouncements(String studentId);
 }
