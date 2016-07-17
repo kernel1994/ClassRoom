@@ -28,11 +28,15 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 			List<TrueOrFalse> trueOrFalses = homeWork.getTrueOrFalses();
 			List<ShortQuestion> shortQuestions = homeWork.getShortQuestions();
 			
-			int i = 1;
 			if (selects != null && selects.size() != 0) {
 				for (Select select : selects) {
 					Element selectTag = root.addElement( "select" );
-					selectTag.addAttribute( "id", "select" + i++ );
+					selectTag.addAttribute( "id", select.getId() );
+					selectTag.addAttribute( "chapter", select.getChapter() );
+					selectTag.addAttribute( "degree", select.getDegree() );
+					selectTag.addAttribute( "knowledgepoint", select.getKnowledgepoint() );
+					selectTag.addAttribute( "score", select.getScore() );
+					selectTag.addAttribute( "types", select.getTypes() );
 					selectTag.addAttribute( "answer", select.getAnswer() );
 					selectTag.addElement("title").setText(select.getTitle());
 					selectTag.addElement("A").setText(select.getA());
@@ -43,11 +47,15 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 				}
 			}
 			
-			i = 1;
 			if (trueOrFalses != null && trueOrFalses.size() != 0) {
 				for (TrueOrFalse trueOrFalse : trueOrFalses) {
 					Element trueOrFalseTag = root.addElement( "trueorfalse" );
-					trueOrFalseTag.addAttribute( "id", "trueorfalse" + i++ );
+					trueOrFalseTag.addAttribute( "id", trueOrFalse.getId());
+					trueOrFalseTag.addAttribute( "chapter", trueOrFalse.getChapter() );
+					trueOrFalseTag.addAttribute( "degree", trueOrFalse.getDegree() );
+					trueOrFalseTag.addAttribute( "knowledgepoint", trueOrFalse.getKnowledgepoint() );
+					trueOrFalseTag.addAttribute( "score", trueOrFalse.getScore() );
+					trueOrFalseTag.addAttribute( "types", trueOrFalse.getTypes() );
 					trueOrFalseTag.addAttribute( "answer", trueOrFalse.getAnswer());
 					trueOrFalseTag.addElement("title").setText(trueOrFalse.getTitle());
 					trueOrFalseTag.addElement("description").setText(trueOrFalse.getDescription());
@@ -55,11 +63,15 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 				}
 			}
 			
-			i = 1;
 			if (shortQuestions != null && shortQuestions.size() != 0) {
 				for (ShortQuestion shortQuestion : shortQuestions) {
 					Element shortQuestionTag = root.addElement( "shortquestion" );
-					shortQuestionTag.addAttribute( "id", "shortquestion" + i++ );
+					shortQuestionTag.addAttribute( "id", shortQuestion.getId());
+					shortQuestionTag.addAttribute( "chapter", shortQuestion.getChapter() );
+					shortQuestionTag.addAttribute( "degree", shortQuestion.getDegree() );
+					shortQuestionTag.addAttribute( "knowledgepoint", shortQuestion.getKnowledgepoint() );
+					shortQuestionTag.addAttribute( "score", shortQuestion.getScore() );
+					shortQuestionTag.addAttribute( "types", shortQuestion.getTypes() );
 					shortQuestionTag.addElement("title").setText(shortQuestion.getTitle());
 					shortQuestionTag.addElement("description").setText(shortQuestion.getDescription());
 				}

@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="../css/blog.css" rel="stylesheet">
- <link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/blog.css" rel="stylesheet">
+ <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <title>教师主页</title>
 </head>
 <body>

@@ -32,6 +32,7 @@
       </div>
  	 <div class="col-sm-4">
           <div class="list-group">
+            <a href="${pageContext.request.contextPath}/servlet/ExamsServlet?method=listExams" class="list-group-item">题库</a>
             <a href="${pageContext.request.contextPath}/servlet/TaskServlet?method=listTask" class="list-group-item">作业</a>
             <a href="${pageContext.request.contextPath}/servlet/CoursewareServlet?method=listCourseware" class="list-group-item">课件</a>
             <a href="${pageContext.request.contextPath}/servlet/ExperimentServlet?method=listExperiment" class="list-group-item">实验</a>

@@ -184,3 +184,43 @@ create table user_experiment (
   constraint user_id_FK10 foreign key(user_id) references user(id),
   constraint experiment_id_FK10 foreign key(experiment_id) references experiment(id)
 )
+
+======================================
+CREATE TABLE `classroom`.`announcement` (
+  `id` VARCHAR(40) NOT NULL,
+  `user_id` VARCHAR(40) NULL,
+  `course_id` VARCHAR(40) NULL,
+  `time` DATE NULL,
+  `content` VARCHAR(256) NULL,
+  PRIMARY KEY (`id`));
+  
+create table user(
+	id varchar(40) primary key,
+	nick varchar(100) not null,
+	password varchar(40) not null,
+	name varchar(100) not null,
+	email varchar(100) not null,
+	gender varchar(10),
+	birthday date,
+	address varchar(255),
+	description varchar(255)
+);
+  
+  --题库表
+create table exams
+(
+	id varchar(40) primary key,
+	chapter varchar(40),
+	degree varchar(40),
+	knowledgepoint varchar(40),
+	score int, 
+	title  varchar(255) not null,
+	type varchar(40),
+	answer varchar(100),
+	a varchar(100),
+	b varchar(100),
+	c varchar(100),
+	d varchar(100),
+	description varchar(255),
+);
+id	chapter	degree	knowledgepoint	score	title	types	answer	a	b	c	d	description
