@@ -86,16 +86,18 @@ public class WebUtils {
 
 
 	public static List<ShortQuestion> conver2ShortQuestion(String[] qtitles,
-			String[] qdescriptions) {
+			String[] qdescriptions, String[] qchapters, String[] qdegrees, String[] qknowledges, String[] qscores, String[] qtypes) {
 		List<ShortQuestion> shortQuestions = new ArrayList<ShortQuestion>();
 		if (qtitles == null) {
 			return shortQuestions;
 		}
 		int len = qtitles.length;
 		
+		//id, chapter, degree, knowledgepoint, score, types, title, answer, stuAnswer, description
 		for (int i = 0; i < len; i++) {
-			ShortQuestion shortQuestion = new ShortQuestion("shortquestion" + i, qtitles[i],
-					qdescriptions[i]);
+			ShortQuestion shortQuestion = new ShortQuestion("q_" + getRandomUUID(), 
+					qchapters[i], qdegrees[i], qknowledges[i], qscores[i],qtypes[i], qtitles[i],
+					null, null, qdescriptions[i], null, null, null, null);
 			shortQuestions.add(shortQuestion);
 		}
 		return shortQuestions;
@@ -133,8 +135,15 @@ public class WebUtils {
 				String sanswerD = request.getParameter("sD" + id);
 				String sdescription = request.getParameter("sdescription" + id);
 				String sanswer = request.getParameter("sanswer" + id);
-				Select select = new Select("select", stitle, sanswerA, sanswerB,
-						sanswerC, sanswerD, sanswer, sdescription);
+				String schapter = request.getParameter("schapter" + id);
+				String sdegree = request.getParameter("sdegree" + id);
+				String sknowledge = request.getParameter("sknowledge" + id);
+				String stypes = request.getParameter("stypes" + id);
+				String sscore = request.getParameter("sscore" + id);
+
+				Select select = new Select("s_"+getRandomUUID(), schapter, 
+						sdegree, sknowledge, sscore, stypes, stitle, 
+						sanswer, null, sdescription,sanswerA, sanswerB, sanswerC, sanswerD);
 				selects.add(select);
 			}
 		}
@@ -148,9 +157,17 @@ public class WebUtils {
 			for (String id : trueorfalseId) {
 				String ttitle = request.getParameter("ttitle" + id);
 				String tanswer = request.getParameter("tanswer" + id);
+				
+				String tchapter = request.getParameter("tchapter" + id);
+				String tdegree = request.getParameter("tdegree" + id);
+				String tknowledge = request.getParameter("tknowledge" + id);
+				String ttypes = request.getParameter("ttypes" + id);
+				String tscore = request.getParameter("tscore" + id);
+				
 				String tdescription = request.getParameter("tdescription" + id);
-				TrueOrFalse trueOrFalse = new TrueOrFalse("trueorfalse", ttitle, tanswer,
-						tdescription);
+				TrueOrFalse trueOrFalse = new TrueOrFalse("t_"+getRandomUUID(), tchapter, 
+						tdegree, tknowledge, tscore, ttypes, ttitle, 
+						tanswer, null, tdescription,null, null, null, null);
 				trueOrFalses.add(trueOrFalse);
 			}
 		}
@@ -160,9 +177,15 @@ public class WebUtils {
 
 		// 简答题
 		String[] qtitles = request.getParameterValues("qtitle");
+		String[] qchapters = request.getParameterValues("qchapter");
+		String[] qdegrees = request.getParameterValues("qdegree");
+		String[] qknowledges = request.getParameterValues("qknowledge");
+		String[] qscores = request.getParameterValues("qscore");
+		String[] qtypes = request.getParameterValues("qtypes");
 		String[] qdescriptions = request.getParameterValues("qdescription");
 		List<ShortQuestion> shortQuestions = conver2ShortQuestion(
-				qtitles, qdescriptions);
+				qtitles, qdescriptions, qchapters, qdegrees,
+				qknowledges, qscores, qtypes);
 		homeWork.setShortQuestions(shortQuestions);
 
 		return homeWork;

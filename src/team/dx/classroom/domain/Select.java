@@ -11,18 +11,22 @@ public class Select extends Topic {
 		super();
 	}
 
-	public Select(String id, String title, String a, String b, String c, String d, String answer, String description) {
-		super(id, title, answer, description);
-		this.id = id;
-		this.title = title;
+	
+	public Select(String id, String chapter, String degree,
+			String knowledgepoint, String score, String types, String title,
+			String answer, String stuAnswer, String description,
+			String a, String b, String c, String d) {
+		super(id, chapter, degree, knowledgepoint, score, types, title, answer, stuAnswer, description);
+		
 		this.a = a;
 		this.b = b;
 		this.c = c;
 		this.d = d;
-		this.answer = answer;
-		this.description = description;
 	}
-	
+
+
+
+
 	public String getA() {
 		return a;
 	}
@@ -57,15 +61,11 @@ public class Select extends Topic {
 
 	@Override
 	public String toString() {
-		return "Select{" +
-				"id='" + id + '\'' +
-				", title='" + title + '\'' +
-				", a='" + a + '\'' +
-				", b='" + b + '\'' +
-				", c='" + c + '\'' +
-				", d='" + d + '\'' +
-				", answer='" + answer + '\'' +
-				", description='" + description + '\'' +
-				'}';
+		return "Select [a=" + a + ", b=" + b + ", c=" + c + ", d=" + d
+				+ ", id=" + id + ", chapter=" + chapter + ", degree=" + degree
+				+ ", knowledgepoint=" + knowledgepoint + ", score=" + score
+				+ ", types=" + types + ", title=" + title + ", answer="
+				+ answer + ", stuAnswer=" + stuAnswer + ", description="
+				+ description + "]";
 	}
 }
