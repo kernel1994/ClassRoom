@@ -41,4 +41,36 @@ public class ExamsServiceImpl implements ExamsService{
 		
 	}
 
+
+	@Override
+	public HomeWork createExams(String chapter, String degree,
+			String knowledgepoint, String type, String examcount) {
+		
+		//对输入数据处理
+		
+		if ("0".equals(chapter)) {
+			chapter = "%";
+		}
+		
+		if ("0".equals(degree)) {
+			degree = "%";
+		}
+		
+		if ("".equals(knowledgepoint)) {
+			knowledgepoint = "%";
+		}
+		
+		if ("0".equals(type)) {
+			type = "%";
+		}
+		
+		if ("".equals(examcount)) {
+			//默认每个类型（若没有选择类型）读取两个题目
+			examcount = "2";
+		}
+		
+		
+		return eDAO.getExams(chapter,degree,knowledgepoint,type,examcount);
+	}
+
 }

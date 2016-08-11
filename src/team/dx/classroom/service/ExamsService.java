@@ -9,6 +9,10 @@ public interface ExamsService {;
 
     /** 添加题库 */
     void addExams(HomeWork homeWork);
+
+    /** 生成题库 */
+	HomeWork createExams(String chapter, String degree, String knowledgepoint,
+			String type, String examcount);
     
     
 }

@@ -93,8 +93,60 @@ public class ExamsServlet extends MethodInvokeServlet2 {
 						response);
 			}
 			
+		} catch (Exception e) {
+			request.setAttribute("message", "listExams未知异常");
+			request.getRequestDispatcher("/message.jsp").forward(request,
+					response);
+		}
+	}
+	
+	public void createExam(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			// 封装作业内容
+			String chapter = request.getParameter("chapter");
+			String degree = request.getParameter("degree");
+			String knowledgepoint = request.getParameter("knowledgepoint");
+			String type = request.getParameter("type");
+			String examcount = request.getParameter("examcount");
 			
+			HomeWork homeWork = es.createExams(chapter,degree,knowledgepoint,type,examcount);
+			/**************************************************************************/
+			// 作业的描述
+			Task task = WebUtils.request2Bean(request.getParameterMap(), Task.class);
+			task.setId(WebUtils.getRandomUUID());
 			
+			// 得到一个 资源保存的父路径
+			String path = this.getServletContext().getRealPath(
+					"/resource/task/homework");
+			// 课程id
+			String courseId = (String) request.getSession().getAttribute(
+					"courseId");
+			// 上传者
+			User uploader = (User) request.getSession().getAttribute("user");
+			Course course = cs.getCourse(courseId);
+			
+			// 作业资源对象
+			Resource resource = WebUtils.conver2Resource(task, uploader,
+					course, path);
+			task.setResource(resource);
+			// 将作业描述插入数据库
+			ts.addTask(task, course.getId());
+			
+			//生成具体题（xml）
+			
+			/*-------------存取真实的作业--------------*/
+			// 得到一个xml作业模板,空内容
+			String standardPath = this.getServletContext().getRealPath(
+					"/resource/task/homework_standard.xml");
+			String desPath = resource.getUri();
+			
+			// 将作业写进硬盘
+			ts.addHomeWork(homeWork, desPath, standardPath);
+			
+			request.setAttribute("homeWork", homeWork);
+			request.getRequestDispatcher("/teacher/exams/listexam.jsp").forward(request,
+					response);
 		} catch (Exception e) {
 			request.setAttribute("message", "listExams未知异常");
 			request.getRequestDispatcher("/message.jsp").forward(request,

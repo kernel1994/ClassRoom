@@ -1,12 +1,9 @@
 package team.dx.classroom.web.teacher.servlet;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import team.dx.classroom.domain.Course;
-import team.dx.classroom.domain.Task;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
 import team.dx.classroom.service.TaskService;

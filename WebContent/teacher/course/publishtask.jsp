@@ -46,7 +46,7 @@
 			
 			  <!-- List group -->
 			  <ul class="list-group">
-			   	<li class="list-group-item"><a href="">生成作业</a></li>
+			   	<li class="list-group-item"><a href="${pageContext.request.contextPath }/teacher/exams/createexam.jsp">生成作业</a></li>
 			   	<li class="list-group-item"><a href="${pageContext.request.contextPath }/teacher/course/addtask.jsp">上传作业</a></li>
 			    <li class="list-group-item"><a href="${pageContext.request.contextPath }/servlet/ExamsServlet?method=listExams">编辑作业</a></li>
 			  </ul>
