@@ -16,4 +16,6 @@ public interface AnnouncementDAO {
     void deleteAnnouncement(String announcementID);
 
     void updateAnnouncement(Announcement announcement);
+
+    List<Announcement> getCourseAnnouncements(String courseID);
 }

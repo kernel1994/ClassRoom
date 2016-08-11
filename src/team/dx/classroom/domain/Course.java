@@ -13,6 +13,7 @@ public class Course {
     private List<Task> tasks;
     private List<Experiment> experiments;
     private List<Review> reviews;
+    private List<Announcement> announcements;
 
     /**
      * 用于标注用户是否用于该课程
@@ -110,7 +111,15 @@ public class Course {
 		this.experiments = experiments;
 	}
 
-	@Override
+    public List<Announcement> getAnnouncements() {
+        return announcements;
+    }
+
+    public void setAnnouncements(List<Announcement> announcements) {
+        this.announcements = announcements;
+    }
+
+    @Override
     public String toString() {
         return "Course{" +
                 "id='" + id + '\'' +

@@ -42,4 +42,11 @@ public class AnnouncementDAOImpl extends BasicDAO<Announcement> implements Annou
     public void updateAnnouncement(Announcement announcement) {
 
     }
+
+    @Override
+    public List<Announcement> getCourseAnnouncements(String courseID) {
+        String sql = "select * from announcement where course_id = ?";
+
+        return getForList(sql, courseID);
+    }
 }

@@ -1,0 +1,20 @@
+.announcement-item {
+    margin-bottom: 20px;
+}
+
+.announcement-item .user {
+    margin-right: 10px;
+}
+
+.announcement-item .course {
+    margin-right: 10px;
+}
+
+.announcement-item .content {
+    display: block;
+}
+
+.announcement .title {
+    text-align: center;
+    font-size: 2em;
+}

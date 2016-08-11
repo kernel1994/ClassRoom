@@ -1,13 +1,12 @@
 package team.dx.classroom.web.servlet;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Servlet implementation class MethodInvokeServlet<br />
@@ -22,7 +21,6 @@ public class MethodInvokeServlet extends HttpServlet {
 	 */
 	public MethodInvokeServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
