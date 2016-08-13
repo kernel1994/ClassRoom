@@ -1,19 +1,15 @@
 package team.dx.classroom.web.teacher.servlet;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import team.dx.classroom.domain.Course;
-import team.dx.classroom.domain.HomeWork;
-import team.dx.classroom.domain.Resource;
-import team.dx.classroom.domain.Task;
-import team.dx.classroom.domain.User;
+import team.dx.classroom.domain.*;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.CourseService;
 import team.dx.classroom.service.ExamsService;
 import team.dx.classroom.service.TaskService;
 import team.dx.classroom.utils.WebUtils;
 import team.dx.classroom.web.servlet.MethodInvokeServlet2;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class ExamsServlet extends MethodInvokeServlet2 {
 
@@ -151,6 +147,7 @@ public class ExamsServlet extends MethodInvokeServlet2 {
 			request.setAttribute("message", "listExams未知异常");
 			request.getRequestDispatcher("/message.jsp").forward(request,
 					response);
+			e.printStackTrace();
 		}
 	}
 

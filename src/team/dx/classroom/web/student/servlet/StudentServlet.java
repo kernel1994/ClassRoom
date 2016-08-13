@@ -24,6 +24,7 @@ public class StudentServlet extends MethodInvokeServlet {
 	private CoursewareService cwService = ObjectFactory.getInstance().createObject(CoursewareService.class);
 	private HomeWorkService hService = ObjectFactory.getInstance().createObject(HomeWorkService.class);
 	private AnnouncementService aService = ObjectFactory.getInstance().createObject(AnnouncementService.class);
+	private OnlineTestService otService = ObjectFactory.getInstance().createObject(OnlineTestService.class);
 
 	@Override
 	public int getSuffixLen() {
@@ -366,4 +367,34 @@ public class StudentServlet extends MethodInvokeServlet {
 		out.flush();
 		out.close();
 	}
+
+	public void createCustomOnlineTest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String chapter = request.getParameter("chapter");
+		String degree = request.getParameter("degree");
+		String knowledgepoint = request.getParameter("knowledgepoint");
+		String type = request.getParameter("type");
+		String examcount = request.getParameter("examcount");
+
+        String userID = getUserId(request, response);
+        String homeworkDir = this.getServletContext().getRealPath("/resource/task/homework");
+        String templateXMLPath = this.getServletContext().getRealPath("/resource/task/homework_standard.xml");
+        String taskID = otService.createCustomOnlineTest(userID, homeworkDir, templateXMLPath, chapter, degree, knowledgepoint, type, examcount);
+
+        HomeWork homeWork = hService.getHomeWork(taskID);
+        request.setAttribute("homeWork", homeWork);
+        request.setAttribute("taskId", taskID);
+        request.getRequestDispatcher("/student/task.jsp").forward(request, response);
+    }
+
+    public void createStanderOnlineTest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String userID = getUserId(request, response);
+        String homeworkDir = this.getServletContext().getRealPath("/resource/task/homework");
+        String templateXMLPath = this.getServletContext().getRealPath("/resource/task/homework_standard.xml");
+        String taskID = otService.createStanderOnlineTest(userID, homeworkDir, templateXMLPath);
+
+        HomeWork homeWork = hService.getHomeWork(taskID);
+        request.setAttribute("homeWork", homeWork);
+        request.setAttribute("taskId", taskID);
+        request.getRequestDispatcher("/student/task.jsp").forward(request, response);
+    }
 }

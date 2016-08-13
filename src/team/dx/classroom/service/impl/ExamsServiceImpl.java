@@ -1,15 +1,14 @@
 package team.dx.classroom.service.impl;
 
-import java.util.List;
-
 import team.dx.classroom.dao.ExamsDAO;
-import team.dx.classroom.dao.UserDAO;
 import team.dx.classroom.domain.HomeWork;
 import team.dx.classroom.domain.Select;
 import team.dx.classroom.domain.ShortQuestion;
 import team.dx.classroom.domain.TrueOrFalse;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.ExamsService;
+
+import java.util.List;
 
 public class ExamsServiceImpl implements ExamsService{
 	
@@ -64,7 +63,7 @@ public class ExamsServiceImpl implements ExamsService{
 			type = "%";
 		}
 		
-		if ("".equals(examcount)) {
+		if ("0".equals(examcount) || "".equals(examcount)) {
 			//默认每个类型（若没有选择类型）读取两个题目
 			examcount = "2";
 		}
