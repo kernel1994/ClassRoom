@@ -1,17 +1,8 @@
 package team.dx.classroom.web.student.servlet;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 import team.dx.classroom.domain.Course;
 import team.dx.classroom.domain.Experiment;
 import team.dx.classroom.domain.User;
@@ -20,6 +11,13 @@ import team.dx.classroom.service.CourseService;
 import team.dx.classroom.service.ExperimentService;
 import team.dx.classroom.utils.CompilerUtils;
 import team.dx.classroom.web.servlet.MethodInvokeServlet2;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 public class StudentExperimentServlet extends MethodInvokeServlet2 {
 
@@ -87,7 +85,7 @@ public class StudentExperimentServlet extends MethodInvokeServlet2 {
 
 			// Configure a repository (to ensure a secure temp location is used)
 			File repository = new File(this.getServletContext().getRealPath(
-					"resource/temp"));
+					"/resource/temp"));
 			factory.setRepository(repository);
 
 			// Create a new file upload handler
@@ -147,6 +145,7 @@ public class StudentExperimentServlet extends MethodInvokeServlet2 {
 			response.sendRedirect(request.getContextPath()
 								+ "/servlet/StudentExperimentServlet?method=doExperiment&experimentId="+experimentId);
 		} catch (Exception e) {
+			e.printStackTrace();
 			request.setAttribute("message", "未知异常: " + e.getMessage());
 			request.getRequestDispatcher("/message.jsp").forward(request,
 					response);

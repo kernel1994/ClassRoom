@@ -76,7 +76,7 @@ public class OnlineTestServiceImpl implements OnlineTestService {
         // 3. 将上一步得到的资源，封装成一次 Task，写到数据库
         Task task = new Task();
         task.setId(WebUtils.getRandomUUID());
-        task.setName(resource.getName());
+        task.setName("在线测试-" + new Date().toString());
         task.setResource(resource);
         // 写入数据库, 第二个参数是 course, 表示作业所对应所属的课程，
         // 此处是在线测试生成的作业没有课程对应，暂时写为 计算机组成原理

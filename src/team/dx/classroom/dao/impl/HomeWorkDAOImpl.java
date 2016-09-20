@@ -1,19 +1,18 @@
 package team.dx.classroom.dao.impl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
-
 import team.dx.classroom.dao.HomeWorkDAO;
 import team.dx.classroom.domain.HomeWork;
 import team.dx.classroom.domain.Select;
 import team.dx.classroom.domain.ShortQuestion;
 import team.dx.classroom.domain.TrueOrFalse;
 import team.dx.classroom.utils.XmlUtils;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class HomeWorkDAOImpl implements HomeWorkDAO {
 
@@ -74,6 +73,7 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 					shortQuestionTag.addAttribute( "types", shortQuestion.getTypes() );
 					shortQuestionTag.addElement("title").setText(shortQuestion.getTitle());
 					shortQuestionTag.addElement("description").setText(shortQuestion.getDescription());
+					shortQuestionTag.addElement( "answer").setText(shortQuestion.getAnswer() );
 				}
 			}
 			
@@ -176,6 +176,11 @@ public class HomeWorkDAOImpl implements HomeWorkDAO {
 
 				String description = shortquestion.elementText("description");
 				sqDm.setDescription(description);
+
+				String answer = shortquestion.elementText("answer");
+				sqDm.setAnswer(answer);
+
+                sqDm.setTypes("shortquestion");
 
 				sqDms.add(sqDm);
 			}

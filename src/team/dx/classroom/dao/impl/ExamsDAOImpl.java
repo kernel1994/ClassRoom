@@ -166,7 +166,7 @@ public class ExamsDAOImpl implements ExamsDAO {
 
 
 				for (Object object : set) {
-					sql =  "select id, chapter, degree, knowledgepoint, score, types, title, description from exams where chapter like ? and degree like ? and knowledgepoint like ? and types like ? limit ?, 1";
+					sql =  "select id, chapter, degree, knowledgepoint, score, types, title, description, answer from exams where chapter like ? and degree like ? and knowledgepoint like ? and types like ? limit ?, 1";
 					args = new Object[]{chapter,degree,knowledgepoint,3,object};
 					ShortQuestion shortQuestion = (ShortQuestion) queryRunner.query(JDBCUtils2.getConnection(), sql, new BeanHandler(ShortQuestion.class), args);
 					shortQuestions.add(shortQuestion);
@@ -250,7 +250,7 @@ public class ExamsDAOImpl implements ExamsDAO {
 
 
 					for (Object object : set) {
-						sql =  "select id, chapter, degree, knowledgepoint, score, types, title, description from exams where chapter like ? and degree like ? and knowledgepoint like ? and types like ? limit ?, 1";
+						sql =  "select id, chapter, degree, knowledgepoint, score, types, title, description, answer from exams where chapter like ? and degree like ? and knowledgepoint like ? and types like ? limit ?, 1";
 						args = new Object[]{chapter,degree,knowledgepoint,type,object};
 						ShortQuestion shortQuestion = (ShortQuestion) queryRunner.query(JDBCUtils2.getConnection(), sql, new BeanHandler(ShortQuestion.class), args);
 						shortQuestions.add(shortQuestion);

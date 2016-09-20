@@ -1,6 +1,5 @@
 package team.dx.classroom.service.impl;
 
-import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -11,12 +10,13 @@ import team.dx.classroom.dao.ThirdPartyCommonDAO;
 import team.dx.classroom.domain.*;
 import team.dx.classroom.factory.ObjectFactory;
 import team.dx.classroom.service.HomeWorkService;
-import team.dx.classroom.utils.WebUtils;
 import team.dx.classroom.utils.XmlUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class HomeWorkServiceImpl implements HomeWorkService {
@@ -105,6 +105,9 @@ public class HomeWorkServiceImpl implements HomeWorkService {
         for (ShortQuestion s : homework.getShortQuestions()) {
             // 插入学生答案
             insertStudentAnswer(s, stuAnswer, root, tagName);
+
+            // 批改
+            scoreTask(s, stuAnswer, wrongMap);
         }
 
         // 还需要写评分，数据库，写文件
@@ -151,10 +154,11 @@ public class HomeWorkServiceImpl implements HomeWorkService {
      * */
     private void scoreTask(Topic s, Map stuAnswer, HashMap wrongMap) {
 
-
+        // always return right answer, no matter student is correct
         if (!s.getAnswer().equalsIgnoreCase((String) stuAnswer.get(s.getId()))) {
             wrongMap.put(s.getId(), s.getAnswer());
         } else {
+            wrongMap.put(s.getId(), s.getAnswer());
             // 对的题一题加5分 (code about the score just like shit!!!)
             String sScore = (String) stuAnswer.get("score");
             Integer iScore = Integer.parseInt(sScore);

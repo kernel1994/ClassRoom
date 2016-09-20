@@ -97,28 +97,6 @@
             </c:otherwise>
         </c:choose>
     </div>
-
-    <div class="brand">
-        <div>课程评论</div>
-        <form action="addCourseReview.rev" method="post">
-            <input type="hidden" name="courseID" value="${requestScope.course.id}">
-            <textarea name="review_content"></textarea><br/>
-            <button type="submit" class="btn waves-effect waves-light">发表评论</button>
-        </form>
-        <c:choose>
-            <c:when test="${not empty requestScope.course.reviews}">
-                <ul>
-                    <c:forEach items="${requestScope.course.reviews}" var="review">
-                        <li><div class="chip">${review.user.nick} ${review.time} <br/> ${review.content}</div></li>
-                        <hr>
-                    </c:forEach>
-                </ul>
-            </c:when>
-            <c:otherwise>
-                <em>没有评论</em>
-            </c:otherwise>
-        </c:choose>
-    </div>
 </div>
 
 </body>

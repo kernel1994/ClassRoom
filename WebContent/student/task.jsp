@@ -4,6 +4,15 @@
 <html>
 <head>
     <title>${requestScope.task.name}</title>
+    <style>
+        .c-eee {
+            background-color: #eee !important;
+        }
+
+        .sqAnswer {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
@@ -22,23 +31,33 @@
             <c:forEach items="${requestScope.homeWork.selects}" var="select">
                 <div class="row">
                     <div class="col s12 m6">
-                        <div class="card teal darken-3">
-                            <div class="card-content white-text">
-                                <span class="card-title">${select.title} <span id="${select.id}Info"></span></span>
+                        <div class="card c-eee">
+                            <div class="card-content black-text">
+                                <span class="card-title">${select.title}</span>
                             </div>
                             <div class="card-action">
                                 <input type="radio" name="${select.id}" id="${select.id}1" value="A"/>
-                                <label for="${select.id}1" class="white-text">A. ${select.a}</label>
+                                <label for="${select.id}1" class="black-text">A. ${select.a}</label>
                                 <br/>
                                 <input type="radio" name="${select.id}" id="${select.id}2" value="B"/>
-                                <label for="${select.id}2" class="white-text">B. ${select.b}</label>
+                                <label for="${select.id}2" class="black-text">B. ${select.b}</label>
                                 <br/>
                                 <input type="radio" name="${select.id}" id="${select.id}3" value="C"/>
-                                <label for="${select.id}3" class="white-text">C. ${select.b}</label>
+                                <label for="${select.id}3" class="black-text">C. ${select.c}</label>
                                 <br/>
                                 <input type="radio" name="${select.id}" id="${select.id}4" value="D"/>
-                                <label for="${select.id}4" class="white-text">D. ${select.d}</label>
+                                <label for="${select.id}4" class="black-text">D. ${select.d}</label>
                                 <br/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 sqAnswer">
+                        <div class="card c-eee">
+                            <div class="card-content black-text">
+                                <span class="card-title">正确答案</span>
+                            </div>
+                            <div class="card-action black-text">
+                                <span id="${select.id}Info"></span>
                             </div>
                         </div>
                     </div>
@@ -49,16 +68,25 @@
             <c:forEach items="${requestScope.homeWork.trueOrFalses}" var="trueOrFalse">
                 <div class="row">
                     <div class="col s12 m6">
-                        <div class="card cyan darken-3">
-                            <div class="card-content white-text">
-                                <span class="card-title">${trueOrFalse.title} <span
-                                        id="${trueOrFalse.id}Info"></span></span>
+                        <div class="card c-eee">
+                            <div class="card-content black-text">
+                                <span class="card-title">${trueOrFalse.title}</span>
                             </div>
                             <div class="card-action">
                                 <input type="radio" name="${trueOrFalse.id}" id="${trueOrFalse.id}T" value="True"/>
-                                <label for="${trueOrFalse.id}T" class="white-text">True</label>
+                                <label for="${trueOrFalse.id}T" class="black-text">True</label>
                                 <input type="radio" name="${trueOrFalse.id}" id="${trueOrFalse.id}F" value="False"/>
-                                <label for="${trueOrFalse.id}F" class="white-text">False</label>
+                                <label for="${trueOrFalse.id}F" class="black-text">False</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 sqAnswer">
+                        <div class="card c-eee">
+                            <div class="card-content black-text">
+                                <span class="card-title">正确答案</span>
+                            </div>
+                            <div class="card-action black-text">
+                                <span id="${trueOrFalse.id}Info"></span>
                             </div>
                         </div>
                     </div>
@@ -69,18 +97,27 @@
             <c:forEach items="${requestScope.homeWork.shortQuestions}" var="shortQuestion">
                 <div class="row">
                     <div class="col s12 m6">
-                        <div class="card light-blue darken-3">
-                            <div class="card-content white-text">
-                                <span class="card-title">${shortQuestion.title} <span
-                                        id="${shortQuestion.id}Info"></span></span>
+                        <div class="card c-eee">
+                            <div class="card-content black-text">
+                                <span class="card-title">${shortQuestion.title}</span>
                             </div>
-                            <div class="card-action white-text">
+                            <div class="card-action black-text">
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <textarea name="${shortQuestion.id}" id="textarea1" class="materialize-textarea"></textarea>
                                         <label for="textarea1">请作答</label>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 sqAnswer">
+                        <div class="card c-eee">
+                            <div class="card-content black-text">
+                                <span class="card-title">参考答案</span>
+                            </div>
+                            <div class="card-action black-text">
+                                <span>${shortQuestion.answer}</span>
                             </div>
                         </div>
                     </div>
@@ -115,14 +152,15 @@
         var jData = JSON.stringify(data);
 
         $.post("submitTask.stu", {data: jData}, function (result) {
-            // alert(result);
             var wrong = JSON.parse(result);
+
+            $('.sqAnswer').removeClass('sqAnswer');
 
             for (var wtfukk in wrong) {
                 console.log(wrong[wtfukk]);
                 $('#' + wtfukk + 'Info')
-                        .html('正确答案: ' + wrong[wtfukk])
-                        .css('color', 'red');
+                        .html(wrong[wtfukk])
+                        .css('color', 'black');
             }
         });
 

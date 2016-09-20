@@ -10,6 +10,11 @@
 <html>
 <head>
     <title>查看作业</title>
+    <style>
+        .c-eee {
+            background-color: #eee !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -29,23 +34,33 @@
             </script>
             <div class="row">
                 <div class="col s12 m6">
-                    <div class="card teal darken-3">
-                        <div class="card-content white-text">
-                            <span class="card-title">${select.title} <span id="${select.id}Info"></span></span>
+                    <div class="card c-eee">
+                        <div class="card-content black-text">
+                            <span class="card-title">${select.title}</span>
                         </div>
                         <div class="card-action">
                             <input type="radio" name="${select.id}" id="${select.id}1" value="A"/>
-                            <label for="${select.id}1" class="white-text">A. ${select.a}</label>
+                            <label for="${select.id}1" class="black-text">A. ${select.a}</label>
                             <br/>
                             <input type="radio" name="${select.id}" id="${select.id}2" value="B"/>
-                            <label for="${select.id}2" class="white-text">B. ${select.b}</label>
+                            <label for="${select.id}2" class="black-text">B. ${select.b}</label>
                             <br/>
                             <input type="radio" name="${select.id}" id="${select.id}3" value="C"/>
-                            <label for="${select.id}3" class="white-text">C. ${select.b}</label>
+                            <label for="${select.id}3" class="black-text">C. ${select.b}</label>
                             <br/>
                             <input type="radio" name="${select.id}" id="${select.id}4" value="D"/>
-                            <label for="${select.id}4" class="white-text">D. ${select.d}</label>
+                            <label for="${select.id}4" class="black-text">D. ${select.d}</label>
                             <br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div class="card c-eee">
+                        <div class="card-content black-text">
+                            <span class="card-title">正确答案</span>
+                        </div>
+                        <div class="card-action">
+                            <span id="${select.id}Info"></span>
                         </div>
                     </div>
                 </div>
@@ -61,16 +76,25 @@
             </script>
             <div class="row">
                 <div class="col s12 m6">
-                    <div class="card cyan darken-3">
-                        <div class="card-content white-text">
-                                <span class="card-title">${trueOrFalse.title} <span
-                                        id="${trueOrFalse.id}Info"></span></span>
+                    <div class="card c-eee">
+                        <div class="card-content black-text">
+                                <span class="card-title">${trueOrFalse.title}</span>
                         </div>
                         <div class="card-action">
                             <input type="radio" name="${trueOrFalse.id}" id="${trueOrFalse.id}T" value="True"/>
-                            <label for="${trueOrFalse.id}T" class="white-text">True</label>
+                            <label for="${trueOrFalse.id}T" class="black-text">True</label>
                             <input type="radio" name="${trueOrFalse.id}" id="${trueOrFalse.id}F" value="False"/>
-                            <label for="${trueOrFalse.id}F" class="white-text">False</label>
+                            <label for="${trueOrFalse.id}F" class="black-text">False</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div class="card c-eee">
+                        <div class="card-content black-text">
+                                <span class="card-title">正确答案</span>
+                        </div>
+                        <div class="card-action">
+                            <span id="${trueOrFalse.id}Info"></span>
                         </div>
                     </div>
                 </div>
@@ -81,17 +105,26 @@
         <c:forEach items="${requestScope.homeWork.shortQuestions}" var="shortQuestion">
             <div class="row">
                 <div class="col s12 m6">
-                    <div class="card light-blue darken-3">
-                        <div class="card-content white-text">
-                                <span class="card-title">${shortQuestion.title} <span
-                                        id="${shortQuestion.id}Info"></span></span>
+                    <div class="card c-eee">
+                        <div class="card-content black-text">
+                                <span class="card-title">${shortQuestion.title}</span>
                         </div>
-                        <div class="card-action white-text">
+                        <div class="card-action black-text">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <textarea class="materialize-textarea white-text">${shortQuestion.stuAnswer}</textarea>
+                                    <textarea class="materialize-textarea black-text">${shortQuestion.stuAnswer}</textarea>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div class="card c-eee">
+                        <div class="card-content black-text">
+                            <span class="card-title">参考答案</span>
+                        </div>
+                        <div class="card-action">
+                            <span id="${shortQuestion.id}Info">${shortQuestion.answer}</span>
                         </div>
                     </div>
                 </div>
@@ -103,7 +136,7 @@
 <script>
 
     function setStudentAnswer(id, stuAnswer, answer) {
-        $('#' + id + 'Info').html('正确答案: ' + answer).css('color', 'red');
+        $('#' + id + 'Info').html(answer).css('color', 'black');
 
         $("input[name='" + id + "']").each(function () {
             if ($(this).val() == stuAnswer) {

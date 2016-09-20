@@ -275,6 +275,13 @@ public class StudentServlet extends MethodInvokeServlet {
 		in.close();
 	}
 
+	public void viewCourseReviews(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String courseId = request.getParameter("courseId");
+		Course course = cService.getCourse(courseId);
+
+		request.setAttribute("course", course);
+		request.getRequestDispatcher("/course/review.jsp").forward(request, response);
+	}
 
 	public void viewStudentAllCoursesTasks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

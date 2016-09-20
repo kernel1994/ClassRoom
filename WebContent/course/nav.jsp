@@ -14,6 +14,7 @@
                 <li><a href="viewCourseTasks.stu?courseId=${requestScope.course.id}">课程作业</a></li>
                  <li><a href="${pageContext.request.contextPath}/servlet/StudentExperimentServlet?method=viewCourseExperiments&courseId=${requestScope.course.id}">课程实验</a></li>
                 <%--<li><a href="javascript:void(0);">课程公告</a></li>--%>
+                <li><a href="viewCourseReviews.stu?courseId=${requestScope.course.id}">留言板</a></li>
             </ul>
         </div>
     </nav>
